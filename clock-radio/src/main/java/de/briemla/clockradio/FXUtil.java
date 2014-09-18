@@ -9,6 +9,12 @@ public class FXUtil {
 
 	private static final String FXML_EXTENSION = ".fxml";
 
+	/**
+	 * Loads a FXML file with the same name as the controller. IOExceptions will be thrown as RuntimeExceptions to keep client code clean.
+	 *
+	 * @param controller
+	 * @return
+	 */
 	static <T> T load(Object controller) {
 		URL resource = findResource(controller);
 		FXMLLoader loader = new FXMLLoader();
@@ -27,6 +33,13 @@ public class FXUtil {
 		return FXUtil.class.getResource(fileName);
 	}
 
+	/**
+	 * Loads a FXML file with the same name as the controller. IOExceptions will be thrown as RuntimeExceptions to keep client code clean.
+	 * 
+	 * @param controller
+	 * @param root
+	 * @return
+	 */
 	static <T> T load(Object controller, Object root) {
 		URL resource = findResource(controller);
 		FXMLLoader loader = new FXMLLoader();

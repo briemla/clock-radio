@@ -23,7 +23,4 @@ public class Clock extends StackPane {
 		return timeProvider.timeProperty().asString("%1$TH:%1$TM:%1$TS");
 	}
 
-	void startTimeline() {
-	}
-
 }
