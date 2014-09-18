@@ -1,9 +1,12 @@
 package de.briemla.clockradio;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
+import de.briemla.fxmltemplateloader.FXMLTemplateLoader;
+import de.briemla.fxmltemplateloader.ITemplate;
 
 public class FXUtil {
 
@@ -35,20 +38,18 @@ public class FXUtil {
 
 	/**
 	 * Loads a FXML file with the same name as the controller. IOExceptions will be thrown as RuntimeExceptions to keep client code clean.
-	 * 
+	 *
 	 * @param controller
 	 * @param root
 	 * @return
 	 */
 	static <T> T load(Object controller, Object root) {
 		URL resource = findResource(controller);
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(resource);
-		loader.setController(controller);
-		loader.setRoot(root);
 		try {
-			return loader.load();
-		} catch (IOException exception) {
+			ITemplate loadedTemplate = FXMLTemplateLoader.loadTemplate(resource);
+			loadedTemplate.setRoot(root);
+			return loadedTemplate.create(controller);
+		} catch (IOException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception) {
 			throw new RuntimeException(exception);
 		}
 	}

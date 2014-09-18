@@ -43,5 +43,10 @@
 			<version>1.4.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>de.briemla</groupId>
+			<artifactId>fxml-template-loader</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
