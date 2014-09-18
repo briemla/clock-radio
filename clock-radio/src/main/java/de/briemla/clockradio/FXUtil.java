@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 
-import javafx.fxml.FXMLLoader;
 import de.briemla.fxmltemplateloader.FXMLTemplateLoader;
 import de.briemla.fxmltemplateloader.ITemplate;
 
@@ -20,11 +19,10 @@ public class FXUtil {
 	 */
 	static <T> T load(Object controller) {
 		URL resource = findResource(controller);
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(resource);
+		FXMLTemplateLoader loader = new FXMLTemplateLoader();
 		loader.setController(controller);
 		try {
-			return loader.load();
+			return loader.doLoad(resource);
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
