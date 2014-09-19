@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <HBox fx:id="container" alignment="CENTER" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <Button fx:id="previous" mnemonicParsing="false" onAction="#previous" text="&lt;" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Button fx:id="next" mnemonicParsing="false" onAction="#next" text="&gt;" BorderPane.alignment="CENTER" />
+   </right>
+</fx:root>

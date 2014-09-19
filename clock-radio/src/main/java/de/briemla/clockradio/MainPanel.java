@@ -5,15 +5,16 @@ import java.net.URISyntaxException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.layout.HBox;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class MainPanel extends VBox {
 
 	@FXML
-	private Clock clock;
+	private ViewSwitcher viewSwitch;
 	@FXML
-	private HBox alarm;
+	private Alarm alarm;
 
 	private final Player player;
 
@@ -21,6 +22,10 @@ public class MainPanel extends VBox {
 		super();
 		this.player = player;
 		FXUtil.load(this, this);
+		Node clock = new Clock();
+		viewSwitch.addView(clock);
+		Node button = new Button();
+		viewSwitch.addView(button);
 	}
 
 	@FXML
