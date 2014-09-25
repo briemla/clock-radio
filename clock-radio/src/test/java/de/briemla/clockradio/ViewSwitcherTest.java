@@ -94,4 +94,44 @@ public class ViewSwitcherTest {
 		verify(thirdView, times(2)).hide();
 		verify(thirdView).show();
 	}
+
+	@Test
+	public void nextOneTime() throws Exception {
+		ViewSwitcher switcher = new ViewSwitcher();
+		View firstView = mock(View.class);
+		View secondView = mock(View.class);
+		View thirdView = mock(View.class);
+		switcher.addView(firstView);
+		switcher.addView(secondView);
+		switcher.addView(thirdView);
+
+		verify(firstView).show();
+		verify(secondView).hide();
+		verify(thirdView).hide();
+
+		switcher.next(null);
+		verify(firstView).hide();
+		verify(secondView).show();
+		verifyZeroInteractions(thirdView);
+	}
+
+	@Test
+	public void nextTwoTimes() throws Exception {
+		ViewSwitcher switcher = new ViewSwitcher();
+		View firstView = mock(View.class);
+		View secondView = mock(View.class);
+		View thirdView = mock(View.class);
+		switcher.addView(firstView);
+		switcher.addView(secondView);
+		switcher.addView(thirdView);
+
+		switcher.next(null);
+		switcher.next(null);
+		verify(firstView).show();
+		verify(firstView).hide();
+		verify(secondView, times(2)).hide();
+		verify(secondView).show();
+		verify(thirdView).hide();
+		verify(thirdView).show();
+	}
 }
