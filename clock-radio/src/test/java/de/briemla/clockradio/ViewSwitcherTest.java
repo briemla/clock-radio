@@ -1,8 +1,10 @@
 package de.briemla.clockradio;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -51,5 +53,45 @@ public class ViewSwitcherTest {
 
 		verify(view).show();
 		verifyNoMoreInteractions(view);
+	}
+
+	@Test
+	public void previousOneTime() throws Exception {
+		ViewSwitcher switcher = new ViewSwitcher();
+		View firstView = mock(View.class);
+		View secondView = mock(View.class);
+		View thirdView = mock(View.class);
+		switcher.addView(firstView);
+		switcher.addView(secondView);
+		switcher.addView(thirdView);
+
+		verify(firstView).show();
+		verify(secondView).hide();
+		verify(thirdView).hide();
+
+		switcher.previous(null);
+		verify(firstView).hide();
+		verifyZeroInteractions(secondView);
+		verify(thirdView).show();
+	}
+
+	@Test
+	public void previousTwoTimes() throws Exception {
+		ViewSwitcher switcher = new ViewSwitcher();
+		View firstView = mock(View.class);
+		View secondView = mock(View.class);
+		View thirdView = mock(View.class);
+		switcher.addView(firstView);
+		switcher.addView(secondView);
+		switcher.addView(thirdView);
+
+		switcher.previous(null);
+		switcher.previous(null);
+		verify(firstView).show();
+		verify(firstView).hide();
+		verify(secondView).hide();
+		verify(secondView).show();
+		verify(thirdView, times(2)).hide();
+		verify(thirdView).show();
 	}
 }
