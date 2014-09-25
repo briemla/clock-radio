@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
-public class Clock extends StackPane {
+public class Clock extends StackPane implements View {
 
 	@FXML
 	private Label time;
@@ -21,6 +21,18 @@ public class Clock extends StackPane {
 
 	private StringBinding providedTime() {
 		return timeProvider.timeProperty().asString("%1$TH:%1$TM:%1$TS");
+	}
+
+	@Override
+	public void show() {
+		setVisible(true);
+		setManaged(true);
+	}
+
+	@Override
+	public void hide() {
+		setVisible(false);
+		setManaged(false);
 	}
 
 }

@@ -5,8 +5,6 @@ import java.net.URISyntaxException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class MainPanel extends VBox {
@@ -22,10 +20,10 @@ public class MainPanel extends VBox {
 		super();
 		this.player = player;
 		FXUtil.load(this, this);
-		Node clock = new Clock();
+		View clock = new Clock();
 		viewSwitch.addView(clock);
-		Node button = new Button();
-		viewSwitch.addView(button);
+		View secondClock = new Clock();
+		viewSwitch.addView(secondClock);
 	}
 
 	@FXML

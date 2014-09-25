@@ -1,9 +1,9 @@
 package de.briemla.clockradio;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -17,17 +17,15 @@ public class ViewSwitcher extends BorderPane {
 	@FXML
 	private Button next;
 
-	private Node defaultView;
+	private View defaultView;
 	private Integer currentView;
+	private final ObservableList<View> views;
 
 	public ViewSwitcher() {
 		super();
 		FXUtil.load(this, this);
 		currentView = 0;
-	}
-
-	private ObservableList<Node> views() {
-		return container.getChildren();
+		views = FXCollections.observableArrayList();
 	}
 
 	/**
@@ -36,20 +34,21 @@ public class ViewSwitcher extends BorderPane {
 	 *
 	 * @param view
 	 */
-	public void addView(Node view) {
-		setAsDefault(view);
-		views().add(view);
-	}
-
-	private void setAsDefault(Node view) {
-		if (views().isEmpty()) {
-			defaultView = view;
-			view.setVisible(true);
-			view.setManaged(true);
+	public void addView(View view) {
+		if (views.contains(view)) {
 			return;
 		}
-		view.setVisible(false);
-		view.setManaged(false);
+		setAsDefault(view);
+		views.add(view);
+	}
+
+	private void setAsDefault(View view) {
+		if (views.isEmpty()) {
+			defaultView = view;
+			view.show();
+			return;
+		}
+		view.hide();
 	}
 
 	/**
@@ -58,10 +57,10 @@ public class ViewSwitcher extends BorderPane {
 	 *
 	 * @param view
 	 */
-	public void removeView(Node view) {
-		views().remove(view);
-		if (defaultView != null && !views().isEmpty() && defaultView.equals(view)) {
-			defaultView = views().get(0);
+	public void removeView(View view) {
+		views.remove(view);
+		if (defaultView != null && !views.isEmpty() && defaultView.equals(view)) {
+			defaultView = views.get(0);
 		}
 	}
 
@@ -82,27 +81,25 @@ public class ViewSwitcher extends BorderPane {
 	}
 
 	private void disableCurrentView() {
-		Node node = views().get(currentView);
-		node.setVisible(false);
-		node.setManaged(false);
+		View view = views.get(currentView);
+		view.hide();
 	}
 
 	private void enableCurrentView() {
-		Node node = views().get(currentView);
-		node.setVisible(true);
-		node.setManaged(true);
+		View view = views.get(currentView);
+		view.show();
 	}
 
 	private void decreaseViewPointer() {
 		currentView--;
 		if (currentView < 0) {
-			currentView = views().size() - 1;
+			currentView = views.size() - 1;
 		}
 	}
 
 	private void increaseViewPointer() {
 		currentView++;
-		if (currentView >= views().size()) {
+		if (currentView >= views.size()) {
 			currentView = 0;
 		}
 	}
