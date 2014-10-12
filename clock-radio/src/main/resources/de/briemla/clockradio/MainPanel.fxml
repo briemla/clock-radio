@@ -16,6 +16,6 @@
          </children>
       </AnchorPane>
       <ViewSwitcher fx:id="viewSwitch" maxHeight="500.0" prefHeight="500.0" prefWidth="800.0"/>
-      <Alarm fx:id="alarm"/>
+      <AlarmView fx:id="alarm"/>
    </children>
 </fx:root>

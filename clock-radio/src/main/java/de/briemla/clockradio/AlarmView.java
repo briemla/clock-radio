@@ -3,9 +3,9 @@ package de.briemla.clockradio;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.HBox;
 
-public class Alarm extends HBox {
+public class AlarmView extends HBox {
 
-	public Alarm() {
+	public AlarmView() {
 		super();
 		FXUtil.load(this, this);
 	}

@@ -14,7 +14,7 @@ public class MainPanel extends VBox {
 	@FXML
 	private ViewSwitcher viewSwitch;
 	@FXML
-	private Alarm alarm;
+	private AlarmView alarm;
 
 	private final Player player;
 
