@@ -5,10 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.HBox?>
 
-
-<fx:root maxHeight="50.0" prefHeight="50.0" type="HBox" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<fx:root maxHeight="50.0" prefHeight="50.0" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox maxHeight="50.0" minHeight="50.0" prefHeight="50.0" />
+      <ListView fx:id="alarm" orientation="HORIZONTAL" />
       <Button maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#add" prefHeight="50.0" prefWidth="50.0" text="add" />
    </children>
 </fx:root>

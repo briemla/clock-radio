@@ -7,12 +7,10 @@ public class Alarm {
 
 	private final IntegerProperty hourProperty;
 	private final IntegerProperty minuteProperty;
-	private final IntegerProperty secondProperty;
 
 	public Alarm() {
 		hourProperty = new SimpleIntegerProperty();
 		minuteProperty = new SimpleIntegerProperty();
-		secondProperty = new SimpleIntegerProperty();
 	}
 
 	public IntegerProperty hourProperty() {
@@ -21,9 +19,5 @@ public class Alarm {
 
 	public IntegerProperty minuteProperty() {
 		return minuteProperty;
-	}
-
-	public IntegerProperty secondProperty() {
-		return secondProperty;
 	}
 }

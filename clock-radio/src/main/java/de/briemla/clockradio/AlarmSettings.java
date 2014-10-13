@@ -11,8 +11,7 @@ public class AlarmSettings extends HBox {
 	private TextField hour;
 	@FXML
 	private TextField minute;
-	@FXML
-	private TextField second;
+	private Alarm lastAlarm;
 
 	public AlarmSettings() {
 		super();
@@ -20,9 +19,22 @@ public class AlarmSettings extends HBox {
 	}
 
 	public void setCurrentAlarm(Alarm alarm) {
+		unbind();
+		bindTo(alarm);
+	}
+
+	private void unbind() {
+		if (lastAlarm == null) {
+			return;
+		}
+		hour.textProperty().unbindBidirectional(lastAlarm.hourProperty());
+		minute.textProperty().unbindBidirectional(lastAlarm.minuteProperty());
+	}
+
+	private void bindTo(Alarm alarm) {
 		hour.textProperty().bindBidirectional(alarm.hourProperty(), new NumberStringConverter());
 		minute.textProperty().bindBidirectional(alarm.minuteProperty(), new NumberStringConverter());
-		second.textProperty().bindBidirectional(alarm.secondProperty(), new NumberStringConverter());
+		lastAlarm = alarm;
 	}
 
 }

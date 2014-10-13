@@ -9,6 +9,5 @@
    <children>
       <TextField fx:id="hour" promptText="Stunde" />
       <TextField fx:id="minute" promptText="Minute" />
-      <TextField fx:id="second" promptText="Sekunde" />
    </children>
 </fx:root>

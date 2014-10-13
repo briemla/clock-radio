@@ -2,6 +2,8 @@ package de.briemla.clockradio;
 
 import java.util.HashMap;
 
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -14,6 +16,7 @@ public class ViewSwitcher extends BorderPane {
 	private HBox container;
 
 	private final HashMap<Class<?>, Node> views;
+	private final SimpleBooleanProperty defaultVisisble;
 	private Node defaultView;
 	private Node currentView;
 
@@ -21,6 +24,7 @@ public class ViewSwitcher extends BorderPane {
 		super();
 		FXUtil.load(this, this);
 		views = new HashMap<>();
+		defaultVisisble = new SimpleBooleanProperty(false);
 	}
 
 	/**
@@ -30,10 +34,9 @@ public class ViewSwitcher extends BorderPane {
 	 * @param view
 	 */
 	public void setDefaultView(Node view) {
-		disableCurrentView();
 		defaultView = view;
 		container.getChildren().add(defaultView);
-		enable(defaultView);
+		showDefault();
 	}
 
 	private void disableCurrentView() {
@@ -50,8 +53,9 @@ public class ViewSwitcher extends BorderPane {
 
 	private void enable(Node view) {
 		currentView = view;
-		view.setVisible(true);
-		view.setManaged(true);
+		currentView.setVisible(true);
+		currentView.setManaged(true);
+		defaultVisisble.set(!currentView.equals(defaultView));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -70,8 +74,17 @@ public class ViewSwitcher extends BorderPane {
 
 	@FXML
 	public void back(ActionEvent event) {
+		showDefault();
+	}
+
+	public void showDefault() {
 		disableCurrentView();
 		enable(defaultView);
+		defaultVisisble.set(true);
+	}
+
+	public ReadOnlyBooleanProperty defaultVisisbleProperty() {
+		return defaultVisisble;
 	}
 
 }
