@@ -1,11 +1,10 @@
 package de.briemla.clockradio;
 
-import java.util.List;
+import java.util.HashMap;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -13,18 +12,15 @@ public class ViewSwitcher extends BorderPane {
 
 	@FXML
 	private HBox container;
-	@FXML
-	private Button previous;
-	@FXML
-	private Button next;
 
+	private final HashMap<Class<?>, Node> views;
 	private Node defaultView;
-	private Integer currentView;
+	private Node currentView;
 
 	public ViewSwitcher() {
 		super();
 		FXUtil.load(this, this);
-		currentView = 0;
+		views = new HashMap<>();
 	}
 
 	/**
@@ -33,82 +29,49 @@ public class ViewSwitcher extends BorderPane {
 	 *
 	 * @param view
 	 */
-	public void addView(Node view) {
-		if (views().contains(view)) {
-			return;
-		}
-		setAsDefault(view);
-		views().add(view);
-	}
-
-	private void setAsDefault(Node view) {
-		if (views().isEmpty()) {
-			defaultView = view;
-			view.setVisible(true);
-			view.setManaged(true);
-			return;
-		}
-		view.setVisible(false);
-		view.setManaged(false);
-	}
-
-	/**
-	 * Remove the given view from {@link ViewSwitcher}. If the given view is the default view, the
-	 * default view will be replaced by the next view in the list.
-	 *
-	 * @param view
-	 */
-	public void removeView(Node view) {
-		views().remove(view);
-		if (defaultView != null && !views().isEmpty() && defaultView.equals(view)) {
-			defaultView = views().get(0);
-		}
-	}
-
-	@SuppressWarnings("unused")
-	@FXML
-	public void previous(ActionEvent event) {
+	public void setDefaultView(Node view) {
 		disableCurrentView();
-		decreaseViewPointer();
-		enableCurrentView();
-	}
-
-	@SuppressWarnings("unused")
-	@FXML
-	public void next(ActionEvent event) {
-		disableCurrentView();
-		increaseViewPointer();
-		enableCurrentView();
+		defaultView = view;
+		container.getChildren().add(defaultView);
+		enable(defaultView);
 	}
 
 	private void disableCurrentView() {
-		Node view = views().get(currentView);
+		disable(currentView);
+	}
+
+	private static void disable(Node view) {
+		if (view == null) {
+			return;
+		}
 		view.setVisible(false);
 		view.setManaged(false);
 	}
 
-	private void enableCurrentView() {
-		Node view = views().get(currentView);
+	private void enable(Node view) {
+		currentView = view;
 		view.setVisible(true);
 		view.setManaged(true);
 	}
 
-	private void decreaseViewPointer() {
-		currentView--;
-		if (currentView < 0) {
-			currentView = views().size() - 1;
-		}
+	@SuppressWarnings("unchecked")
+	public <T> T show(Class<?> clazz) {
+		disableCurrentView();
+		Node node = views.get(clazz);
+		enable(node);
+		return (T) node;
 	}
 
-	private void increaseViewPointer() {
-		currentView++;
-		if (currentView >= views().size()) {
-			currentView = 0;
-		}
+	public void addView(Class<Alarm> clazz, Node node) {
+		views.put(clazz, node);
+		container.getChildren().add(node);
+		disable(node);
 	}
 
-	private List<Node> views() {
-		return container.getChildren();
+	@FXML
+	public void back(ActionEvent event) {
+		disableCurrentView();
+		enable(defaultView);
 	}
 
 }

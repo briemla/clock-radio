@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root maxHeight="50.0" prefHeight="50.0" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="hour" promptText="Stunde" />
+      <TextField fx:id="minute" promptText="Minute" />
+      <TextField fx:id="second" promptText="Sekunde" />
+   </children>
+</fx:root>

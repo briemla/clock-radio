@@ -9,10 +9,7 @@
    <center>
       <HBox fx:id="container" alignment="CENTER" BorderPane.alignment="CENTER" />
    </center>
-   <left>
-      <Button fx:id="previous" mnemonicParsing="false" onAction="#previous" text="&lt;" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <Button fx:id="next" mnemonicParsing="false" onAction="#next" text="&gt;" BorderPane.alignment="CENTER" />
-   </right>
+   <top>
+      <Button mnemonicParsing="false" onAction="#back" text="Zurück" BorderPane.alignment="CENTER" />
+   </top>
 </fx:root>

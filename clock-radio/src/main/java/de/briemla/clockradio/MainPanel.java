@@ -6,7 +6,6 @@ import java.net.URISyntaxException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class MainPanel extends VBox {
@@ -17,15 +16,18 @@ public class MainPanel extends VBox {
 	private AlarmView alarm;
 
 	private final Player player;
+	private final Settings settings;
 
 	public MainPanel(Player player) {
 		super();
 		this.player = player;
 		FXUtil.load(this, this);
+		settings = new Settings(viewSwitch);
+		alarm.setSettings(settings);
 		Node clock = new Clock();
-		viewSwitch.addView(clock);
-		Node button = new Button("TROET");
-		viewSwitch.addView(button);
+		viewSwitch.setDefaultView(clock);
+		AlarmSettings alarmSettings = new AlarmSettings();
+		viewSwitch.addView(Alarm.class, alarmSettings);
 	}
 
 	@FXML

@@ -18,7 +18,8 @@ public class ClockRadio extends Application {
 	}
 
 	/**
-	 * Will check which player is available. On Raspberry Pi there is no javafx.scene.media support, so we need another player.
+	 * Will check which player is available. On Raspberry Pi there is no javafx.scene.media support,
+	 * so we need another player.
 	 *
 	 * @return
 	 */
