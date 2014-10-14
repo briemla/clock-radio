@@ -14,17 +14,18 @@ public class Settings {
 	private final ObservableList<Alarm> alarms;
 	private final AlarmSelectionListener alarmSelectionListener;
 	private ObservableList<Alarm> selectedAlarms;
+	private final Player player;
 
-	public Settings(ViewSwitcher viewSwitcher, TimeProvider timeProvider, Player player) {
+	public Settings(ViewSwitcher viewSwitcher, Player player) {
 		this.viewSwitcher = viewSwitcher;
+		this.player = player;
 		alarmStartedProperty = new SimpleBooleanProperty();
 		alarms = FXCollections.observableArrayList();
 		alarmSelectionListener = new AlarmSelectionListener(this.viewSwitcher);
-		timeProvider.timeProperty().addListener(new AlarmStartListener(alarms, player));
 	}
 
 	public void addAlarm() {
-		Alarm alarm = new Alarm(alarmStartedProperty);
+		Alarm alarm = new Alarm(alarmStartedProperty, player);
 		alarms.add(alarm);
 		rebindAlarms();
 		AlarmSettings alarmSettings = viewSwitcher.show(Alarm.class);

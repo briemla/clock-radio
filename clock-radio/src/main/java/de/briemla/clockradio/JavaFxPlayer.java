@@ -24,6 +24,7 @@ public class JavaFxPlayer implements Player {
 	public void stop() {
 		if (lastPlayer != null) {
 			lastPlayer.stop();
+			lastPlayer.dispose();
 			lastPlayer = null;
 			playingProperty.set(false);
 		}

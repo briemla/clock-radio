@@ -19,10 +19,9 @@ public class MainPanel extends VBox {
 		super();
 		this.player = player;
 		FXUtil.load(this, this);
-		TimeProvider timeProvider = new TimeProvider();
-		settings = new Settings(viewSwitch, timeProvider, player);
+		settings = new Settings(viewSwitch, player);
 		alarm.setSettings(settings);
-		Node clock = new Clock(timeProvider);
+		Node clock = new Clock();
 		viewSwitch.setDefaultView(clock);
 		AlarmSettings alarmSettings = new AlarmSettings();
 		viewSwitch.addView(Alarm.class, alarmSettings);
