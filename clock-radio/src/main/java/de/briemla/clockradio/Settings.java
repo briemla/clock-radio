@@ -20,11 +20,11 @@ public class Settings {
 		alarmStartedProperty = new SimpleBooleanProperty();
 		alarms = FXCollections.observableArrayList();
 		alarmSelectionListener = new AlarmSelectionListener(this.viewSwitcher);
-		timeProvider.timeProperty().addListener(new AlarmStartListener(alarms, player, alarmStartedProperty));
+		timeProvider.timeProperty().addListener(new AlarmStartListener(alarms, player));
 	}
 
 	public void addAlarm() {
-		Alarm alarm = new Alarm();
+		Alarm alarm = new Alarm(alarmStartedProperty);
 		alarms.add(alarm);
 		rebindAlarms();
 		AlarmSettings alarmSettings = viewSwitcher.show(Alarm.class);

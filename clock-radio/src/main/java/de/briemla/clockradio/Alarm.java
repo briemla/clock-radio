@@ -13,8 +13,10 @@ public class Alarm {
 	private final IntegerProperty hourProperty;
 	private final IntegerProperty minuteProperty;
 	private final SimpleBooleanProperty alarmStartedProperty;
+	private final SimpleBooleanProperty alarmAlreadyStartedProperty;
 
-	public Alarm() {
+	public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty) {
+		this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
 		hourProperty = new SimpleIntegerProperty();
 		minuteProperty = new SimpleIntegerProperty();
 		alarmStartedProperty = new SimpleBooleanProperty();
@@ -29,6 +31,9 @@ public class Alarm {
 	}
 
 	public void play(Player player) {
+		if (alarmAlreadyStartedProperty.get()) {
+			return;
+		}
 		alarmStartedProperty.set(true);
 		try {
 			URI uri = new URI("file:///D:/Bibliotheken/Musik/WCG_Theme_Song.mp3");
