@@ -12,10 +12,10 @@ public class Clock extends StackPane {
 
 	private final TimeProvider timeProvider;
 
-	public Clock() {
+	public Clock(TimeProvider timeProvider) {
 		super();
 		FXUtil.load(this, this);
-		timeProvider = new TimeProvider();
+		this.timeProvider = timeProvider;
 		time.textProperty().bind(providedTime());
 	}
 

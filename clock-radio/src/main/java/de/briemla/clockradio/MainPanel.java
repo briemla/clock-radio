@@ -1,8 +1,5 @@
 package de.briemla.clockradio;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -22,9 +19,10 @@ public class MainPanel extends VBox {
 		super();
 		this.player = player;
 		FXUtil.load(this, this);
-		settings = new Settings(viewSwitch);
+		TimeProvider timeProvider = new TimeProvider();
+		settings = new Settings(viewSwitch, timeProvider, player);
 		alarm.setSettings(settings);
-		Node clock = new Clock();
+		Node clock = new Clock(timeProvider);
 		viewSwitch.setDefaultView(clock);
 		AlarmSettings alarmSettings = new AlarmSettings();
 		viewSwitch.addView(Alarm.class, alarmSettings);
@@ -33,15 +31,6 @@ public class MainPanel extends VBox {
 	@FXML
 	public void openSettings(ActionEvent event) {
 
-	}
-
-	public void startSound(ActionEvent event) {
-		try {
-			URI uri = new URI("file:///D:/Bibliotheken/Musik/WCG_Theme_Song.mp3");
-			player.play(uri);
-		} catch (URISyntaxException exception) {
-			exception.printStackTrace();
-		}
 	}
 
 	public void stopSound(ActionEvent event) {
