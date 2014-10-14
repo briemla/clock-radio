@@ -9,7 +9,6 @@ public class DefaultVisisbleListener implements ChangeListener<Boolean> {
 
 	public DefaultVisisbleListener(ListView<Alarm> alarm) {
 		this.alarm = alarm;
-
 	}
 
 	@Override
