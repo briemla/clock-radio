@@ -12,8 +12,6 @@ public class Settings {
 	private final ViewSwitcher viewSwitcher;
 	private final SimpleBooleanProperty alarmStartedProperty;
 	private final ObservableList<Alarm> alarms;
-	private final AlarmSelectionListener alarmSelectionListener;
-	private ObservableList<Alarm> selectedAlarms;
 	private final Player player;
 
 	public Settings(ViewSwitcher viewSwitcher, Player player) {
@@ -21,7 +19,6 @@ public class Settings {
 		this.player = player;
 		alarmStartedProperty = new SimpleBooleanProperty();
 		alarms = FXCollections.observableArrayList();
-		alarmSelectionListener = new AlarmSelectionListener(this.viewSwitcher);
 	}
 
 	public void addAlarm() {
@@ -50,15 +47,12 @@ public class Settings {
 		return alarms;
 	}
 
-	public void setSelectedAlarms(ObservableList<Alarm> selectedAlarms) {
-		if (this.selectedAlarms != null) {
-			this.selectedAlarms.removeListener(alarmSelectionListener);
-		}
-		this.selectedAlarms = selectedAlarms;
-		this.selectedAlarms.addListener(alarmSelectionListener);
-	}
-
 	public ReadOnlyBooleanProperty defaultVisisbleProperty() {
 		return viewSwitcher.defaultVisisbleProperty();
+	}
+
+	public void select(Alarm alarm) {
+		AlarmSettings alarmSettings = viewSwitcher.show(Alarm.class);
+		alarmSettings.setCurrentAlarm(alarm);
 	}
 }
