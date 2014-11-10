@@ -11,6 +11,8 @@ public class AlarmSettings extends HBox {
 	private TextField hour;
 	@FXML
 	private TextField minute;
+	@FXML
+	private final MediaSelector mediaSelector = new MediaSelector();
 	private Alarm lastAlarm;
 
 	public AlarmSettings() {
@@ -29,11 +31,13 @@ public class AlarmSettings extends HBox {
 		}
 		hour.textProperty().unbindBidirectional(lastAlarm.hourProperty());
 		minute.textProperty().unbindBidirectional(lastAlarm.minuteProperty());
+		mediaSelector.mediaProperty().unbindBidirectional(lastAlarm.mediaProperty());
 	}
 
 	private void bindTo(Alarm alarm) {
 		hour.textProperty().bindBidirectional(alarm.hourProperty(), new NumberStringConverter());
 		minute.textProperty().bindBidirectional(alarm.minuteProperty(), new NumberStringConverter());
+		mediaSelector.mediaProperty().bindBidirectional(alarm.mediaProperty());
 		lastAlarm = alarm;
 	}
 

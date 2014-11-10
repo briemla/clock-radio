@@ -1,7 +1,6 @@
 package de.briemla.clockradio;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -10,6 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -61,27 +61,30 @@ public class Alarm {
 		}
 	}
 
+	public static final URI DEFAULT_MEDIA = URI.create("file:///D:/Bibliotheken/Musik/WCG_Theme_Song.mp3");
 	private final SimpleIntegerProperty hourProperty;
 	private final SimpleIntegerProperty minuteProperty;
 	private final SimpleObjectProperty<Duration> durationProperty;
 	private final SimpleBooleanProperty alarmStartedProperty;
 	private final SimpleBooleanProperty alarmAlreadyStartedProperty;
-	private final Player player;
+	private final SimpleObjectProperty<Media> mediaProperty;
+	private final Player mediaPlayer;
 
-	public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, Player player) {
+	public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, Player mediaPlayer) {
 		this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
-		this.player = player;
+		this.mediaPlayer = mediaPlayer;
 		hourProperty = new SimpleIntegerProperty();
 		minuteProperty = new SimpleIntegerProperty();
 		durationProperty = new SimpleObjectProperty<>(Duration.ofSeconds(10));
 		alarmStartedProperty = new SimpleBooleanProperty();
+		mediaProperty = new SimpleObjectProperty<>(player -> player.play(DEFAULT_MEDIA));
 		AlarmTimer alarmTimer = new AlarmTimer(this);
 		hourProperty.addListener(alarmTimer);
 		minuteProperty.addListener(alarmTimer);
 	}
 
 	public void stop() {
-		player.stop();
+		mediaPlayer.stop();
 		alarmStartedProperty.set(false);
 	}
 
@@ -97,15 +100,18 @@ public class Alarm {
 		return minuteProperty;
 	}
 
+	public ObjectProperty<Media> mediaProperty() {
+		return mediaProperty;
+	}
+
 	public void play() {
 		if (alarmAlreadyStartedProperty.get()) {
 			return;
 		}
 		alarmStartedProperty.set(true);
 		try {
-			URI uri = new URI("file:///D:/Bibliotheken/Musik/WCG_Theme_Song.mp3");
-			player.play(uri);
-		} catch (URISyntaxException exception) {
+			mediaProperty.get().play(mediaPlayer);
+		} catch (Exception exception) {
 			exception.printStackTrace();
 			alarmStartedProperty.set(false);
 		}
