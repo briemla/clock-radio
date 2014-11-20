@@ -3,6 +3,7 @@ package de.briemla.clockradio;
 import java.net.URI;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Timer;
@@ -73,8 +74,8 @@ public class Alarm {
 	public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, Player mediaPlayer) {
 		this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
 		this.mediaPlayer = mediaPlayer;
-		hourProperty = new SimpleIntegerProperty();
-		minuteProperty = new SimpleIntegerProperty();
+		hourProperty = new SimpleIntegerProperty(LocalTime.now().getHour());
+		minuteProperty = new SimpleIntegerProperty(LocalTime.now().getMinute() + 1);
 		durationProperty = new SimpleObjectProperty<>(Duration.ofSeconds(10));
 		alarmStartedProperty = new SimpleBooleanProperty();
 		mediaProperty = new SimpleObjectProperty<>(player -> player.play(DEFAULT_MEDIA));
