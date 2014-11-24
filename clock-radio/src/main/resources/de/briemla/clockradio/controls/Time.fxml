@@ -17,17 +17,17 @@
 	<children>
 		<HBox alignment="CENTER" maxHeight="100.0" minHeight="100.0" prefHeight="100.0" prefWidth="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
-				<Label fx:id="hour" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="00" />
+				<Label fx:id="hour" id="hour" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="00" />
 				<Label text=":" />
-				<Label fx:id="minute" text="00" />
+				<Label fx:id="minute" id="minute" text="00" />
 			</children>
 		</HBox>
 		<StackPane maxHeight="300.0" maxWidth="300.0" minHeight="300.0" minWidth="300.0" prefHeight="300.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
 			<children>
 				<StackPane fx:id="hourParent">
 					<children>
-						<CircularPane fx:id="afternoon" diameter="250.0" startAngle="15.0" />
-						<CircularPane fx:id="morning" diameter="180" startAngle="15.0" />
+						<CircularPane fx:id="afternoon" diameter="250.0" startAngle="-15.0" />
+						<CircularPane fx:id="morning" diameter="180" startAngle="-15.0" />
 					</children>
 				</StackPane>
 				<StackPane fx:id="minuteParent" visible="false">
