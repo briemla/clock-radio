@@ -43,14 +43,17 @@ public class Time extends AnchorPane {
 			minuteCircle.add(timeLabelFor(currentMinute * 5 % 60));
 		}
 
-		morning.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-			hourProperty.set(Angle.toHour(event.getX(), event.getY(), morning.getWidth(), morning.getHeight()));
+		hourParent.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			hourProperty.set(Angle.toHour(event.getX(), event.getY(), hourParent.getWidth(), hourParent.getHeight()));
 			event.consume();
 		});
-		afternoon.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-			hourProperty.set(12 + Angle.toHour(event.getX(), event.getY(), afternoon.getWidth(), afternoon.getHeight()));
-			event.consume();
-		});
+		// afternoon.addEventHandler(MouseEvent.ANY, event -> {
+		// if (event.isPrimaryButtonDown()) {
+		// hourProperty.set(12 + Angle.toHour(event.getX(), event.getY(), afternoon.getWidth(),
+		// afternoon.getHeight()));
+		// event.consume();
+		// }
+		// });
 
 		hourProperty = new SimpleIntegerProperty();
 		minuteProperty = new SimpleIntegerProperty();

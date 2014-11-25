@@ -15,13 +15,13 @@ public class Angle {
 	public static Integer toHour(double absoluteX, double absoluteY, double width, double height) {
 		double centerX = width / 2.0d;
 		double centerY = height / 2.0d;
-		// double afternoonDistance = centerX * 0.72d * 0.8d;
+		double afternoonDistance = centerX * 0.72d * 0.8d;
 
 		double relativeX = absoluteX - centerX;
 		double relativeY = (height - absoluteY) - centerY;
 
-		// double distance = length(relativeX, relativeY);
-		Integer afternoonOffset = 0;// distance > afternoonDistance ? 12 : 0;
+		double distance = length(relativeX, relativeY);
+		Integer afternoonOffset = distance > afternoonDistance ? 12 : 0;
 		return afternoonOffset + relativeHour(relativeX, relativeY);
 	}
 
