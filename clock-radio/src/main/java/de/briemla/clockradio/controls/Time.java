@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Translate;
 import jfxtras.scene.layout.CircularPane;
 import de.briemla.clockradio.FXUtil;
 
@@ -26,6 +28,8 @@ public class Time extends AnchorPane {
 	private CircularPane afternoon;
 	@FXML
 	private CircularPane minuteCircle;
+	@FXML
+	private Pointer pointer;
 
 	private final SimpleIntegerProperty hourProperty;
 	private final SimpleIntegerProperty minuteProperty;
@@ -33,6 +37,9 @@ public class Time extends AnchorPane {
 	public Time() {
 		super();
 		FXUtil.load(this, this);
+
+		hourProperty = new SimpleIntegerProperty();
+		minuteProperty = new SimpleIntegerProperty();
 		for (int currentHour = 0; currentHour <= 11; currentHour++) {
 			morning.add(timeLabelFor(currentHour));
 		}
@@ -50,8 +57,15 @@ public class Time extends AnchorPane {
 			}
 		});
 
-		hourProperty = new SimpleIntegerProperty();
-		minuteProperty = new SimpleIntegerProperty();
+		double translateX = 150d - 10d;
+		double translateY = 55d;
+		pointer.getTransforms().add(new Translate(translateX, translateY));
+		hourProperty.addListener((change, oldValue, newValue) -> {
+			pointer.getTransforms().add(new Translate(-translateX, -translateY));
+			pointer.getTransforms().add(new Rotate((int) oldValue * -30d, 150d, 150d));
+			pointer.getTransforms().add(new Rotate((int) newValue * 30d, 150d, 150d));
+			pointer.getTransforms().add(new Translate(translateX, translateY));
+		});
 
 		hour.textProperty().bind(hourProperty.asString("%02d"));
 		minute.textProperty().bind(minuteProperty.asString("%02d"));
