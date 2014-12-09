@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -11,25 +12,28 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleButton?>
-<?import de.briemla.clockradio.controls.Pointer?>
 
-
-<fx:root type="AnchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<HBox alignment="CENTER" maxHeight="100.0" minHeight="100.0" prefHeight="100.0" prefWidth="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
-				<Label fx:id="hour" id="hour" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="00" />
+				<Label id="hour" fx:id="hour" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="00" />
 				<Label text=":" />
-				<Label fx:id="minute" id="minute" text="00" />
+				<Label id="minute" fx:id="minute" text="00" />
 			</children>
 		</HBox>
 		<StackPane maxHeight="300.0" maxWidth="300.0" minHeight="300.0" minWidth="300.0" prefHeight="300.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
 			<children>
 				<StackPane fx:id="hourParent">
 					<children>
-						<CircularPane fx:id="afternoon" showDebug="rgb(0,255,0)" diameter="250.0" startAngle="-15.0" />
+						<AnchorPane>
+							<children>
+								<Line fx:id="line" fill="rgb(128,205,255)" stroke="rgb(128,205,255)" endX="100.0" startX="0.0" />
+								<Circle fx:id="circle" fill="rgb(128,205,255)" radius="10.0" stroke="rgb(128,205,255)" strokeType="INSIDE" />
+							</children>
+						</AnchorPane>
+						<CircularPane fx:id="afternoon" diameter="250.0" startAngle="-15.0" />
 						<CircularPane fx:id="morning" diameter="180" startAngle="-15.0" />
-						<Pointer fx:id="pointer" maxHeight="300.0" maxWidth="300.0" minHeight="300.0" minWidth="300.0" prefHeight="300.0" prefWidth="300.0" />
 					</children>
 				</StackPane>
 				<StackPane fx:id="minuteParent" visible="false">
