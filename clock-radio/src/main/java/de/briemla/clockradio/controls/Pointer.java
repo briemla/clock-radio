@@ -13,6 +13,7 @@ import de.briemla.clockradio.FXUtil;
 
 public class Pointer extends AnchorPane {
 
+	private static final double OFFSET = Math.PI / 2d;
 	@FXML
 	private Circle circle;
 	@FXML
@@ -20,12 +21,14 @@ public class Pointer extends AnchorPane {
 
 	private final SimpleIntegerProperty value;
 	private final SimpleDoubleProperty length;
+	private final SimpleIntegerProperty tics;
 
 	public Pointer() {
 		super();
 		FXUtil.load(this, this);
 		value = new SimpleIntegerProperty();
 		length = new SimpleDoubleProperty();
+		tics = new SimpleIntegerProperty();
 
 		line.startXProperty().bind(widthProperty().divide(2d));
 		line.startYProperty().bind(heightProperty().divide(2d));
@@ -50,9 +53,10 @@ public class Pointer extends AnchorPane {
 		line.setEndY(newCoordinates.getY());
 	}
 
-	private static Point2D align(Point2D center, int currentHour) {
-		double hourAlignedX = center.getX() + Math.cos(Math.toRadians(currentHour * 30d - 90d));
-		double hourAlignedY = center.getY() + Math.sin(Math.toRadians(currentHour * 30d - 90d));
+	private Point2D align(Point2D center, int currentHour) {
+		double ticAngle = 2 * Math.PI / tics.get();
+		double hourAlignedX = center.getX() + Math.cos(currentHour * ticAngle - OFFSET);
+		double hourAlignedY = center.getY() + Math.sin(currentHour * ticAngle - OFFSET);
 		return new Point2D(hourAlignedX, hourAlignedY);
 	}
 
@@ -75,5 +79,9 @@ public class Pointer extends AnchorPane {
 
 	public DoubleProperty lengthValue() {
 		return length;
+	}
+
+	public void setTics(Integer tics) {
+		this.tics.set(tics);
 	}
 }

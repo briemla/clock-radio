@@ -48,8 +48,9 @@ public class Time extends AnchorPane {
 			minuteCircle.add(timeLabelFor(currentMinute * 5 % 60));
 		}
 
-		pointer.valueProperty().bindBidirectional(hourProperty);
+		pointer.valueProperty().bind(hourProperty);
 		pointer.lengthValue().bind(afternoon.diameterProperty());
+		pointer.setTics(12);
 
 		hourParent.addEventHandler(MouseEvent.ANY, event -> {
 			if (event.isPrimaryButtonDown()) {
