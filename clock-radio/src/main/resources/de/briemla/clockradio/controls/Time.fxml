@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleButton?>
+<?import de.briemla.clockradio.controls.Pointer?>
 
 <fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
@@ -26,12 +27,7 @@
 			<children>
 				<StackPane fx:id="hourParent">
 					<children>
-						<AnchorPane>
-							<children>
-								<Line fx:id="line" fill="rgb(128,205,255)" stroke="rgb(128,205,255)" endX="100.0" startX="0.0" />
-								<Circle fx:id="circle" fill="rgb(128,205,255)" radius="10.0" stroke="rgb(128,205,255)" strokeType="INSIDE" />
-							</children>
-						</AnchorPane>
+						<Pointer fx:id="pointer"/>
 						<CircularPane fx:id="afternoon" diameter="250.0" startAngle="-15.0" />
 						<CircularPane fx:id="morning" diameter="180" startAngle="-15.0" />
 					</children>
