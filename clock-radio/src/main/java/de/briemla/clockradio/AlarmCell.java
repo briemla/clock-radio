@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class AlarmCell extends AnchorPane {
 
+	private static final String TIME_FORMAT = "%02d";
 	@FXML
 	private AnchorPane container;
 	@FXML
@@ -21,7 +22,7 @@ public class AlarmCell extends AnchorPane {
 		super();
 		FXUtil.load(this, this);
 		// TODO maybe create timeProperty in Alarm class
-		time.textProperty().bind(alarm.hourProperty().asString().concat(":").concat(alarm.minuteProperty().asString()));
+		time.textProperty().bind(alarm.hourProperty().asString(TIME_FORMAT).concat(":").concat(alarm.minuteProperty().asString(TIME_FORMAT)));
 		activated = new ActivatedPseudoClassProperty(this);
 		setOnMouseClicked(event -> activated.set(!activated.get()));
 		this.settings.setOnAction(event -> settings.select(alarm));
