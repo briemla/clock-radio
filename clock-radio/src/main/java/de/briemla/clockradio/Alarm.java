@@ -1,6 +1,5 @@
 package de.briemla.clockradio;
 
-import java.net.URI;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -17,6 +16,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import de.briemla.clockradio.controls.LocalFile;
 
 public class Alarm {
 
@@ -62,7 +62,6 @@ public class Alarm {
 		}
 	}
 
-	public static final URI DEFAULT_MEDIA = URI.create("file:///D:/Bibliotheken/Musik/WCG_Theme_Song.mp3");
 	private final SimpleIntegerProperty hourProperty;
 	private final SimpleIntegerProperty minuteProperty;
 	private final SimpleObjectProperty<Duration> durationProperty;
@@ -78,7 +77,7 @@ public class Alarm {
 		minuteProperty = new SimpleIntegerProperty(LocalTime.now().getMinute() + 1);
 		durationProperty = new SimpleObjectProperty<>(Duration.ofSeconds(10));
 		alarmStartedProperty = new SimpleBooleanProperty();
-		mediaProperty = new SimpleObjectProperty<>(player -> player.play(DEFAULT_MEDIA));
+		mediaProperty = new SimpleObjectProperty<>(new LocalFile());
 		AlarmTimer alarmTimer = new AlarmTimer(this);
 		hourProperty.addListener(alarmTimer);
 		minuteProperty.addListener(alarmTimer);
