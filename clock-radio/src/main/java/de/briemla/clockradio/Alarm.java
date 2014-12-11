@@ -36,6 +36,10 @@ public class Alarm {
 				timer.cancel();
 				timer = null;
 			}
+			startTimer();
+		}
+
+		private void startTimer() {
 			timer = new Timer("AlarmTimer", true);
 			timer.scheduleAtFixedRate(new AlarmTask(alarm), alarm.alarmDate(), Long.MAX_VALUE);
 		}
@@ -79,6 +83,7 @@ public class Alarm {
 		alarmStartedProperty = new SimpleBooleanProperty();
 		mediaProperty = new SimpleObjectProperty<>(new LocalFile());
 		AlarmTimer alarmTimer = new AlarmTimer(this);
+		alarmTimer.startTimer();
 		hourProperty.addListener(alarmTimer);
 		minuteProperty.addListener(alarmTimer);
 	}
