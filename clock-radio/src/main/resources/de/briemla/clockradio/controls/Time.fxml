@@ -13,6 +13,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleButton?>
 <?import de.briemla.clockradio.controls.Pointer?>
+<?import de.briemla.clockradio.controls.Pointer2Circle?>
 
 <fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
@@ -27,13 +28,14 @@
 			<children>
 				<StackPane fx:id="hourParent">
 					<children>
-						<Pointer fx:id="pointer"/>
+						<Pointer2Circle fx:id="hourPointer"/>
 						<CircularPane fx:id="afternoon" diameter="250.0" startAngle="-15.0" />
 						<CircularPane fx:id="morning" diameter="180" startAngle="-15.0" />
 					</children>
 				</StackPane>
 				<StackPane fx:id="minuteParent" visible="false">
 					<children>
+						<Pointer fx:id="minutePointer"/>
 						<CircularPane fx:id="minuteCircle" diameter="250.0" startAngle="15.0" />
 					</children>
 				</StackPane>

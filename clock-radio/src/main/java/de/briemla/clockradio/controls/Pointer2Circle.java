@@ -11,9 +11,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import de.briemla.clockradio.FXUtil;
 
-public class Pointer extends AnchorPane {
+public class Pointer2Circle extends AnchorPane {
 
-	private static final double TIC_ANGLE = 2 * Math.PI / 60;
+	private static final double TIC_ANGLE = 2 * Math.PI / 12;
 	private static final double OFFSET = Math.PI / 2d;
 	@FXML
 	private Circle circle;
@@ -22,8 +22,9 @@ public class Pointer extends AnchorPane {
 
 	private final SimpleIntegerProperty value = new SimpleIntegerProperty();
 	private final SimpleDoubleProperty length = new SimpleDoubleProperty();
+	private final SimpleDoubleProperty longLength = new SimpleDoubleProperty();
 
-	public Pointer() {
+	public Pointer2Circle() {
 		super();
 		FXUtil.load(this, this);
 
@@ -41,7 +42,7 @@ public class Pointer extends AnchorPane {
 		double centerY = height / 2.0d;
 		Point2D center = new Point2D(centerX, centerY);
 		int toHour = value.get();
-		double distanceToCenter = distance();
+		double distanceToCenter = distanceTo(toHour);
 		Point2D currentHourAligned = align(center, toHour);
 		Point2D newCoordinates = toCircle(currentHourAligned, center, distanceToCenter);
 		circle.setCenterX(newCoordinates.getX());
@@ -56,8 +57,10 @@ public class Pointer extends AnchorPane {
 		return new Point2D(hourAlignedX, hourAlignedY);
 	}
 
-	private double distance() {
-		return length.get() / 2d - 10d;
+	private double distanceTo(int toHour) {
+		double morningDistance = length.get() / 2d;
+		double afternoonDistance = longLength.get() / 2d;
+		return (toHour >= 12 ? afternoonDistance : morningDistance) - 10d;
 	}
 
 	private static Point2D toCircle(Point2D current, Point2D center, double suggestedLength) {
@@ -73,6 +76,10 @@ public class Pointer extends AnchorPane {
 
 	public DoubleProperty lengthValue() {
 		return length;
+	}
+
+	public DoubleProperty longLengthValue() {
+		return longLength;
 	}
 
 }

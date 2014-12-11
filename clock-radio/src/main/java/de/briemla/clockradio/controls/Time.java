@@ -27,7 +27,9 @@ public class Time extends AnchorPane {
 	@FXML
 	private CircularPane minuteCircle;
 	@FXML
-	private Pointer pointer;
+	private Pointer2Circle hourPointer;
+	@FXML
+	private Pointer minutePointer;
 
 	private final SimpleIntegerProperty hourProperty;
 	private final SimpleIntegerProperty minuteProperty;
@@ -48,9 +50,11 @@ public class Time extends AnchorPane {
 			minuteCircle.add(timeLabelFor(currentMinute * 5 % 60));
 		}
 
-		pointer.valueProperty().bind(hourProperty);
-		pointer.lengthValue().bind(afternoon.diameterProperty());
-		pointer.setTics(12);
+		hourPointer.valueProperty().bind(hourProperty);
+		hourPointer.longLengthValue().bind(afternoon.diameterProperty());
+		hourPointer.lengthValue().bind(morning.diameterProperty());
+		minutePointer.valueProperty().bind(minuteProperty);
+		minutePointer.lengthValue().bind(minuteCircle.diameterProperty());
 
 		hourParent.addEventHandler(MouseEvent.ANY, event -> {
 			if (event.isPrimaryButtonDown()) {
@@ -59,6 +63,16 @@ public class Time extends AnchorPane {
 				double width = hourParent.getWidth();
 				double height = hourParent.getHeight();
 				hourProperty.set(Angle.toHour(x, y, width, height));
+				event.consume();
+			}
+		});
+		minuteParent.addEventHandler(MouseEvent.ANY, event -> {
+			if (event.isPrimaryButtonDown()) {
+				double x = event.getX();
+				double y = event.getY();
+				double width = minuteParent.getWidth();
+				double height = minuteParent.getHeight();
+				minuteProperty.set(Angle.toMinute(x, y, width, height));
 				event.consume();
 			}
 		});

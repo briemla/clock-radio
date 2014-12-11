@@ -16,146 +16,192 @@ public class TimeTest extends GuiTest {
 
 	@Test
 	public void clickAtZeroOClock() {
-		click("#0");
-		assertThat("#hour", hasText("00"));
+		checkHour(0);
 	}
 
 	@Test
 	public void clickAtOneOClock() {
-		click("#1");
-		assertThat("#hour", hasText("01"));
+		checkHour(1);
 	}
 
 	@Test
 	public void clickAtTwoOClock() {
-		click("#2");
-		assertThat("#hour", hasText("02"));
+		checkHour(2);
 	}
 
 	@Test
 	public void clickAtThreeOClock() {
-		click("#3");
-		assertThat("#hour", hasText("03"));
+		checkHour(3);
 	}
 
 	@Test
 	public void clickAtFourOClock() {
-		click("#4");
-		assertThat("#hour", hasText("04"));
+		checkHour(4);
 	}
 
 	@Test
 	public void clickAtFiveOClock() {
-		click("#5");
-		assertThat("#hour", hasText("05"));
+		checkHour(5);
 	}
 
 	@Test
 	public void clickAtSixOClock() {
-		click("#6");
-		assertThat("#hour", hasText("06"));
+		checkHour(6);
 	}
 
 	@Test
 	public void clickAtSevenOClock() {
-		click("#7");
-		assertThat("#hour", hasText("07"));
+		checkHour(7);
 	}
 
 	@Test
 	public void clickAtEightOClock() {
-		click("#8");
-		assertThat("#hour", hasText("08"));
+		checkHour(8);
 	}
 
 	@Test
 	public void clickAtNineOClock() {
-		click("#9");
-		assertThat("#hour", hasText("09"));
+		checkHour(9);
 	}
 
 	@Test
 	public void clickAtTenOClock() {
-		click("#10");
-		assertThat("#hour", hasText("10"));
+		checkHour(10);
 	}
 
 	@Test
 	public void clickAtElevenOClock() {
-		click("#11");
-		assertThat("#hour", hasText("11"));
+		checkHour(11);
 	}
 
 	@Test
 	public void clickAtTwelveOClock() {
-		click("#12");
-		assertThat("#hour", hasText("12"));
+		checkHour(12);
 	}
 
 	@Test
 	public void clickAtThirteenOClock() {
-		click("#13");
-		assertThat("#hour", hasText("13"));
+		checkHour(13);
 	}
 
 	@Test
 	public void clickAtFourteenOClock() {
-		click("#14");
-		assertThat("#hour", hasText("14"));
+		checkHour(14);
 	}
 
 	@Test
 	public void clickAtFivteenOClock() {
-		click("#15");
-		assertThat("#hour", hasText("15"));
+		checkHour(15);
 	}
 
 	@Test
 	public void clickAtSixtennOClock() {
-		click("#16");
-		assertThat("#hour", hasText("16"));
+		checkHour(16);
 	}
 
 	@Test
 	public void clickAtSeventeenOClock() {
-		click("#17");
-		assertThat("#hour", hasText("17"));
+		checkHour(17);
 	}
 
 	@Test
 	public void clickAtEighteenOClock() {
-		click("#18");
-		assertThat("#hour", hasText("18"));
+		checkHour(18);
 	}
 
 	@Test
 	public void clickAtNineteenOClock() {
-		click("#19");
-		assertThat("#hour", hasText("19"));
+		checkHour(19);
 	}
 
 	@Test
 	public void clickAtTwentyOClock() {
-		click("#20");
-		assertThat("#hour", hasText("20"));
+		checkHour(20);
 	}
 
 	@Test
 	public void clickAtTwentyOneOClock() {
-		click("#21");
-		assertThat("#hour", hasText("21"));
+		checkHour(21);
 	}
 
 	@Test
 	public void clickAtTwentyTwoOClock() {
-		click("#22");
-		assertThat("#hour", hasText("22"));
+		checkHour(22);
 	}
 
 	@Test
 	public void clickAtTwentyThreeOClock() {
-		click("#23");
-		assertThat("#hour", hasText("23"));
+		checkHour(23);
+	}
+
+	private void checkHour(int hour) {
+		click("#" + hour);
+		assertThat("#hour", hasText(String.format("%02d", hour)));
+	}
+
+	@Test
+	public void clickAtFiveMinutes() {
+		checkMinute(5);
+	}
+
+	@Test
+	public void clickAtTenMinutes() {
+		checkMinute(10);
+	}
+
+	@Test
+	public void clickAtThirteenMinutes() {
+		checkMinute(15);
+	}
+
+	@Test
+	public void clickAtTwentyMinutes() {
+		checkMinute(20);
+	}
+
+	@Test
+	public void clickAtTwentyFiveMinutes() {
+		checkMinute(25);
+	}
+
+	@Test
+	public void clickAtThirtyMinutes() {
+		checkMinute(30);
+	}
+
+	@Test
+	public void clickAtThirtyFiveMinutes() {
+		checkMinute(35);
+	}
+
+	@Test
+	public void clickAtFourtyMinutes() {
+		checkMinute(40);
+	}
+
+	@Test
+	public void clickAtFourtyFiveMinutes() {
+		checkMinute(45);
+	}
+
+	@Test
+	public void clickAtFivtyMinutes() {
+		checkMinute(50);
+	}
+
+	@Test
+	public void clickAtFivtyFiveMinutes() {
+		checkMinute(55);
+	}
+
+	private void checkMinute(int minutes) {
+		switchToMinute();
+		click("#" + minutes);
+		assertThat("#minute", hasText(String.format("%02d", minutes)));
+	}
+
+	private void switchToMinute() {
+		click("#minute");
 	}
 
 }
