@@ -21,9 +21,10 @@ public class AlarmCell extends AnchorPane {
 	public AlarmCell(Alarm alarm, Settings settings) {
 		super();
 		FXUtil.load(this, this);
+		activated = new ActivatedPseudoClassProperty(this);
 		// TODO maybe create timeProperty in Alarm class
 		time.textProperty().bind(alarm.hourProperty().asString(TIME_FORMAT).concat(":").concat(alarm.minuteProperty().asString(TIME_FORMAT)));
-		activated = new ActivatedPseudoClassProperty(this);
+		activated.bindBidirectional(alarm.activatedProperty());
 		setOnMouseClicked(event -> activated.set(!activated.get()));
 		this.settings.setOnAction(event -> settings.select(alarm));
 		getStyleClass().add("selectable-label");

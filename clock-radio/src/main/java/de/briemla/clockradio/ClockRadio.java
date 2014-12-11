@@ -13,6 +13,7 @@ public class ClockRadio extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		MainPanel mainPanel = new MainPanel(availablePlayer());
+		mainPanel.getStylesheets().add(ClockRadio.class.getResource("clock-radio.css").toExternalForm());
 		primaryStage.setScene(new Scene(mainPanel));
 		primaryStage.show();
 	}

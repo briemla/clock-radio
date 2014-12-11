@@ -10,6 +10,7 @@ import java.util.TimerTask;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -33,10 +34,14 @@ public class Alarm {
 		@Override
 		public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 			if (timer != null) {
-				timer.cancel();
-				timer = null;
+				stopTimer();
 			}
 			startTimer();
+		}
+
+		private void stopTimer() {
+			timer.cancel();
+			timer = null;
 		}
 
 		private void startTimer() {
@@ -72,6 +77,7 @@ public class Alarm {
 	private final SimpleBooleanProperty alarmStartedProperty;
 	private final SimpleBooleanProperty alarmAlreadyStartedProperty;
 	private final SimpleObjectProperty<Media> mediaProperty;
+	private final SimpleBooleanProperty activated = new SimpleBooleanProperty(true);
 	private final Player mediaPlayer;
 
 	public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, Player mediaPlayer) {
@@ -86,6 +92,13 @@ public class Alarm {
 		alarmTimer.startTimer();
 		hourProperty.addListener(alarmTimer);
 		minuteProperty.addListener(alarmTimer);
+		activated.addListener((change, oldValue, newValue) -> {
+			if (newValue) {
+				alarmTimer.startTimer();
+				return;
+			}
+			alarmTimer.stopTimer();
+		});
 	}
 
 	public void stop() {
@@ -135,5 +148,9 @@ public class Alarm {
 		date = date.withMinute(minuteProperty.get());
 		date = date.withSecond(0);
 		return Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
+	}
+
+	public Property<Boolean> activatedProperty() {
+		return activated;
 	}
 }

@@ -1,0 +1,29 @@
+.button {
+	-fx-background-color: transparent;
+	-fx-border: 0;
+}
+
+.button:hover {
+	-fx-background-color: rgb(0,0,255);
+}
+
+.add {
+	-fx-graphic: url("add.png");
+}
+.alarm-cell .button {
+	-fx-background-image: url("settings.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+
+.alarm-cell {
+	-fx-background-image: url("deactivated.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: left;
+}
+
+.alarm-cell:activated {
+	-fx-background-image: url("activated.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: left;
+}
