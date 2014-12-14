@@ -1,29 +1,69 @@
+.main-panel {
+	-fx-background-color: rgb(10,10,10);
+}
+.label {
+	-fx-text-fill: rgba(128,205,255,0.7);
+}
 .button {
-	-fx-background-color: transparent;
-	-fx-border: 0;
+	-fx-background-color: rgba(128,205,255,0.1);
+	-fx-background-radius: 10px;
+	-fx-text-fill: rgba(128,205,255,0.7);
+	-fx-border-color: rgba(128,205,255,0.3);
+	-fx-border-radius: 10px;
+	-fx-border-width: 1px;
+	-fx-padding: 1px;
 }
 
 .button:hover {
-	-fx-background-color: rgb(0,0,255);
+	-fx-background-color: rgba(128,205,255,0.25);
 }
 
 .add {
 	-fx-graphic: url("add.png");
 }
+
+.alarm-cell {
+	-fx-background-image: url("deactivated.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: 9px center;
+	-fx-opacity: 0.2;
+}
+
+.alarm-cell:activated {
+	-fx-background-image: url("activated.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: 9px center;
+	-fx-opacity: 1.0;
+}
+
 .alarm-cell .button {
 	-fx-background-image: url("settings.png");
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 }
 
-.alarm-cell {
-	-fx-background-image: url("deactivated.png");
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: left;
+.alarm-cell .label {
+	-fx-font-size: 15pt;
 }
 
-.alarm-cell:activated {
-	-fx-background-image: url("activated.png");
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: left;
+.time .display {
+	-fx-font-size: 30pt;
+}
+
+.time .setting {
+	-fx-font-size: 15pt;
+}
+
+.clock .label {
+	-fx-font-size: 120pt;
+}
+
+.pointer .circle {
+	-fx-fill: rgb(10,10,10);
+	-fx-stroke: rgba(128,205,255,0.3);
+}
+
+.pointer .line {
+	-fx-fill: rgb(10,10,10);
+	-fx-stroke: rgba(128,205,255,0.3);
 }

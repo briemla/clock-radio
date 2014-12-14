@@ -20,7 +20,7 @@ public class Clock extends StackPane {
 	}
 
 	private StringBinding providedTime() {
-		return timeProvider.timeProperty().asString("%1$TH:%1$TM:%1$TS");
+		return timeProvider.timeProperty().asString("%1$TH:%1$TM");
 	}
 
 }

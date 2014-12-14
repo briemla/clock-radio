@@ -60,7 +60,7 @@ public class Pointer2Circle extends AnchorPane {
 	private double distanceTo(int toHour) {
 		double morningDistance = length.get() / 2d;
 		double afternoonDistance = longLength.get() / 2d;
-		return (toHour >= 12 ? afternoonDistance : morningDistance) - 10d;
+		return (toHour >= 12 ? afternoonDistance : morningDistance) - 18d;
 	}
 
 	private static Point2D toCircle(Point2D current, Point2D center, double suggestedLength) {

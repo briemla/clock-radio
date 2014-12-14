@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="AnchorPane" styleClass="pointer" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Line fx:id="line" fill="rgb(128,205,255)" stroke="rgb(128,205,255)" endX="100.0" startX="0.0" />
+		<Line fx:id="line" styleClass="line" stroke="rgb(128,205,255)" endX="100.0" startX="0.0" />
 		<Circle fx:id="circle" fill="rgb(128,205,255)" radius="10.0" stroke="rgb(128,205,255)" strokeType="INSIDE" />
 	</children>
 </fx:root>

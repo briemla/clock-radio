@@ -17,6 +17,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import jfxtras.scene.control.LocalTimePicker;
 import de.briemla.clockradio.controls.LocalFile;
 
 public class Alarm {
@@ -83,8 +84,9 @@ public class Alarm {
 	public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, Player mediaPlayer) {
 		this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
 		this.mediaPlayer = mediaPlayer;
-		hourProperty = new SimpleIntegerProperty(LocalTime.now().getHour());
-		minuteProperty = new SimpleIntegerProperty(LocalTime.now().getMinute() + 1);
+		LocalTime now = LocalTime.now().plusMinutes(1);
+		hourProperty = new SimpleIntegerProperty(now.getHour());
+		minuteProperty = new SimpleIntegerProperty(now.getMinute());
 		durationProperty = new SimpleObjectProperty<>(Duration.ofSeconds(10));
 		alarmStartedProperty = new SimpleBooleanProperty();
 		mediaProperty = new SimpleObjectProperty<>(new LocalFile());
