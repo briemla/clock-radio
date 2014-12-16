@@ -17,7 +17,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import jfxtras.scene.control.LocalTimePicker;
 import de.briemla.clockradio.controls.LocalFile;
 
 public class Alarm {

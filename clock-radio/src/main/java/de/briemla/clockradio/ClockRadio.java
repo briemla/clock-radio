@@ -1,9 +1,9 @@
 package de.briemla.clockradio;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
@@ -29,10 +29,9 @@ public class ClockRadio extends Application {
 		primaryStage.show();
 	}
 
-	private void watchCssFile(MainPanel mainPanel) throws URISyntaxException {
-		File file = new File(ClockRadio.class.getResource("clock-radio.css")
-				.toURI());
-		mainPanel.getStylesheets().add("file:" + file.getAbsolutePath());
+	private static void watchCssFile(MainPanel mainPanel) throws URISyntaxException, MalformedURLException {
+		File file = new File(ClockRadio.class.getResource("clock-radio.css").toURI());
+		mainPanel.getStylesheets().add(file.toURI().toURL().toExternalForm());
 		Path myDir = file.getParentFile().toPath();
 
 		try {
@@ -40,6 +39,8 @@ public class ClockRadio extends Application {
 			myDir.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY);
 
 			Thread thread = new Thread("CSS Watcher") {
+
+				@Override
 				public void run() {
 					try {
 						WatchKey watckKey = watcher.take();
@@ -49,8 +50,7 @@ public class ClockRadio extends Application {
 							if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
 								Platform.runLater(() -> {
 									mainPanel.getStylesheets().clear();
-									mainPanel.getStylesheets().add(
-											"file:" + file.getAbsolutePath());
+									mainPanel.getStylesheets().add("file:" + file.getAbsolutePath());
 									System.out.println("CSS file changed");
 								});
 							}
@@ -69,8 +69,8 @@ public class ClockRadio extends Application {
 	}
 
 	/**
-	 * Will check which player is available. On Raspberry Pi there is no
-	 * javafx.scene.media support, so we need another player.
+	 * Will check which player is available. On Raspberry Pi there is no javafx.scene.media support,
+	 * so we need another player.
 	 *
 	 * @return
 	 */

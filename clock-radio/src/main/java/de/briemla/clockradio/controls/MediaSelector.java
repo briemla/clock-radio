@@ -35,7 +35,10 @@ public class MediaSelector extends VBox {
 	@FXML
 	public void browse(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setInitialDirectory(currentFolder());
+		File currentFolder = currentFolder();
+		if (currentFolder.exists()) {
+			fileChooser.setInitialDirectory(currentFolder);
+		}
 		File newSource = fileChooser.showOpenDialog(getScene().getWindow());
 		if (newSource == null) {
 			return;

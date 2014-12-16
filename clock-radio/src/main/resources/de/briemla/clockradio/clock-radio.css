@@ -22,17 +22,11 @@
 	-fx-graphic: url("add.png");
 }
 
-.alarm-cell {
-	-fx-background-image: url("deactivated.png");
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: 9px center;
+.alarm-cell .label, .alarm-cell .button {
 	-fx-opacity: 0.2;
 }
 
-.alarm-cell:activated {
-	-fx-background-image: url("activated.png");
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: 9px center;
+.alarm-cell:activated .label, .alarm-cell:activated .button {
 	-fx-opacity: 1.0;
 }
 
@@ -42,8 +36,22 @@
 	-fx-background-position: center;
 }
 
+.alarm-cell .button:hover {
+	-fx-opacity: 1.0;
+}
+
 .alarm-cell .label {
+	-fx-background-image: url("deactivated.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: 9px center;
 	-fx-font-size: 15pt;
+	-fx-padding: 0 0 0 50px;
+}
+
+.alarm-cell:activated .label {
+	-fx-background-image: url("activated.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: 9px center;
 }
 
 .time .display {

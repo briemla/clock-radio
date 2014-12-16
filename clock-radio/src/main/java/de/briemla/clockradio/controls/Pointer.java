@@ -13,6 +13,7 @@ import de.briemla.clockradio.FXUtil;
 
 public class Pointer extends AnchorPane {
 
+	private static final double POINTER_DISTANCE_OFFSET = 18d;
 	private static final double TIC_ANGLE = 2 * Math.PI / 60;
 	private static final double OFFSET = Math.PI / 2d;
 	@FXML
@@ -57,7 +58,7 @@ public class Pointer extends AnchorPane {
 	}
 
 	private double distance() {
-		return length.get() / 2d - 10d;
+		return length.get() / 2d - POINTER_DISTANCE_OFFSET;
 	}
 
 	private static Point2D toCircle(Point2D current, Point2D center, double suggestedLength) {

@@ -7,7 +7,7 @@
 
 <fx:root type="AnchorPane" styleClass="pointer" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Line fx:id="line" styleClass="line" stroke="rgb(128,205,255)" endX="100.0" startX="0.0" />
-		<Circle fx:id="circle" fill="rgb(128,205,255)" radius="10.0" stroke="rgb(128,205,255)" strokeType="INSIDE" />
+		<Line fx:id="line" styleClass="line" strokeWidth="4.0" strokeLineCap="ROUND" endX="100.0" startX="0.0" />
+		<Circle fx:id="circle" styleClass="circle" radius="19.0" strokeWidth="2.0" strokeType="INSIDE" />
 	</children>
 </fx:root>
