@@ -154,4 +154,9 @@ public class Alarm {
 	public Property<Boolean> activatedProperty() {
 		return activated;
 	}
+
+	public void kill() {
+		stop();
+		activated.set(false);
+	}
 }

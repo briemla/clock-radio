@@ -58,6 +58,7 @@ public class Settings {
 
 	public void delete(Alarm alarm) {
 		viewSwitcher.showDefault();
+		alarm.kill();
 		alarms.remove(alarm);
 		rebindAlarms();
 	}
