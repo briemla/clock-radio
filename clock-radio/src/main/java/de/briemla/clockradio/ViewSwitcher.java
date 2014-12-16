@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -14,6 +15,8 @@ public class ViewSwitcher extends BorderPane {
 
 	@FXML
 	private HBox container;
+	@FXML
+	private Button back;
 
 	private final HashMap<Class<?>, Node> views;
 	private final SimpleBooleanProperty defaultVisisble;
@@ -25,6 +28,7 @@ public class ViewSwitcher extends BorderPane {
 		FXUtil.load(this, this);
 		views = new HashMap<>();
 		defaultVisisble = new SimpleBooleanProperty(false);
+		back.visibleProperty().bind(defaultVisisble.not());
 	}
 
 	/**
@@ -55,7 +59,7 @@ public class ViewSwitcher extends BorderPane {
 		currentView = view;
 		currentView.setVisible(true);
 		currentView.setManaged(true);
-		defaultVisisble.set(!currentView.equals(defaultView));
+		defaultVisisble.set(currentView.equals(defaultView));
 	}
 
 	@SuppressWarnings("unchecked")

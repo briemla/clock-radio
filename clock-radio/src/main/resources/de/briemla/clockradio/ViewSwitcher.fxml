@@ -10,6 +10,6 @@
       <HBox fx:id="container" alignment="CENTER" BorderPane.alignment="CENTER" />
    </center>
    <top>
-      <Button mnemonicParsing="false" onAction="#back" text="Zurück" BorderPane.alignment="CENTER" />
+      <Button fx:id="back" mnemonicParsing="false" onAction="#back" text="Zurück" BorderPane.alignment="CENTER" />
    </top>
 </fx:root>
