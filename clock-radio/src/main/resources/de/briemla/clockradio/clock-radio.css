@@ -85,3 +85,11 @@
 	-fx-fill: rgb(10,10,10);
 	-fx-stroke: rgba(128,205,255,0.3);
 }
+
+.main-panel:active .alarm-view, .main-panel:active .top-bar {
+	-fx-opacity: 1.0;
+}
+
+.main-panel .alarm-view, .main-panel .top-bar {
+	-fx-opacity: 0.1;
+}

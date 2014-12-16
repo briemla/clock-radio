@@ -32,7 +32,6 @@ public class AlarmCell extends AnchorPane {
 		active.bindBidirectional(alarm.activatedProperty());
 		setOnMouseClicked(event -> active.set(!active.get()));
 		this.settings.setOnAction(event -> settings.select(alarm));
-		getStyleClass().add("selectable-label");
 	}
 
 	public void unbind() {
