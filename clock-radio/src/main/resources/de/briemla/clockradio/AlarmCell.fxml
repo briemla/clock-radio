@@ -5,9 +5,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root fx:id="container" minHeight="50.0" minWidth="200.0" styleClass="alarm-cell" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="container" maxWidth="200" minHeight="50.0" minWidth="200.0" styleClass="alarm-cell" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="time" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="time" styleClass="time" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="weekdays" alignment="TOP_RIGHT" styleClass="weekdays" text="Mo - Fr" wrapText="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="mediaDescription" styleClass="media-description" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="35.0" />
       <Button fx:id="settings" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" text="" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </fx:root>

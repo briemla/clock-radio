@@ -14,6 +14,10 @@ public class AlarmCell extends AnchorPane {
 	@FXML
 	private Label time;
 	@FXML
+	private Label weekdays;
+	@FXML
+	private Label mediaDescription;
+	@FXML
 	private Button settings;
 
 	private final BooleanProperty activated;
@@ -24,6 +28,7 @@ public class AlarmCell extends AnchorPane {
 		activated = new ActivatedPseudoClassProperty(this);
 		// TODO maybe create timeProperty in Alarm class
 		time.textProperty().bind(alarm.hourProperty().asString(TIME_FORMAT).concat(":").concat(alarm.minuteProperty().asString(TIME_FORMAT)));
+		mediaDescription.textProperty().bind(alarm.mediaProperty().asString());
 		activated.bindBidirectional(alarm.activatedProperty());
 		setOnMouseClicked(event -> activated.set(!activated.get()));
 		this.settings.setOnAction(event -> settings.select(alarm));
@@ -32,6 +37,8 @@ public class AlarmCell extends AnchorPane {
 
 	public void unbind() {
 		time.textProperty().unbind();
+		weekdays.textProperty().unbind();
+		mediaDescription.textProperty().unbind();
 	}
 
 	public BooleanProperty activatedProperty() {

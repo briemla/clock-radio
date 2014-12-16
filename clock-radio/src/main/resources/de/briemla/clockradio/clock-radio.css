@@ -40,7 +40,7 @@
 	-fx-opacity: 1.0;
 }
 
-.alarm-cell .label {
+.alarm-cell .time {
 	-fx-background-image: url("deactivated.png");
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: 9px center;
@@ -48,10 +48,20 @@
 	-fx-padding: 0 0 0 50px;
 }
 
-.alarm-cell:activated .label {
+.alarm-cell:activated .time {
 	-fx-background-image: url("activated.png");
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: 9px center;
+}
+
+.alarm-cell .media-description {
+	-fx-font-size: 7pt;
+	-fx-padding: 0 5px 0 50px;
+}
+
+.alarm-cell .weekdays {
+	-fx-font-size: 7pt;
+	-fx-padding: 0 5px 0 0;
 }
 
 .time .display {
