@@ -20,17 +20,17 @@ public class AlarmCell extends AnchorPane {
 	@FXML
 	private Button settings;
 
-	private final BooleanProperty activated;
+	private final BooleanProperty active;
 
 	public AlarmCell(Alarm alarm, Settings settings) {
 		super();
 		FXUtil.load(this, this);
-		activated = new ActivatedPseudoClassProperty(this);
+		active = new ActivePseudoClassProperty(this);
 		// TODO maybe create timeProperty in Alarm class
 		time.textProperty().bind(alarm.hourProperty().asString(TIME_FORMAT).concat(":").concat(alarm.minuteProperty().asString(TIME_FORMAT)));
 		mediaDescription.textProperty().bind(alarm.mediaProperty().asString());
-		activated.bindBidirectional(alarm.activatedProperty());
-		setOnMouseClicked(event -> activated.set(!activated.get()));
+		active.bindBidirectional(alarm.activatedProperty());
+		setOnMouseClicked(event -> active.set(!active.get()));
 		this.settings.setOnAction(event -> settings.select(alarm));
 		getStyleClass().add("selectable-label");
 	}
@@ -42,6 +42,6 @@ public class AlarmCell extends AnchorPane {
 	}
 
 	public BooleanProperty activatedProperty() {
-		return activated;
+		return active;
 	}
 }

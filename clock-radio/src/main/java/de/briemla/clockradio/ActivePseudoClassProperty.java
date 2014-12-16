@@ -4,12 +4,13 @@ import javafx.beans.property.BooleanPropertyBase;
 import javafx.css.PseudoClass;
 import javafx.scene.Node;
 
-public class ActivatedPseudoClassProperty extends BooleanPropertyBase {
-	private static final PseudoClass ACTIVATED_PSEUDO_CLASS = PseudoClass.getPseudoClass("activated");
+public class ActivePseudoClassProperty extends BooleanPropertyBase {
+
+	private static final PseudoClass ACTIVATED_PSEUDO_CLASS = PseudoClass.getPseudoClass("active");
 
 	private final Node node;
 
-	public ActivatedPseudoClassProperty(Node node) {
+	public ActivePseudoClassProperty(Node node) {
 		super();
 		this.node = node;
 	}
