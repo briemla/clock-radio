@@ -1,5 +1,6 @@
 package de.briemla.clockradio;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.beans.binding.Bindings;
@@ -15,14 +16,15 @@ public class AlarmView extends HBox {
 	@FXML
 	private HBox container;
 
-	private Settings settings;
-
 	private final ObservableList<Alarm> alarms;
+	private Settings settings;
+	private final HashMap<Alarm, AlarmCell> alarmToCell;
 
 	public AlarmView() {
 		super();
 		FXUtil.load(this, this);
 		alarms = FXCollections.observableArrayList();
+		alarmToCell = new HashMap<>();
 		alarms.addListener(new ListChangeListener<Alarm>() {
 
 			@Override
@@ -33,6 +35,13 @@ public class AlarmView extends HBox {
 						for (Alarm alarm : addedSubList) {
 							AlarmCell alarmCell = new AlarmCell(alarm, settings);
 							container.getChildren().add(container.getChildren().size() - 1, alarmCell);
+							alarmToCell.put(alarm, alarmCell);
+						}
+					}
+					if (change.wasRemoved()) {
+						List<? extends Alarm> removedSubList = change.getRemoved();
+						for (Alarm alarm : removedSubList) {
+							container.getChildren().remove(alarmToCell.get(alarm));
 						}
 					}
 				}

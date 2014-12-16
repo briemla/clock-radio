@@ -86,6 +86,12 @@
 	-fx-stroke: rgba(128,205,255,0.3);
 }
 
+.delete {
+	-fx-background-image: url("delete.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+
 .main-panel:active .alarm-view, .main-panel:active .top-bar {
 	-fx-opacity: 1.0;
 }

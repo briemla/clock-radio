@@ -4,12 +4,18 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import de.briemla.clockradio.controls.Time?>
 <?import de.briemla.clockradio.controls.MediaSelector?>
 
 <fx:root styleClass="alarm-settings" maxHeight="50.0" prefHeight="50.0" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Time fx:id="time" />
-      <MediaSelector fx:id="source" />
-   </children>
+	<children>
+		<Time fx:id="time" />
+		<VBox alignment="TOP_RIGHT" spacing="50">
+			<children>
+				<MediaSelector fx:id="source" VBox.vgrow="ALWAYS" />
+				<Button fx:id="delete" styleClass="delete" onAction="#delete" minWidth="50" minHeight="50" VBox.vgrow="NEVER" />
+			</children>
+		</VBox>
+	</children>
 </fx:root>

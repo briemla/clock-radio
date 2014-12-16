@@ -1,5 +1,6 @@
 package de.briemla.clockradio;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import de.briemla.clockradio.controls.MediaSelector;
@@ -12,9 +13,11 @@ public class AlarmSettings extends HBox {
 	@FXML
 	private MediaSelector source;
 	private Alarm lastAlarm;
+	private final Settings settings;
 
-	public AlarmSettings() {
+	public AlarmSettings(Settings settings) {
 		super();
+		this.settings = settings;
 		FXUtil.load(this, this);
 	}
 
@@ -38,6 +41,11 @@ public class AlarmSettings extends HBox {
 		source.mediaProperty().bindBidirectional(alarm.mediaProperty());
 		lastAlarm = alarm;
 		time.switchToHour();
+	}
+
+	@FXML
+	public void delete(ActionEvent event) {
+		settings.delete(lastAlarm);
 	}
 
 }

@@ -55,4 +55,10 @@ public class Settings {
 		AlarmSettings alarmSettings = viewSwitcher.show(Alarm.class);
 		alarmSettings.setCurrentAlarm(alarm);
 	}
+
+	public void delete(Alarm alarm) {
+		viewSwitcher.showDefault();
+		alarms.remove(alarm);
+		rebindAlarms();
+	}
 }

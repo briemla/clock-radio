@@ -47,7 +47,7 @@ public class MainPanel extends VBox {
 		alarm.setSettings(settings);
 		Node clock = new Clock();
 		viewSwitch.setDefaultView(clock);
-		AlarmSettings alarmSettings = new AlarmSettings();
+		AlarmSettings alarmSettings = new AlarmSettings(settings);
 		viewSwitch.addView(Alarm.class, alarmSettings);
 		addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
 			active.set(true);
