@@ -37,6 +37,7 @@ public class AlarmSettings extends HBox {
 		time.minuteProperty().bindBidirectional(alarm.minuteProperty());
 		source.mediaProperty().bindBidirectional(alarm.mediaProperty());
 		lastAlarm = alarm;
+		time.switchToHour();
 	}
 
 }

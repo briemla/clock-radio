@@ -103,7 +103,7 @@ public class Time extends AnchorPane {
 		minuteParent.setVisible(true);
 	}
 
-	private void switchToHour() {
+	public void switchToHour() {
 		hourParent.setVisible(true);
 		minuteParent.setVisible(false);
 	}
