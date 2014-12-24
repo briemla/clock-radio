@@ -8,11 +8,19 @@ import de.briemla.clockradio.Player;
 
 public class LocalFile implements Media {
 
-	public static final URI DEFAULT_MEDIA = URI.create("file:///D:/Bibliotheken/Musik/WCG_Theme_Song.mp3");
 	private final File source;
 
 	public LocalFile() {
-		this(new File(DEFAULT_MEDIA));
+		this(new File(defaultMedia()));
+	}
+
+	private static URI defaultMedia() {
+		URI defaultMedia = URI
+				.create("file:///opt/clock-radio/music/WCG_Theme_Song.mp3");
+		if ("amd64".equals(System.getProperty("os.arch").toLowerCase()))
+			defaultMedia = URI
+					.create("file:///home/lars/Musik/WCG_Theme_Song.mp3");
+		return defaultMedia;
 	}
 
 	public LocalFile(File source) {

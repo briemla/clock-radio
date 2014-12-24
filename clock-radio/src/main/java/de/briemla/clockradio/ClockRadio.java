@@ -24,7 +24,8 @@ public class ClockRadio extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		MainPanel mainPanel = new MainPanel(availablePlayer());
-		watchCssFile(mainPanel);
+		mainPanel.getStylesheets().add(ClockRadio.class.getResource("clock-radio.css").toExternalForm());
+//		watchCssFile(mainPanel);
 		primaryStage.setScene(new Scene(mainPanel));
 		primaryStage.show();
 	}
@@ -75,7 +76,8 @@ public class ClockRadio extends Application {
 	 * @return
 	 */
 	private static Player availablePlayer() {
-		return new JavaFxPlayer();
+		return new AudioFilePlayer();
+//		return new JavaFxPlayer();
 	}
 
 }

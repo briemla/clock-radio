@@ -44,7 +44,7 @@
 	-fx-background-image: url("inactive.png");
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: 9px center;
-	-fx-font-size: 15pt;
+	-fx-font-size: 13pt;
 	-fx-padding: 0 0 0 50px;
 }
 
@@ -62,6 +62,12 @@
 .alarm-cell .weekdays {
 	-fx-font-size: 7pt;
 	-fx-padding: 0 5px 0 0;
+}
+
+.shutdown {
+	-fx-background-image: url("shutdown.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
 }
 
 .time .display {

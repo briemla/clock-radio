@@ -50,11 +50,15 @@ public class MainPanel extends VBox {
 		AlarmSettings alarmSettings = new AlarmSettings(settings);
 		viewSwitch.addView(Alarm.class, alarmSettings);
 		addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+			if (!active.get()) {
+				event.consume();
+			}
 			active.set(true);
 			resetInactiveTimer();
 		});
 		active.set(true);
 		resetInactiveTimer();
+		settings.addAlarm();
 	}
 
 	private void resetInactiveTimer() {
@@ -69,6 +73,11 @@ public class MainPanel extends VBox {
 	@FXML
 	public void openSettings(ActionEvent event) {
 
+	}
+	
+	@FXML
+	public void shutdown(ActionEvent event) {
+		System.exit(0);
 	}
 
 	public void stopSound(ActionEvent event) {

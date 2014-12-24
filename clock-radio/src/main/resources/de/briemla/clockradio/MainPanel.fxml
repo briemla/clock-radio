@@ -11,6 +11,7 @@
    <children>
       <AnchorPane styleClass="top-bar" maxHeight="50.0" prefHeight="50.0">
          <children>
+         	<Button mnemonicParsing="false" styleClass="shutdown" onAction="#shutdown" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <Button mnemonicParsing="false" onAction="#openSettings" prefHeight="50.0" prefWidth="100.0" text="Einstellungen" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
