@@ -40,22 +40,36 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>wagon-maven-plugin</artifactId>
 				<version>1.0</version>
+				<configuration>
+					<serverId>clock-radio</serverId>
+					<fromFile>${project.build.directory}/${project.build.finalName}.jar</fromFile>
+					<url>scp://clock-radio.local/home/pi/</url>
+				</configuration>
 				<executions>
 					<execution>
-						<id>deplay-to-pi</id>
+						<id>deploy-to-pi</id>
 						<phase>deploy</phase>
 						<goals>
 							<goal>upload</goal>
 						</goals>
-						<configuration>
-							<fromDir>local.dir</fromDir>
-							<includes>*</includes>
-							<excludes>pom.xml</excludes>
-							<url>scp://pi@192.168.1.20/</url>
-							<toDir>/opt/clock-radio/</toDir>
-						</configuration>
 					</execution>
 				</executions>
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<id>deplay-to-pi</id> -->
+<!-- 						<phase>deploy</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>upload</goal> -->
+<!-- 						</goals> -->
+<!-- 						<configuration> -->
+<!-- 							<fromDir>local.dir</fromDir> -->
+<!-- 							<includes>*</includes> -->
+<!-- 							<excludes>pom.xml</excludes> -->
+<!-- 							<url>scp://pi@192.168.1.20/</url> -->
+<!-- 							<toDir>/opt/clock-radio/</toDir> -->
+<!-- 						</configuration> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
 			</plugin>
 		</plugins>
 	</build>

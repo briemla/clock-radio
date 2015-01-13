@@ -20,7 +20,7 @@ public class MediaSelector extends VBox {
 	@FXML
 	private Button browse;
 
-	private final SimpleObjectProperty<Media> mediaProperty = new SimpleObjectProperty<>(new LocalFile());
+	private final SimpleObjectProperty<Media> mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
 
 	public MediaSelector() {
 		super();
@@ -43,7 +43,7 @@ public class MediaSelector extends VBox {
 		if (newSource == null) {
 			return;
 		}
-		mediaProperty.set(new LocalFile(newSource));
+		mediaProperty.set(new LocalFolder(newSource.toPath()));
 	}
 
 	private File currentFolder() {

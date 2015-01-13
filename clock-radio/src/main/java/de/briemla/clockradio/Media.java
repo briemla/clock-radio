@@ -6,5 +6,7 @@ public interface Media {
 
 	void play(Player player);
 
+	void stop(Player player);
+
 	File getSource();
 }

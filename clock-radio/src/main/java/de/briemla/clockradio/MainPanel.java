@@ -59,6 +59,7 @@ public class MainPanel extends VBox {
 		active.set(true);
 		resetInactiveTimer();
 		settings.addAlarm();
+		viewSwitch.showDefault();
 	}
 
 	private void resetInactiveTimer() {

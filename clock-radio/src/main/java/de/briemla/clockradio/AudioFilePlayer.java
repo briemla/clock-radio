@@ -6,6 +6,7 @@ import static javax.sound.sampled.AudioSystem.getAudioInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.time.LocalTime;
 
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -20,31 +21,17 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class AudioFilePlayer implements Player {
 
-	private final class StartAudio extends Thread {
-
-		private URI uriToPlay;
-
-		private StartAudio(URI uriToPlay) {
-			super("Audio");
-			this.uriToPlay = uriToPlay;
-			setDaemon(true);
-		}
-
-		@Override
-		public void run() {
-			File file = new File(uriToPlay);
-			startAudio(file);
-		}
-	}
-
-	private final SimpleBooleanProperty playingProperty = new SimpleBooleanProperty(
-			false);
+	private final SimpleBooleanProperty playingProperty = new SimpleBooleanProperty(false);
 	private final Object lineLock = new Object();
 	private SourceDataLine line;
 
+	/**
+	 * Method blocks until audio input is finished or closed.
+	 */
 	@Override
 	public void play(URI uriToPlay) {
-		new StartAudio(uriToPlay).start();
+		System.out.println("Start: " + LocalTime.now());
+		startAudio(new File(uriToPlay));
 	}
 
 	private AudioFormat getOutFormat(AudioFormat inFormat) {
@@ -53,8 +40,7 @@ public class AudioFilePlayer implements Player {
 		return new AudioFormat(PCM_SIGNED, rate, 16, ch, ch * 2, rate, false);
 	}
 
-	private void stream(AudioInputStream in, SourceDataLine line)
-			throws IOException {
+	private void stream(AudioInputStream in, SourceDataLine line) throws IOException {
 		byte[] buffer = new byte[65536];
 		for (int n = 0; n != -1; n = in.read(buffer, 0, buffer.length)) {
 			line.write(buffer, 0, n);
@@ -63,9 +49,11 @@ public class AudioFilePlayer implements Player {
 
 	@Override
 	public void stop() {
+		System.out.println("Stop: " + LocalTime.now());
 		synchronized (lineLock) {
 			if (line != null) {
 				line.close();
+				line.stop();
 				line = null;
 				playingProperty.set(false);
 			}
@@ -93,8 +81,7 @@ public class AudioFilePlayer implements Player {
 					stop();
 				}
 			}
-		} catch (UnsupportedAudioFileException | LineUnavailableException
-				| IOException e) {
+		} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
 			throw new IllegalStateException(e);
 		}
 	}
