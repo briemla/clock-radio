@@ -25,12 +25,15 @@ public class ClockRadio extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		MainPanel mainPanel = new MainPanel(availablePlayer());
 		mainPanel.getStylesheets().add(ClockRadio.class.getResource("clock-radio.css").toExternalForm());
-//		watchCssFile(mainPanel);
+		watchCssFile(mainPanel);
 		primaryStage.setScene(new Scene(mainPanel));
 		primaryStage.show();
 	}
 
 	private static void watchCssFile(MainPanel mainPanel) throws URISyntaxException, MalformedURLException {
+		if (!"amd64".equals(System.getProperty("os.arch"))) {
+			return;
+		}
 		File file = new File(ClockRadio.class.getResource("clock-radio.css").toURI());
 		mainPanel.getStylesheets().add(file.toURI().toURL().toExternalForm());
 		Path myDir = file.getParentFile().toPath();
@@ -70,14 +73,14 @@ public class ClockRadio extends Application {
 	}
 
 	/**
-	 * Will check which player is available. On Raspberry Pi there is no javafx.scene.media support,
-	 * so we need another player.
+	 * Will check which player is available. On Raspberry Pi there is no
+	 * javafx.scene.media support, so we need another player.
 	 *
 	 * @return
 	 */
 	private static Player availablePlayer() {
 		return new AudioFilePlayer();
-//		return new JavaFxPlayer();
+		// return new JavaFxPlayer();
 	}
 
 }
