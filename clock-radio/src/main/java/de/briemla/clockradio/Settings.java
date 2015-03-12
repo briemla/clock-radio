@@ -62,4 +62,10 @@ public class Settings {
 		alarms.remove(alarm);
 		rebindAlarms();
 	}
+
+	public void stopCurrentAlarm() {
+		for (Alarm alarm : alarms) {
+			alarm.stop();
+		}
+	}
 }

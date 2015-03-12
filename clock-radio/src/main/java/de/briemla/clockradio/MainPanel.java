@@ -75,14 +75,16 @@ public class MainPanel extends VBox {
 	public void openSettings(ActionEvent event) {
 
 	}
-	
+
 	@FXML
 	public void shutdown(ActionEvent event) {
-		System.exit(0);
+		Platform.exit();
 	}
 
+	@FXML
 	public void stopSound(ActionEvent event) {
-		player.stop();
+		settings.stopCurrentAlarm();
+		// player.stop();
 	}
 
 }
