@@ -70,6 +70,12 @@
 	-fx-background-position: center;
 }
 
+.stop {
+	-fx-background-image: url("stop.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+
 .time .display {
 	-fx-font-size: 40pt;
 }
