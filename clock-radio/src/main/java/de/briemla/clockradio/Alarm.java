@@ -2,6 +2,7 @@ package de.briemla.clockradio;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Timer;
@@ -50,7 +51,8 @@ public class Alarm {
 
 		private void startTimer() {
 			startTimer = new Timer("AlarmTimer", true);
-			// TODO: Maybe use Timer#schedule to run the timer on specified dates:
+			// TODO: Maybe use Timer#schedule to run the timer on specified
+			// dates:
 			// Timer timer new Timer();
 			// Thread myThread= // Your thread
 			// Calendar date = Calendar.getInstance();
@@ -114,9 +116,9 @@ public class Alarm {
 	public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, Player mediaPlayer) {
 		this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
 		this.mediaPlayer = mediaPlayer;
-		// LocalTime now = LocalTime.now().plusMinutes(1);
-		hourProperty = new SimpleIntegerProperty(8);// now.getHour());
-		minuteProperty = new SimpleIntegerProperty(0);// now.getMinute());
+		LocalTime now = LocalTime.now().plusMinutes(1);
+		hourProperty = new SimpleIntegerProperty(now.getHour());
+		minuteProperty = new SimpleIntegerProperty(now.getMinute());
 		durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
 		alarmStartedProperty = new SimpleBooleanProperty();
 		mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
@@ -134,8 +136,10 @@ public class Alarm {
 	}
 
 	public void stop() {
-		mediaProperty().get().stop(mediaPlayer);
-		alarmStartedProperty.set(false);
+		if (alarmStartedProperty.get()) {
+			mediaProperty().get().stop(mediaPlayer);
+			alarmStartedProperty.set(false);
+		}
 	}
 
 	public Duration getDuration() {
@@ -181,7 +185,8 @@ public class Alarm {
 
 	private LocalDateTime alarmLocalDate() {
 		LocalDateTime date = LocalDateTime.now();
-		if (date.getHour() > hourProperty.get() || date.getHour() == hourProperty.get() && date.getMinute() >= minuteProperty.get()) {
+		if (date.getHour() > hourProperty.get() || date.getHour() == hourProperty.get()
+				&& date.getMinute() >= minuteProperty.get()) {
 			date = date.plusDays(1);
 		}
 		date = date.withHour(hourProperty.get());
