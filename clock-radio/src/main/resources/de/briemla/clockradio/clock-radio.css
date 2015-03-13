@@ -77,7 +77,7 @@
 }
 
 .time .display {
-	-fx-font-size: 40pt;
+	-fx-font-size: 60pt;
 }
 
 .time .setting {
@@ -85,7 +85,7 @@
 }
 
 .clock .label {
-	-fx-font-size: 120pt;
+	-fx-font-size: 200pt;
 }
 
 .pointer .circle {
