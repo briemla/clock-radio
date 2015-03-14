@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 public class MainPanel extends StackPane {
@@ -31,19 +32,25 @@ public class MainPanel extends StackPane {
 	@FXML
 	private ViewSwitcher viewSwitch;
 	@FXML
+	private AnchorPane overlay;
+	@FXML
 	private AlarmView alarm;
+	@FXML
+	private AlarmMenu alarmMenu;
 
 	private final ActivePseudoClassProperty active;
-	private final Player player;
 	private final Settings settings;
 	private Timer timer;
 
 	public MainPanel(Player player) {
 		super();
-		this.player = player;
 		FXUtil.load(this, this);
 		active = new ActivePseudoClassProperty(this);
-		settings = new Settings(viewSwitch, player);
+		overlay.setPickOnBounds(true);
+		// overlay.setMouseTransparent(true);
+		OverlaySwitcher overlaySwitcher = new OverlaySwitcher(overlay);
+		overlaySwitcher.addView(Alarm.class, alarmMenu);
+		settings = new Settings(viewSwitch, player, overlaySwitcher);
 		alarm.setSettings(settings);
 		Node clock = new Clock();
 		viewSwitch.setDefaultView(clock);

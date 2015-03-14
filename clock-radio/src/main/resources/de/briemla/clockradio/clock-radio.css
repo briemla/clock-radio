@@ -1,7 +1,7 @@
 .root {
-	background-color: rgb(10,10,10);
-	border-color: rgba(128,205,255,0.3);
-	text-color: rgba(128,205,255,0.7);
+	background-color: rgb(10.0,10.0,10.0);
+	border-color: rgba(128.0,205.0,255.0,0.3);
+	text-color: rgba(128.0,205.0,255.0,0.7);
 }
 
 .main-panel {
@@ -11,28 +11,28 @@
 	-fx-text-fill: text-color;
 }
 .button {
-	-fx-background-color: rgba(128,205,255,0.1);
-	-fx-background-radius: 10px;
+	-fx-background-color: rgba(128.0,205.0,255.0,0.1);
+	-fx-background-radius: 10.0px;
 	-fx-text-fill: text-color;
 	-fx-border-color: border-color;
-	-fx-border-radius: 10px;
-	-fx-border-width: 1px;
-	-fx-padding: 1px;
+	-fx-border-radius: 10.0px;
+	-fx-border-width: 1.0px;
+	-fx-padding: 1.0px;
 }
 
 .button:hover {
-	-fx-background-color: rgba(128,205,255,0.25);
+	-fx-background-color: rgba(128.0,205.0,255.0,0.25);
 }
 
 .add {
 	-fx-graphic: url("add.png");
 }
 
-.alarm-cell .label, .alarm-cell .button {
+.alarm-cell {
 	-fx-opacity: 0.2;
 }
 
-.alarm-cell:active .label, .alarm-cell:active .button {
+.alarm-cell:active {
 	-fx-opacity: 1.0;
 }
 
@@ -47,36 +47,49 @@
 }
 
 .alarm-cell .time {
-	-fx-background-image: url("inactive.png");
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: 9px center;
-	-fx-font-size: 13pt;
-	-fx-padding: 0 0 0 50px;
+	-fx-font-size: 13.0pt;
+	-fx-text-alignement: left;
 }
 
-.alarm-cell:active .time {
-	-fx-background-image: url("active.png");
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: 9px center;
+.check-box>.box {
+  -fx-background-insets: 0.0;
+  -fx-background-radius: 0.0;
+  -fx-background-color: transparent;
+}
+
+.check-box>.box>.mark {
+  -fx-background-color: transparent;
+  -fx-background-image: url("inactive.png");
+  -fx-background-position: center;
+  -fx-background-repeat: no-repeat;
+  -fx-shape: none;
+  -fx-padding: 16px;
+}
+
+.check-box:selected>.box>.mark{
+  -fx-background-color: transparent;
+  -fx-background-image: url("active.png");
+  -fx-background-position: center;
+  -fx-background-repeat: no-repeat;
 }
 
 .alarm-cell .media-description {
-	-fx-font-size: 7pt;
-	-fx-padding: 0 5px 0 50px;
+	-fx-font-size: 7.0pt;
 }
 
 .alarm-cell .weekdays {
-	-fx-font-size: 7pt;
-	-fx-padding: 0 5px 0 0;
+	-fx-font-size: 7.0pt;
+	-fx-padding: 0.0 5.0px 0.0 0.0;
 }
 
 .alarm-menu {
 	-fx-background-color:  background-color;
-	-fx-background-radius: 10px;
+	-fx-background-radius: 10.0px;
 	-fx-border-color: border-color;
-	-fx-border-radius: 10px;
-	-fx-border-width: 1px;
+	-fx-border-radius: 10.0px;
+	-fx-border-width: 1.0px;
 	-fx-border-style: solid;
+	-fx-padding: 10.0px;
 }
 
 .shutdown {
@@ -92,15 +105,15 @@
 }
 
 .time .display {
-	-fx-font-size: 60pt;
+	-fx-font-size: 60.0pt;
 }
 
 .time .setting {
-	-fx-font-size: 15pt;
+	-fx-font-size: 15.0pt;
 }
 
 .clock .label {
-	-fx-font-size: 200pt;
+	-fx-font-size: 200.0pt;
 }
 
 .pointer .circle {
