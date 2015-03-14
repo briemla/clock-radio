@@ -6,17 +6,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import de.briemla.clockradio.ViewSwitcher?>
 <?import de.briemla.clockradio.AlarmView?>
+<?import javafx.scene.layout.StackPane?>
+<?import de.briemla.clockradio.AlarmMenu?>
 
-<fx:root styleClass="main-panel" prefHeight="600.0" prefWidth="1024.0" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <AnchorPane styleClass="top-bar" maxHeight="50.0" prefHeight="50.0">
-         <children>
-         	<Button mnemonicParsing="false" styleClass="shutdown" onAction="#shutdown" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         	<Button mnemonicParsing="false" styleClass="stop" onAction="#stopSound" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="0.0" />
-            <Button mnemonicParsing="false" onAction="#openSettings" prefHeight="50.0" prefWidth="100.0" text="Einstellungen" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
-      <ViewSwitcher fx:id="viewSwitch" maxHeight="500.0" prefHeight="500.0" prefWidth="1024.0"/>
-      <AlarmView fx:id="alarm"/>
-   </children>
+<fx:root styleClass="main-panel" prefHeight="600.0" prefWidth="1024.0" type="StackPane" xmlns="http://javafx.com/javafx/8"
+    xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox>
+            <children>
+                <AnchorPane styleClass="top-bar" maxHeight="50.0" prefHeight="50.0">
+                    <children>
+                        <Button mnemonicParsing="false" styleClass="shutdown" onAction="#shutdown" prefHeight="50.0"
+                            prefWidth="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button mnemonicParsing="false" styleClass="stop" onAction="#stopSound" prefHeight="50.0"
+                            prefWidth="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="0.0" />
+                        <Button mnemonicParsing="false" onAction="#openSettings" prefHeight="50.0" prefWidth="100.0"
+                            text="Einstellungen" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    </children>
+                </AnchorPane>
+                <ViewSwitcher fx:id="viewSwitch" maxHeight="500.0" prefHeight="500.0" prefWidth="1024.0" />
+                <AlarmView fx:id="alarm" />
+            </children>
+        </VBox>
+        <AnchorPane maxHeight="600" maxWidth="1024" minHeight="600" minWidth="1024">
+            <children>
+                <AlarmMenu AnchorPane.leftAnchor="0.0" AnchorPane.bottomAnchor="50.0"/>
+            </children>
+        </AnchorPane>
+    </children>
 </fx:root>

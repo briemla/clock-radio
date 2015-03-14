@@ -64,6 +64,12 @@
 	-fx-padding: 0 5px 0 0;
 }
 
+.alarm-menu {
+	-fx-bordor-color: rgba(128,205,255,1.0);
+	-fx-border-radius: 10px;
+	-fx-border-width: 1px;
+}
+
 .shutdown {
 	-fx-background-image: url("shutdown.png");
 	-fx-background-repeat: no-repeat;

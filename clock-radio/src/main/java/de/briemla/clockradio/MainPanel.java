@@ -9,9 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 
-public class MainPanel extends VBox {
+public class MainPanel extends StackPane {
 
 	private final class ActivationTask extends TimerTask {
 
