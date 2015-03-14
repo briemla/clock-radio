@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root fx:id="alarmMenu" maxHeight="200" maxWidth="400" minHeight="200.0" minWidth="400.0" styleClass="alarm-menu" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="time" styleClass="time" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="weekdays" alignment="TOP_RIGHT" styleClass="weekdays" text="Mo - Fr" wrapText="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="mediaDescription" styleClass="media-description" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="35.0" />
+   </children>
+</fx:root>
