@@ -20,12 +20,19 @@ public class LocalFolder implements Media {
 		this(defaultFolder());
 	}
 
+	/**
+	 * Select Folder based on os.
+	 *
+	 * @return
+	 */
 	private static Path defaultFolder() {
-		Path defaultFolder = new File("/opt/clock-radio/music/").toPath();
-		if ("amd64".equals(System.getProperty("os.arch").toLowerCase())) {
-			defaultFolder = new File("/home/lars/Musik/").toPath(); // WCG_Theme_Song.mp3
+		if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
+			return new File("D:\\Bibliotheken\\Musik").toPath();
 		}
-		return defaultFolder;
+		if ("amd64".equals(System.getProperty("os.arch").toLowerCase())) {
+			return new File("/home/lars/Musik/").toPath(); // WCG_Theme_Song.mp3
+		}
+		return new File("/opt/clock-radio/music/").toPath();
 	}
 
 	public LocalFolder(Path source) {
@@ -39,6 +46,7 @@ public class LocalFolder implements Media {
 		cancelled = false;
 		try {
 			Files.walkFileTree(source, new SimpleFileVisitor<Path>() {
+
 				@Override
 				public FileVisitResult visitFile(Path fileOn, BasicFileAttributes attrs) throws IOException {
 					if (cancelled) {

@@ -3,6 +3,7 @@ package de.briemla.clockradio;
 import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
@@ -12,6 +13,8 @@ public class AlarmCell extends AnchorPane {
 	@FXML
 	private AnchorPane container;
 	@FXML
+	private CheckBox active;
+	@FXML
 	private Label time;
 	@FXML
 	private Label weekdays;
@@ -20,18 +23,18 @@ public class AlarmCell extends AnchorPane {
 	@FXML
 	private Button settings;
 
-	private final BooleanProperty active;
+	private final BooleanProperty activeProperty;
 
 	public AlarmCell(Alarm alarm, Settings settings) {
 		super();
 		FXUtil.load(this, this);
-		active = new ActivePseudoClassProperty(this);
+		activeProperty = new ActivePseudoClassProperty(this);
 		// TODO maybe create timeProperty in Alarm class
 		time.textProperty().bind(alarm.hourProperty().asString(TIME_FORMAT).concat(":").concat(alarm.minuteProperty().asString(TIME_FORMAT)));
 		mediaDescription.textProperty().bind(alarm.mediaProperty().asString());
-		active.bindBidirectional(alarm.activatedProperty());
-		setOnMouseClicked(event -> active.set(!active.get()));
-		this.settings.setOnAction(event -> settings.select(alarm));
+		activeProperty.bindBidirectional(alarm.activatedProperty());
+		active.selectedProperty().bindBidirectional(activeProperty);
+		setOnMouseClicked(event -> settings.select(alarm));
 	}
 
 	public void unbind() {
@@ -41,6 +44,6 @@ public class AlarmCell extends AnchorPane {
 	}
 
 	public BooleanProperty activatedProperty() {
-		return active;
+		return activeProperty;
 	}
 }
