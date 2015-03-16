@@ -93,9 +93,6 @@ public class MainPanel extends StackPane {
 	@FXML
 	public void stopSound(ActionEvent event) {
 		settings.stopCurrentAlarm();
-		if (alsaloop != null) {
-			alsaloop.destroyForcibly();
-		}
 		// player.stop();
 	}
 
