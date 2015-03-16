@@ -1,5 +1,6 @@
 package de.briemla.clockradio;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -92,6 +93,19 @@ public class MainPanel extends StackPane {
 	public void stopSound(ActionEvent event) {
 		settings.stopCurrentAlarm();
 		// player.stop();
+	}
+
+	@FXML
+	public void startRadio(ActionEvent event) {
+		Runtime runtime = Runtime.getRuntime();
+		try {
+			Process alsaloop = runtime.exec("alsaloop -C hw:1,0");
+			Process process = runtime.exec("/home/pi/dabpi_ctl/startRadio.sh");
+			process.waitFor();
+		} catch (IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
