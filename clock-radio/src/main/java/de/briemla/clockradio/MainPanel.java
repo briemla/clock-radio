@@ -94,7 +94,7 @@ public class MainPanel extends StackPane {
 	public void stopSound(ActionEvent event) {
 		settings.stopCurrentAlarm();
 		if (alsaloop != null) {
-			alsaloop.destroy();
+			alsaloop.destroyForcibly();
 		}
 		// player.stop();
 	}
