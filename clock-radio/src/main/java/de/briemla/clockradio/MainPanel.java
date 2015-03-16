@@ -42,6 +42,7 @@ public class MainPanel extends StackPane {
 	private final ActivePseudoClassProperty active;
 	private final Settings settings;
 	private Timer timer;
+	private Process alsaloop;
 
 	public MainPanel(Player player) {
 		super();
@@ -92,6 +93,9 @@ public class MainPanel extends StackPane {
 	@FXML
 	public void stopSound(ActionEvent event) {
 		settings.stopCurrentAlarm();
+		if (alsaloop != null) {
+			alsaloop.destroy();
+		}
 		// player.stop();
 	}
 
@@ -99,7 +103,7 @@ public class MainPanel extends StackPane {
 	public void startRadio(ActionEvent event) {
 		Runtime runtime = Runtime.getRuntime();
 		try {
-			Process alsaloop = runtime.exec("alsaloop -C hw:1,0");
+			alsaloop = runtime.exec("alsaloop -C hw:1,0");
 			Process process = runtime.exec("/home/pi/dabpi_ctl/startRadio.sh");
 			process.waitFor();
 		} catch (IOException | InterruptedException e) {
