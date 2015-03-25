@@ -55,9 +55,9 @@ public class RadioPlayer {
 			DAB_CONTROL.SCAN_UP.execute();
 			Integer currentFrequency = currentFrequency();
 			frequency.add(currentFrequency);
-			overflow |= lastFrequency != currentFrequency;
+			overflow |= lastFrequency > currentFrequency;
 			search = !startFrequency.equals(currentFrequency) && !(overflow && currentFrequency > startFrequency)
-			        && !(currentFrequency.equals(Integer.MIN_VALUE));
+					&& !(currentFrequency.equals(Integer.MIN_VALUE));
 			lastFrequency = currentFrequency;
 		}
 		return frequency;
@@ -69,7 +69,7 @@ public class RadioPlayer {
 		if (status.isEmpty()) {
 			return Integer.MIN_VALUE;
 		}
-		String string = status.split(" ")[0];
+		String string = status.split(" ")[1];
 		String frequency = string.substring(0, string.length() - 3);
 		return Integer.parseInt(frequency);
 	}

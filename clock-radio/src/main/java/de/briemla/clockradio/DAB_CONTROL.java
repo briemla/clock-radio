@@ -20,7 +20,7 @@ public enum DAB_CONTROL {
 	public Output execute() {
 		Output output = new Output();
 		try {
-			Process process = Runtime.getRuntime().exec(DABPI_CTL + command);
+			Process process = Runtime.getRuntime().exec(DABPI_CTL + " " + command);
 			BufferedInputStream processOutput = new BufferedInputStream(process.getInputStream());
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(processOutput));
 			process.waitFor();
