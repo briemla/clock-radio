@@ -24,7 +24,7 @@ public class DabpiCtl implements RadioExecutor {
 		try {
 			Process process = Runtime.getRuntime().exec(DABPI_CTL + " " + command.getParameter());
 			try (BufferedReader standardOutput = createReader(process.getInputStream());
-			        BufferedReader errorOutput = createReader(process.getErrorStream())) {
+					BufferedReader errorOutput = createReader(process.getErrorStream())) {
 				process.waitFor();
 				standardOutput.lines().forEach(line -> output.addStandard(line));
 				errorOutput.lines().forEach(line -> output.addError(line));
