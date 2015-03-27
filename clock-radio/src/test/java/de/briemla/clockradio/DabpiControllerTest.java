@@ -126,14 +126,14 @@ public class DabpiControllerTest {
 		StartDABServiceResult result = new StartDABServiceResult(true, serviceId);
 		StartDABServiceResult expectedResult = new StartDABServiceResult(true, serviceId);
 
-		when(factory.startDABService()).thenReturn(command);
+		when(factory.startDABService(serviceId)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
 		StartDABServiceResult startDABService = controller.startDABService(serviceId);
 		assertThat("Result", startDABService, is(equalTo(expectedResult)));
 
-		verify(factory).startDABService();
+		verify(factory).startDABService(serviceId);
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}

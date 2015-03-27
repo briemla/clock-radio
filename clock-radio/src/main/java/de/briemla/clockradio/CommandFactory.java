@@ -12,7 +12,7 @@ public interface CommandFactory {
 
 	Command<DABStatusResult> dabStatus();
 
-	Command<StartDABServiceResult> startDABService();
+	Command<StartDABServiceResult> startDABService(Integer serviceId);
 
 	Command<ReadDABServiceListResult> readDABServiceList();
 
