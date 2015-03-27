@@ -236,4 +236,23 @@ public class DabpiControllerTest {
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}
+
+	@Test
+	public void readRDS() throws Exception {
+		@SuppressWarnings("unchecked")
+		Command<ReadRDSResult> command = mock(Command.class);
+		ReadRDSResult result = new ReadRDSResult(true);
+		ReadRDSResult expectedResult = new ReadRDSResult(true);
+
+		when(factory.readRDS()).thenReturn(command);
+		when(executor.execute(command)).thenReturn(result);
+
+		DabpiController controller = new DabpiController(executor, factory);
+		ReadRDSResult scanNextStation = controller.readRDS();
+		assertThat("Result", scanNextStation, is(equalTo(expectedResult)));
+
+		verify(factory).readRDS();
+		verify(executor).execute(command);
+		verifyZeroInteractions(command);
+	}
 }

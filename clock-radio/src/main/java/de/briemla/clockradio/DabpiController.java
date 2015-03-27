@@ -97,4 +97,8 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.scanNextStation(direction));
 	}
 
+	public ReadRDSResult readRDS() {
+		return executor.execute(factory.readRDS());
+	}
+
 }

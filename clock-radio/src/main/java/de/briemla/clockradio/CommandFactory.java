@@ -24,4 +24,6 @@ public interface CommandFactory {
 
 	Command<ScanNextStationResult> scanNextStation(ScanDirection direction);
 
+	Command<ReadRDSResult> readRDS();
+
 }
