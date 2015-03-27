@@ -10,4 +10,6 @@ public interface CommandFactory {
 
 	Command<FMStatusResult> fmStatus();
 
+	Command<DABStatusResult> dabStatus();
+
 }

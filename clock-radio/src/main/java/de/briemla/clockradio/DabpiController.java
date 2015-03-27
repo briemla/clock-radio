@@ -69,4 +69,8 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.fmStatus());
 	}
 
+	public DABStatusResult dabStatus() {
+		return executor.execute(factory.dabStatus());
+	}
+
 }

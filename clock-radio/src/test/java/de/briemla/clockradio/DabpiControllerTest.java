@@ -98,4 +98,23 @@ public class DabpiControllerTest {
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}
+
+	@Test
+	public void dabStatus() throws Exception {
+		@SuppressWarnings("unchecked")
+		Command<DABStatusResult> command = mock(Command.class);
+		DABStatusResult result = new DABStatusResult(true);
+		DABStatusResult expectedResult = new DABStatusResult(true);
+
+		when(factory.dabStatus()).thenReturn(command);
+		when(executor.execute(command)).thenReturn(result);
+
+		DabpiController controller = new DabpiController(executor, factory);
+		DABStatusResult dabStatus = controller.dabStatus();
+		assertThat("Result", dabStatus, is(equalTo(expectedResult)));
+
+		verify(factory).dabStatus();
+		verify(executor).execute(command);
+		verifyZeroInteractions(command);
+	}
 }
