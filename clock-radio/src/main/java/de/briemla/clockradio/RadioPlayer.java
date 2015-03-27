@@ -45,6 +45,13 @@ import java.util.ArrayList;
  */
 public class RadioPlayer {
 
+	private final RadioController controller;
+
+	public RadioPlayer(RadioController controller) {
+		super();
+		this.controller = controller;
+	}
+
 	public ArrayList<Integer> scan() {
 		Integer startFrequency = currentFrequency();
 		Integer lastFrequency = startFrequency;
