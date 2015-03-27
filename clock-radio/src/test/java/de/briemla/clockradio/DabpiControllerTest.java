@@ -149,8 +149,8 @@ public class DabpiControllerTest {
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		ReadDABServiceListResult startDABService = controller.readDABServiceList();
-		assertThat("Result", startDABService, is(equalTo(expectedResult)));
+		ReadDABServiceListResult readDABServiceList = controller.readDABServiceList();
+		assertThat("Result", readDABServiceList, is(equalTo(expectedResult)));
 
 		verify(factory).readDABServiceList();
 		verify(executor).execute(command);
