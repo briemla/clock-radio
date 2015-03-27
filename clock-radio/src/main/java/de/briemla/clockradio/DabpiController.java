@@ -93,4 +93,8 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.readFrequencyListFor(regionId));
 	}
 
+	public ScanNextStationResult scanNextStation(ScanDirection direction) {
+		return executor.execute(factory.scanNextStation(direction));
+	}
+
 }

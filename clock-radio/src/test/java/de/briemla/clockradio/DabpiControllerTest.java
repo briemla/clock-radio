@@ -216,4 +216,24 @@ public class DabpiControllerTest {
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}
+
+	@Test
+	public void scanNextStation() throws Exception {
+		@SuppressWarnings("unchecked")
+		Command<ScanNextStationResult> command = mock(Command.class);
+		ScanDirection direction = ScanDirection.UP;
+		ScanNextStationResult result = new ScanNextStationResult(true, direction);
+		ScanNextStationResult expectedResult = new ScanNextStationResult(true, direction);
+
+		when(factory.scanNextStation(direction)).thenReturn(command);
+		when(executor.execute(command)).thenReturn(result);
+
+		DabpiController controller = new DabpiController(executor, factory);
+		ScanNextStationResult scanNextStation = controller.scanNextStation(direction);
+		assertThat("Result", scanNextStation, is(equalTo(expectedResult)));
+
+		verify(factory).scanNextStation(direction);
+		verify(executor).execute(command);
+		verifyZeroInteractions(command);
+	}
 }

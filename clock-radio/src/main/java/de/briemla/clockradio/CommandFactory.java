@@ -22,4 +22,6 @@ public interface CommandFactory {
 
 	Command<ReadFrequencyListForRegionResult> readFrequencyListFor(Integer regionId);
 
+	Command<ScanNextStationResult> scanNextStation(ScanDirection direction);
+
 }
