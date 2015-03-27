@@ -77,4 +77,8 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.startDABService());
 	}
 
+	public ReadDABServiceListResult readDABServiceList() {
+		return executor.execute(factory.readDABServiceList());
+	}
+
 }

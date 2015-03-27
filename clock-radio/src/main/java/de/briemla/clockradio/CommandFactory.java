@@ -14,4 +14,6 @@ public interface CommandFactory {
 
 	Command<StartDABServiceResult> startDABService();
 
+	Command<ReadDABServiceListResult> readDABServiceList();
+
 }
