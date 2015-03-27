@@ -101,4 +101,8 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.readRDS());
 	}
 
+	public ReadDABAudioInfoResult readDABAudioInfo() {
+		return executor.execute(factory.readDABAudioInfo());
+	}
+
 }

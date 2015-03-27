@@ -26,4 +26,6 @@ public interface CommandFactory {
 
 	Command<ReadRDSResult> readRDS();
 
+	Command<ReadDABAudioInfoResult> readDABAudioInfo();
+
 }

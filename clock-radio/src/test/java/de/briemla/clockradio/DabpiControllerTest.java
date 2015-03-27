@@ -255,4 +255,23 @@ public class DabpiControllerTest {
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}
+
+	@Test
+	public void readDABAudioInfo() throws Exception {
+		@SuppressWarnings("unchecked")
+		Command<ReadDABAudioInfoResult> command = mock(Command.class);
+		ReadDABAudioInfoResult result = new ReadDABAudioInfoResult(true);
+		ReadDABAudioInfoResult expectedResult = new ReadDABAudioInfoResult(true);
+
+		when(factory.readDABAudioInfo()).thenReturn(command);
+		when(executor.execute(command)).thenReturn(result);
+
+		DabpiController controller = new DabpiController(executor, factory);
+		ReadDABAudioInfoResult readDABAudioInfo = controller.readDABAudioInfo();
+		assertThat("Result", readDABAudioInfo, is(equalTo(expectedResult)));
+
+		verify(factory).readDABAudioInfo();
+		verify(executor).execute(command);
+		verifyZeroInteractions(command);
+	}
 }
