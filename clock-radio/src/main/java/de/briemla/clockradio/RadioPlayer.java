@@ -3,42 +3,7 @@ package de.briemla.clockradio;
 import java.util.ArrayList;
 
 /**
- * Controls dabpi player
- *
- * <pre>
- * ./dabpi_ctl
- * usage: ./dabpi_ctl [-a|-b]
- *   -a             init DAB mode
- *   -b             init fm mode
- *   -c frequency   tune frequency in FM mode
- *   -d             fm status
- *   -e             dab status
- *   -f service     start service of dab service list
- *   -g             get dab service list
- *   -i channel     tune to channel in dab frequency list
- *   -j region      set frequency list
- *                     0   Baden-Wuertemberg
- *                     1   Bayern
- *                     2   Berlin-Brandenburg
- *                     3   Bremen
- *                     4   Hamburg
- *                     5   Hessen
- *                     6   Mecklenburg-Vorpommern
- *                     7   Niedersachsen
- *                     8   Nordrhein-Westfalen
- *                     9   Rheinland-Pfalz
- *                     10  Saarland
- *                     11  Sachsen
- *                     12  Sachsen-Anhalt
- *                     13  Schleswig-Holstein
- *                     14  Thueringen
- *   -k region      scan frequency list
- *   -l up|down     fm seek next station
- *   -m             fm rds status
- *   -n             dab get audio info
- *   -o             dab get subchannel info
- *   -h             this help
- * </pre>
+ * Controls radio
  *
  * @author Lars
  *
