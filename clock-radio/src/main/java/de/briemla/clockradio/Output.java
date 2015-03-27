@@ -6,13 +6,19 @@ import java.util.Optional;
 public class Output {
 
 	private final ArrayList<String> standard;
+	private final ArrayList<String> error;
 
 	public Output() {
 		standard = new ArrayList<>();
+		error = new ArrayList<>();
 	}
 
 	public void addStandard(String line) {
 		standard.add(line);
+	}
+
+	public void addError(String line) {
+		error.add(line);
 	}
 
 	public String asString() {
