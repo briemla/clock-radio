@@ -4,4 +4,6 @@ public interface CommandFactory {
 
 	Command<SwitchToDABResult> switchToDAB();
 
+	Command<SwitchToFMResult> switchToFM();
+
 }
