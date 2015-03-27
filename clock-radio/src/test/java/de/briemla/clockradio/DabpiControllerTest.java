@@ -24,11 +24,10 @@ public class DabpiControllerTest {
 	public void switchToDAB() throws Exception {
 		@SuppressWarnings("unchecked")
 		Command<SwitchToDABResult> command = mock(Command.class);
-		SwitchToDABResult result = mock(SwitchToDABResult.class);
+		SwitchToDABResult result = new SwitchToDABResult(true);
 
 		when(factory.switchToDAB()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
-		when(result.isSuccessful()).thenReturn(true);
 
 		DabpiController controller = new DabpiController(executor, factory);
 		boolean switchSuccessful = controller.switchToDAB();
