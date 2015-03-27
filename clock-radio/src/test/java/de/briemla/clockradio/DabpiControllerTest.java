@@ -42,11 +42,10 @@ public class DabpiControllerTest {
 	public void switchToFM() throws Exception {
 		@SuppressWarnings("unchecked")
 		Command<SwitchToFMResult> command = mock(Command.class);
-		SwitchToFMResult result = mock(SwitchToFMResult.class);
+		SwitchToFMResult result = new SwitchToFMResult(true);
 
 		when(factory.switchToFM()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
-		when(result.isSuccessful()).thenReturn(true);
 
 		DabpiController controller = new DabpiController(executor, factory);
 		boolean switchSuccessful = controller.switchToFM();
