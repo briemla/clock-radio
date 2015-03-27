@@ -17,15 +17,13 @@ public class DabpiController implements RadioController {
 	}
 
 	@Override
-	public boolean switchToDAB() {
-		RadioResult result = executor.execute(factory.switchToDAB());
-		return result.isSuccessful();
+	public SwitchToDABResult switchToDAB() {
+		return executor.execute(factory.switchToDAB());
 	}
 
 	@Override
-	public boolean switchToFM() {
-		RadioResult result = executor.execute(factory.switchToFM());
-		return result.isSuccessful();
+	public SwitchToFMResult switchToFM() {
+		return executor.execute(factory.switchToFM());
 	}
 
 }

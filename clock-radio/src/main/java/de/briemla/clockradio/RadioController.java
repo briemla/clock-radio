@@ -13,13 +13,13 @@ public interface RadioController {
 	 *
 	 * @return <code>true</code> if switch was successful, <code>false</code> otherwise
 	 */
-	boolean switchToDAB();
+	SwitchToDABResult switchToDAB();
 
 	/**
 	 * Switch radio to FM mode.
 	 *
 	 * @return <code>true</code> if switch was successful, <code>false</code> otherwise
 	 */
-	boolean switchToFM();
+	SwitchToFMResult switchToFM();
 
 }

@@ -1,5 +1,6 @@
 package de.briemla.clockradio;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -26,13 +27,14 @@ public class DabpiControllerTest {
 		@SuppressWarnings("unchecked")
 		Command<SwitchToDABResult> command = mock(Command.class);
 		SwitchToDABResult result = new SwitchToDABResult(true);
+		SwitchToDABResult expectedResult = new SwitchToDABResult(true);
 
 		when(factory.switchToDAB()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		boolean switchSuccessful = controller.switchToDAB();
-		assertThat("Return value", switchSuccessful, is(true));
+		SwitchToDABResult switchSuccessful = controller.switchToDAB();
+		assertThat("Return value", switchSuccessful, is(equalTo(expectedResult)));
 
 		verify(factory).switchToDAB();
 		verify(executor).execute(command);
@@ -44,13 +46,14 @@ public class DabpiControllerTest {
 		@SuppressWarnings("unchecked")
 		Command<SwitchToFMResult> command = mock(Command.class);
 		SwitchToFMResult result = new SwitchToFMResult(true);
+		SwitchToFMResult expectedResult = new SwitchToFMResult(true);
 
 		when(factory.switchToFM()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		boolean switchSuccessful = controller.switchToFM();
-		assertThat("Return value", switchSuccessful, is(true));
+		SwitchToFMResult switchSuccessful = controller.switchToFM();
+		assertThat("Return value", switchSuccessful, is(equalTo(expectedResult)));
 
 		verify(factory).switchToFM();
 		verify(executor).execute(command);
