@@ -248,8 +248,8 @@ public class DabpiControllerTest {
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		ReadRDSResult scanNextStation = controller.readRDS();
-		assertThat("Result", scanNextStation, is(equalTo(expectedResult)));
+		ReadRDSResult readRDS = controller.readRDS();
+		assertThat("Result", readRDS, is(equalTo(expectedResult)));
 
 		verify(factory).readRDS();
 		verify(executor).execute(command);
