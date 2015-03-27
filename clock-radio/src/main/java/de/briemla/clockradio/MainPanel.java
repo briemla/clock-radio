@@ -97,8 +97,11 @@ public class MainPanel extends StackPane {
 
 	@FXML
 	public void startRadio(ActionEvent event) {
-		RadioPlayer radioPlayer = new RadioPlayer();
-		radioPlayer.scan();
+		// TODO implement this
+		// RadioExecutor executor;
+		// CommandFactory factory;
+		// RadioPlayer radioPlayer = new RadioPlayer(new DabpiController(executor, factory));
+		// radioPlayer.scan();
 		// Runtime runtime = Runtime.getRuntime();
 		// try {
 		// alsaloop = runtime.exec("alsaloop -C hw:1,0");
