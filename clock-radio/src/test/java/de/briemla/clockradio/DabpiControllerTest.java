@@ -72,8 +72,8 @@ public class DabpiControllerTest {
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		TuneToFrequencyResult switchSuccessful = controller.tuneTo(frequency);
-		assertThat("Return value", switchSuccessful, is(equalTo(expectedResult)));
+		TuneToFrequencyResult tunedFrequency = controller.tuneTo(frequency);
+		assertThat("Return value", tunedFrequency, is(equalTo(expectedResult)));
 
 		verify(factory).tuneTo(frequency);
 		verify(executor).execute(command);
