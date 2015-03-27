@@ -6,4 +6,6 @@ public interface CommandFactory {
 
 	Command<SwitchToFMResult> switchToFM();
 
+	Command<TuneToFrequencyResult> tuneTo(Integer frequency);
+
 }
