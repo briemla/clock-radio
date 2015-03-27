@@ -85,4 +85,8 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.selectDABChannel(channelId));
 	}
 
+	public SelectDABRegionResult selectDABRegion(Integer regionId) {
+		return executor.execute(factory.selectDABRegion(regionId));
+	}
+
 }

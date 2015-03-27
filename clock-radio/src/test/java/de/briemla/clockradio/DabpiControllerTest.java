@@ -176,4 +176,24 @@ public class DabpiControllerTest {
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}
+
+	@Test
+	public void selectDABRegion() throws Exception {
+		@SuppressWarnings("unchecked")
+		Command<SelectDABRegionResult> command = mock(Command.class);
+		Integer regionId = 0;
+		SelectDABRegionResult result = new SelectDABRegionResult(true, regionId);
+		SelectDABRegionResult expectedResult = new SelectDABRegionResult(true, regionId);
+
+		when(factory.selectDABRegion(regionId)).thenReturn(command);
+		when(executor.execute(command)).thenReturn(result);
+
+		DabpiController controller = new DabpiController(executor, factory);
+		SelectDABRegionResult selectDABRegion = controller.selectDABRegion(regionId);
+		assertThat("Result", selectDABRegion, is(equalTo(expectedResult)));
+
+		verify(factory).selectDABRegion(regionId);
+		verify(executor).execute(command);
+		verifyZeroInteractions(command);
+	}
 }

@@ -18,4 +18,6 @@ public interface CommandFactory {
 
 	Command<SelectDABChannelResult> selectDABChannel(Integer channelId);
 
+	Command<SelectDABRegionResult> selectDABRegion(Integer regionId);
+
 }
