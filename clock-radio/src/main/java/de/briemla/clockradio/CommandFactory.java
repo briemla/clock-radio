@@ -28,4 +28,6 @@ public interface CommandFactory {
 
 	Command<ReadDABAudioInfoResult> readDABAudioInfo();
 
+	Command<ReadDABSubchannelInfoResult> readDABSubchannelInfo();
+
 }

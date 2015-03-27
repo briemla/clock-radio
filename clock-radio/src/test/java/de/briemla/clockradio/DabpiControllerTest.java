@@ -274,4 +274,23 @@ public class DabpiControllerTest {
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}
+
+	@Test
+	public void readDABSubchannelInfo() throws Exception {
+		@SuppressWarnings("unchecked")
+		Command<ReadDABSubchannelInfoResult> command = mock(Command.class);
+		ReadDABSubchannelInfoResult result = new ReadDABSubchannelInfoResult(true);
+		ReadDABSubchannelInfoResult expectedResult = new ReadDABSubchannelInfoResult(true);
+
+		when(factory.readDABSubchannelInfo()).thenReturn(command);
+		when(executor.execute(command)).thenReturn(result);
+
+		DabpiController controller = new DabpiController(executor, factory);
+		ReadDABSubchannelInfoResult readDABSubchannelInfo = controller.readDABSubchannelInfo();
+		assertThat("Result", readDABSubchannelInfo, is(equalTo(expectedResult)));
+
+		verify(factory).readDABSubchannelInfo();
+		verify(executor).execute(command);
+		verifyZeroInteractions(command);
+	}
 }

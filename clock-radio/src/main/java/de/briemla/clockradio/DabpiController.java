@@ -105,4 +105,8 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.readDABAudioInfo());
 	}
 
+	public ReadDABSubchannelInfoResult readDABSubchannelInfo() {
+		return executor.execute(factory.readDABSubchannelInfo());
+	}
+
 }
