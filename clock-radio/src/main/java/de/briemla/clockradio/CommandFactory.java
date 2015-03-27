@@ -12,4 +12,6 @@ public interface CommandFactory {
 
 	Command<DABStatusResult> dabStatus();
 
+	Command<StartDABServiceResult> startDABService();
+
 }

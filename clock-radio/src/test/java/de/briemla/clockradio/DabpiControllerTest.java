@@ -117,4 +117,24 @@ public class DabpiControllerTest {
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}
+
+	@Test
+	public void startDABService() throws Exception {
+		@SuppressWarnings("unchecked")
+		Command<StartDABServiceResult> command = mock(Command.class);
+		Integer serviceId = 0;
+		StartDABServiceResult result = new StartDABServiceResult(true, serviceId);
+		StartDABServiceResult expectedResult = new StartDABServiceResult(true, serviceId);
+
+		when(factory.startDABService()).thenReturn(command);
+		when(executor.execute(command)).thenReturn(result);
+
+		DabpiController controller = new DabpiController(executor, factory);
+		StartDABServiceResult startDABService = controller.startDABService(serviceId);
+		assertThat("Result", startDABService, is(equalTo(expectedResult)));
+
+		verify(factory).startDABService();
+		verify(executor).execute(command);
+		verifyZeroInteractions(command);
+	}
 }
