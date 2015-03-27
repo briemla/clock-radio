@@ -65,4 +65,8 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.tuneTo(frequency));
 	}
 
+	public FMStatusResult fmStatus() {
+		return executor.execute(factory.fmStatus());
+	}
+
 }

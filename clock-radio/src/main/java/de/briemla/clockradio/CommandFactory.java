@@ -8,4 +8,6 @@ public interface CommandFactory {
 
 	Command<TuneToFrequencyResult> tuneTo(Integer frequency);
 
+	Command<FMStatusResult> fmStatus();
+
 }

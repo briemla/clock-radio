@@ -79,4 +79,23 @@ public class DabpiControllerTest {
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}
+
+	@Test
+	public void fmStatus() throws Exception {
+		@SuppressWarnings("unchecked")
+		Command<FMStatusResult> command = mock(Command.class);
+		FMStatusResult result = new FMStatusResult(true);
+		FMStatusResult expectedResult = new FMStatusResult(true);
+
+		when(factory.fmStatus()).thenReturn(command);
+		when(executor.execute(command)).thenReturn(result);
+
+		DabpiController controller = new DabpiController(executor, factory);
+		FMStatusResult fmStatus = controller.fmStatus();
+		assertThat("Result", fmStatus, is(equalTo(expectedResult)));
+
+		verify(factory).fmStatus();
+		verify(executor).execute(command);
+		verifyZeroInteractions(command);
+	}
 }
