@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
@@ -35,6 +36,7 @@ public class DabpiControllerTest {
 
 		verify(factory).switchToDAB();
 		verify(executor).execute(command);
+		verifyZeroInteractions(command);
 	}
 
 	@Test
@@ -52,5 +54,6 @@ public class DabpiControllerTest {
 
 		verify(factory).switchToFM();
 		verify(executor).execute(command);
+		verifyZeroInteractions(command);
 	}
 }
