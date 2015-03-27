@@ -16,4 +16,6 @@ public interface CommandFactory {
 
 	Command<ReadDABServiceListResult> readDABServiceList();
 
+	Command<SelectDABChannelResult> selectDABChannel(Integer channelId);
+
 }

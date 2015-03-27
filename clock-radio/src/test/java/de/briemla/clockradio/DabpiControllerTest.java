@@ -156,4 +156,24 @@ public class DabpiControllerTest {
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}
+
+	@Test
+	public void selectDABChannel() throws Exception {
+		@SuppressWarnings("unchecked")
+		Command<SelectDABChannelResult> command = mock(Command.class);
+		Integer channelId = 0;
+		SelectDABChannelResult result = new SelectDABChannelResult(true, channelId);
+		SelectDABChannelResult expectedResult = new SelectDABChannelResult(true, channelId);
+
+		when(factory.selectDABChannel(channelId)).thenReturn(command);
+		when(executor.execute(command)).thenReturn(result);
+
+		DabpiController controller = new DabpiController(executor, factory);
+		SelectDABChannelResult selectDABChannel = controller.selectDABChannel(channelId);
+		assertThat("Result", selectDABChannel, is(equalTo(expectedResult)));
+
+		verify(factory).selectDABChannel(channelId);
+		verify(executor).execute(command);
+		verifyZeroInteractions(command);
+	}
 }
