@@ -89,4 +89,8 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.selectDABRegion(regionId));
 	}
 
+	public ReadFrequencyListForRegionResult readFrequencyListFor(Integer regionId) {
+		return executor.execute(factory.readFrequencyListFor(regionId));
+	}
+
 }

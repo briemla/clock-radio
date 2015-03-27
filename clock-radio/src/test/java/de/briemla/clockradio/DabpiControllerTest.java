@@ -196,4 +196,24 @@ public class DabpiControllerTest {
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}
+
+	@Test
+	public void readFrequencyListForRegion() throws Exception {
+		@SuppressWarnings("unchecked")
+		Command<ReadFrequencyListForRegionResult> command = mock(Command.class);
+		Integer regionId = 0;
+		ReadFrequencyListForRegionResult result = new ReadFrequencyListForRegionResult(true, regionId);
+		ReadFrequencyListForRegionResult expectedResult = new ReadFrequencyListForRegionResult(true, regionId);
+
+		when(factory.readFrequencyListFor(regionId)).thenReturn(command);
+		when(executor.execute(command)).thenReturn(result);
+
+		DabpiController controller = new DabpiController(executor, factory);
+		ReadFrequencyListForRegionResult readFrequencyList = controller.readFrequencyListFor(regionId);
+		assertThat("Result", readFrequencyList, is(equalTo(expectedResult)));
+
+		verify(factory).readFrequencyListFor(regionId);
+		verify(executor).execute(command);
+		verifyZeroInteractions(command);
+	}
 }

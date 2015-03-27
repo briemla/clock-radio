@@ -20,4 +20,6 @@ public interface CommandFactory {
 
 	Command<SelectDABRegionResult> selectDABRegion(Integer regionId);
 
+	Command<ReadFrequencyListForRegionResult> readFrequencyListFor(Integer regionId);
+
 }
