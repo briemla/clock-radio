@@ -61,12 +61,12 @@ public class DabpiControllerTest {
 	}
 
 	@Test
-	public void tuneToFrequencyInFM() throws Exception {
+	public void tuneToFrequency() throws Exception {
 		@SuppressWarnings("unchecked")
 		Command<TuneToFrequencyResult> command = mock(Command.class);
-		TuneToFrequencyResult result = new TuneToFrequencyResult(true);
-		TuneToFrequencyResult expectedResult = new TuneToFrequencyResult(true);
 		Integer frequency = 106700;
+		TuneToFrequencyResult result = new TuneToFrequencyResult(true, frequency);
+		TuneToFrequencyResult expectedResult = new TuneToFrequencyResult(true, frequency);
 
 		when(factory.tuneTo(frequency)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
