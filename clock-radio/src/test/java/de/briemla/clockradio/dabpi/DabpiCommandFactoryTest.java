@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import de.briemla.clockradio.dabpi.command.SwitchToDAB;
 import de.briemla.clockradio.dabpi.command.SwitchToFM;
+import de.briemla.clockradio.dabpi.result.DABAudioInfo;
 import de.briemla.clockradio.dabpi.result.DABChannel;
 import de.briemla.clockradio.dabpi.result.DABRegion;
 import de.briemla.clockradio.dabpi.result.DABService;
@@ -119,5 +120,12 @@ public class DabpiCommandFactoryTest {
 		Command<RDSInfo> command = factory.readRDS();
 
 		assertThat(command, is(equalTo(new ReadRDS())));
+	}
+
+	@Test
+	public void readDABAudioInfo() {
+		Command<DABAudioInfo> command = factory.readDABAudioInfo();
+
+		assertThat(command, is(equalTo(new ReadDABAudioInfo())));
 	}
 }

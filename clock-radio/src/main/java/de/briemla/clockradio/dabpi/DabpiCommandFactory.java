@@ -122,7 +122,7 @@ public class DabpiCommandFactory implements CommandFactory {
 
 	@Override
 	public Command<DABAudioInfo> readDABAudioInfo() {
-		return null;
+		return new ReadDABAudioInfo();
 	}
 
 	@Override
