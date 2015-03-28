@@ -1,7 +1,6 @@
-package de.briemla.clockradio.dabpi;
+package de.briemla.clockradio.dabpi.command;
 
 import de.briemla.clockradio.Output;
-import de.briemla.clockradio.dabpi.command.BaseCommand;
 import de.briemla.clockradio.dabpi.result.DABChannel;
 
 public class SelectDABChannel extends BaseCommand<DABChannel> {
