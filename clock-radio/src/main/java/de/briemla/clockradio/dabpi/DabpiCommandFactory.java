@@ -112,7 +112,7 @@ public class DabpiCommandFactory implements CommandFactory {
 
 	@Override
 	public Command<Station> scanNextStation(ScanDirection direction) {
-		return null;
+		return new ScanNextStation(direction);
 	}
 
 	@Override

@@ -16,6 +16,7 @@ import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
 import de.briemla.clockradio.dabpi.result.FMStatus;
 import de.briemla.clockradio.dabpi.result.FrequencyList;
+import de.briemla.clockradio.dabpi.result.Station;
 import de.briemla.clockradio.dabpi.result.SwitchToDABResult;
 import de.briemla.clockradio.dabpi.result.SwitchToFMResult;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
@@ -102,5 +103,13 @@ public class DabpiCommandFactoryTest {
 		Command<FrequencyList> command = factory.readFrequencyListFor(regionId);
 
 		assertThat(command, is(equalTo(new ReadFrequencyList(regionId))));
+	}
+
+	@Test
+	public void scanNextStation() {
+		ScanDirection direction = ScanDirection.UP;
+		Command<Station> command = factory.scanNextStation(direction);
+
+		assertThat(command, is(equalTo(new ScanNextStation(direction))));
 	}
 }
