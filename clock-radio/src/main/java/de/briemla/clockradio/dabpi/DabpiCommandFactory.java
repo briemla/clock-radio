@@ -97,7 +97,7 @@ public class DabpiCommandFactory implements CommandFactory {
 
 	@Override
 	public Command<DABChannel> selectDABChannel(Integer channelId) {
-		return null;
+		return new SelectDABChannel(channelId);
 	}
 
 	@Override
