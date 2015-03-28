@@ -92,7 +92,7 @@ public class DabpiCommandFactory implements CommandFactory {
 
 	@Override
 	public Command<DABServiceList> readDABServiceList() {
-		return null;
+		return new ReadDABServiceList();
 	}
 
 	@Override
