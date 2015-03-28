@@ -4,7 +4,7 @@ import de.briemla.clockradio.Output;
 
 public interface Command<T extends RadioResult> {
 
-	public String getParameter();
+	public String serialize();
 
 	public T parse(Output output);
 

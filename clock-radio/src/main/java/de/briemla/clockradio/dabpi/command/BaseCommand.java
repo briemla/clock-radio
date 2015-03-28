@@ -13,7 +13,7 @@ public abstract class BaseCommand<T extends RadioResult> implements Command<T> {
 	}
 
 	@Override
-	public String getParameter() {
+	public String serialize() {
 		return parameter;
 	}
 
