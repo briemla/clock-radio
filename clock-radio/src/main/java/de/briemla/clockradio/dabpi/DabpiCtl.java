@@ -1,10 +1,12 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import de.briemla.clockradio.Output;
 
 public class DabpiCtl implements RadioExecutor {
 

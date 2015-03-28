@@ -1,4 +1,5 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
+
 
 public interface RadioExecutor {
 

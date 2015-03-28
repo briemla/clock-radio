@@ -1,4 +1,4 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -10,6 +10,26 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import de.briemla.clockradio.dabpi.Command;
+import de.briemla.clockradio.dabpi.CommandFactory;
+import de.briemla.clockradio.dabpi.DABStatusResult;
+import de.briemla.clockradio.dabpi.DabpiController;
+import de.briemla.clockradio.dabpi.FMStatusResult;
+import de.briemla.clockradio.dabpi.RadioExecutor;
+import de.briemla.clockradio.dabpi.ReadDABAudioInfoResult;
+import de.briemla.clockradio.dabpi.ReadDABServiceListResult;
+import de.briemla.clockradio.dabpi.ReadDABSubchannelInfoResult;
+import de.briemla.clockradio.dabpi.ReadFrequencyListForRegionResult;
+import de.briemla.clockradio.dabpi.ReadRDSResult;
+import de.briemla.clockradio.dabpi.ScanDirection;
+import de.briemla.clockradio.dabpi.ScanNextStationResult;
+import de.briemla.clockradio.dabpi.SelectDABChannelResult;
+import de.briemla.clockradio.dabpi.SelectDABRegionResult;
+import de.briemla.clockradio.dabpi.StartDABServiceResult;
+import de.briemla.clockradio.dabpi.SwitchToDABResult;
+import de.briemla.clockradio.dabpi.SwitchToFMResult;
+import de.briemla.clockradio.dabpi.TuneToFrequencyResult;
 
 public class DabpiControllerTest {
 

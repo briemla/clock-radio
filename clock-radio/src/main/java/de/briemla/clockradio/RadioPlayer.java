@@ -2,6 +2,8 @@ package de.briemla.clockradio;
 
 import java.util.ArrayList;
 
+import de.briemla.clockradio.dabpi.RadioController;
+
 /**
  * Controls radio
  *

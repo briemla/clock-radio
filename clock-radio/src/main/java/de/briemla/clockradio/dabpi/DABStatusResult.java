@@ -1,10 +1,10 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
 
-public class ReadRDSResult implements RadioResult {
+public class DABStatusResult implements RadioResult {
 
 	private final boolean successful;
 
-	public ReadRDSResult(boolean successful) {
+	public DABStatusResult(boolean successful) {
 		this.successful = successful;
 	}
 
@@ -29,7 +29,7 @@ public class ReadRDSResult implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ReadRDSResult other = (ReadRDSResult) obj;
+		DABStatusResult other = (DABStatusResult) obj;
 		if (successful != other.successful)
 			return false;
 		return true;
@@ -37,7 +37,7 @@ public class ReadRDSResult implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "ReadRDSResult [successful=" + successful + "]";
+		return "DABStatusResult [successful=" + successful + "]";
 	}
 
 }

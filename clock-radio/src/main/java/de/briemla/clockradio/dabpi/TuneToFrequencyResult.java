@@ -1,13 +1,13 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
 
-public class SelectDABRegionResult implements RadioResult {
+public class TuneToFrequencyResult implements RadioResult {
 
 	private final boolean successful;
-	private final Integer regionId;
+	private final Integer frequency;
 
-	public SelectDABRegionResult(boolean successful, Integer regionId) {
+	public TuneToFrequencyResult(boolean successful, Integer frequency) {
 		this.successful = successful;
-		this.regionId = regionId;
+		this.frequency = frequency;
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class SelectDABRegionResult implements RadioResult {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((regionId == null) ? 0 : regionId.hashCode());
+		result = prime * result + ((frequency == null) ? 0 : frequency.hashCode());
 		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
@@ -32,11 +32,11 @@ public class SelectDABRegionResult implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SelectDABRegionResult other = (SelectDABRegionResult) obj;
-		if (regionId == null) {
-			if (other.regionId != null)
+		TuneToFrequencyResult other = (TuneToFrequencyResult) obj;
+		if (frequency == null) {
+			if (other.frequency != null)
 				return false;
-		} else if (!regionId.equals(other.regionId))
+		} else if (!frequency.equals(other.frequency))
 			return false;
 		if (successful != other.successful)
 			return false;
@@ -45,7 +45,7 @@ public class SelectDABRegionResult implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "SelectDABRegionResult [successful=" + successful + ", regionId=" + regionId + "]";
+		return "TuneToFrequencyResult [successful=" + successful + ", frequency=" + frequency + "]";
 	}
 
 }

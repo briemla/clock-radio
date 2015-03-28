@@ -1,4 +1,4 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
 
 public class SwitchToFMResult implements RadioResult {
 

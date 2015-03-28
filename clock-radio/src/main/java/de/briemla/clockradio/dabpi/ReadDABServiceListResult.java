@@ -1,13 +1,11 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
 
-public class SelectDABChannelResult implements RadioResult {
+public class ReadDABServiceListResult implements RadioResult {
 
 	private final boolean successful;
-	private final Integer channelId;
 
-	public SelectDABChannelResult(boolean successful, Integer channelId) {
+	public ReadDABServiceListResult(boolean successful) {
 		this.successful = successful;
-		this.channelId = channelId;
 	}
 
 	@Override
@@ -19,7 +17,6 @@ public class SelectDABChannelResult implements RadioResult {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((channelId == null) ? 0 : channelId.hashCode());
 		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
@@ -32,12 +29,7 @@ public class SelectDABChannelResult implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SelectDABChannelResult other = (SelectDABChannelResult) obj;
-		if (channelId == null) {
-			if (other.channelId != null)
-				return false;
-		} else if (!channelId.equals(other.channelId))
-			return false;
+		ReadDABServiceListResult other = (ReadDABServiceListResult) obj;
 		if (successful != other.successful)
 			return false;
 		return true;
@@ -45,7 +37,7 @@ public class SelectDABChannelResult implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "SelectDABChannelResult [successful=" + successful + ", channelId=" + channelId + "]";
+		return "ReadDABServiceListResult [successful=" + successful + "]";
 	}
 
 }

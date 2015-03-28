@@ -1,4 +1,6 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
+
+import de.briemla.clockradio.Output;
 
 public interface Command<T extends RadioResult> {
 

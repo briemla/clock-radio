@@ -1,13 +1,11 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
 
-public class ScanNextStationResult implements RadioResult {
+public class ReadDABSubchannelInfoResult implements RadioResult {
 
 	private final boolean successful;
-	private final ScanDirection direction;
 
-	public ScanNextStationResult(boolean successful, ScanDirection direction) {
+	public ReadDABSubchannelInfoResult(boolean successful) {
 		this.successful = successful;
-		this.direction = direction;
 	}
 
 	@Override
@@ -19,7 +17,6 @@ public class ScanNextStationResult implements RadioResult {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((direction == null) ? 0 : direction.hashCode());
 		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
@@ -32,9 +29,7 @@ public class ScanNextStationResult implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ScanNextStationResult other = (ScanNextStationResult) obj;
-		if (direction != other.direction)
-			return false;
+		ReadDABSubchannelInfoResult other = (ReadDABSubchannelInfoResult) obj;
 		if (successful != other.successful)
 			return false;
 		return true;
@@ -42,7 +37,7 @@ public class ScanNextStationResult implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "ScanNextStationResult [successful=" + successful + ", direction=" + direction + "]";
+		return "ReadDABSubchannelInfoResult [successful=" + successful + "]";
 	}
 
 }

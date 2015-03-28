@@ -1,4 +1,5 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
+
 
 /**
  * This class generates {@link Command}s and executes them on the given {@link RadioExecutor}

@@ -1,11 +1,13 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
 
-public class FMStatusResult implements RadioResult {
+public class ScanNextStationResult implements RadioResult {
 
 	private final boolean successful;
+	private final ScanDirection direction;
 
-	public FMStatusResult(boolean successful) {
+	public ScanNextStationResult(boolean successful, ScanDirection direction) {
 		this.successful = successful;
+		this.direction = direction;
 	}
 
 	@Override
@@ -17,6 +19,7 @@ public class FMStatusResult implements RadioResult {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((direction == null) ? 0 : direction.hashCode());
 		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
@@ -29,7 +32,9 @@ public class FMStatusResult implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FMStatusResult other = (FMStatusResult) obj;
+		ScanNextStationResult other = (ScanNextStationResult) obj;
+		if (direction != other.direction)
+			return false;
 		if (successful != other.successful)
 			return false;
 		return true;
@@ -37,7 +42,7 @@ public class FMStatusResult implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "FMStatusResult [successful=" + successful + "]";
+		return "ScanNextStationResult [successful=" + successful + ", direction=" + direction + "]";
 	}
 
 }
