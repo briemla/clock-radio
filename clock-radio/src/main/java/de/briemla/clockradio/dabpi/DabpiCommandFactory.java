@@ -127,7 +127,7 @@ public class DabpiCommandFactory implements CommandFactory {
 
 	@Override
 	public Command<DABSubchannelInfo> readDABSubchannelInfo() {
-		return null;
+		return new ReadDABSubchannelInfo();
 	}
 
 }

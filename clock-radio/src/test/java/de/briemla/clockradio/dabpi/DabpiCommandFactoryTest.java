@@ -15,6 +15,7 @@ import de.briemla.clockradio.dabpi.result.DABRegion;
 import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
+import de.briemla.clockradio.dabpi.result.DABSubchannelInfo;
 import de.briemla.clockradio.dabpi.result.FMStatus;
 import de.briemla.clockradio.dabpi.result.FrequencyList;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
@@ -127,5 +128,12 @@ public class DabpiCommandFactoryTest {
 		Command<DABAudioInfo> command = factory.readDABAudioInfo();
 
 		assertThat(command, is(equalTo(new ReadDABAudioInfo())));
+	}
+
+	@Test
+	public void readDABSubchannelInfo() {
+		Command<DABSubchannelInfo> command = factory.readDABSubchannelInfo();
+
+		assertThat(command, is(equalTo(new ReadDABSubchannelInfo())));
 	}
 }
