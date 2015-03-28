@@ -72,7 +72,7 @@ public class DabpiCommandFactory implements CommandFactory {
 
 	@Override
 	public Command<TuneToFrequencyResult> tuneTo(Integer frequency) {
-		return null;
+		return new TuneToFrequency(frequency);
 	}
 
 	@Override
