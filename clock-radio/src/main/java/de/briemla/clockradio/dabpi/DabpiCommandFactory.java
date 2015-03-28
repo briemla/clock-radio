@@ -77,7 +77,7 @@ public class DabpiCommandFactory implements CommandFactory {
 
 	@Override
 	public Command<FMStatus> fmStatus() {
-		return null;
+		return new FMStatusCommand();
 	}
 
 	@Override
