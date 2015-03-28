@@ -82,7 +82,7 @@ public class DabpiCommandFactory implements CommandFactory {
 
 	@Override
 	public Command<DABStatus> dabStatus() {
-		return null;
+		return new DABStatusCommand();
 	}
 
 	@Override

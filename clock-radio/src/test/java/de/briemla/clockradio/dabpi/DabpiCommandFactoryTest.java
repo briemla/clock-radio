@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import de.briemla.clockradio.dabpi.command.SwitchToDAB;
 import de.briemla.clockradio.dabpi.command.SwitchToFM;
+import de.briemla.clockradio.dabpi.result.DABStatus;
 import de.briemla.clockradio.dabpi.result.FMStatus;
 import de.briemla.clockradio.dabpi.result.SwitchToDABResult;
 import de.briemla.clockradio.dabpi.result.SwitchToFMResult;
@@ -50,5 +51,12 @@ public class DabpiCommandFactoryTest {
 		Command<FMStatus> command = factory.fmStatus();
 
 		assertThat(command, is(equalTo(new FMStatusCommand())));
+	}
+
+	@Test
+	public void dabStatus() {
+		Command<DABStatus> command = factory.dabStatus();
+
+		assertThat(command, is(equalTo(new DABStatusCommand())));
 	}
 }
