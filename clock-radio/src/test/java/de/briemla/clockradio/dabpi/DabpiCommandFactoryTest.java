@@ -10,6 +10,7 @@ import org.junit.Test;
 import de.briemla.clockradio.dabpi.command.SwitchToDAB;
 import de.briemla.clockradio.dabpi.command.SwitchToFM;
 import de.briemla.clockradio.dabpi.result.DABChannel;
+import de.briemla.clockradio.dabpi.result.DABRegion;
 import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
@@ -84,5 +85,13 @@ public class DabpiCommandFactoryTest {
 		Command<DABChannel> command = factory.selectDABChannel(channelId);
 
 		assertThat(command, is(equalTo(new SelectDABChannel(channelId))));
+	}
+
+	@Test
+	public void selectDABRegion() {
+		Integer regionId = 0;
+		Command<DABRegion> command = factory.selectDABRegion(regionId);
+
+		assertThat(command, is(equalTo(new SelectDABRegion(regionId))));
 	}
 }

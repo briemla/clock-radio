@@ -102,7 +102,7 @@ public class DabpiCommandFactory implements CommandFactory {
 
 	@Override
 	public Command<DABRegion> selectDABRegion(Integer regionId) {
-		return null;
+		return new SelectDABRegion(regionId);
 	}
 
 	@Override
