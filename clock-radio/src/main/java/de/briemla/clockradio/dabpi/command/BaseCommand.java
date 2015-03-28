@@ -33,6 +33,7 @@ public abstract class BaseCommand<T extends RadioResult> implements Command<T> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		@SuppressWarnings("unchecked")
 		BaseCommand<RadioResult> other = (BaseCommand<RadioResult>) obj;
 		if (parameter == null) {
 			if (other.parameter != null)
