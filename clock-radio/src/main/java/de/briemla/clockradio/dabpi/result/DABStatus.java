@@ -1,13 +1,13 @@
-package de.briemla.clockradio.dabpi;
+package de.briemla.clockradio.dabpi.result;
 
-public class DABRegion implements RadioResult {
+import de.briemla.clockradio.dabpi.RadioResult;
+
+public class DABStatus implements RadioResult {
 
 	private final boolean successful;
-	private final Integer regionId;
 
-	public DABRegion(boolean successful, Integer regionId) {
+	public DABStatus(boolean successful) {
 		this.successful = successful;
-		this.regionId = regionId;
 	}
 
 	@Override
@@ -19,7 +19,6 @@ public class DABRegion implements RadioResult {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((regionId == null) ? 0 : regionId.hashCode());
 		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
@@ -32,12 +31,7 @@ public class DABRegion implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DABRegion other = (DABRegion) obj;
-		if (regionId == null) {
-			if (other.regionId != null)
-				return false;
-		} else if (!regionId.equals(other.regionId))
-			return false;
+		DABStatus other = (DABStatus) obj;
 		if (successful != other.successful)
 			return false;
 		return true;
@@ -45,7 +39,7 @@ public class DABRegion implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "SelectDABRegionResult [successful=" + successful + ", regionId=" + regionId + "]";
+		return "DABStatusResult [successful=" + successful + "]";
 	}
 
 }

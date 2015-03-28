@@ -1,13 +1,15 @@
-package de.briemla.clockradio.dabpi;
+package de.briemla.clockradio.dabpi.result;
 
-public class DABChannel implements RadioResult {
+import de.briemla.clockradio.dabpi.RadioResult;
+
+public class TuneToFrequencyResult implements RadioResult {
 
 	private final boolean successful;
-	private final Integer channelId;
+	private final Integer frequency;
 
-	public DABChannel(boolean successful, Integer channelId) {
+	public TuneToFrequencyResult(boolean successful, Integer frequency) {
 		this.successful = successful;
-		this.channelId = channelId;
+		this.frequency = frequency;
 	}
 
 	@Override
@@ -19,7 +21,7 @@ public class DABChannel implements RadioResult {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((channelId == null) ? 0 : channelId.hashCode());
+		result = prime * result + ((frequency == null) ? 0 : frequency.hashCode());
 		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
@@ -32,11 +34,11 @@ public class DABChannel implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DABChannel other = (DABChannel) obj;
-		if (channelId == null) {
-			if (other.channelId != null)
+		TuneToFrequencyResult other = (TuneToFrequencyResult) obj;
+		if (frequency == null) {
+			if (other.frequency != null)
 				return false;
-		} else if (!channelId.equals(other.channelId))
+		} else if (!frequency.equals(other.frequency))
 			return false;
 		if (successful != other.successful)
 			return false;
@@ -45,7 +47,7 @@ public class DABChannel implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "SelectDABChannelResult [successful=" + successful + ", channelId=" + channelId + "]";
+		return "TuneToFrequencyResult [successful=" + successful + ", frequency=" + frequency + "]";
 	}
 
 }

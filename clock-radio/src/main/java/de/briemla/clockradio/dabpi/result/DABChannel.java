@@ -1,13 +1,15 @@
-package de.briemla.clockradio.dabpi;
+package de.briemla.clockradio.dabpi.result;
 
-public class Station implements RadioResult {
+import de.briemla.clockradio.dabpi.RadioResult;
+
+public class DABChannel implements RadioResult {
 
 	private final boolean successful;
-	private final ScanDirection direction;
+	private final Integer channelId;
 
-	public Station(boolean successful, ScanDirection direction) {
+	public DABChannel(boolean successful, Integer channelId) {
 		this.successful = successful;
-		this.direction = direction;
+		this.channelId = channelId;
 	}
 
 	@Override
@@ -19,7 +21,7 @@ public class Station implements RadioResult {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((direction == null) ? 0 : direction.hashCode());
+		result = prime * result + ((channelId == null) ? 0 : channelId.hashCode());
 		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
@@ -32,8 +34,11 @@ public class Station implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Station other = (Station) obj;
-		if (direction != other.direction)
+		DABChannel other = (DABChannel) obj;
+		if (channelId == null) {
+			if (other.channelId != null)
+				return false;
+		} else if (!channelId.equals(other.channelId))
 			return false;
 		if (successful != other.successful)
 			return false;
@@ -42,7 +47,7 @@ public class Station implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "ScanNextStationResult [successful=" + successful + ", direction=" + direction + "]";
+		return "SelectDABChannelResult [successful=" + successful + ", channelId=" + channelId + "]";
 	}
 
 }

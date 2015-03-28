@@ -1,13 +1,16 @@
-package de.briemla.clockradio.dabpi;
+package de.briemla.clockradio.dabpi.result;
 
-public class TuneToFrequencyResult implements RadioResult {
+import de.briemla.clockradio.dabpi.RadioResult;
+import de.briemla.clockradio.dabpi.ScanDirection;
+
+public class Station implements RadioResult {
 
 	private final boolean successful;
-	private final Integer frequency;
+	private final ScanDirection direction;
 
-	public TuneToFrequencyResult(boolean successful, Integer frequency) {
+	public Station(boolean successful, ScanDirection direction) {
 		this.successful = successful;
-		this.frequency = frequency;
+		this.direction = direction;
 	}
 
 	@Override
@@ -19,7 +22,7 @@ public class TuneToFrequencyResult implements RadioResult {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((frequency == null) ? 0 : frequency.hashCode());
+		result = prime * result + ((direction == null) ? 0 : direction.hashCode());
 		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
@@ -32,11 +35,8 @@ public class TuneToFrequencyResult implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TuneToFrequencyResult other = (TuneToFrequencyResult) obj;
-		if (frequency == null) {
-			if (other.frequency != null)
-				return false;
-		} else if (!frequency.equals(other.frequency))
+		Station other = (Station) obj;
+		if (direction != other.direction)
 			return false;
 		if (successful != other.successful)
 			return false;
@@ -45,7 +45,7 @@ public class TuneToFrequencyResult implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "TuneToFrequencyResult [successful=" + successful + ", frequency=" + frequency + "]";
+		return "ScanNextStationResult [successful=" + successful + ", direction=" + direction + "]";
 	}
 
 }

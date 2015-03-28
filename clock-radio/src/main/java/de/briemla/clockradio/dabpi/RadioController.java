@@ -1,5 +1,8 @@
 package de.briemla.clockradio.dabpi;
 
+import de.briemla.clockradio.dabpi.result.SwitchToDABResult;
+import de.briemla.clockradio.dabpi.result.SwitchToFMResult;
+
 
 /**
  * Abstraction for controlling radio.

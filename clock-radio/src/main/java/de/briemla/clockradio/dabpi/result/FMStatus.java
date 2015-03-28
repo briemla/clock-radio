@@ -1,10 +1,12 @@
-package de.briemla.clockradio.dabpi;
+package de.briemla.clockradio.dabpi.result;
 
-public class RDSInfo implements RadioResult {
+import de.briemla.clockradio.dabpi.RadioResult;
+
+public class FMStatus implements RadioResult {
 
 	private final boolean successful;
 
-	public RDSInfo(boolean successful) {
+	public FMStatus(boolean successful) {
 		this.successful = successful;
 	}
 
@@ -29,7 +31,7 @@ public class RDSInfo implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RDSInfo other = (RDSInfo) obj;
+		FMStatus other = (FMStatus) obj;
 		if (successful != other.successful)
 			return false;
 		return true;
@@ -37,7 +39,7 @@ public class RDSInfo implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "ReadRDSResult [successful=" + successful + "]";
+		return "FMStatusResult [successful=" + successful + "]";
 	}
 
 }

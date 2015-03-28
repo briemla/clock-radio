@@ -1,13 +1,13 @@
-package de.briemla.clockradio.dabpi;
+package de.briemla.clockradio.dabpi.result;
 
-public class DABService implements RadioResult {
+import de.briemla.clockradio.dabpi.RadioResult;
+
+public class SwitchToFMResult implements RadioResult {
 
 	private final boolean successful;
-	private final Integer serviceId;
 
-	public DABService(boolean successful, Integer serviceId) {
+	public SwitchToFMResult(boolean successful) {
 		this.successful = successful;
-		this.serviceId = serviceId;
 	}
 
 	@Override
@@ -19,7 +19,6 @@ public class DABService implements RadioResult {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
 		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
@@ -32,12 +31,7 @@ public class DABService implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DABService other = (DABService) obj;
-		if (serviceId == null) {
-			if (other.serviceId != null)
-				return false;
-		} else if (!serviceId.equals(other.serviceId))
-			return false;
+		SwitchToFMResult other = (SwitchToFMResult) obj;
 		if (successful != other.successful)
 			return false;
 		return true;
@@ -45,7 +39,7 @@ public class DABService implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "StartDABServiceResult [successful=" + successful + ", serviceId=" + serviceId + "]";
+		return "SwitchToFMResult [successful=" + successful + "]";
 	}
 
 }
