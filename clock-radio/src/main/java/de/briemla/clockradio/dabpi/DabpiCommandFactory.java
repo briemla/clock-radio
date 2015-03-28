@@ -117,7 +117,7 @@ public class DabpiCommandFactory implements CommandFactory {
 
 	@Override
 	public Command<RDSInfo> readRDS() {
-		return null;
+		return new ReadRDS();
 	}
 
 	@Override
