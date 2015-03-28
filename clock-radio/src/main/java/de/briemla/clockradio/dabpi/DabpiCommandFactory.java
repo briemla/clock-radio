@@ -107,7 +107,7 @@ public class DabpiCommandFactory implements CommandFactory {
 
 	@Override
 	public Command<FrequencyList> readFrequencyListFor(Integer regionId) {
-		return null;
+		return new ReadFrequencyList(regionId);
 	}
 
 	@Override
