@@ -1,13 +1,11 @@
 package de.briemla.clockradio.dabpi;
 
-public class ReadFrequencyListForRegionResult implements RadioResult {
+public class DABServiceList implements RadioResult {
 
 	private final boolean successful;
-	private final Integer regionId;
 
-	public ReadFrequencyListForRegionResult(boolean successful, Integer regionId) {
+	public DABServiceList(boolean successful) {
 		this.successful = successful;
-		this.regionId = regionId;
 	}
 
 	@Override
@@ -19,7 +17,6 @@ public class ReadFrequencyListForRegionResult implements RadioResult {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((regionId == null) ? 0 : regionId.hashCode());
 		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
@@ -32,12 +29,7 @@ public class ReadFrequencyListForRegionResult implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ReadFrequencyListForRegionResult other = (ReadFrequencyListForRegionResult) obj;
-		if (regionId == null) {
-			if (other.regionId != null)
-				return false;
-		} else if (!regionId.equals(other.regionId))
-			return false;
+		DABServiceList other = (DABServiceList) obj;
 		if (successful != other.successful)
 			return false;
 		return true;
@@ -45,7 +37,7 @@ public class ReadFrequencyListForRegionResult implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "ReadFrequencyListForRegionResult [successful=" + successful + ", regionId=" + regionId + "]";
+		return "ReadDABServiceListResult [successful=" + successful + "]";
 	}
 
 }

@@ -11,26 +11,6 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.briemla.clockradio.dabpi.Command;
-import de.briemla.clockradio.dabpi.CommandFactory;
-import de.briemla.clockradio.dabpi.DABStatusResult;
-import de.briemla.clockradio.dabpi.DabpiController;
-import de.briemla.clockradio.dabpi.FMStatusResult;
-import de.briemla.clockradio.dabpi.RadioExecutor;
-import de.briemla.clockradio.dabpi.ReadDABAudioInfoResult;
-import de.briemla.clockradio.dabpi.ReadDABServiceListResult;
-import de.briemla.clockradio.dabpi.ReadDABSubchannelInfoResult;
-import de.briemla.clockradio.dabpi.ReadFrequencyListForRegionResult;
-import de.briemla.clockradio.dabpi.ReadRDSResult;
-import de.briemla.clockradio.dabpi.ScanDirection;
-import de.briemla.clockradio.dabpi.ScanNextStationResult;
-import de.briemla.clockradio.dabpi.SelectDABChannelResult;
-import de.briemla.clockradio.dabpi.SelectDABRegionResult;
-import de.briemla.clockradio.dabpi.StartDABServiceResult;
-import de.briemla.clockradio.dabpi.SwitchToDABResult;
-import de.briemla.clockradio.dabpi.SwitchToFMResult;
-import de.briemla.clockradio.dabpi.TuneToFrequencyResult;
-
 public class DabpiControllerTest {
 
 	private RadioExecutor executor;
@@ -103,15 +83,15 @@ public class DabpiControllerTest {
 	@Test
 	public void fmStatus() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<FMStatusResult> command = mock(Command.class);
-		FMStatusResult result = new FMStatusResult(true);
-		FMStatusResult expectedResult = new FMStatusResult(true);
+		Command<FMStatus> command = mock(Command.class);
+		FMStatus result = new FMStatus(true);
+		FMStatus expectedResult = new FMStatus(true);
 
 		when(factory.fmStatus()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		FMStatusResult fmStatus = controller.fmStatus();
+		FMStatus fmStatus = controller.fmStatus();
 		assertThat("Result", fmStatus, is(equalTo(expectedResult)));
 
 		verify(factory).fmStatus();
@@ -122,15 +102,15 @@ public class DabpiControllerTest {
 	@Test
 	public void dabStatus() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<DABStatusResult> command = mock(Command.class);
-		DABStatusResult result = new DABStatusResult(true);
-		DABStatusResult expectedResult = new DABStatusResult(true);
+		Command<DABStatus> command = mock(Command.class);
+		DABStatus result = new DABStatus(true);
+		DABStatus expectedResult = new DABStatus(true);
 
 		when(factory.dabStatus()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		DABStatusResult dabStatus = controller.dabStatus();
+		DABStatus dabStatus = controller.dabStatus();
 		assertThat("Result", dabStatus, is(equalTo(expectedResult)));
 
 		verify(factory).dabStatus();
@@ -141,16 +121,16 @@ public class DabpiControllerTest {
 	@Test
 	public void startDABService() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<StartDABServiceResult> command = mock(Command.class);
+		Command<DABService> command = mock(Command.class);
 		Integer serviceId = 0;
-		StartDABServiceResult result = new StartDABServiceResult(true, serviceId);
-		StartDABServiceResult expectedResult = new StartDABServiceResult(true, serviceId);
+		DABService result = new DABService(true, serviceId);
+		DABService expectedResult = new DABService(true, serviceId);
 
 		when(factory.startDABService(serviceId)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		StartDABServiceResult startDABService = controller.startDABService(serviceId);
+		DABService startDABService = controller.startDABService(serviceId);
 		assertThat("Result", startDABService, is(equalTo(expectedResult)));
 
 		verify(factory).startDABService(serviceId);
@@ -161,15 +141,15 @@ public class DabpiControllerTest {
 	@Test
 	public void readDABServiceList() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<ReadDABServiceListResult> command = mock(Command.class);
-		ReadDABServiceListResult result = new ReadDABServiceListResult(true);
-		ReadDABServiceListResult expectedResult = new ReadDABServiceListResult(true);
+		Command<DABServiceList> command = mock(Command.class);
+		DABServiceList result = new DABServiceList(true);
+		DABServiceList expectedResult = new DABServiceList(true);
 
 		when(factory.readDABServiceList()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		ReadDABServiceListResult readDABServiceList = controller.readDABServiceList();
+		DABServiceList readDABServiceList = controller.readDABServiceList();
 		assertThat("Result", readDABServiceList, is(equalTo(expectedResult)));
 
 		verify(factory).readDABServiceList();
@@ -180,16 +160,16 @@ public class DabpiControllerTest {
 	@Test
 	public void selectDABChannel() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<SelectDABChannelResult> command = mock(Command.class);
+		Command<DABChannel> command = mock(Command.class);
 		Integer channelId = 0;
-		SelectDABChannelResult result = new SelectDABChannelResult(true, channelId);
-		SelectDABChannelResult expectedResult = new SelectDABChannelResult(true, channelId);
+		DABChannel result = new DABChannel(true, channelId);
+		DABChannel expectedResult = new DABChannel(true, channelId);
 
 		when(factory.selectDABChannel(channelId)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		SelectDABChannelResult selectDABChannel = controller.selectDABChannel(channelId);
+		DABChannel selectDABChannel = controller.selectDABChannel(channelId);
 		assertThat("Result", selectDABChannel, is(equalTo(expectedResult)));
 
 		verify(factory).selectDABChannel(channelId);
@@ -200,16 +180,16 @@ public class DabpiControllerTest {
 	@Test
 	public void selectDABRegion() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<SelectDABRegionResult> command = mock(Command.class);
+		Command<DABRegion> command = mock(Command.class);
 		Integer regionId = 0;
-		SelectDABRegionResult result = new SelectDABRegionResult(true, regionId);
-		SelectDABRegionResult expectedResult = new SelectDABRegionResult(true, regionId);
+		DABRegion result = new DABRegion(true, regionId);
+		DABRegion expectedResult = new DABRegion(true, regionId);
 
 		when(factory.selectDABRegion(regionId)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		SelectDABRegionResult selectDABRegion = controller.selectDABRegion(regionId);
+		DABRegion selectDABRegion = controller.selectDABRegion(regionId);
 		assertThat("Result", selectDABRegion, is(equalTo(expectedResult)));
 
 		verify(factory).selectDABRegion(regionId);
@@ -220,16 +200,16 @@ public class DabpiControllerTest {
 	@Test
 	public void readFrequencyListForRegion() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<ReadFrequencyListForRegionResult> command = mock(Command.class);
+		Command<FrequencyList> command = mock(Command.class);
 		Integer regionId = 0;
-		ReadFrequencyListForRegionResult result = new ReadFrequencyListForRegionResult(true, regionId);
-		ReadFrequencyListForRegionResult expectedResult = new ReadFrequencyListForRegionResult(true, regionId);
+		FrequencyList result = new FrequencyList(true, regionId);
+		FrequencyList expectedResult = new FrequencyList(true, regionId);
 
 		when(factory.readFrequencyListFor(regionId)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		ReadFrequencyListForRegionResult readFrequencyList = controller.readFrequencyListFor(regionId);
+		FrequencyList readFrequencyList = controller.readFrequencyListFor(regionId);
 		assertThat("Result", readFrequencyList, is(equalTo(expectedResult)));
 
 		verify(factory).readFrequencyListFor(regionId);
@@ -240,16 +220,16 @@ public class DabpiControllerTest {
 	@Test
 	public void scanNextStation() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<ScanNextStationResult> command = mock(Command.class);
+		Command<Station> command = mock(Command.class);
 		ScanDirection direction = ScanDirection.UP;
-		ScanNextStationResult result = new ScanNextStationResult(true, direction);
-		ScanNextStationResult expectedResult = new ScanNextStationResult(true, direction);
+		Station result = new Station(true, direction);
+		Station expectedResult = new Station(true, direction);
 
 		when(factory.scanNextStation(direction)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		ScanNextStationResult scanNextStation = controller.scanNextStation(direction);
+		Station scanNextStation = controller.scanNextStation(direction);
 		assertThat("Result", scanNextStation, is(equalTo(expectedResult)));
 
 		verify(factory).scanNextStation(direction);
@@ -260,15 +240,15 @@ public class DabpiControllerTest {
 	@Test
 	public void readRDS() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<ReadRDSResult> command = mock(Command.class);
-		ReadRDSResult result = new ReadRDSResult(true);
-		ReadRDSResult expectedResult = new ReadRDSResult(true);
+		Command<RDSInfo> command = mock(Command.class);
+		RDSInfo result = new RDSInfo(true);
+		RDSInfo expectedResult = new RDSInfo(true);
 
 		when(factory.readRDS()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		ReadRDSResult readRDS = controller.readRDS();
+		RDSInfo readRDS = controller.readRDS();
 		assertThat("Result", readRDS, is(equalTo(expectedResult)));
 
 		verify(factory).readRDS();
@@ -279,15 +259,15 @@ public class DabpiControllerTest {
 	@Test
 	public void readDABAudioInfo() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<ReadDABAudioInfoResult> command = mock(Command.class);
-		ReadDABAudioInfoResult result = new ReadDABAudioInfoResult(true);
-		ReadDABAudioInfoResult expectedResult = new ReadDABAudioInfoResult(true);
+		Command<DABAudioInfo> command = mock(Command.class);
+		DABAudioInfo result = new DABAudioInfo(true);
+		DABAudioInfo expectedResult = new DABAudioInfo(true);
 
 		when(factory.readDABAudioInfo()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		ReadDABAudioInfoResult readDABAudioInfo = controller.readDABAudioInfo();
+		DABAudioInfo readDABAudioInfo = controller.readDABAudioInfo();
 		assertThat("Result", readDABAudioInfo, is(equalTo(expectedResult)));
 
 		verify(factory).readDABAudioInfo();
@@ -298,15 +278,15 @@ public class DabpiControllerTest {
 	@Test
 	public void readDABSubchannelInfo() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<ReadDABSubchannelInfoResult> command = mock(Command.class);
-		ReadDABSubchannelInfoResult result = new ReadDABSubchannelInfoResult(true);
-		ReadDABSubchannelInfoResult expectedResult = new ReadDABSubchannelInfoResult(true);
+		Command<DABSubchannelInfo> command = mock(Command.class);
+		DABSubchannelInfo result = new DABSubchannelInfo(true);
+		DABSubchannelInfo expectedResult = new DABSubchannelInfo(true);
 
 		when(factory.readDABSubchannelInfo()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		ReadDABSubchannelInfoResult readDABSubchannelInfo = controller.readDABSubchannelInfo();
+		DABSubchannelInfo readDABSubchannelInfo = controller.readDABSubchannelInfo();
 		assertThat("Result", readDABSubchannelInfo, is(equalTo(expectedResult)));
 
 		verify(factory).readDABSubchannelInfo();

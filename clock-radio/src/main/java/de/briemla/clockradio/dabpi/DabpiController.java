@@ -66,47 +66,47 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.tuneTo(frequency));
 	}
 
-	public FMStatusResult fmStatus() {
+	public FMStatus fmStatus() {
 		return executor.execute(factory.fmStatus());
 	}
 
-	public DABStatusResult dabStatus() {
+	public DABStatus dabStatus() {
 		return executor.execute(factory.dabStatus());
 	}
 
-	public StartDABServiceResult startDABService(Integer serviceId) {
+	public DABService startDABService(Integer serviceId) {
 		return executor.execute(factory.startDABService(serviceId));
 	}
 
-	public ReadDABServiceListResult readDABServiceList() {
+	public DABServiceList readDABServiceList() {
 		return executor.execute(factory.readDABServiceList());
 	}
 
-	public SelectDABChannelResult selectDABChannel(Integer channelId) {
+	public DABChannel selectDABChannel(Integer channelId) {
 		return executor.execute(factory.selectDABChannel(channelId));
 	}
 
-	public SelectDABRegionResult selectDABRegion(Integer regionId) {
+	public DABRegion selectDABRegion(Integer regionId) {
 		return executor.execute(factory.selectDABRegion(regionId));
 	}
 
-	public ReadFrequencyListForRegionResult readFrequencyListFor(Integer regionId) {
+	public FrequencyList readFrequencyListFor(Integer regionId) {
 		return executor.execute(factory.readFrequencyListFor(regionId));
 	}
 
-	public ScanNextStationResult scanNextStation(ScanDirection direction) {
+	public Station scanNextStation(ScanDirection direction) {
 		return executor.execute(factory.scanNextStation(direction));
 	}
 
-	public ReadRDSResult readRDS() {
+	public RDSInfo readRDS() {
 		return executor.execute(factory.readRDS());
 	}
 
-	public ReadDABAudioInfoResult readDABAudioInfo() {
+	public DABAudioInfo readDABAudioInfo() {
 		return executor.execute(factory.readDABAudioInfo());
 	}
 
-	public ReadDABSubchannelInfoResult readDABSubchannelInfo() {
+	public DABSubchannelInfo readDABSubchannelInfo() {
 		return executor.execute(factory.readDABSubchannelInfo());
 	}
 

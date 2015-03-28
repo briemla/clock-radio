@@ -1,11 +1,13 @@
 package de.briemla.clockradio.dabpi;
 
-public class ReadDABAudioInfoResult implements RadioResult {
+public class DABService implements RadioResult {
 
 	private final boolean successful;
+	private final Integer serviceId;
 
-	public ReadDABAudioInfoResult(boolean successful) {
+	public DABService(boolean successful, Integer serviceId) {
 		this.successful = successful;
+		this.serviceId = serviceId;
 	}
 
 	@Override
@@ -17,6 +19,7 @@ public class ReadDABAudioInfoResult implements RadioResult {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
 		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
@@ -29,7 +32,12 @@ public class ReadDABAudioInfoResult implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ReadDABAudioInfoResult other = (ReadDABAudioInfoResult) obj;
+		DABService other = (DABService) obj;
+		if (serviceId == null) {
+			if (other.serviceId != null)
+				return false;
+		} else if (!serviceId.equals(other.serviceId))
+			return false;
 		if (successful != other.successful)
 			return false;
 		return true;
@@ -37,7 +45,7 @@ public class ReadDABAudioInfoResult implements RadioResult {
 
 	@Override
 	public String toString() {
-		return "ReadDABAudioInfoResult [successful=" + successful + "]";
+		return "StartDABServiceResult [successful=" + successful + ", serviceId=" + serviceId + "]";
 	}
 
 }

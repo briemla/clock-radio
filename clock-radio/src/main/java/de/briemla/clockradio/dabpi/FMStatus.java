@@ -1,10 +1,10 @@
 package de.briemla.clockradio.dabpi;
 
-public class FMStatusResult implements RadioResult {
+public class FMStatus implements RadioResult {
 
 	private final boolean successful;
 
-	public FMStatusResult(boolean successful) {
+	public FMStatus(boolean successful) {
 		this.successful = successful;
 	}
 
@@ -29,7 +29,7 @@ public class FMStatusResult implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FMStatusResult other = (FMStatusResult) obj;
+		FMStatus other = (FMStatus) obj;
 		if (successful != other.successful)
 			return false;
 		return true;

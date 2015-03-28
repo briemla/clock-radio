@@ -9,26 +9,26 @@ public interface CommandFactory {
 
 	Command<TuneToFrequencyResult> tuneTo(Integer frequency);
 
-	Command<FMStatusResult> fmStatus();
+	Command<FMStatus> fmStatus();
 
-	Command<DABStatusResult> dabStatus();
+	Command<DABStatus> dabStatus();
 
-	Command<StartDABServiceResult> startDABService(Integer serviceId);
+	Command<DABService> startDABService(Integer serviceId);
 
-	Command<ReadDABServiceListResult> readDABServiceList();
+	Command<DABServiceList> readDABServiceList();
 
-	Command<SelectDABChannelResult> selectDABChannel(Integer channelId);
+	Command<DABChannel> selectDABChannel(Integer channelId);
 
-	Command<SelectDABRegionResult> selectDABRegion(Integer regionId);
+	Command<DABRegion> selectDABRegion(Integer regionId);
 
-	Command<ReadFrequencyListForRegionResult> readFrequencyListFor(Integer regionId);
+	Command<FrequencyList> readFrequencyListFor(Integer regionId);
 
-	Command<ScanNextStationResult> scanNextStation(ScanDirection direction);
+	Command<Station> scanNextStation(ScanDirection direction);
 
-	Command<ReadRDSResult> readRDS();
+	Command<RDSInfo> readRDS();
 
-	Command<ReadDABAudioInfoResult> readDABAudioInfo();
+	Command<DABAudioInfo> readDABAudioInfo();
 
-	Command<ReadDABSubchannelInfoResult> readDABSubchannelInfo();
+	Command<DABSubchannelInfo> readDABSubchannelInfo();
 
 }

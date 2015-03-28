@@ -1,11 +1,11 @@
 package de.briemla.clockradio.dabpi;
 
-public class ScanNextStationResult implements RadioResult {
+public class Station implements RadioResult {
 
 	private final boolean successful;
 	private final ScanDirection direction;
 
-	public ScanNextStationResult(boolean successful, ScanDirection direction) {
+	public Station(boolean successful, ScanDirection direction) {
 		this.successful = successful;
 		this.direction = direction;
 	}
@@ -32,7 +32,7 @@ public class ScanNextStationResult implements RadioResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ScanNextStationResult other = (ScanNextStationResult) obj;
+		Station other = (Station) obj;
 		if (direction != other.direction)
 			return false;
 		if (successful != other.successful)
