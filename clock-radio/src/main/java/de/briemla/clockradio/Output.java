@@ -29,8 +29,13 @@ public class Output {
 		return "";
 	}
 
+	/**
+	 * Checks if there has something be written on the error output. Empty lines will be ignored.
+	 *
+	 * @return
+	 */
 	public boolean isErrorEmpty() {
-		return error.isEmpty();
+		return error.stream().filter(text -> !text.isEmpty()).count() == 0;
 	}
 
 }
