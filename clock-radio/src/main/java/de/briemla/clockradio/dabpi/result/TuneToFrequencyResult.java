@@ -1,8 +1,6 @@
 package de.briemla.clockradio.dabpi.result;
 
-import de.briemla.clockradio.dabpi.RadioResult;
-
-public class TuneToFrequencyResult implements RadioResult {
+public class TuneToFrequencyResult {
 
 	private final Integer frequency;
 

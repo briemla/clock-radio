@@ -1,8 +1,6 @@
 package de.briemla.clockradio.dabpi.result;
 
-import de.briemla.clockradio.dabpi.RadioResult;
-
-public class FMStatus implements RadioResult {
+public class FMStatus {
 
 	private final boolean successful;
 

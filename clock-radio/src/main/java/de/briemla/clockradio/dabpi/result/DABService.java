@@ -1,8 +1,6 @@
 package de.briemla.clockradio.dabpi.result;
 
-import de.briemla.clockradio.dabpi.RadioResult;
-
-public class DABService implements RadioResult {
+public class DABService {
 
 	private final Integer serviceId;
 

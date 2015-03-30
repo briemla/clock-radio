@@ -1,8 +1,6 @@
 package de.briemla.clockradio.dabpi.result;
 
-import de.briemla.clockradio.dabpi.RadioResult;
-
-public class DABAudioInfo implements RadioResult {
+public class DABAudioInfo {
 
 	private final boolean successful;
 

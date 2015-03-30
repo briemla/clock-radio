@@ -23,12 +23,12 @@ public class DabpiCtl implements RadioExecutor {
 	 *             when underlying application outputs errors
 	 */
 	@Override
-	public <T extends RadioResult> T execute(Command<T> command) throws IOException {
+	public <T> T execute(Command<T> command) throws IOException {
 		Output output = new Output();
 		try {
 			Process process = Runtime.getRuntime().exec(DABPI_CTL + " " + command.serialize());
 			try (BufferedReader standardOutput = createReader(process.getInputStream());
-					BufferedReader errorOutput = createReader(process.getErrorStream())) {
+			        BufferedReader errorOutput = createReader(process.getErrorStream())) {
 				process.waitFor();
 				standardOutput.lines().forEach(line -> output.addStandard(line));
 				errorOutput.lines().forEach(line -> output.addError(line));

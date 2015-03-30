@@ -1,9 +1,8 @@
 package de.briemla.clockradio.dabpi.result;
 
-import de.briemla.clockradio.dabpi.RadioResult;
 import de.briemla.clockradio.dabpi.ScanDirection;
 
-public class Station implements RadioResult {
+public class Station {
 
 	private final boolean successful;
 	private final ScanDirection direction;

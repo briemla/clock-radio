@@ -1,8 +1,6 @@
 package de.briemla.clockradio.dabpi.result;
 
-import de.briemla.clockradio.dabpi.RadioResult;
-
-public class SwitchToFMResult implements RadioResult {
+public class SwitchToFMResult {
 
 	private final boolean successful;
 

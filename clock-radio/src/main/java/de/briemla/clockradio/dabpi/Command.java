@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import de.briemla.clockradio.Output;
 
-public interface Command<T extends RadioResult> {
+public interface Command<T> {
 
 	public String serialize();
 

@@ -4,9 +4,8 @@ import java.io.IOException;
 
 import de.briemla.clockradio.Output;
 import de.briemla.clockradio.dabpi.Command;
-import de.briemla.clockradio.dabpi.RadioResult;
 
-public abstract class BaseCommand<T extends RadioResult> implements Command<T> {
+public abstract class BaseCommand<T> implements Command<T> {
 
 	private final String parameter;
 
@@ -47,7 +46,7 @@ public abstract class BaseCommand<T extends RadioResult> implements Command<T> {
 		if (getClass() != obj.getClass())
 			return false;
 		@SuppressWarnings("unchecked")
-		BaseCommand<RadioResult> other = (BaseCommand<RadioResult>) obj;
+		BaseCommand<T> other = (BaseCommand<T>) obj;
 		if (parameter == null) {
 			if (other.parameter != null)
 				return false;

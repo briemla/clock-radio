@@ -1,8 +1,6 @@
 package de.briemla.clockradio.dabpi.result;
 
-import de.briemla.clockradio.dabpi.RadioResult;
-
-public class DABSubchannelInfo implements RadioResult {
+public class DABSubchannelInfo {
 
 	private final boolean successful;
 

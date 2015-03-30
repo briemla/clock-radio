@@ -1,8 +1,6 @@
 package de.briemla.clockradio.dabpi.result;
 
-import de.briemla.clockradio.dabpi.RadioResult;
-
-public class FrequencyList implements RadioResult {
+public class FrequencyList {
 
 	private final Integer regionId;
 

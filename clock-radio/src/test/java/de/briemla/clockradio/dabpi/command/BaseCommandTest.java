@@ -13,11 +13,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import de.briemla.clockradio.Output;
-import de.briemla.clockradio.dabpi.RadioResult;
 
 public class BaseCommandTest {
 
-	public static class ConcreteBaseCommand extends BaseCommand<RadioResult> {
+	public static class ConcreteBaseCommand extends BaseCommand<Void> {
 
 		private boolean called = false;
 
@@ -26,7 +25,7 @@ public class BaseCommandTest {
 		}
 
 		@Override
-		protected RadioResult parseSpecialized(Output output) {
+		protected Void parseSpecialized(Output output) {
 			called = true;
 			return null;
 		}
@@ -37,7 +36,7 @@ public class BaseCommandTest {
 
 	@Test
 	public void serialize() throws Exception {
-		BaseCommand<RadioResult> command = new ConcreteBaseCommand("test");
+		ConcreteBaseCommand command = new ConcreteBaseCommand("test");
 
 		String serialized = command.serialize();
 
@@ -46,7 +45,7 @@ public class BaseCommandTest {
 
 	@Test
 	public void serializeSomethingElse() throws Exception {
-		BaseCommand<RadioResult> command = new ConcreteBaseCommand("somethingElse");
+		ConcreteBaseCommand command = new ConcreteBaseCommand("somethingElse");
 
 		String serialized = command.serialize();
 

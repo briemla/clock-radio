@@ -1,8 +1,6 @@
 package de.briemla.clockradio.dabpi.result;
 
-import de.briemla.clockradio.dabpi.RadioResult;
-
-public class DABChannel implements RadioResult {
+public class DABChannel {
 
 	private final Integer channelId;
 
