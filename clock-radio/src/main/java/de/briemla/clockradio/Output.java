@@ -18,6 +18,9 @@ public class Output {
 	}
 
 	public void addError(String line) {
+		if (line == null) {
+			return;
+		}
 		error.add(line);
 	}
 

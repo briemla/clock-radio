@@ -39,4 +39,12 @@ public class OutputTest {
 		assertThat(output.isErrorEmpty(), is(false));
 	}
 
+	@Test
+	public void addNull() throws Exception {
+		Output output = new Output();
+		output.addError(null);
+
+		assertThat(output.isErrorEmpty(), is(true));
+	}
+
 }
