@@ -3,6 +3,7 @@ package de.briemla.clockradio.dabpi.command;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.Test;
 
@@ -39,5 +40,10 @@ public class BaseCommandTest {
 		String serialized = command.serialize();
 
 		assertThat(serialized, is(equalTo(" -somethingElse")));
+	}
+
+	@Test
+	public void equalsAndHashCode() throws Exception {
+		EqualsVerifier.forClass(BaseCommand.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}
 }
