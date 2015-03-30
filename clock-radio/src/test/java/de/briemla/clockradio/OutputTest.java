@@ -31,4 +31,12 @@ public class OutputTest {
 		assertThat(output.isErrorEmpty(), is(true));
 	}
 
+	@Test
+	public void somethingInErrorOutput() throws Exception {
+		Output output = new Output();
+		output.addError("something");
+
+		assertThat(output.isErrorEmpty(), is(false));
+	}
+
 }
