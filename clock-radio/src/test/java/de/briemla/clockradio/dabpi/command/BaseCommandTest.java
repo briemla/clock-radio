@@ -31,4 +31,13 @@ public class BaseCommandTest {
 
 		assertThat(serialized, is(equalTo(" -test")));
 	}
+
+	@Test
+	public void serializeSomethingElse() throws Exception {
+		BaseCommand<RadioResult> command = new ConcreteBaseCommand("somethingElse");
+
+		String serialized = command.serialize();
+
+		assertThat(serialized, is(equalTo(" -somethingElse")));
+	}
 }
