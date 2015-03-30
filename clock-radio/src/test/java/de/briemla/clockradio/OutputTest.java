@@ -22,4 +22,13 @@ public class OutputTest {
 		assertThat(output.isErrorEmpty(), is(true));
 	}
 
+	@Test
+	public void emptyLinesInError() throws Exception {
+		Output output = new Output();
+		output.addError("");
+		output.addError("");
+
+		assertThat(output.isErrorEmpty(), is(true));
+	}
+
 }
