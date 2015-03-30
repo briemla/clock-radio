@@ -14,7 +14,7 @@ public class ScanNextStation extends BaseCommand<Station> {
 	}
 
 	@Override
-	public Station parse(Output output) {
+	protected Station parseSpecialized(Output output) {
 		return null;
 	}
 

@@ -10,7 +10,7 @@ public class FMStatusCommand extends BaseCommand<FMStatus> {
 	}
 
 	@Override
-	public FMStatus parse(Output output) {
+	protected FMStatus parseSpecialized(Output output) {
 		return null;
 	}
 

@@ -13,7 +13,7 @@ public class ReadFrequencyList extends BaseCommand<FrequencyList> {
 	}
 
 	@Override
-	public FrequencyList parse(Output output) {
+	protected FrequencyList parseSpecialized(Output output) {
 		return null;
 	}
 

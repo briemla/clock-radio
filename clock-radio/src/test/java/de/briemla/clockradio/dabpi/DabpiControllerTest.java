@@ -41,15 +41,14 @@ public class DabpiControllerTest {
 	public void switchToDAB() throws Exception {
 		@SuppressWarnings("unchecked")
 		Command<SwitchToDABResult> command = mock(Command.class);
-		SwitchToDABResult result = new SwitchToDABResult(true);
-		SwitchToDABResult expectedResult = new SwitchToDABResult(true);
+		SwitchToDABResult result = new SwitchToDABResult();
 
 		when(factory.switchToDAB()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
 		SwitchToDABResult switchSuccessful = controller.switchToDAB();
-		assertThat("Return value", switchSuccessful, is(equalTo(expectedResult)));
+		assertThat("Return value", switchSuccessful, is(equalTo(result)));
 
 		verify(factory).switchToDAB();
 		verify(executor).execute(command);
@@ -80,8 +79,8 @@ public class DabpiControllerTest {
 		@SuppressWarnings("unchecked")
 		Command<TuneToFrequencyResult> command = mock(Command.class);
 		Integer frequency = 106700;
-		TuneToFrequencyResult result = new TuneToFrequencyResult(true, frequency);
-		TuneToFrequencyResult expectedResult = new TuneToFrequencyResult(true, frequency);
+		TuneToFrequencyResult result = new TuneToFrequencyResult(frequency);
+		TuneToFrequencyResult expectedResult = new TuneToFrequencyResult(frequency);
 
 		when(factory.tuneTo(frequency)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
@@ -138,8 +137,8 @@ public class DabpiControllerTest {
 		@SuppressWarnings("unchecked")
 		Command<DABService> command = mock(Command.class);
 		Integer serviceId = 0;
-		DABService result = new DABService(true, serviceId);
-		DABService expectedResult = new DABService(true, serviceId);
+		DABService result = new DABService(serviceId);
+		DABService expectedResult = new DABService(serviceId);
 
 		when(factory.startDABService(serviceId)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
@@ -177,8 +176,8 @@ public class DabpiControllerTest {
 		@SuppressWarnings("unchecked")
 		Command<DABChannel> command = mock(Command.class);
 		Integer channelId = 0;
-		DABChannel result = new DABChannel(true, channelId);
-		DABChannel expectedResult = new DABChannel(true, channelId);
+		DABChannel result = new DABChannel(channelId);
+		DABChannel expectedResult = new DABChannel(channelId);
 
 		when(factory.selectDABChannel(channelId)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
@@ -197,8 +196,8 @@ public class DabpiControllerTest {
 		@SuppressWarnings("unchecked")
 		Command<DABRegion> command = mock(Command.class);
 		Integer regionId = 0;
-		DABRegion result = new DABRegion(true, regionId);
-		DABRegion expectedResult = new DABRegion(true, regionId);
+		DABRegion result = new DABRegion(regionId);
+		DABRegion expectedResult = new DABRegion(regionId);
 
 		when(factory.selectDABRegion(regionId)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
@@ -217,8 +216,8 @@ public class DabpiControllerTest {
 		@SuppressWarnings("unchecked")
 		Command<FrequencyList> command = mock(Command.class);
 		Integer regionId = 0;
-		FrequencyList result = new FrequencyList(true, regionId);
-		FrequencyList expectedResult = new FrequencyList(true, regionId);
+		FrequencyList result = new FrequencyList(regionId);
+		FrequencyList expectedResult = new FrequencyList(regionId);
 
 		when(factory.readFrequencyListFor(regionId)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);

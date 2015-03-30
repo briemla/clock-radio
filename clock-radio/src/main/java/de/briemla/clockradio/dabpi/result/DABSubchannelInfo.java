@@ -10,7 +10,6 @@ public class DABSubchannelInfo implements RadioResult {
 		this.successful = successful;
 	}
 
-	@Override
 	public boolean isSuccessful() {
 		return successful;
 	}

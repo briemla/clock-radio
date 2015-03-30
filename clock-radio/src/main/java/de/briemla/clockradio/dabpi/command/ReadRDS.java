@@ -10,8 +10,7 @@ public class ReadRDS extends BaseCommand<RDSInfo> {
 	}
 
 	@Override
-	public RDSInfo parse(Output output) {
+	protected RDSInfo parseSpecialized(Output output) {
 		return null;
 	}
-
 }

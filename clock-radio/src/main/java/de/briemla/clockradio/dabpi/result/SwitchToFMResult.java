@@ -10,7 +10,6 @@ public class SwitchToFMResult implements RadioResult {
 		this.successful = successful;
 	}
 
-	@Override
 	public boolean isSuccessful() {
 		return successful;
 	}

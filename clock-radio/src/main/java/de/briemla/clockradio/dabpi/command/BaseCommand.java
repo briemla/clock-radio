@@ -1,5 +1,8 @@
 package de.briemla.clockradio.dabpi.command;
 
+import java.io.IOException;
+
+import de.briemla.clockradio.Output;
 import de.briemla.clockradio.dabpi.Command;
 import de.briemla.clockradio.dabpi.RadioResult;
 
@@ -16,6 +19,16 @@ public abstract class BaseCommand<T extends RadioResult> implements Command<T> {
 	public String serialize() {
 		return " -" + parameter;
 	}
+
+	@Override
+	public T parse(Output output) throws IOException {
+		if (output.isErrorEmpty()) {
+			return parseSpecialized(output);
+		}
+		throw new IOException(output.concatErrorMessage());
+	}
+
+	protected abstract T parseSpecialized(Output output);
 
 	@Override
 	public int hashCode() {

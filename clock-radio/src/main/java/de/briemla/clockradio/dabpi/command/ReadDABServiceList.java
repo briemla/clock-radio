@@ -10,7 +10,7 @@ public class ReadDABServiceList extends BaseCommand<DABServiceList> {
 	}
 
 	@Override
-	public DABServiceList parse(Output output) {
+	protected DABServiceList parseSpecialized(Output output) {
 		return null;
 	}
 

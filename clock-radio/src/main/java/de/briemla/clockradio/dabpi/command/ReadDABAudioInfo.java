@@ -10,7 +10,7 @@ public class ReadDABAudioInfo extends BaseCommand<DABAudioInfo> {
 	}
 
 	@Override
-	public DABAudioInfo parse(Output output) {
+	protected DABAudioInfo parseSpecialized(Output output) {
 		return null;
 	}
 

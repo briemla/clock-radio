@@ -19,9 +19,11 @@ public class DabpiCtl implements RadioExecutor {
 	 * @param command
 	 *            command to execute
 	 * @return instance of implemented {@link RadioResult} specified by given command
+	 * @throws IOException
+	 *             when underlying application outputs errors
 	 */
 	@Override
-	public <T extends RadioResult> T execute(Command<T> command) {
+	public <T extends RadioResult> T execute(Command<T> command) throws IOException {
 		Output output = new Output();
 		try {
 			Process process = Runtime.getRuntime().exec(DABPI_CTL + " " + command.serialize());

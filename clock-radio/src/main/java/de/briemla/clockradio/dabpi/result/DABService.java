@@ -4,17 +4,10 @@ import de.briemla.clockradio.dabpi.RadioResult;
 
 public class DABService implements RadioResult {
 
-	private final boolean successful;
 	private final Integer serviceId;
 
-	public DABService(boolean successful, Integer serviceId) {
-		this.successful = successful;
+	public DABService(Integer serviceId) {
 		this.serviceId = serviceId;
-	}
-
-	@Override
-	public boolean isSuccessful() {
-		return successful;
 	}
 
 	@Override
@@ -22,7 +15,6 @@ public class DABService implements RadioResult {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
-		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
 
@@ -40,14 +32,12 @@ public class DABService implements RadioResult {
 				return false;
 		} else if (!serviceId.equals(other.serviceId))
 			return false;
-		if (successful != other.successful)
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "StartDABServiceResult [successful=" + successful + ", serviceId=" + serviceId + "]";
+		return "DABService [serviceId=" + serviceId + "]";
 	}
 
 }

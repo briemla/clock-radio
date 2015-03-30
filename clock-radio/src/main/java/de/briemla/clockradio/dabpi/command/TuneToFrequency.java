@@ -13,7 +13,7 @@ public class TuneToFrequency extends BaseCommand<TuneToFrequencyResult> {
 	}
 
 	@Override
-	public TuneToFrequencyResult parse(Output output) {
+	protected TuneToFrequencyResult parseSpecialized(Output output) {
 		return null;
 	}
 

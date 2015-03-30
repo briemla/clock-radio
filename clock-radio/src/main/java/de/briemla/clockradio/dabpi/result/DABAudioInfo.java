@@ -11,11 +11,6 @@ public class DABAudioInfo implements RadioResult {
 	}
 
 	@Override
-	public boolean isSuccessful() {
-		return successful;
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

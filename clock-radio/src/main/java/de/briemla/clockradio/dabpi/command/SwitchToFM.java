@@ -10,7 +10,7 @@ public class SwitchToFM extends BaseCommand<SwitchToFMResult> {
 	}
 
 	@Override
-	public SwitchToFMResult parse(Output output) {
+	protected SwitchToFMResult parseSpecialized(Output output) {
 		return null;
 	}
 

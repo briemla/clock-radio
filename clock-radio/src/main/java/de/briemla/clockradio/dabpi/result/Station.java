@@ -13,7 +13,6 @@ public class Station implements RadioResult {
 		this.direction = direction;
 	}
 
-	@Override
 	public boolean isSuccessful() {
 		return successful;
 	}

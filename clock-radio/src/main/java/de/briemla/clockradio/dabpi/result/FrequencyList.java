@@ -4,17 +4,10 @@ import de.briemla.clockradio.dabpi.RadioResult;
 
 public class FrequencyList implements RadioResult {
 
-	private final boolean successful;
 	private final Integer regionId;
 
-	public FrequencyList(boolean successful, Integer regionId) {
-		this.successful = successful;
+	public FrequencyList(Integer regionId) {
 		this.regionId = regionId;
-	}
-
-	@Override
-	public boolean isSuccessful() {
-		return successful;
 	}
 
 	@Override
@@ -22,7 +15,6 @@ public class FrequencyList implements RadioResult {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((regionId == null) ? 0 : regionId.hashCode());
-		result = prime * result + (successful ? 1231 : 1237);
 		return result;
 	}
 
@@ -40,14 +32,12 @@ public class FrequencyList implements RadioResult {
 				return false;
 		} else if (!regionId.equals(other.regionId))
 			return false;
-		if (successful != other.successful)
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ReadFrequencyListForRegionResult [successful=" + successful + ", regionId=" + regionId + "]";
+		return "FrequencyList [regionId=" + regionId + "]";
 	}
 
 }

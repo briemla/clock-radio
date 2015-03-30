@@ -10,7 +10,7 @@ public class ReadDABSubchannelInfo extends BaseCommand<DABSubchannelInfo> {
 	}
 
 	@Override
-	public DABSubchannelInfo parse(Output output) {
+	protected DABSubchannelInfo parseSpecialized(Output output) {
 		return null;
 	}
 

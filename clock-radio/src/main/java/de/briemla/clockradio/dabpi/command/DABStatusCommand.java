@@ -10,7 +10,7 @@ public class DABStatusCommand extends BaseCommand<DABStatus> {
 	}
 
 	@Override
-	public DABStatus parse(Output output) {
+	protected DABStatus parseSpecialized(Output output) {
 		return null;
 	}
 

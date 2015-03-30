@@ -13,7 +13,7 @@ public class StartDABService extends BaseCommand<DABService> {
 	}
 
 	@Override
-	public DABService parse(Output output) {
+	protected DABService parseSpecialized(Output output) {
 		return null;
 	}
 

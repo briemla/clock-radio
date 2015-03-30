@@ -1,5 +1,7 @@
 package de.briemla.clockradio.dabpi;
 
+import java.io.IOException;
+
 import de.briemla.clockradio.dabpi.result.DABAudioInfo;
 import de.briemla.clockradio.dabpi.result.DABChannel;
 import de.briemla.clockradio.dabpi.result.DABRegion;
@@ -32,60 +34,60 @@ public class DabpiController implements RadioController {
 	}
 
 	@Override
-	public SwitchToDABResult switchToDAB() {
+	public SwitchToDABResult switchToDAB() throws IOException {
 		return executor.execute(factory.switchToDAB());
 	}
 
 	@Override
-	public SwitchToFMResult switchToFM() {
+	public SwitchToFMResult switchToFM() throws IOException {
 		return executor.execute(factory.switchToFM());
 	}
 
-	public TuneToFrequencyResult tuneTo(Integer frequency) {
+	public TuneToFrequencyResult tuneTo(Integer frequency) throws IOException {
 		return executor.execute(factory.tuneTo(frequency));
 	}
 
-	public FMStatus fmStatus() {
+	public FMStatus fmStatus() throws IOException {
 		return executor.execute(factory.fmStatus());
 	}
 
-	public DABStatus dabStatus() {
+	public DABStatus dabStatus() throws IOException {
 		return executor.execute(factory.dabStatus());
 	}
 
-	public DABService startDABService(Integer serviceId) {
+	public DABService startDABService(Integer serviceId) throws IOException {
 		return executor.execute(factory.startDABService(serviceId));
 	}
 
-	public DABServiceList readDABServiceList() {
+	public DABServiceList readDABServiceList() throws IOException {
 		return executor.execute(factory.readDABServiceList());
 	}
 
-	public DABChannel selectDABChannel(Integer channelId) {
+	public DABChannel selectDABChannel(Integer channelId) throws IOException {
 		return executor.execute(factory.selectDABChannel(channelId));
 	}
 
-	public DABRegion selectDABRegion(Integer regionId) {
+	public DABRegion selectDABRegion(Integer regionId) throws IOException {
 		return executor.execute(factory.selectDABRegion(regionId));
 	}
 
-	public FrequencyList readFrequencyListFor(Integer regionId) {
+	public FrequencyList readFrequencyListFor(Integer regionId) throws IOException {
 		return executor.execute(factory.readFrequencyListFor(regionId));
 	}
 
-	public Station scanNextStation(ScanDirection direction) {
+	public Station scanNextStation(ScanDirection direction) throws IOException {
 		return executor.execute(factory.scanNextStation(direction));
 	}
 
-	public RDSInfo readRDS() {
+	public RDSInfo readRDS() throws IOException {
 		return executor.execute(factory.readRDS());
 	}
 
-	public DABAudioInfo readDABAudioInfo() {
+	public DABAudioInfo readDABAudioInfo() throws IOException {
 		return executor.execute(factory.readDABAudioInfo());
 	}
 
-	public DABSubchannelInfo readDABSubchannelInfo() {
+	public DABSubchannelInfo readDABSubchannelInfo() throws IOException {
 		return executor.execute(factory.readDABSubchannelInfo());
 	}
 

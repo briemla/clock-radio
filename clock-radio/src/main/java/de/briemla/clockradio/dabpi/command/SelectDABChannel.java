@@ -13,7 +13,7 @@ public class SelectDABChannel extends BaseCommand<DABChannel> {
 	}
 
 	@Override
-	public DABChannel parse(Output output) {
+	protected DABChannel parseSpecialized(Output output) {
 		return null;
 	}
 

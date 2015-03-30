@@ -13,7 +13,7 @@ public class SelectDABRegion extends BaseCommand<DABRegion> {
 	}
 
 	@Override
-	public DABRegion parse(Output output) {
+	protected DABRegion parseSpecialized(Output output) {
 		return null;
 	}
 

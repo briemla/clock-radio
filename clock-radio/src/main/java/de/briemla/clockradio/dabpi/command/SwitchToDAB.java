@@ -10,8 +10,7 @@ public class SwitchToDAB extends BaseCommand<SwitchToDABResult> {
 	}
 
 	@Override
-	public SwitchToDABResult parse(Output output) {
-		return new SwitchToDABResult(output.isErrorEmpty());
+	protected SwitchToDABResult parseSpecialized(Output output) {
+		return new SwitchToDABResult();
 	}
-
 }

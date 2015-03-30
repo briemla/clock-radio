@@ -10,7 +10,6 @@ public class DABStatus implements RadioResult {
 		this.successful = successful;
 	}
 
-	@Override
 	public boolean isSuccessful() {
 		return successful;
 	}
