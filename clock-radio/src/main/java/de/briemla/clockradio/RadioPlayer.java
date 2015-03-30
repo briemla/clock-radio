@@ -31,7 +31,7 @@ public class RadioPlayer {
 			frequency.add(currentFrequency);
 			overflow |= lastFrequency > currentFrequency;
 			search = !startFrequency.equals(currentFrequency) && !(overflow && currentFrequency > startFrequency)
-					&& !(currentFrequency.equals(Integer.MIN_VALUE));
+			        && !(currentFrequency.equals(Integer.MIN_VALUE));
 			lastFrequency = currentFrequency;
 		}
 		return frequency;
