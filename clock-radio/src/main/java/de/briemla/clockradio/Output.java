@@ -29,4 +29,8 @@ public class Output {
 		return "";
 	}
 
+	public boolean isErrorEmpty() {
+		return error.isEmpty();
+	}
+
 }

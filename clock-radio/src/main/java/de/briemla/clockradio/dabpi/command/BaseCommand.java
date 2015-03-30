@@ -14,7 +14,7 @@ public abstract class BaseCommand<T extends RadioResult> implements Command<T> {
 
 	@Override
 	public String serialize() {
-		return parameter;
+		return " -" + parameter;
 	}
 
 	@Override
