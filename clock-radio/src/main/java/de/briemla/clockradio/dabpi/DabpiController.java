@@ -13,8 +13,6 @@ import de.briemla.clockradio.dabpi.result.FMStatus;
 import de.briemla.clockradio.dabpi.result.FrequencyList;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
 import de.briemla.clockradio.dabpi.result.Station;
-import de.briemla.clockradio.dabpi.result.SwitchToDABResult;
-import de.briemla.clockradio.dabpi.result.SwitchToFMResult;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 /**
@@ -34,12 +32,12 @@ public class DabpiController implements RadioController {
 	}
 
 	@Override
-	public SwitchToDABResult switchToDAB() throws IOException {
+	public Void switchToDAB() throws IOException {
 		return executor.execute(factory.switchToDAB());
 	}
 
 	@Override
-	public SwitchToFMResult switchToFM() throws IOException {
+	public Void switchToFM() throws IOException {
 		return executor.execute(factory.switchToFM());
 	}
 

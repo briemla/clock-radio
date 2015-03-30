@@ -22,8 +22,6 @@ import de.briemla.clockradio.dabpi.result.FMStatus;
 import de.briemla.clockradio.dabpi.result.FrequencyList;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
 import de.briemla.clockradio.dabpi.result.Station;
-import de.briemla.clockradio.dabpi.result.SwitchToDABResult;
-import de.briemla.clockradio.dabpi.result.SwitchToFMResult;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 public class DabpiControllerTest {
@@ -40,14 +38,14 @@ public class DabpiControllerTest {
 	@Test
 	public void switchToDAB() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<SwitchToDABResult> command = mock(Command.class);
-		SwitchToDABResult result = new SwitchToDABResult();
+		Command<Void> command = mock(Command.class);
+		Void result = null;
 
 		when(factory.switchToDAB()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		SwitchToDABResult switchSuccessful = controller.switchToDAB();
+		Void switchSuccessful = controller.switchToDAB();
 		assertThat("Return value", switchSuccessful, is(equalTo(result)));
 
 		verify(factory).switchToDAB();
@@ -58,15 +56,15 @@ public class DabpiControllerTest {
 	@Test
 	public void switchToFM() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<SwitchToFMResult> command = mock(Command.class);
-		SwitchToFMResult result = new SwitchToFMResult(true);
-		SwitchToFMResult expectedResult = new SwitchToFMResult(true);
+		Command<Void> command = mock(Command.class);
+		Void result = null;
+		Void expectedResult = null;
 
 		when(factory.switchToFM()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		SwitchToFMResult switchSuccessful = controller.switchToFM();
+		Void switchSuccessful = controller.switchToFM();
 		assertThat("Return value", switchSuccessful, is(equalTo(expectedResult)));
 
 		verify(factory).switchToFM();

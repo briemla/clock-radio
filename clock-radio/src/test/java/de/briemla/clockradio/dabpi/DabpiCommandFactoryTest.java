@@ -32,8 +32,6 @@ import de.briemla.clockradio.dabpi.result.FMStatus;
 import de.briemla.clockradio.dabpi.result.FrequencyList;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
 import de.briemla.clockradio.dabpi.result.Station;
-import de.briemla.clockradio.dabpi.result.SwitchToDABResult;
-import de.briemla.clockradio.dabpi.result.SwitchToFMResult;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 public class DabpiCommandFactoryTest {
@@ -47,14 +45,14 @@ public class DabpiCommandFactoryTest {
 
 	@Test
 	public void switchToDAB() {
-		Command<SwitchToDABResult> switchToDAB = factory.switchToDAB();
+		Command<Void> switchToDAB = factory.switchToDAB();
 
 		assertThat(switchToDAB, is(equalTo(new SwitchToDAB())));
 	}
 
 	@Test
 	public void switchToFM() {
-		Command<SwitchToFMResult> switchToDAB = factory.switchToFM();
+		Command<Void> switchToDAB = factory.switchToFM();
 
 		assertThat(switchToDAB, is(equalTo(new SwitchToFM())));
 	}

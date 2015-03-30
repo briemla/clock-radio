@@ -11,16 +11,13 @@ import de.briemla.clockradio.dabpi.result.FMStatus;
 import de.briemla.clockradio.dabpi.result.FrequencyList;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
 import de.briemla.clockradio.dabpi.result.Station;
-import de.briemla.clockradio.dabpi.result.SwitchToDABResult;
-import de.briemla.clockradio.dabpi.result.SwitchToFMResult;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
-
 
 public interface CommandFactory {
 
-	Command<SwitchToDABResult> switchToDAB();
+	Command<Void> switchToDAB();
 
-	Command<SwitchToFMResult> switchToFM();
+	Command<Void> switchToFM();
 
 	Command<TuneToFrequencyResult> tuneTo(Integer frequency);
 

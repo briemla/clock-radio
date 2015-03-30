@@ -25,8 +25,6 @@ import de.briemla.clockradio.dabpi.result.FMStatus;
 import de.briemla.clockradio.dabpi.result.FrequencyList;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
 import de.briemla.clockradio.dabpi.result.Station;
-import de.briemla.clockradio.dabpi.result.SwitchToDABResult;
-import de.briemla.clockradio.dabpi.result.SwitchToFMResult;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 /**
@@ -73,12 +71,12 @@ import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 public class DabpiCommandFactory implements CommandFactory {
 
 	@Override
-	public Command<SwitchToDABResult> switchToDAB() {
+	public Command<Void> switchToDAB() {
 		return new SwitchToDAB();
 	}
 
 	@Override
-	public Command<SwitchToFMResult> switchToFM() {
+	public Command<Void> switchToFM() {
 		return new SwitchToFM();
 	}
 
