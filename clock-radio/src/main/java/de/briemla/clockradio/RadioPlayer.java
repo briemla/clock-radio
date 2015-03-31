@@ -39,13 +39,14 @@ public class RadioPlayer {
 	}
 
 	private static Integer currentFrequency() {
-		String status = DAB_CONTROL.FM_STATUS.execute().asString();
-		if (status.isEmpty()) {
-			return Integer.MIN_VALUE;
-		}
-		String string = status.split(" ")[1];
-		String frequency = string.substring(0, string.length() - 3);
-		return Integer.parseInt(frequency);
+		// TODO refactor to new DABPi API
+		// String status = DAB_CONTROL.FM_STATUS.execute().asString();
+		// if (status.isEmpty()) {
+		return Integer.MIN_VALUE;
+		// }
+		// String string = status.split(" ")[1];
+		// String frequency = string.substring(0, string.length() - 3);
+		// return Integer.parseInt(frequency);
 	}
 
 }

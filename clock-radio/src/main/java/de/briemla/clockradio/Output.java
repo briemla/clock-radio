@@ -1,8 +1,8 @@
 package de.briemla.clockradio;
 
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Output {
 
@@ -26,14 +26,6 @@ public class Output {
 		error.add(line);
 	}
 
-	public String asString() {
-		Optional<String> findFirst = standard.stream().findFirst();
-		if (findFirst.isPresent()) {
-			return findFirst.get();
-		}
-		return "";
-	}
-
 	/**
 	 * Checks if there has something be written on the error output. Empty lines will be ignored.
 	 *
@@ -45,11 +37,15 @@ public class Output {
 
 	/**
 	 * Returns the error output of the underlying dabpi_ctl application
-	 * 
+	 *
 	 * @return
 	 */
 	public String concatErrorMessage() {
 		return error.stream().collect(Collectors.joining(LINE_SEPARATOR)).toString();
+	}
+
+	public Stream<String> standardAsStream() {
+		return standard.stream();
 	}
 
 }
