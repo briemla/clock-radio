@@ -49,7 +49,7 @@ public class FMStatusCommandTest {
 		FMStatusCommand command = new FMStatusCommand();
 
 		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage(is(equalTo("Frequency missing in status output.")));
+		thrown.expectMessage(is(equalTo("Frequency missing in FM status output.")));
 		command.parse(output);
 	}
 

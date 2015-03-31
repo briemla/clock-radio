@@ -18,9 +18,9 @@ public class FMStatusCommand extends BaseCommand<FMStatus> {
 	@Override
 	protected FMStatus parseSpecialized(Output output) {
 		Optional<String> fmStatus = output.standardAsStream().filter(line -> line.startsWith(FREQUENCY))
-		        .map(line -> line.substring(START_FREQUENCY_INDEX, line.length() - UNIT_LENGTH)).findFirst();
+				.map(line -> line.substring(START_FREQUENCY_INDEX, line.length() - UNIT_LENGTH)).findFirst();
 		if (!fmStatus.isPresent()) {
-			throw new IllegalArgumentException("Frequency missing in status output.");
+			throw new IllegalArgumentException("Frequency missing in FM status output.");
 		}
 		Integer frequency = Integer.parseInt(fmStatus.get());
 		return new FMStatus(frequency);
