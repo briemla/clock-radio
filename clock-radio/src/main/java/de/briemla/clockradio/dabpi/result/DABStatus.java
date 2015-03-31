@@ -2,21 +2,17 @@ package de.briemla.clockradio.dabpi.result;
 
 public class DABStatus {
 
-	private final boolean successful;
+	private final Integer frequency;
 
-	public DABStatus(boolean successful) {
-		this.successful = successful;
-	}
-
-	public boolean isSuccessful() {
-		return successful;
+	public DABStatus(Integer frequency) {
+		this.frequency = frequency;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (successful ? 1231 : 1237);
+		result = prime * result + ((frequency == null) ? 0 : frequency.hashCode());
 		return result;
 	}
 
@@ -29,14 +25,17 @@ public class DABStatus {
 		if (getClass() != obj.getClass())
 			return false;
 		DABStatus other = (DABStatus) obj;
-		if (successful != other.successful)
+		if (frequency == null) {
+			if (other.frequency != null)
+				return false;
+		} else if (!frequency.equals(other.frequency))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "DABStatusResult [successful=" + successful + "]";
+		return "DABStatus [frequency=" + frequency + "]";
 	}
 
 }

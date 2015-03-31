@@ -115,8 +115,8 @@ public class DabpiControllerTest {
 	public void dabStatus() throws Exception {
 		@SuppressWarnings("unchecked")
 		Command<DABStatus> command = mock(Command.class);
-		DABStatus result = new DABStatus(true);
-		DABStatus expectedResult = new DABStatus(true);
+		DABStatus result = new DABStatus(208064);
+		DABStatus expectedResult = new DABStatus(208064);
 
 		when(factory.dabStatus()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
