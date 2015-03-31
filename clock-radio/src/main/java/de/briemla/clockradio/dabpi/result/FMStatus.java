@@ -2,21 +2,17 @@ package de.briemla.clockradio.dabpi.result;
 
 public class FMStatus {
 
-	private final boolean successful;
+	private final Integer successful;
 
-	public FMStatus(boolean successful) {
-		this.successful = successful;
-	}
-
-	public boolean isSuccessful() {
-		return successful;
+	public FMStatus(Integer frequency) {
+		successful = frequency;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (successful ? 1231 : 1237);
+		result = prime * result + ((successful == null) ? 0 : successful.hashCode());
 		return result;
 	}
 
@@ -29,14 +25,17 @@ public class FMStatus {
 		if (getClass() != obj.getClass())
 			return false;
 		FMStatus other = (FMStatus) obj;
-		if (successful != other.successful)
+		if (successful == null) {
+			if (other.successful != null)
+				return false;
+		} else if (!successful.equals(other.successful))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "FMStatusResult [successful=" + successful + "]";
+		return "FMStatus [successful=" + successful + "]";
 	}
 
 }

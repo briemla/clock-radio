@@ -96,8 +96,8 @@ public class DabpiControllerTest {
 	public void fmStatus() throws Exception {
 		@SuppressWarnings("unchecked")
 		Command<FMStatus> command = mock(Command.class);
-		FMStatus result = new FMStatus(true);
-		FMStatus expectedResult = new FMStatus(true);
+		FMStatus result = new FMStatus(105500);
+		FMStatus expectedResult = new FMStatus(105500);
 
 		when(factory.fmStatus()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
