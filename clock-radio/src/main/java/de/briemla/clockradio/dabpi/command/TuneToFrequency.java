@@ -7,6 +7,7 @@ import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 public class TuneToFrequency extends BaseCommand<TuneToFrequencyResult> {
 
+	private static final String FREQUENCY_KEY_WORD = "si46xx_fm_tune_freq(";
 	private final Integer frequency;
 
 	public TuneToFrequency(Integer frequency) {
@@ -16,9 +17,8 @@ public class TuneToFrequency extends BaseCommand<TuneToFrequencyResult> {
 
 	@Override
 	protected TuneToFrequencyResult parseSpecialized(Output output) {
-		Optional<String> tunedFrequency = output.standardAsStream()
-				.filter(line -> line.startsWith("si46xx_fm_tune_freq("))
-		        .map(line -> line.substring(20, line.length() - 1)).findFirst();
+		Optional<String> tunedFrequency = output.standardAsStream().filter(line -> line.startsWith(FREQUENCY_KEY_WORD))
+				.map(line -> line.substring(20, line.length() - 1)).findFirst();
 		check(tunedFrequency);
 		return new TuneToFrequencyResult(frequency);
 	}
@@ -30,7 +30,7 @@ public class TuneToFrequency extends BaseCommand<TuneToFrequencyResult> {
 		Integer parsedFrequency = Integer.parseInt(tunedFrequency.get());
 		if (!frequency.equals(parsedFrequency)) {
 			throw new IllegalArgumentException("Tuned frequency differs from expected frequency: tuned: "
-					+ parsedFrequency + " expected: " + frequency);
+			        + parsedFrequency + " expected: " + frequency);
 		}
 	}
 
