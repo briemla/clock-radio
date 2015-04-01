@@ -2,17 +2,20 @@ package de.briemla.clockradio.dabpi.result;
 
 public class DABService {
 
-	private final Integer serviceId;
+	private final Integer serviceNumber;
+	private final String serviceName;
 
-	public DABService(Integer serviceId) {
-		this.serviceId = serviceId;
+	public DABService(Integer serviceNumber, String serviceName) {
+		this.serviceNumber = serviceNumber;
+		this.serviceName = serviceName;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
+		result = prime * result + ((serviceNumber == null) ? 0 : serviceNumber.hashCode());
+		result = prime * result + ((serviceName == null) ? 0 : serviceName.hashCode());
 		return result;
 	}
 
@@ -25,17 +28,22 @@ public class DABService {
 		if (getClass() != obj.getClass())
 			return false;
 		DABService other = (DABService) obj;
-		if (serviceId == null) {
-			if (other.serviceId != null)
+		if (serviceNumber == null) {
+			if (other.serviceNumber != null)
 				return false;
-		} else if (!serviceId.equals(other.serviceId))
+		} else if (!serviceNumber.equals(other.serviceNumber))
+			return false;
+		if (serviceName == null) {
+			if (other.serviceName != null)
+				return false;
+		} else if (!serviceName.equals(other.serviceName))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "DABService [serviceId=" + serviceId + "]";
+		return "DABService [serviceNumber=" + serviceNumber + ", serviceName=" + serviceName + "]";
 	}
 
 }
