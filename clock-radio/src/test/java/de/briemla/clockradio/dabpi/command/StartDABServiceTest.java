@@ -20,6 +20,7 @@ public class StartDABServiceTest {
 	@Test
 	public void parseCorrectOutput() throws Exception {
 		Integer serviceNumber = 2;
+		String serviceId = "d3a3";
 		String serviceName = "SWR3";
 		Output output = new Output();
 		output.addStandard("dabpi_ctl version v0.01-29-g62f16f4");
@@ -52,15 +53,16 @@ public class StartDABServiceTest {
 		output.addStandard("Starting service SWR3             d3a3 4");
 		output.addStandard("");
 
-		StartDABService command = new StartDABService(serviceNumber, serviceName);
+		StartDABService command = new StartDABService(serviceNumber, serviceId, serviceName);
 		DABService dabService = command.parse(output);
 
-		assertThat(dabService, is(equalTo(new DABService(serviceNumber, serviceName))));
+		assertThat(dabService, is(equalTo(new DABService(serviceNumber, serviceId, serviceName))));
 	}
 
 	@Test
 	public void parseWrongServiceStarted() throws Exception {
 		Integer serviceNumber = 12;
+		String serviceId = "d3a3";
 		String serviceName = "SWR3";
 		Output output = new Output();
 		output.addStandard("dabpi_ctl version v0.01-29-g62f16f4");
@@ -93,7 +95,7 @@ public class StartDABServiceTest {
 		output.addStandard("Starting service 0 0");
 		output.addStandard("");
 
-		StartDABService command = new StartDABService(serviceNumber, serviceName);
+		StartDABService command = new StartDABService(serviceNumber, serviceId, serviceName);
 
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Wrong service started: 0 expected: " + serviceName);
@@ -102,7 +104,7 @@ public class StartDABServiceTest {
 
 	@Test
 	public void serialize() throws Exception {
-		StartDABService command = new StartDABService(0, "SWR3");
+		StartDABService command = new StartDABService(0, "d3a3", "SWR3");
 		String serializedCommand = command.serialize();
 
 		assertThat(serializedCommand, is(equalTo(" -f 0")));

@@ -1,42 +1,52 @@
 package de.briemla.clockradio.dabpi.result;
 
+import java.util.ArrayList;
+
 public class DABServiceList {
 
-	private final boolean successful;
+	private final ArrayList<DABService> serviceList;
 
-	public DABServiceList(boolean successful) {
-		this.successful = successful;
+	public DABServiceList() {
+		serviceList = new ArrayList<>();
 	}
 
-	public boolean isSuccessful() {
-		return successful;
+	public void add(DABService dabService) {
+		serviceList.add(dabService);
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (successful ? 1231 : 1237);
+		result = prime * result + ((serviceList == null) ? 0 : serviceList.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		DABServiceList other = (DABServiceList) obj;
-		if (successful != other.successful)
+		if (serviceList == null) {
+			if (other.serviceList != null) {
+				return false;
+			}
+		} else if (!serviceList.equals(other.serviceList)) {
 			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ReadDABServiceListResult [successful=" + successful + "]";
+		return "DABServiceList [serviceList=" + serviceList + "]";
 	}
 
 }

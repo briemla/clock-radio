@@ -82,10 +82,11 @@ public class DabpiCommandFactoryTest {
 	@Test
 	public void startDABService() {
 		Integer serviceNumber = 0;
+		String serviceId = "d3a3";
 		String serviceName = "ServiceName";
-		Command<DABService> command = factory.startDABService(serviceNumber, serviceName);
+		Command<DABService> command = factory.startDABService(serviceNumber, serviceId, serviceName);
 
-		assertThat(command, is(equalTo(new StartDABService(serviceNumber, serviceName))));
+		assertThat(command, is(equalTo(new StartDABService(serviceNumber, serviceId, serviceName))));
 	}
 
 	@Test

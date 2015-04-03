@@ -16,7 +16,8 @@ import de.briemla.clockradio.dabpi.result.Station;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 /**
- * This class generates {@link Command}s and executes them on the given {@link RadioExecutor}
+ * This class generates {@link Command}s and executes them on the given
+ * {@link RadioExecutor}
  *
  * @author Lars
  *
@@ -53,8 +54,8 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.dabStatus());
 	}
 
-	public DABService startDABService(Integer serviceNumber, String serviceName) throws IOException {
-		return executor.execute(factory.startDABService(serviceNumber, serviceName));
+	public DABService startDABService(Integer serviceNumber, String serviceId, String serviceName) throws IOException {
+		return executor.execute(factory.startDABService(serviceNumber, serviceId, serviceName));
 	}
 
 	public DABServiceList readDABServiceList() throws IOException {

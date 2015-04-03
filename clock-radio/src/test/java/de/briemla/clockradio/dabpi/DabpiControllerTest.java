@@ -135,18 +135,19 @@ public class DabpiControllerTest {
 		@SuppressWarnings("unchecked")
 		Command<DABService> command = mock(Command.class);
 		Integer serviceNumber = 0;
+		String serviceId = "da09";
 		String serviceName = "ServiceName";
-		DABService result = new DABService(serviceNumber, serviceName);
-		DABService expectedResult = new DABService(serviceNumber, serviceName);
+		DABService result = new DABService(serviceNumber, serviceId, serviceName);
+		DABService expectedResult = new DABService(serviceNumber, serviceId, serviceName);
 
-		when(factory.startDABService(serviceNumber, serviceName)).thenReturn(command);
+		when(factory.startDABService(serviceNumber, serviceId, serviceName)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		DABService startDABService = controller.startDABService(serviceNumber, serviceName);
+		DABService startDABService = controller.startDABService(serviceNumber, serviceId, serviceName);
 		assertThat("Result", startDABService, is(equalTo(expectedResult)));
 
-		verify(factory).startDABService(serviceNumber, serviceName);
+		verify(factory).startDABService(serviceNumber, serviceId, serviceName);
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}
@@ -155,8 +156,8 @@ public class DabpiControllerTest {
 	public void readDABServiceList() throws Exception {
 		@SuppressWarnings("unchecked")
 		Command<DABServiceList> command = mock(Command.class);
-		DABServiceList result = new DABServiceList(true);
-		DABServiceList expectedResult = new DABServiceList(true);
+		DABServiceList result = new DABServiceList();
+		DABServiceList expectedResult = new DABServiceList();
 
 		when(factory.readDABServiceList()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
