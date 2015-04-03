@@ -54,8 +54,8 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.dabStatus());
 	}
 
-	public DABService startDABService(Integer serviceNumber, String serviceId, String serviceName) throws IOException {
-		return executor.execute(factory.startDABService(serviceNumber, serviceId, serviceName));
+	public DABService startDABService(DABService service) throws IOException {
+		return executor.execute(factory.startDABService(service));
 	}
 
 	public DABServiceList readDABServiceList() throws IOException {

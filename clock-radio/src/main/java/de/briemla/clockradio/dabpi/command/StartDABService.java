@@ -1,34 +1,37 @@
 package de.briemla.clockradio.dabpi.command;
 
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import de.briemla.clockradio.Output;
 import de.briemla.clockradio.dabpi.result.DABService;
 
 public class StartDABService extends BaseCommand<DABService> {
 
-	private final Integer serviceNumber;
-	private final String serviceName;
-	private final String serviceId;
+	private static final int ID = 2;
+	private static final int NAME = 1;
+	private static final int ELEMENTS = 2;
+	private static final Pattern PATTERN = Pattern.compile("^Starting service(.*) ([aAbBcCdDeEfF0-9]+) .*$");
 
-	public StartDABService(Integer serviceNumber, String serviceId, String serviceName) {
+	private final DABService service;
+
+	public StartDABService(DABService service) {
 		super("f");
-		this.serviceNumber = serviceNumber;
-		this.serviceId = serviceId;
-		this.serviceName = serviceName;
+		this.service = service;
 	}
 
 	@Override
 	public String serialize() {
-		return super.serialize() + " " + serviceNumber;
+		return super.serialize() + " " + service.serialize();
 	}
 
 	@Override
 	protected DABService parseSpecialized(Output output) {
 		Optional<String> startedService = output.standardAsStream().filter(line -> line.startsWith("Starting service"))
-				.map(line -> line.split(" ")[2]).findFirst();
+				.findFirst();
 		check(startedService);
-		return new DABService(serviceNumber, serviceId, serviceName);
+		return service;
 	}
 
 	private void check(Optional<String> startedService) {
@@ -36,8 +39,18 @@ public class StartDABService extends BaseCommand<DABService> {
 			return;
 		}
 		String service = startedService.get();
-		if (!serviceName.equals(service)) {
-			throw new IllegalArgumentException("Wrong service started: " + service + " expected: " + serviceName);
+		if (service.equals("Starting service 0 0")) {
+			throw new IllegalArgumentException("Wrong service started: " + service);
+		}
+		Matcher matcher = PATTERN.matcher(service);
+		if (!matcher.matches() || matcher.groupCount() < ELEMENTS) {
+			throw new IllegalArgumentException("Not able to parse input.");
+		}
+		String name = matcher.group(NAME).trim();
+		String id = matcher.group(ID).trim();
+		if (!this.service.checkId(id) || !this.service.checkName(name)) {
+			throw new IllegalArgumentException("Wrong service started: " + name + " " + id + " expected: "
+					+ this.service.toString());
 		}
 	}
 
@@ -45,9 +58,7 @@ public class StartDABService extends BaseCommand<DABService> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
-		result = prime * result + ((serviceName == null) ? 0 : serviceName.hashCode());
-		result = prime * result + ((serviceNumber == null) ? 0 : serviceNumber.hashCode());
+		result = prime * result + ((service == null) ? 0 : service.hashCode());
 		return result;
 	}
 
@@ -63,25 +74,11 @@ public class StartDABService extends BaseCommand<DABService> {
 			return false;
 		}
 		StartDABService other = (StartDABService) obj;
-		if (serviceId == null) {
-			if (other.serviceId != null) {
+		if (service == null) {
+			if (other.service != null) {
 				return false;
 			}
-		} else if (!serviceId.equals(other.serviceId)) {
-			return false;
-		}
-		if (serviceName == null) {
-			if (other.serviceName != null) {
-				return false;
-			}
-		} else if (!serviceName.equals(other.serviceName)) {
-			return false;
-		}
-		if (serviceNumber == null) {
-			if (other.serviceNumber != null) {
-				return false;
-			}
-		} else if (!serviceNumber.equals(other.serviceNumber)) {
+		} else if (!service.equals(other.service)) {
 			return false;
 		}
 		return true;
@@ -89,8 +86,7 @@ public class StartDABService extends BaseCommand<DABService> {
 
 	@Override
 	public String toString() {
-		return "StartDABService [serviceNumber=" + serviceNumber + ", serviceName=" + serviceName + ", serviceId="
-				+ serviceId + "]";
+		return "StartDABService [service=" + service + "]";
 	}
 
 }

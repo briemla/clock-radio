@@ -53,7 +53,8 @@ public class StartDABServiceTest {
 		output.addStandard("Starting service SWR3             d3a3 4");
 		output.addStandard("");
 
-		StartDABService command = new StartDABService(serviceNumber, serviceId, serviceName);
+		DABService service = new DABService(serviceNumber, serviceId, serviceName);
+		StartDABService command = new StartDABService(service);
 		DABService dabService = command.parse(output);
 
 		assertThat(dabService, is(equalTo(new DABService(serviceNumber, serviceId, serviceName))));
@@ -95,16 +96,18 @@ public class StartDABServiceTest {
 		output.addStandard("Starting service 0 0");
 		output.addStandard("");
 
-		StartDABService command = new StartDABService(serviceNumber, serviceId, serviceName);
+		DABService service = new DABService(serviceNumber, serviceId, serviceName);
+		StartDABService command = new StartDABService(service);
 
 		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Wrong service started: 0 expected: " + serviceName);
+		thrown.expectMessage("Wrong service started: Starting service 0 0");
 		command.parse(output);
 	}
 
 	@Test
 	public void serialize() throws Exception {
-		StartDABService command = new StartDABService(0, "d3a3", "SWR3");
+		DABService service = new DABService(0, "d3a3", "SWR3");
+		StartDABService command = new StartDABService(service);
 		String serializedCommand = command.serialize();
 
 		assertThat(serializedCommand, is(equalTo(" -f 0")));

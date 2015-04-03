@@ -96,8 +96,8 @@ public class DabpiCommandFactory implements CommandFactory {
 	}
 
 	@Override
-	public Command<DABService> startDABService(Integer serviceNumber, String serviceId, String serviceName) {
-		return new StartDABService(serviceNumber, serviceId, serviceName);
+	public Command<DABService> startDABService(DABService service) {
+		return new StartDABService(service);
 	}
 
 	@Override

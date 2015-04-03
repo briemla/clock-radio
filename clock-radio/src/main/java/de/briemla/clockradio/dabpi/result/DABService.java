@@ -12,6 +12,18 @@ public class DABService {
 		this.name = name;
 	}
 
+	public String serialize() {
+		return String.valueOf(number);
+	}
+
+	public boolean checkId(String id) {
+		return this.id.equals(id);
+	}
+
+	public boolean checkName(String name) {
+		return this.name.equals(name);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

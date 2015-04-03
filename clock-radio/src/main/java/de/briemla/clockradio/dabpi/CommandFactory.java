@@ -25,7 +25,7 @@ public interface CommandFactory {
 
 	Command<DABStatus> dabStatus();
 
-	Command<DABService> startDABService(Integer serviceNumber, String serviceId, String serviceName);
+	Command<DABService> startDABService(DABService service);
 
 	Command<DABServiceList> readDABServiceList();
 
