@@ -46,6 +46,7 @@ public class StartDABService extends BaseCommand<DABService> {
 		if (!matcher.matches() || matcher.groupCount() < ELEMENTS) {
 			throw new IllegalArgumentException("Not able to parse input.");
 		}
+		// TODO clean up checkId
 		String name = matcher.group(NAME).trim();
 		String id = matcher.group(ID).trim();
 		if (!this.service.checkId(id) || !this.service.checkName(name)) {
