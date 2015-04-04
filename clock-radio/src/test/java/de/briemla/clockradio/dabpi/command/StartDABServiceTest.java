@@ -61,7 +61,7 @@ public class StartDABServiceTest {
 	}
 
 	@Test
-	public void parseWrongServiceStarted() throws Exception {
+	public void parseUnavailableServiceStarted() throws Exception {
 		Integer serviceNumber = 12;
 		String serviceId = "d3a3";
 		String serviceName = "SWR3";
