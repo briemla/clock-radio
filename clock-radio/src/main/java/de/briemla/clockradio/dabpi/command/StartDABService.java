@@ -9,6 +9,7 @@ import de.briemla.clockradio.dabpi.result.DABService;
 
 public class StartDABService extends BaseCommand<DABService> {
 
+	private static final String FILTER = "Starting service";
 	private static final int ID = 2;
 	private static final int NAME = 1;
 	private static final int ELEMENTS = 2;
@@ -28,8 +29,7 @@ public class StartDABService extends BaseCommand<DABService> {
 
 	@Override
 	protected DABService parseSpecialized(Output output) {
-		Optional<String> startedService = output.standardAsStream().filter(line -> line.startsWith("Starting service"))
-				.findFirst();
+		Optional<String> startedService = output.standardAsStream().filter(line -> line.startsWith(FILTER)).findFirst();
 		check(startedService);
 		return service;
 	}
