@@ -7,6 +7,7 @@ import de.briemla.clockradio.dabpi.command.ReadDABServiceList;
 import de.briemla.clockradio.dabpi.command.ReadDABSubchannelInfo;
 import de.briemla.clockradio.dabpi.command.ReadFrequencyList;
 import de.briemla.clockradio.dabpi.command.ReadRDS;
+import de.briemla.clockradio.dabpi.command.Region;
 import de.briemla.clockradio.dabpi.command.ScanNextStation;
 import de.briemla.clockradio.dabpi.command.SelectDABChannel;
 import de.briemla.clockradio.dabpi.command.SelectDABRegion;
@@ -16,7 +17,6 @@ import de.briemla.clockradio.dabpi.command.SwitchToFM;
 import de.briemla.clockradio.dabpi.command.TuneToFrequency;
 import de.briemla.clockradio.dabpi.result.DABAudioInfo;
 import de.briemla.clockradio.dabpi.result.DABChannel;
-import de.briemla.clockradio.dabpi.result.DABRegion;
 import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
@@ -111,8 +111,8 @@ public class DabpiCommandFactory implements CommandFactory {
 	}
 
 	@Override
-	public Command<DABRegion> selectDABRegion(Integer regionId) {
-		return new SelectDABRegion(regionId);
+	public Command<Void> selectDABRegion(Region region) {
+		return new SelectDABRegion(region);
 	}
 
 	@Override

@@ -11,9 +11,9 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.briemla.clockradio.dabpi.command.Region;
 import de.briemla.clockradio.dabpi.result.DABAudioInfo;
 import de.briemla.clockradio.dabpi.result.DABChannel;
-import de.briemla.clockradio.dabpi.result.DABRegion;
 import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
@@ -195,19 +195,19 @@ public class DabpiControllerTest {
 	@Test
 	public void selectDABRegion() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<DABRegion> command = mock(Command.class);
-		Integer regionId = 0;
-		DABRegion result = new DABRegion(regionId);
-		DABRegion expectedResult = new DABRegion(regionId);
+		Command<Void> command = mock(Command.class);
+		Region region = Region.BAYERN;
+		Void result = null;
+		Void expectedResult = null;
 
-		when(factory.selectDABRegion(regionId)).thenReturn(command);
+		when(factory.selectDABRegion(region)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		DABRegion selectDABRegion = controller.selectDABRegion(regionId);
+		Void selectDABRegion = controller.selectDABRegion(region);
 		assertThat("Result", selectDABRegion, is(equalTo(expectedResult)));
 
-		verify(factory).selectDABRegion(regionId);
+		verify(factory).selectDABRegion(region);
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}

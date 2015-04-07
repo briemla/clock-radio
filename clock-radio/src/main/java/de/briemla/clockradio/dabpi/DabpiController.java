@@ -2,9 +2,9 @@ package de.briemla.clockradio.dabpi;
 
 import java.io.IOException;
 
+import de.briemla.clockradio.dabpi.command.Region;
 import de.briemla.clockradio.dabpi.result.DABAudioInfo;
 import de.briemla.clockradio.dabpi.result.DABChannel;
-import de.briemla.clockradio.dabpi.result.DABRegion;
 import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
@@ -16,8 +16,7 @@ import de.briemla.clockradio.dabpi.result.Station;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 /**
- * This class generates {@link Command}s and executes them on the given
- * {@link RadioExecutor}
+ * This class generates {@link Command}s and executes them on the given {@link RadioExecutor}
  *
  * @author Lars
  *
@@ -66,8 +65,8 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.selectDABChannel(channelId));
 	}
 
-	public DABRegion selectDABRegion(Integer regionId) throws IOException {
-		return executor.execute(factory.selectDABRegion(regionId));
+	public Void selectDABRegion(Region region) throws IOException {
+		return executor.execute(factory.selectDABRegion(region));
 	}
 
 	public FrequencyList readFrequencyListFor(Integer regionId) throws IOException {

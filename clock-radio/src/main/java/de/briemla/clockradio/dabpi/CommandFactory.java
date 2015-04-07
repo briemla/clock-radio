@@ -1,8 +1,8 @@
 package de.briemla.clockradio.dabpi;
 
+import de.briemla.clockradio.dabpi.command.Region;
 import de.briemla.clockradio.dabpi.result.DABAudioInfo;
 import de.briemla.clockradio.dabpi.result.DABChannel;
-import de.briemla.clockradio.dabpi.result.DABRegion;
 import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
@@ -31,7 +31,7 @@ public interface CommandFactory {
 
 	Command<DABChannel> selectDABChannel(Integer channelId);
 
-	Command<DABRegion> selectDABRegion(Integer regionId);
+	Command<Void> selectDABRegion(Region region);
 
 	Command<FrequencyList> readFrequencyListFor(Integer regionId);
 

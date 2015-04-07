@@ -14,6 +14,7 @@ import de.briemla.clockradio.dabpi.command.ReadDABServiceList;
 import de.briemla.clockradio.dabpi.command.ReadDABSubchannelInfo;
 import de.briemla.clockradio.dabpi.command.ReadFrequencyList;
 import de.briemla.clockradio.dabpi.command.ReadRDS;
+import de.briemla.clockradio.dabpi.command.Region;
 import de.briemla.clockradio.dabpi.command.ScanNextStation;
 import de.briemla.clockradio.dabpi.command.SelectDABChannel;
 import de.briemla.clockradio.dabpi.command.SelectDABRegion;
@@ -23,7 +24,6 @@ import de.briemla.clockradio.dabpi.command.SwitchToFM;
 import de.briemla.clockradio.dabpi.command.TuneToFrequency;
 import de.briemla.clockradio.dabpi.result.DABAudioInfo;
 import de.briemla.clockradio.dabpi.result.DABChannel;
-import de.briemla.clockradio.dabpi.result.DABRegion;
 import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
@@ -107,10 +107,10 @@ public class DabpiCommandFactoryTest {
 
 	@Test
 	public void selectDABRegion() {
-		Integer regionId = 0;
-		Command<DABRegion> command = factory.selectDABRegion(regionId);
+		Region region = Region.BAYERN;
+		Command<Void> command = factory.selectDABRegion(region);
 
-		assertThat(command, is(equalTo(new SelectDABRegion(regionId))));
+		assertThat(command, is(equalTo(new SelectDABRegion(region))));
 	}
 
 	@Test
