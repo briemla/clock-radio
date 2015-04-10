@@ -11,6 +11,6 @@ public class ReadRDS extends BaseCommand<RDSInfo> {
 
 	@Override
 	protected RDSInfo parseSpecialized(Output output) {
-		return null;
+		throw new UnsupportedOperationException("Not yet implemented");
 	}
 }
