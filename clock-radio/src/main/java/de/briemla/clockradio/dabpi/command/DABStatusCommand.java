@@ -1,15 +1,16 @@
 package de.briemla.clockradio.dabpi.command;
 
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import de.briemla.clockradio.Output;
 import de.briemla.clockradio.dabpi.result.DABStatus;
 
 public class DABStatusCommand extends BaseCommand<DABStatus> {
 
-	private static final String FREQUENCY = "Tuned frequency";
-	private static final int UNIT_LENGTH = 3;
-	private static final int START_FREQUENCY_INDEX = 16;
+	private static final Pattern FREQUENCY_PATTERN = Pattern.compile("^Tuned frequency ([0-9]+)kHz$");
+	private static final String FREQUENCY_FILTER = "Tuned frequency";
 
 	public DABStatusCommand() {
 		super("e");
@@ -17,13 +18,21 @@ public class DABStatusCommand extends BaseCommand<DABStatus> {
 
 	@Override
 	protected DABStatus parseSpecialized(Output output) {
-		Optional<String> frequency = output.standardAsStream().filter(line -> line.startsWith(FREQUENCY))
-				.map(line -> line.substring(START_FREQUENCY_INDEX, line.length() - UNIT_LENGTH)).findFirst();
-		if (!frequency.isPresent()) {
+		Optional<DABStatus> status = output.standardAsStream().filter(line -> line.startsWith(FREQUENCY_FILTER))
+		        .map(DABStatusCommand::convert).findFirst();
+		if (!status.isPresent()) {
 			throw new IllegalArgumentException("Frequency missing in DAB status output.");
 		}
 
-		Integer parsedFrequency = Integer.parseInt(frequency.get());
-		return new DABStatus(parsedFrequency);
+		return status.get();
+	}
+
+	private static DABStatus convert(String line) {
+		Matcher matcher = FREQUENCY_PATTERN.matcher(line);
+		if (!matcher.matches()) {
+			throw new IllegalArgumentException("Frequency missing in DAB status output.");
+		}
+		Integer frequency = Integer.parseInt(matcher.group(1));
+		return new DABStatus(frequency);
 	}
 }
