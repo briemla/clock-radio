@@ -40,38 +40,47 @@ public class DabpiController implements RadioController {
 		return executor.execute(factory.switchToFM());
 	}
 
+	@Override
 	public TuneToFrequencyResult tuneTo(Integer frequency) throws IOException {
 		return executor.execute(factory.tuneTo(frequency));
 	}
 
+	@Override
 	public FMStatus fmStatus() throws IOException {
 		return executor.execute(factory.fmStatus());
 	}
 
+	@Override
 	public DABStatus dabStatus() throws IOException {
 		return executor.execute(factory.dabStatus());
 	}
 
+	@Override
 	public DABService startDABService(DABService service) throws IOException {
 		return executor.execute(factory.startDABService(service));
 	}
 
+	@Override
 	public DABServiceList readDABServiceList() throws IOException {
 		return executor.execute(factory.readDABServiceList());
 	}
 
+	@Override
 	public DABChannel selectDABChannel(DABChannel channel) throws IOException {
 		return executor.execute(factory.selectDABChannel(channel));
 	}
 
+	@Override
 	public Void selectDABRegion(Region region) throws IOException {
 		return executor.execute(factory.selectDABRegion(region));
 	}
 
+	@Override
 	public DABChannelList readFrequencyListFor(Region region) throws IOException {
 		return executor.execute(factory.readFrequencyListFor(region));
 	}
 
+	@Override
 	public Void scanNextStation(ScanDirection direction) throws IOException {
 		return executor.execute(factory.scanNextStation(direction));
 	}
