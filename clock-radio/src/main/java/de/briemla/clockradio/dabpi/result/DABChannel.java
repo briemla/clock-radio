@@ -8,6 +8,10 @@ public class DABChannel {
 		this.channelId = channelId;
 	}
 
+	public String serialize() {
+		return String.valueOf(channelId);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
