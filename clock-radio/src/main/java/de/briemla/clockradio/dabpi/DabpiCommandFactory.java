@@ -22,7 +22,7 @@ import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
 import de.briemla.clockradio.dabpi.result.DABSubchannelInfo;
 import de.briemla.clockradio.dabpi.result.FMStatus;
-import de.briemla.clockradio.dabpi.result.FrequencyList;
+import de.briemla.clockradio.dabpi.result.DABChannelList;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
 import de.briemla.clockradio.dabpi.result.Station;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
@@ -116,8 +116,8 @@ public class DabpiCommandFactory implements CommandFactory {
 	}
 
 	@Override
-	public Command<FrequencyList> readFrequencyListFor(Integer regionId) {
-		return new ReadFrequencyList(regionId);
+	public Command<DABChannelList> readFrequencyListFor(Region region) {
+		return new ReadFrequencyList(region);
 	}
 
 	@Override

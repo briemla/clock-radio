@@ -19,7 +19,7 @@ import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
 import de.briemla.clockradio.dabpi.result.DABSubchannelInfo;
 import de.briemla.clockradio.dabpi.result.FMStatus;
-import de.briemla.clockradio.dabpi.result.FrequencyList;
+import de.briemla.clockradio.dabpi.result.DABChannelList;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
 import de.briemla.clockradio.dabpi.result.Station;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
@@ -215,19 +215,19 @@ public class DabpiControllerTest {
 	@Test
 	public void readFrequencyListForRegion() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<FrequencyList> command = mock(Command.class);
-		Integer regionId = 0;
-		FrequencyList result = new FrequencyList(regionId);
-		FrequencyList expectedResult = new FrequencyList(regionId);
+		Command<DABChannelList> command = mock(Command.class);
+		Region region = Region.BAYERN;
+		DABChannelList result = new DABChannelList(region);
+		DABChannelList expectedResult = new DABChannelList(region);
 
-		when(factory.readFrequencyListFor(regionId)).thenReturn(command);
+		when(factory.readFrequencyListFor(region)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		FrequencyList readFrequencyList = controller.readFrequencyListFor(regionId);
+		DABChannelList readFrequencyList = controller.readFrequencyListFor(region);
 		assertThat("Result", readFrequencyList, is(equalTo(expectedResult)));
 
-		verify(factory).readFrequencyListFor(regionId);
+		verify(factory).readFrequencyListFor(region);
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}

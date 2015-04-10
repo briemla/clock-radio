@@ -1,27 +1,50 @@
 package de.briemla.clockradio.dabpi.command;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import de.briemla.clockradio.Output;
-import de.briemla.clockradio.dabpi.result.FrequencyList;
+import de.briemla.clockradio.dabpi.result.DABChannel;
+import de.briemla.clockradio.dabpi.result.DABChannelList;
 
-public class ReadFrequencyList extends BaseCommand<FrequencyList> {
+public class ReadFrequencyList extends BaseCommand<DABChannelList> {
 
-	private final Integer regionId;
+	private static final Pattern PATTERN = Pattern
+			.compile("^Channel ([0-9]+): ACQ: ([0-9]+) RSSI: ([0-9]+) SNR: ([\\-0-9]+) (?:Name: ([a-zA-Z ]+)$|$)");
+	private final Region region;
 
-	public ReadFrequencyList(Integer regionId) {
+	public ReadFrequencyList(Region region) {
 		super("k");
-		this.regionId = regionId;
+		this.region = region;
 	}
 
 	@Override
-	protected FrequencyList parseSpecialized(Output output) {
-		return null;
+	public String serialize() {
+		return super.serialize() + " " + region.serialize();
+	}
+
+	@Override
+	protected DABChannelList parseSpecialized(Output output) {
+		DABChannelList channelList = new DABChannelList(region);
+		output.standardAsStream().filter(line -> line.startsWith("Channel ")).map(ReadFrequencyList::convert)
+		.forEach(channel -> channelList.add(channel));
+		return channelList;
+	}
+
+	private static DABChannel convert(String line) {
+		Matcher matcher = PATTERN.matcher(line);
+		if (matcher.matches()) {
+			Integer id = Integer.parseInt(matcher.group(1));
+			return new DABChannel(id);
+		}
+		throw new IllegalArgumentException("Could not parse channel info: " + line);
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((regionId == null) ? 0 : regionId.hashCode());
+		result = prime * result + ((region == null) ? 0 : region.hashCode());
 		return result;
 	}
 
@@ -34,17 +57,14 @@ public class ReadFrequencyList extends BaseCommand<FrequencyList> {
 		if (getClass() != obj.getClass())
 			return false;
 		ReadFrequencyList other = (ReadFrequencyList) obj;
-		if (regionId == null) {
-			if (other.regionId != null)
-				return false;
-		} else if (!regionId.equals(other.regionId))
+		if (region != other.region)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ReadFrequencyList [regionId=" + regionId + "]";
+		return "ReadFrequencyList [region=" + region + "]";
 	}
 
 }
