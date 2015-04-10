@@ -179,14 +179,14 @@ public class Alarm {
 		return convertToDate(alarmLocalDate());
 	}
 
-	private Date convertToDate(LocalDateTime date) {
+	private static Date convertToDate(LocalDateTime date) {
 		return Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
 	}
 
 	private LocalDateTime alarmLocalDate() {
 		LocalDateTime date = LocalDateTime.now();
 		if (date.getHour() > hourProperty.get() || date.getHour() == hourProperty.get()
-				&& date.getMinute() >= minuteProperty.get()) {
+		        && date.getMinute() >= minuteProperty.get()) {
 			date = date.plusDays(1);
 		}
 		date = date.withHour(hourProperty.get());
