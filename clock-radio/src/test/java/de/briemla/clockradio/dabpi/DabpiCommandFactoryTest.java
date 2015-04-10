@@ -24,12 +24,12 @@ import de.briemla.clockradio.dabpi.command.SwitchToFM;
 import de.briemla.clockradio.dabpi.command.TuneToFrequency;
 import de.briemla.clockradio.dabpi.result.DABAudioInfo;
 import de.briemla.clockradio.dabpi.result.DABChannel;
+import de.briemla.clockradio.dabpi.result.DABChannelList;
 import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
 import de.briemla.clockradio.dabpi.result.DABSubchannelInfo;
 import de.briemla.clockradio.dabpi.result.FMStatus;
-import de.briemla.clockradio.dabpi.result.DABChannelList;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
 import de.briemla.clockradio.dabpi.result.Station;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
@@ -99,10 +99,10 @@ public class DabpiCommandFactoryTest {
 
 	@Test
 	public void selectDABChannel() {
-		Integer channelId = 0;
-		Command<DABChannel> command = factory.selectDABChannel(channelId);
+		DABChannel channel = new DABChannel(0);
+		Command<DABChannel> command = factory.selectDABChannel(channel);
 
-		assertThat(command, is(equalTo(new SelectDABChannel(channelId))));
+		assertThat(command, is(equalTo(new SelectDABChannel(channel))));
 	}
 
 	@Test

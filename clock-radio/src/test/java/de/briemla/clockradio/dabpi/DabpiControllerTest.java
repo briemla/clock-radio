@@ -14,12 +14,12 @@ import org.junit.Test;
 import de.briemla.clockradio.dabpi.command.Region;
 import de.briemla.clockradio.dabpi.result.DABAudioInfo;
 import de.briemla.clockradio.dabpi.result.DABChannel;
+import de.briemla.clockradio.dabpi.result.DABChannelList;
 import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
 import de.briemla.clockradio.dabpi.result.DABSubchannelInfo;
 import de.briemla.clockradio.dabpi.result.FMStatus;
-import de.briemla.clockradio.dabpi.result.DABChannelList;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
 import de.briemla.clockradio.dabpi.result.Station;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
@@ -177,17 +177,18 @@ public class DabpiControllerTest {
 		@SuppressWarnings("unchecked")
 		Command<DABChannel> command = mock(Command.class);
 		Integer channelId = 0;
+		DABChannel original = new DABChannel(channelId);
 		DABChannel result = new DABChannel(channelId);
 		DABChannel expectedResult = new DABChannel(channelId);
 
-		when(factory.selectDABChannel(channelId)).thenReturn(command);
+		when(factory.selectDABChannel(original)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		DABChannel selectDABChannel = controller.selectDABChannel(channelId);
+		DABChannel selectDABChannel = controller.selectDABChannel(original);
 		assertThat("Result", selectDABChannel, is(equalTo(expectedResult)));
 
-		verify(factory).selectDABChannel(channelId);
+		verify(factory).selectDABChannel(original);
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
 	}

@@ -17,12 +17,12 @@ import de.briemla.clockradio.dabpi.command.SwitchToFM;
 import de.briemla.clockradio.dabpi.command.TuneToFrequency;
 import de.briemla.clockradio.dabpi.result.DABAudioInfo;
 import de.briemla.clockradio.dabpi.result.DABChannel;
+import de.briemla.clockradio.dabpi.result.DABChannelList;
 import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.DABStatus;
 import de.briemla.clockradio.dabpi.result.DABSubchannelInfo;
 import de.briemla.clockradio.dabpi.result.FMStatus;
-import de.briemla.clockradio.dabpi.result.DABChannelList;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
 import de.briemla.clockradio.dabpi.result.Station;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
@@ -106,8 +106,8 @@ public class DabpiCommandFactory implements CommandFactory {
 	}
 
 	@Override
-	public Command<DABChannel> selectDABChannel(Integer channelId) {
-		return new SelectDABChannel(channelId);
+	public Command<DABChannel> selectDABChannel(DABChannel channel) {
+		return new SelectDABChannel(channel);
 	}
 
 	@Override
