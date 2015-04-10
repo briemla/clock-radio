@@ -16,12 +16,12 @@ public class DABService {
 		return String.valueOf(number);
 	}
 
-	public boolean checkId(String id) {
-		return this.id.equals(id);
+	public boolean checkId(String idToCheck) {
+		return id.equals(idToCheck);
 	}
 
-	public boolean checkName(String name) {
-		return this.name.equals(name);
+	public boolean checkName(String nameToCheck) {
+		return name.equals(nameToCheck);
 	}
 
 	@Override
