@@ -12,7 +12,7 @@ public enum Region {
 		this.regionId = regionId;
 	}
 
-	public String serialize() {
+	String serialize() {
 		return String.valueOf(regionId);
 	}
 

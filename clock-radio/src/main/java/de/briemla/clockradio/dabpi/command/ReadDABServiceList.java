@@ -14,7 +14,7 @@ public class ReadDABServiceList extends BaseCommand<DABServiceList> {
 	private static final int NAME = 3;
 	private static final String FILTER = "Num:";
 	private static final Pattern PATTERN = Pattern
-			.compile("^Num:[ ]+([0-9]+)[ ]+Service ID:[ ]+([aAbBcCdDeEfF0-9]+)[ ]+Service Name:[ ]+(.+)Component ID:[ ]+([0-9]+)$");
+	        .compile("^Num:[ ]+([0-9]+)[ ]+Service ID:[ ]+([aAbBcCdDeEfF0-9]+)[ ]+Service Name:[ ]+(.+)Component ID:[ ]+([0-9]+)$");
 
 	public ReadDABServiceList() {
 		super("g");
@@ -24,11 +24,11 @@ public class ReadDABServiceList extends BaseCommand<DABServiceList> {
 	protected DABServiceList parseSpecialized(Output output) {
 		DABServiceList dabServiceList = new DABServiceList();
 		output.standardAsStream().filter(line -> line.startsWith(FILTER))
-		.forEach(line -> dabServiceList.add(split(line)));
+		        .forEach(line -> dabServiceList.add(split(line)));
 		return dabServiceList;
 	}
 
-	public static DABService split(String line) {
+	private static DABService split(String line) {
 		Matcher matcher = PATTERN.matcher(line);
 		if (!matcher.matches() || matcher.groupCount() < 4) {
 			throw new IllegalArgumentException("Incorrect line: " + line);

@@ -5,11 +5,11 @@ import java.io.IOException;
 import de.briemla.clockradio.Output;
 import de.briemla.clockradio.dabpi.Command;
 
-public abstract class BaseCommand<T> implements Command<T> {
+abstract class BaseCommand<T> implements Command<T> {
 
 	private final String parameter;
 
-	public BaseCommand(String parameter) {
+	BaseCommand(String parameter) {
 		super();
 		this.parameter = parameter;
 	}
