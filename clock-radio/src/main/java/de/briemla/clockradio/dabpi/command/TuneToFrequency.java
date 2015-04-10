@@ -1,13 +1,16 @@
 package de.briemla.clockradio.dabpi.command;
 
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import de.briemla.clockradio.Output;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 public class TuneToFrequency extends BaseCommand<TuneToFrequencyResult> {
 
-	private static final String FREQUENCY_KEY_WORD = "si46xx_fm_tune_freq(";
+	private static final String FILTER = "si46xx_fm_tune_freq";
+	private static final Pattern PATTERN = Pattern.compile("^si46xx_fm_tune_freq\\(([0-9]+)\\)");
 	private final Integer frequency;
 
 	public TuneToFrequency(Integer frequency) {
@@ -22,17 +25,25 @@ public class TuneToFrequency extends BaseCommand<TuneToFrequencyResult> {
 
 	@Override
 	protected TuneToFrequencyResult parseSpecialized(Output output) {
-		Optional<String> tunedFrequency = output.standardAsStream().filter(line -> line.startsWith(FREQUENCY_KEY_WORD))
-		        .map(line -> line.substring(20, line.length() - 1)).findFirst();
-		check(tunedFrequency);
-		return new TuneToFrequencyResult(frequency);
+		Optional<TuneToFrequencyResult> tunedFrequency = output.standardAsStream()
+				.filter(line -> line.startsWith(FILTER)).map(this::convert).findFirst();
+		if (tunedFrequency.isPresent()) {
+			return tunedFrequency.get();
+		}
+		throw new IllegalArgumentException("Tuned frequency missing in output.");
 	}
 
-	private void check(Optional<String> tunedFrequency) {
-		if (!tunedFrequency.isPresent()) {
+	private TuneToFrequencyResult convert(String line) {
+		Matcher matcher = PATTERN.matcher(line);
+		if (!matcher.matches()) {
 			throw new IllegalArgumentException("Tuned frequency missing in output.");
 		}
-		Integer parsedFrequency = Integer.parseInt(tunedFrequency.get());
+		Integer parsedFrequency = Integer.parseInt(matcher.group(1));
+		check(parsedFrequency);
+		return new TuneToFrequencyResult(parsedFrequency);
+	}
+
+	private void check(Integer parsedFrequency) {
 		if (!frequency.equals(parsedFrequency)) {
 			throw new IllegalArgumentException("Tuned frequency differs from expected frequency: tuned: "
 					+ parsedFrequency + " expected: " + frequency);
