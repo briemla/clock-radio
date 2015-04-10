@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.Test;
 
@@ -31,6 +32,11 @@ public class SelectDABRegionTest {
 		Void parsed = command.parse(output);
 
 		assertThat(parsed, is(nullValue()));
+	}
+
+	@Test
+	public void equalsAndHashCode() throws Exception {
+		EqualsVerifier.forClass(SelectDABRegion.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}
 
 }

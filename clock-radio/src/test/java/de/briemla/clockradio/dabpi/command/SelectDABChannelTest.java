@@ -3,6 +3,7 @@ package de.briemla.clockradio.dabpi.command;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -80,6 +81,11 @@ public class SelectDABChannelTest {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Could not parse channel: si46xx_dab_tune_freq(a0): 0x818000c0");
 		command.parse(output);
+	}
+
+	@Test
+	public void equalsAndHashCode() throws Exception {
+		EqualsVerifier.forClass(SelectDABChannel.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}
 
 }
