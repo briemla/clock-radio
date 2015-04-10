@@ -18,6 +18,14 @@ public class FMStatusCommandTest {
 	public final ExpectedException thrown = ExpectedException.none();
 
 	@Test
+	public void serialize() throws Exception {
+		FMStatusCommand command = new FMStatusCommand();
+		String serialized = command.serialize();
+
+		assertThat(serialized, is(equalTo(" -d")));
+	}
+
+	@Test
 	public void parseCorrectOutput() throws Exception {
 		Output output = new Output();
 		output.addStandard("dabpi_ctl version v0.01-29-g62f16f4");

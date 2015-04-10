@@ -14,6 +14,14 @@ import de.briemla.clockradio.dabpi.result.DABServiceList;
 public class ReadDABServiceListTest {
 
 	@Test
+	public void serialize() throws Exception {
+		ReadDABServiceList command = new ReadDABServiceList();
+		String serialized = command.serialize();
+
+		assertThat(serialized, is(equalTo(" -g")));
+	}
+
+	@Test
 	public void parseCorrectOutput() throws Exception {
 		DABServiceList expectedServices = new DABServiceList();
 		expectedServices.add(new DABService(0, "d301", "SWR1 BW"));
