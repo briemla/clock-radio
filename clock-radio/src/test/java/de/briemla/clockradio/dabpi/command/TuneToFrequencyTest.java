@@ -18,6 +18,15 @@ public class TuneToFrequencyTest {
 	public final ExpectedException thrown = ExpectedException.none();
 
 	@Test
+	public void serialize() throws Exception {
+		Integer frequency = 104800;
+		TuneToFrequency command = new TuneToFrequency(frequency);
+
+		String serialized = command.serialize();
+		assertThat(serialized, is(equalTo(" -c 104800")));
+	}
+
+	@Test
 	public void parseCorrectOutput() throws Exception {
 		Integer frequency = 106700;
 		Output output = new Output();

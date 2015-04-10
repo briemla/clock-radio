@@ -16,9 +16,14 @@ public class TuneToFrequency extends BaseCommand<TuneToFrequencyResult> {
 	}
 
 	@Override
+	public String serialize() {
+		return super.serialize() + " " + frequency;
+	}
+
+	@Override
 	protected TuneToFrequencyResult parseSpecialized(Output output) {
 		Optional<String> tunedFrequency = output.standardAsStream().filter(line -> line.startsWith(FREQUENCY_KEY_WORD))
-				.map(line -> line.substring(20, line.length() - 1)).findFirst();
+		        .map(line -> line.substring(20, line.length() - 1)).findFirst();
 		check(tunedFrequency);
 		return new TuneToFrequencyResult(frequency);
 	}
@@ -30,7 +35,7 @@ public class TuneToFrequency extends BaseCommand<TuneToFrequencyResult> {
 		Integer parsedFrequency = Integer.parseInt(tunedFrequency.get());
 		if (!frequency.equals(parsedFrequency)) {
 			throw new IllegalArgumentException("Tuned frequency differs from expected frequency: tuned: "
-			        + parsedFrequency + " expected: " + frequency);
+					+ parsedFrequency + " expected: " + frequency);
 		}
 	}
 
