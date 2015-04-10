@@ -11,7 +11,7 @@ public class ReadDABAudioInfo extends BaseCommand<DABAudioInfo> {
 
 	@Override
 	protected DABAudioInfo parseSpecialized(Output output) {
-		return null;
+		throw new UnsupportedOperationException("Not yet implemented.");
 	}
 
 }

@@ -11,7 +11,7 @@ public class ReadDABSubchannelInfo extends BaseCommand<DABSubchannelInfo> {
 
 	@Override
 	protected DABSubchannelInfo parseSpecialized(Output output) {
-		return null;
+		throw new UnsupportedOperationException("Not yet implemented.");
 	}
 
 }
