@@ -38,20 +38,20 @@ public class StartDABService extends BaseCommand<DABService> {
 		if (!startedService.isPresent()) {
 			return;
 		}
-		String service = startedService.get();
-		if (service.equals("Starting service 0 0")) {
-			throw new IllegalArgumentException("Wrong service started: " + service);
+		String parsedService = startedService.get();
+		if (parsedService.equals("Starting service 0 0")) {
+			throw new IllegalArgumentException("Wrong service started: " + parsedService);
 		}
-		Matcher matcher = PATTERN.matcher(service);
+		Matcher matcher = PATTERN.matcher(parsedService);
 		if (!matcher.matches() || matcher.groupCount() < ELEMENTS) {
 			throw new IllegalArgumentException("Not able to parse input.");
 		}
 		// TODO clean up checkId
 		String name = matcher.group(NAME).trim();
 		String id = matcher.group(ID).trim();
-		if (!this.service.checkId(id) || !this.service.checkName(name)) {
+		if (!service.checkId(id) || !service.checkName(name)) {
 			throw new IllegalArgumentException("Wrong service started: " + name + " " + id + " expected: "
-					+ this.service.toString());
+			        + service.toString());
 		}
 	}
 
