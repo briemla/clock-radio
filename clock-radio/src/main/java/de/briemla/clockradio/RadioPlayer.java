@@ -1,8 +1,10 @@
 package de.briemla.clockradio;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import de.briemla.clockradio.dabpi.RadioController;
+import de.briemla.clockradio.dabpi.ScanDirection;
 
 /**
  * Controls radio
@@ -19,19 +21,20 @@ public class RadioPlayer {
 		this.controller = controller;
 	}
 
-	public ArrayList<Integer> scan() {
+	public ArrayList<Integer> scan() throws IOException {
 		Integer startFrequency = currentFrequency();
 		Integer lastFrequency = startFrequency;
 		boolean search = true;
 		boolean overflow = false;
 		ArrayList<Integer> frequency = new ArrayList<>();
+		controller.switchToFM();
 		while (search) {
-			DAB_CONTROL.SCAN_UP.execute();
+			controller.scanNextStation(ScanDirection.UP);
 			Integer currentFrequency = currentFrequency();
 			frequency.add(currentFrequency);
 			overflow |= lastFrequency > currentFrequency;
 			search = !startFrequency.equals(currentFrequency) && !(overflow && currentFrequency > startFrequency)
-			        && !(currentFrequency.equals(Integer.MIN_VALUE));
+					&& !(currentFrequency.equals(Integer.MIN_VALUE));
 			lastFrequency = currentFrequency;
 		}
 		return frequency;
