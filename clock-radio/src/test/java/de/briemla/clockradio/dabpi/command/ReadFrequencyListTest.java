@@ -3,6 +3,7 @@ package de.briemla.clockradio.dabpi.command;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -73,6 +74,11 @@ public class ReadFrequencyListTest {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Could not parse channel info: Channel a: ACQ: 1 RSSI: 42 SNR: -10 Name: DR Deutschland");
 		command.parse(output);
+	}
+
+	@Test
+	public void equalsAndHashCode() throws Exception {
+		EqualsVerifier.forClass(ReadFrequencyList.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}
 
 }
