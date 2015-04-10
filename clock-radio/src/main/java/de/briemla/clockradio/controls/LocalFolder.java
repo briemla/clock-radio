@@ -61,7 +61,7 @@ public class LocalFolder implements Media {
 		}
 	}
 
-	private void play(Path path, Player player) {
+	private static void play(Path path, Player player) {
 		if (isMedia(path)) {
 			player.play(path.toUri());
 		}
