@@ -24,7 +24,6 @@ import de.briemla.clockradio.dabpi.result.DABStatus;
 import de.briemla.clockradio.dabpi.result.DABSubchannelInfo;
 import de.briemla.clockradio.dabpi.result.FMStatus;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
-import de.briemla.clockradio.dabpi.result.Station;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 /**
@@ -121,7 +120,7 @@ public class DabpiCommandFactory implements CommandFactory {
 	}
 
 	@Override
-	public Command<Station> scanNextStation(ScanDirection direction) {
+	public Command<Void> scanNextStation(ScanDirection direction) {
 		return new ScanNextStation(direction);
 	}
 

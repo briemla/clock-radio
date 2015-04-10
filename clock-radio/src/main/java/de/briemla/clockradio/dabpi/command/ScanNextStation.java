@@ -2,9 +2,8 @@ package de.briemla.clockradio.dabpi.command;
 
 import de.briemla.clockradio.Output;
 import de.briemla.clockradio.dabpi.ScanDirection;
-import de.briemla.clockradio.dabpi.result.Station;
 
-public class ScanNextStation extends BaseCommand<Station> {
+public class ScanNextStation extends BaseCommand<Void> {
 
 	private final ScanDirection direction;
 
@@ -14,7 +13,12 @@ public class ScanNextStation extends BaseCommand<Station> {
 	}
 
 	@Override
-	protected Station parseSpecialized(Output output) {
+	public String serialize() {
+		return super.serialize() + " " + direction.serialize();
+	}
+
+	@Override
+	protected Void parseSpecialized(Output output) {
 		return null;
 	}
 

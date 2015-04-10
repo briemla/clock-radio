@@ -10,7 +10,6 @@ import de.briemla.clockradio.dabpi.result.DABStatus;
 import de.briemla.clockradio.dabpi.result.DABSubchannelInfo;
 import de.briemla.clockradio.dabpi.result.FMStatus;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
-import de.briemla.clockradio.dabpi.result.Station;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 public interface CommandFactory {
@@ -35,7 +34,7 @@ public interface CommandFactory {
 
 	Command<DABChannelList> readFrequencyListFor(Region region);
 
-	Command<Station> scanNextStation(ScanDirection direction);
+	Command<Void> scanNextStation(ScanDirection direction);
 
 	Command<RDSInfo> readRDS();
 

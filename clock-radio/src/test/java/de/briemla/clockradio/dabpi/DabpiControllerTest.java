@@ -21,7 +21,6 @@ import de.briemla.clockradio.dabpi.result.DABStatus;
 import de.briemla.clockradio.dabpi.result.DABSubchannelInfo;
 import de.briemla.clockradio.dabpi.result.FMStatus;
 import de.briemla.clockradio.dabpi.result.RDSInfo;
-import de.briemla.clockradio.dabpi.result.Station;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 public class DabpiControllerTest {
@@ -236,16 +235,16 @@ public class DabpiControllerTest {
 	@Test
 	public void scanNextStation() throws Exception {
 		@SuppressWarnings("unchecked")
-		Command<Station> command = mock(Command.class);
+		Command<Void> command = mock(Command.class);
 		ScanDirection direction = ScanDirection.UP;
-		Station result = new Station(true, direction);
-		Station expectedResult = new Station(true, direction);
+		Void result = null;
+		Void expectedResult = null;
 
 		when(factory.scanNextStation(direction)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
 		DabpiController controller = new DabpiController(executor, factory);
-		Station scanNextStation = controller.scanNextStation(direction);
+		Void scanNextStation = controller.scanNextStation(direction);
 		assertThat("Result", scanNextStation, is(equalTo(expectedResult)));
 
 		verify(factory).scanNextStation(direction);
