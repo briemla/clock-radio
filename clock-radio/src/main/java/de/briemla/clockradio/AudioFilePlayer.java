@@ -34,13 +34,13 @@ public class AudioFilePlayer implements Player {
 		startAudio(new File(uriToPlay));
 	}
 
-	private AudioFormat getOutFormat(AudioFormat inFormat) {
+	private static AudioFormat getOutFormat(AudioFormat inFormat) {
 		int ch = inFormat.getChannels();
 		float rate = inFormat.getSampleRate();
 		return new AudioFormat(PCM_SIGNED, rate, 16, ch, ch * 2, rate, false);
 	}
 
-	private void stream(AudioInputStream in, SourceDataLine line) throws IOException {
+	private static void stream(AudioInputStream in, SourceDataLine line) throws IOException {
 		byte[] buffer = new byte[65536];
 		for (int n = 0; n != -1; n = in.read(buffer, 0, buffer.length)) {
 			line.write(buffer, 0, n);
