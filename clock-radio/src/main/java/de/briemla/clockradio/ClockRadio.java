@@ -14,6 +14,11 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import de.briemla.clockradio.dabpi.CommandFactory;
+import de.briemla.clockradio.dabpi.DabpiCommandFactory;
+import de.briemla.clockradio.dabpi.DabpiController;
+import de.briemla.clockradio.dabpi.DabpiExecutor;
+import de.briemla.clockradio.dabpi.RadioExecutor;
 
 public class ClockRadio extends Application {
 
@@ -72,6 +77,12 @@ public class ClockRadio extends Application {
 
 	}
 
+	private static RadioPlayer radioPlayer() {
+		RadioExecutor executor = new DabpiExecutor();
+		CommandFactory factory = new DabpiCommandFactory();
+		return new RadioPlayer(new DabpiController(executor, factory));
+	}
+
 	/**
 	 * Will check which player is available. On Raspberry Pi there is no
 	 * javafx.scene.media support, so we need another player.
@@ -79,7 +90,7 @@ public class ClockRadio extends Application {
 	 * @return
 	 */
 	private static Player availablePlayer() {
-		return new AudioFilePlayer();
+		return new BasePlayer(new AudioFilePlayer(), radioPlayer());
 		// return new JavaFxPlayer();
 	}
 

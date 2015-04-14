@@ -41,7 +41,6 @@ public class MainPanel extends StackPane {
 	private final ActivePseudoClassProperty active;
 	private final Settings settings;
 	private Timer timer;
-	private Process alsaloop;
 
 	public MainPanel(Player player) {
 		super();
@@ -98,9 +97,6 @@ public class MainPanel extends StackPane {
 	@FXML
 	public void startRadio(ActionEvent event) {
 		// TODO implement this
-		// RadioExecutor executor;
-		// CommandFactory factory;
-		// RadioPlayer radioPlayer = new RadioPlayer(new DabpiController(executor, factory));
 		// radioPlayer.scan();
 		// Runtime runtime = Runtime.getRuntime();
 		// try {

@@ -8,9 +8,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.time.LocalTime;
 
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -19,16 +16,14 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class AudioFilePlayer implements Player {
+public class AudioFilePlayer {
 
-	private final SimpleBooleanProperty playingProperty = new SimpleBooleanProperty(false);
 	private final Object lineLock = new Object();
 	private SourceDataLine line;
 
 	/**
 	 * Method blocks until audio input is finished or closed.
 	 */
-	@Override
 	public void play(URI uriToPlay) {
 		System.out.println("Start: " + LocalTime.now());
 		startAudio(new File(uriToPlay));
@@ -47,7 +42,6 @@ public class AudioFilePlayer implements Player {
 		}
 	}
 
-	@Override
 	public void stop() {
 		System.out.println("Stop: " + LocalTime.now());
 		synchronized (lineLock) {
@@ -55,14 +49,8 @@ public class AudioFilePlayer implements Player {
 				line.close();
 				line.stop();
 				line = null;
-				playingProperty.set(false);
 			}
 		}
-	}
-
-	@Override
-	public ReadOnlyBooleanProperty playingProperty() {
-		return playingProperty;
 	}
 
 	private void startAudio(File file) {

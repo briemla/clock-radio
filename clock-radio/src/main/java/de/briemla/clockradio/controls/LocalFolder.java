@@ -77,7 +77,6 @@ public class LocalFolder implements Media {
 		player.stop();
 	}
 
-	@Override
 	public File getSource() {
 		return source.toFile();
 	}

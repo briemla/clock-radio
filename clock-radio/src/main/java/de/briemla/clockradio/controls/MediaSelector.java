@@ -47,7 +47,10 @@ public class MediaSelector extends VBox {
 	}
 
 	private File currentFolder() {
-		File currentSource = mediaProperty.get().getSource();
-		return currentSource.isDirectory() ? currentSource : currentSource.getParentFile();
+		if (mediaProperty.get() instanceof LocalFolder) {
+			File currentSource = ((LocalFolder) mediaProperty.get()).getSource();
+			return currentSource.isDirectory() ? currentSource : currentSource.getParentFile();
+		}
+		return new File("");
 	}
 }

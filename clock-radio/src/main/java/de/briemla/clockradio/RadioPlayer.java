@@ -66,4 +66,9 @@ public class RadioPlayer {
 		station.tuneTo(controller);
 	}
 
+	public void stop() {
+		// TODO Stop alsa redirection
+
+	}
+
 }
