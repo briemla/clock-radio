@@ -7,7 +7,7 @@ import de.briemla.clockradio.dabpi.command.Region;
 import de.briemla.clockradio.dabpi.result.DABChannel;
 import de.briemla.clockradio.dabpi.result.DABService;
 
-public class DABStation {
+public class DABStation implements Station {
 
 	private final Region region;
 	private final DABService service;
@@ -19,6 +19,7 @@ public class DABStation {
 		this.channel = channel;
 	}
 
+	@Override
 	public void tuneTo(RadioController controller) throws IOException {
 		controller.switchToDAB();
 		controller.selectDABRegion(region);
