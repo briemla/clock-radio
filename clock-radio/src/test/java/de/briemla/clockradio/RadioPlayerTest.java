@@ -84,4 +84,14 @@ public class RadioPlayerTest {
 		verify(controller).readDABServiceList();
 		verifyNoMoreInteractions(controller);
 	}
+
+	@Test
+	public void play() throws Exception {
+		RadioController controller = mock(RadioController.class);
+		Station station = mock(Station.class);
+		RadioPlayer player = new RadioPlayer(controller);
+		player.play(station);
+
+		verify(station).tuneTo(controller);
+	}
 }

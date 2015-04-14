@@ -59,4 +59,8 @@ public class RadioPlayer {
 
 	}
 
+	public void play(Station station) throws IOException {
+		station.tuneTo(controller);
+	}
+
 }
