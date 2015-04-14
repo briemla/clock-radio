@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import de.briemla.clockradio.dabpi.RadioController;
 
-public class FMStation implements Comparable<FMStation> {
+public class FMStation implements Comparable<FMStation>, Station {
 
 	private final Integer frequency;
 
@@ -12,6 +12,7 @@ public class FMStation implements Comparable<FMStation> {
 		this.frequency = frequency;
 	}
 
+	@Override
 	public void tuneTo(RadioController controller) throws IOException {
 		controller.switchToFM();
 		controller.tuneTo(frequency);
