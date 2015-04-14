@@ -8,6 +8,10 @@ public class FMStatus {
 		this.frequency = frequency;
 	}
 
+	public Integer getFrequency() {
+		return frequency;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -18,18 +22,23 @@ public class FMStatus {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		FMStatus other = (FMStatus) obj;
 		if (frequency == null) {
-			if (other.frequency != null)
+			if (other.frequency != null) {
 				return false;
-		} else if (!frequency.equals(other.frequency))
+			}
+		} else if (!frequency.equals(other.frequency)) {
 			return false;
+		}
 		return true;
 	}
 

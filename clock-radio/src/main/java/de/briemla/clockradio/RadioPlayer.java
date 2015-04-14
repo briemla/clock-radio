@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import de.briemla.clockradio.dabpi.RadioController;
 import de.briemla.clockradio.dabpi.ScanDirection;
+import de.briemla.clockradio.dabpi.result.FMStatus;
 
 /**
  * Controls radio
@@ -21,7 +22,7 @@ public class RadioPlayer {
 		this.controller = controller;
 	}
 
-	public ArrayList<Integer> scan() throws IOException {
+	public ArrayList<Integer> scanFM() throws IOException {
 		Integer startFrequency = currentFrequency();
 		Integer lastFrequency = startFrequency;
 		boolean search = true;
@@ -41,15 +42,9 @@ public class RadioPlayer {
 
 	}
 
-	private static Integer currentFrequency() {
-		// TODO refactor to new DABPi API
-		// String status = DAB_CONTROL.FM_STATUS.execute().asString();
-		// if (status.isEmpty()) {
-		return Integer.MIN_VALUE;
-		// }
-		// String string = status.split(" ")[1];
-		// String frequency = string.substring(0, string.length() - 3);
-		// return Integer.parseInt(frequency);
+	private Integer currentFrequency() throws IOException {
+		FMStatus fmStatus = controller.fmStatus();
+		return fmStatus.getFrequency();
 	}
 
 }
