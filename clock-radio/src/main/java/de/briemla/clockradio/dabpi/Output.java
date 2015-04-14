@@ -1,4 +1,4 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

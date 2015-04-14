@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import de.briemla.clockradio.Output;
-
 public class DabpiExecutor implements RadioExecutor {
 
 	private static final String DABPI_CTL = "sudo /home/pi/dabpi_ctl/dabpi_ctl";

@@ -8,7 +8,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.Test;
 
-import de.briemla.clockradio.Output;
+import de.briemla.clockradio.dabpi.Output;
 
 public class SelectDABRegionTest {
 

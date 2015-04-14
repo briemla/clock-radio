@@ -1,10 +1,12 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+
+import de.briemla.clockradio.dabpi.Output;
 
 public class OutputTest {
 

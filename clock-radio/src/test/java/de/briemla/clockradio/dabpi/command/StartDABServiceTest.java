@@ -9,7 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.briemla.clockradio.Output;
+import de.briemla.clockradio.dabpi.Output;
 import de.briemla.clockradio.dabpi.result.DABService;
 
 public class StartDABServiceTest {

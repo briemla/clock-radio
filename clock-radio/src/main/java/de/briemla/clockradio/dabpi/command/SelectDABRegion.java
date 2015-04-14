@@ -1,6 +1,6 @@
 package de.briemla.clockradio.dabpi.command;
 
-import de.briemla.clockradio.Output;
+import de.briemla.clockradio.dabpi.Output;
 
 public class SelectDABRegion extends BaseCommand<Void> {
 

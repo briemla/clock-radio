@@ -4,7 +4,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import de.briemla.clockradio.Output;
+import de.briemla.clockradio.dabpi.Output;
 import de.briemla.clockradio.dabpi.result.DABStatus;
 
 public class DABStatusCommand extends BaseCommand<DABStatus> {

@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import de.briemla.clockradio.Output;
+import de.briemla.clockradio.dabpi.Output;
 
 public class ReadRDSTest {
 
