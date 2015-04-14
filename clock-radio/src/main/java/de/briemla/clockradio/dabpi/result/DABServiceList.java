@@ -1,6 +1,8 @@
 package de.briemla.clockradio.dabpi.result;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.stream.Stream;
 
 public class DABServiceList {
 
@@ -12,6 +14,10 @@ public class DABServiceList {
 
 	public void add(DABService dabService) {
 		serviceList.add(dabService);
+	}
+
+	public Stream<DABService> stream() {
+		return serviceList.stream();
 	}
 
 	@Override

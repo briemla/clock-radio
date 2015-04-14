@@ -1,8 +1,11 @@
 package de.briemla.clockradio.dabpi.result;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.briemla.clockradio.DABStation;
+import de.briemla.clockradio.dabpi.RadioController;
 import de.briemla.clockradio.dabpi.command.Region;
 
 public class DABChannelList {
@@ -23,6 +26,17 @@ public class DABChannelList {
 		return channels;
 	}
 
+	public List<DABStation> scanStations(RadioController controller) throws IOException {
+		controller.selectDABRegion(region);
+		ArrayList<DABStation> stations = new ArrayList<>();
+		for (DABChannel channel : channels) {
+			controller.selectDABChannel(channel);
+			DABServiceList serviceList = controller.readDABServiceList();
+			serviceList.stream().map(service -> new DABStation(region, service, channel)).forEach(stations::add);
+		}
+		return stations;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -34,20 +48,26 @@ public class DABChannelList {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		DABChannelList other = (DABChannelList) obj;
 		if (channels == null) {
-			if (other.channels != null)
+			if (other.channels != null) {
 				return false;
-		} else if (!channels.equals(other.channels))
+			}
+		} else if (!channels.equals(other.channels)) {
 			return false;
-		if (region != other.region)
+		}
+		if (region != other.region) {
 			return false;
+		}
 		return true;
 	}
 

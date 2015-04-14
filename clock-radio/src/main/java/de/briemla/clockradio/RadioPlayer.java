@@ -3,9 +3,12 @@ package de.briemla.clockradio;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import de.briemla.clockradio.dabpi.RadioController;
 import de.briemla.clockradio.dabpi.ScanDirection;
+import de.briemla.clockradio.dabpi.command.Region;
+import de.briemla.clockradio.dabpi.result.DABChannelList;
 import de.briemla.clockradio.dabpi.result.FMStatus;
 
 /**
@@ -47,6 +50,13 @@ public class RadioPlayer {
 	private Integer currentFrequency() throws IOException {
 		FMStatus fmStatus = controller.fmStatus();
 		return fmStatus.getFrequency();
+	}
+
+	public List<DABStation> scanDAB(Region region) throws IOException {
+		controller.switchToDAB();
+		DABChannelList channels = controller.readFrequencyListFor(region);
+		return channels.scanStations(controller);
+
 	}
 
 }
