@@ -2,6 +2,7 @@ package de.briemla.clockradio;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import de.briemla.clockradio.dabpi.RadioController;
 import de.briemla.clockradio.dabpi.ScanDirection;
@@ -38,6 +39,7 @@ public class RadioPlayer {
 					&& !(currentFrequency.equals(Integer.MIN_VALUE));
 			lastFrequency = currentFrequency;
 		}
+		Collections.sort(frequency);
 		return frequency;
 
 	}

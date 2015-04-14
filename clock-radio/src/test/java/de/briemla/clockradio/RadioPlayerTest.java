@@ -31,4 +31,20 @@ public class RadioPlayerTest {
 		verify(controller).scanNextStation(ScanDirection.UP);
 		verify(controller, times(2)).fmStatus();
 	}
+
+	@Test
+	public void scanMultipleFMStations() throws Exception {
+		Integer[] expectedFrequencies = { 105500, 106700 };
+		RadioController controller = mock(RadioController.class);
+		RadioPlayer player = new RadioPlayer(controller);
+		when(controller.fmStatus()).thenReturn(new FMStatus(105500)).thenReturn(new FMStatus(106700))
+		.thenReturn(new FMStatus(105500));
+
+		ArrayList<Integer> frequencies = player.scanFM();
+
+		assertThat(frequencies, contains(expectedFrequencies));
+		verify(controller).switchToFM();
+		verify(controller, times(2)).scanNextStation(ScanDirection.UP);
+		verify(controller, times(3)).fmStatus();
+	}
 }
