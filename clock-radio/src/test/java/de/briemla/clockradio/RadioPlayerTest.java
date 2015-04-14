@@ -18,7 +18,7 @@ import de.briemla.clockradio.dabpi.result.FMStatus;
 public class RadioPlayerTest {
 
 	@Test
-	public void scanFMOneFM() throws Exception {
+	public void scanOneFMStation() throws Exception {
 		Integer[] expectedFrequencies = { 105500 };
 		RadioController controller = mock(RadioController.class);
 		RadioPlayer player = new RadioPlayer(controller);
