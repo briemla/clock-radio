@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import de.briemla.clockradio.dabpi.DABStation;
+import de.briemla.clockradio.dabpi.FMStation;
 import de.briemla.clockradio.dabpi.RadioController;
 import de.briemla.clockradio.dabpi.ScanDirection;
+import de.briemla.clockradio.dabpi.Station;
 import de.briemla.clockradio.dabpi.command.Region;
 import de.briemla.clockradio.dabpi.result.DABChannelList;
 import de.briemla.clockradio.dabpi.result.FMStatus;

@@ -16,7 +16,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.Test;
 
-import de.briemla.clockradio.DABStation;
+import de.briemla.clockradio.dabpi.DABStation;
 import de.briemla.clockradio.dabpi.RadioController;
 import de.briemla.clockradio.dabpi.command.Region;
 

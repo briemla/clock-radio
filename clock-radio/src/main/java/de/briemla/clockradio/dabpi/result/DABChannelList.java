@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.briemla.clockradio.DABStation;
+import de.briemla.clockradio.dabpi.DABStation;
 import de.briemla.clockradio.dabpi.RadioController;
 import de.briemla.clockradio.dabpi.command.Region;
 

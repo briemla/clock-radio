@@ -1,8 +1,6 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.dabpi;
 
 import java.io.IOException;
-
-import de.briemla.clockradio.dabpi.RadioController;
 
 public interface Station {
 
