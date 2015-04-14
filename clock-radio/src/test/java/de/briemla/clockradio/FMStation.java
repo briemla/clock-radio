@@ -1,11 +1,20 @@
 package de.briemla.clockradio;
 
+import java.io.IOException;
+
+import de.briemla.clockradio.dabpi.RadioController;
+
 public class FMStation implements Comparable<FMStation> {
 
 	private final Integer frequency;
 
 	public FMStation(Integer frequency) {
 		this.frequency = frequency;
+	}
+
+	public void tuneTo(RadioController controller) throws IOException {
+		controller.switchToFM();
+		controller.tuneTo(frequency);
 	}
 
 	@Override
