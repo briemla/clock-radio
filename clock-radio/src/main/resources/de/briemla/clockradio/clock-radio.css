@@ -82,8 +82,8 @@
 	-fx-padding: 0.0 5.0px 0.0 0.0;
 }
 
-.alarm-menu {
-	-fx-background-color:  background-color;
+/*.alarm-menu {
+	-fx-background-color: background-color;
 	-fx-background-radius: 10.0px;
 	-fx-border-color: border-color;
 	-fx-border-radius: 10.0px;
@@ -91,7 +91,7 @@
 	-fx-border-style: solid;
 	-fx-padding: 10.0px;
 }
-
+*/
 .shutdown {
 	-fx-background-image: url("shutdown.png");
 	-fx-background-repeat: no-repeat;

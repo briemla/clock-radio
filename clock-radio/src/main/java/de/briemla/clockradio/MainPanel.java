@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 public class MainPanel extends StackPane {
@@ -30,13 +29,9 @@ public class MainPanel extends StackPane {
 
 	private static final long INACTIVE_TIMEOUT = 10 * 1000;
 	@FXML
-	private ViewSwitcher viewSwitch;
-	@FXML
-	private AnchorPane overlay;
+	private ViewSwitcher viewSwitcher;
 	@FXML
 	private AlarmView alarm;
-	@FXML
-	private AlarmMenu alarmMenu;
 
 	private final ActivePseudoClassProperty active;
 	private final Settings settings;
@@ -46,14 +41,12 @@ public class MainPanel extends StackPane {
 		super();
 		FXUtil.load(this, this);
 		active = new ActivePseudoClassProperty(this);
-		overlay.setPickOnBounds(true);
-		// overlay.setMouseTransparent(true);
-		settings = new Settings(viewSwitch, player);
+		settings = new Settings(viewSwitcher, player);
 		alarm.setSettings(settings);
 		Node clock = new Clock();
-		viewSwitch.setDefaultView(clock);
-		AlarmSettings alarmSettings = new AlarmSettings(settings);
-		viewSwitch.addView(Alarm.class, alarmSettings);
+		viewSwitcher.setDefaultView(clock);
+		AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher);
+		viewSwitcher.addView(Alarm.class, alarmMenu);
 		addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
 			if (!active.get()) {
 				event.consume();
@@ -64,7 +57,7 @@ public class MainPanel extends StackPane {
 		active.set(true);
 		resetInactiveTimer();
 		settings.addAlarm();
-		viewSwitch.showDefault();
+		viewSwitcher.showDefault();
 	}
 
 	private void resetInactiveTimer() {

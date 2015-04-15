@@ -6,7 +6,6 @@ import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.stage.Popup;
 
 public class Settings {
 
@@ -26,8 +25,8 @@ public class Settings {
 		Alarm alarm = new Alarm(alarmStartedProperty, player);
 		alarms.add(alarm);
 		rebindAlarms();
-		AlarmSettings alarmSettings = viewSwitcher.show(Alarm.class);
-		alarmSettings.setCurrentAlarm(alarm);
+		AlarmMenu alarmMenu = viewSwitcher.show(Alarm.class);
+		alarmMenu.setCurrentAlarm(alarm);
 	}
 
 	private void rebindAlarms() {
@@ -55,14 +54,15 @@ public class Settings {
 	public void select(Alarm alarm) {
 		// AlarmMenu menu = overlaySwitcher.show(Alarm.class);
 		// menu.setCurrentAlarm(alarm);
-		AlarmMenu alarmMenu = new AlarmMenu();
-		alarmMenu.setCurrentAlarm(alarm);
-		Popup popup = new Popup();
-		popup.setAutoHide(true);
-		popup.getContent().add(alarmMenu);
-		AlarmSettings alarmSettings = viewSwitcher.show(Alarm.class);
+		// AlarmMenu alarmMenu = new AlarmMenu();
+		// alarmMenu.setCurrentAlarm(alarm);
+		// Popup popup = new Popup();
+		// popup.setAutoHide(true);
+		// popup.getContent().add(alarmMenu);
+		// alarmMenu.getStylesheets().setAll(viewSwitcher.getScene().getRoot().getStylesheets());
+		AlarmMenu alarmSettings = viewSwitcher.show(Alarm.class);
 		alarmSettings.setCurrentAlarm(alarm);
-		popup.show(alarmSettings.getScene().getWindow());
+		// popup.show(alarmSettings.getScene().getWindow());
 	}
 
 	public void delete(Alarm alarm) {

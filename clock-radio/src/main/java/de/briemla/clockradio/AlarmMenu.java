@@ -23,9 +23,11 @@ public class AlarmMenu extends VBox {
 	private final SimpleObjectProperty<Media> mediaProperty;
 	private final SimpleIntegerProperty hourProperty;
 	private final SimpleIntegerProperty minuteProperty;
+	private final ViewSwitcher viewSwitcher;
 
-	public AlarmMenu() {
+	public AlarmMenu(ViewSwitcher viewSwitcher) {
 		super();
+		this.viewSwitcher = viewSwitcher;
 		FXUtil.load(this, this);
 		mediaProperty = new SimpleObjectProperty<>();
 		hourProperty = new SimpleIntegerProperty();

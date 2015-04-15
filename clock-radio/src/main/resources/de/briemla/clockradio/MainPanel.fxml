@@ -26,15 +26,9 @@
                             text="Einstellungen" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                     </children>
                 </AnchorPane>
-                <ViewSwitcher fx:id="viewSwitch" maxHeight="500.0" prefHeight="500.0" prefWidth="1024.0" />
+                <ViewSwitcher fx:id="viewSwitcher" maxHeight="500.0" prefHeight="500.0" prefWidth="1024.0" />
                 <AlarmView fx:id="alarm" />
             </children>
         </VBox>
-        <AnchorPane fx:id="overlay" visible="false" managed="false" maxHeight="600" maxWidth="1024"
-            minHeight="600" minWidth="1024">
-            <children>
-                <AlarmMenu fx:id="alarmMenu" AnchorPane.leftAnchor="0.0" AnchorPane.bottomAnchor="0.0" />
-            </children>
-        </AnchorPane>
     </children>
 </fx:root>
