@@ -48,9 +48,7 @@ public class MainPanel extends StackPane {
 		active = new ActivePseudoClassProperty(this);
 		overlay.setPickOnBounds(true);
 		// overlay.setMouseTransparent(true);
-		OverlaySwitcher overlaySwitcher = new OverlaySwitcher(overlay);
-		overlaySwitcher.addView(Alarm.class, alarmMenu);
-		settings = new Settings(viewSwitch, player, overlaySwitcher);
+		settings = new Settings(viewSwitch, player);
 		alarm.setSettings(settings);
 		Node clock = new Clock();
 		viewSwitch.setDefaultView(clock);

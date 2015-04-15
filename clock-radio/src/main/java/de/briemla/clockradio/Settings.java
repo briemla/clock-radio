@@ -14,12 +14,10 @@ public class Settings {
 	private final SimpleBooleanProperty alarmStartedProperty;
 	private final ObservableList<Alarm> alarms;
 	private final Player player;
-	private final OverlaySwitcher overlaySwitcher;
 
-	public Settings(ViewSwitcher viewSwitcher, Player player, OverlaySwitcher overlaySwitcher) {
+	public Settings(ViewSwitcher viewSwitcher, Player player) {
 		this.viewSwitcher = viewSwitcher;
 		this.player = player;
-		this.overlaySwitcher = overlaySwitcher;
 		alarmStartedProperty = new SimpleBooleanProperty();
 		alarms = FXCollections.observableArrayList();
 	}
