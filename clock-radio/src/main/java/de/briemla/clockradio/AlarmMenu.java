@@ -2,27 +2,27 @@ package de.briemla.clockradio;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 
-public class AlarmMenu extends VBox {
+public class AlarmMenu extends GridPane {
 
+	private static final String TIME_FORMAT = "%02d";
 	@FXML
-	private AnchorPane container;
+	private GridPane container;
 	@FXML
-	private Label time;
+	private Button time;
 	@FXML
-	private Label weekdays;
+	private Button weekdays;
 	@FXML
-	private Label mediaDescription;
-	@FXML
-	private Button settings;
+	private Button mediaDescription;
 	private final SimpleObjectProperty<Media> mediaProperty;
 	private final SimpleIntegerProperty hourProperty;
 	private final SimpleIntegerProperty minuteProperty;
+	private final SimpleStringProperty weekdaysProperty;
 	private final ViewSwitcher viewSwitcher;
 
 	public AlarmMenu(ViewSwitcher viewSwitcher) {
@@ -32,7 +32,10 @@ public class AlarmMenu extends VBox {
 		mediaProperty = new SimpleObjectProperty<>();
 		hourProperty = new SimpleIntegerProperty();
 		minuteProperty = new SimpleIntegerProperty();
-		time.textProperty().bind(hourProperty.asString().concat(":").concat(minuteProperty.asString()));
+		weekdaysProperty = new SimpleStringProperty("Mo - Fr");
+		time.textProperty().bind(
+				hourProperty.asString(TIME_FORMAT).concat(":").concat(minuteProperty.asString(TIME_FORMAT)));
+		mediaDescription.textProperty().bind(mediaProperty.asString());
 	}
 
 	public void unbind() {
@@ -50,6 +53,21 @@ public class AlarmMenu extends VBox {
 		hourProperty.bindBidirectional(alarm.hourProperty());
 		minuteProperty.bindBidirectional(alarm.minuteProperty());
 		mediaProperty.bindBidirectional(alarm.mediaProperty());
+	}
+
+	@FXML
+	public void selectMediaDescription(Event event) {
+
+	}
+
+	@FXML
+	public void selectTime(Event event) {
+
+	}
+
+	@FXML
+	public void selectWeekdays(Event event) {
+
 	}
 
 }

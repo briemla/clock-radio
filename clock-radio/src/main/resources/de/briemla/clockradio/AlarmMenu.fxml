@@ -3,17 +3,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.CheckBox?>
 
-<fx:root type="VBox" fx:id="alarmMenu" styleClass="alarm-menu" maxHeight="200" maxWidth="400" minHeight="200.0" minWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <HBox VBox.vgrow="ALWAYS">
-            <children>
-                <Label fx:id="time" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="time" HBox.hgrow="ALWAYS" />
-                <Label fx:id="weekdays" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="weekdays" text="Mo - Fr" wrapText="true" HBox.hgrow="NEVER" />
-            </children>
-        </HBox>
-        <Label fx:id="mediaDescription" styleClass="media-description" VBox.vgrow="NEVER" />
-    </children>
+<fx:root maxHeight="150.0" maxWidth="450.0" minHeight="150.0" minWidth="450.0" styleClass="alarm-menu" type="GridPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints hgrow="ALWAYS" percentWidth="70.0" />
+      <ColumnConstraints hgrow="ALWAYS" percentWidth="30.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints percentHeight="70.0" vgrow="ALWAYS" />
+      <RowConstraints percentHeight="30.0" vgrow="ALWAYS" />
+   </rowConstraints>
+   <children>
+        <Button fx:id="mediaDescription" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#selectMediaDescription" styleClass="media-description" text="Media" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS" />
+        <Button fx:id="time" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#selectTime" styleClass="time" text="time" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
+        <Button fx:id="weekdays" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#selectWeekdays" styleClass="weekdays" text="Mo - Fr" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
+   </children>
 </fx:root>
