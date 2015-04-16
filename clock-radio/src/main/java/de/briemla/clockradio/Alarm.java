@@ -135,6 +135,7 @@ public class Alarm {
 		});
 	}
 
+	// TODO restart timer
 	public void stop() {
 		if (alarmStartedProperty.get()) {
 			mediaProperty().get().stop(mediaPlayer);
@@ -186,7 +187,7 @@ public class Alarm {
 	private LocalDateTime alarmLocalDate() {
 		LocalDateTime date = LocalDateTime.now();
 		if (date.getHour() > hourProperty.get() || date.getHour() == hourProperty.get()
-		        && date.getMinute() >= minuteProperty.get()) {
+				&& date.getMinute() >= minuteProperty.get()) {
 			date = date.plusDays(1);
 		}
 		date = date.withHour(hourProperty.get());
