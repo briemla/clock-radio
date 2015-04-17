@@ -113,11 +113,10 @@ public class Alarm {
 	public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, Player mediaPlayer) {
 		this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
 		this.mediaPlayer = mediaPlayer;
-		LocalTime now = LocalTime.now().plusMinutes(1);
 		durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
 		alarmStartedProperty = new SimpleBooleanProperty();
 		mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
-		wakeUpTimeProperty = new SimpleObjectProperty<>(new WakeUpTime(now.getHour(), now.getMinute()));
+		wakeUpTimeProperty = new SimpleObjectProperty<>(initialWakeUpTime());
 		AlarmTimer alarmTimer = new AlarmTimer(this);
 		alarmTimer.startTimer();
 		activated.addListener((change, oldValue, newValue) -> {
@@ -127,6 +126,11 @@ public class Alarm {
 			}
 			alarmTimer.stopTimer();
 		});
+	}
+
+	private static WakeUpTime initialWakeUpTime() {
+		LocalTime now = LocalTime.now().plusMinutes(1);
+		return new WakeUpTime(now.getHour(), now.getMinute());
 	}
 
 	// TODO restart timer
