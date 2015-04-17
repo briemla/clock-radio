@@ -32,8 +32,8 @@ public class ViewSwitcher extends BorderPane {
 	}
 
 	/**
-	 * Add a view to the {@link ViewSwitcher}. The first view will automatically be used as default
-	 * view.
+	 * Add a view to the {@link ViewSwitcher}. The first view will automatically
+	 * be used as default view.
 	 *
 	 * @param view
 	 */
@@ -70,7 +70,7 @@ public class ViewSwitcher extends BorderPane {
 		return (T) node;
 	}
 
-	public void addView(Class<Alarm> clazz, Node node) {
+	public void addView(Class<?> clazz, Node node) {
 		views.put(clazz, node);
 		container.getChildren().add(node);
 		disable(node);
