@@ -1,4 +1,4 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.controls;
 
 import javafx.beans.property.BooleanPropertyBase;
 import javafx.css.PseudoClass;

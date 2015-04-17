@@ -1,5 +1,8 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.controls;
 
+import de.briemla.clockradio.Alarm;
+import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.Settings;
 import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

@@ -1,8 +1,11 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.controls;
 
 import java.util.HashMap;
 import java.util.List;
 
+import de.briemla.clockradio.Alarm;
+import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.Settings;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;

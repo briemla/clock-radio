@@ -1,8 +1,12 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.controls;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.briemla.clockradio.Alarm;
+import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.Player;
+import de.briemla.clockradio.Settings;
 import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.event.ActionEvent;

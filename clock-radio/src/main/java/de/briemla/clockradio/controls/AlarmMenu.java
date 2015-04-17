@@ -1,4 +1,4 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.controls;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.Event;
@@ -6,8 +6,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import de.briemla.clockradio.controls.MediaSelector;
-import de.briemla.clockradio.controls.TimeEditor;
+import de.briemla.clockradio.Alarm;
+import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.Media;
+import de.briemla.clockradio.Settings;
+import de.briemla.clockradio.WakeUpTime;
 
 public class AlarmMenu extends VBox {
 

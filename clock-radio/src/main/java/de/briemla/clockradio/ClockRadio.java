@@ -14,6 +14,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import de.briemla.clockradio.controls.MainPanel;
 import de.briemla.clockradio.dabpi.CommandFactory;
 import de.briemla.clockradio.dabpi.DabpiCommandFactory;
 import de.briemla.clockradio.dabpi.DabpiController;

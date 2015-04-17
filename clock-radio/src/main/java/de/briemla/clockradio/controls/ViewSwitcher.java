@@ -1,7 +1,8 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.controls;
 
 import java.util.HashMap;
 
+import de.briemla.clockradio.FXUtil;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;

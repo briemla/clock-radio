@@ -1,5 +1,7 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.controls;
 
+import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.TimeProvider;
 import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

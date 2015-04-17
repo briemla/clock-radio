@@ -4,10 +4,10 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import de.briemla.clockradio.ViewSwitcher?>
-<?import de.briemla.clockradio.AlarmView?>
+<?import de.briemla.clockradio.controls.ViewSwitcher?>
+<?import de.briemla.clockradio.controls.AlarmView?>
 <?import javafx.scene.layout.StackPane?>
-<?import de.briemla.clockradio.AlarmMenu?>
+<?import de.briemla.clockradio.controls.AlarmMenu?>
 
 <fx:root styleClass="main-panel" prefHeight="600.0" prefWidth="1024.0" type="StackPane" xmlns="http://javafx.com/javafx/8"
     xmlns:fx="http://javafx.com/fxml/1">

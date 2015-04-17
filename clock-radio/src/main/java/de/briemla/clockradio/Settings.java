@@ -2,6 +2,8 @@ package de.briemla.clockradio;
 
 import java.util.Iterator;
 
+import de.briemla.clockradio.controls.AlarmMenu;
+import de.briemla.clockradio.controls.ViewSwitcher;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
