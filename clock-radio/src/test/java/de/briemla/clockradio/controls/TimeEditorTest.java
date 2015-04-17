@@ -7,11 +7,11 @@ import javafx.scene.Parent;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
-public class TimeTest extends GuiTest {
+public class TimeEditorTest extends GuiTest {
 
 	@Override
 	protected Parent getRootNode() {
-		return new Time();
+		return new TimeEditor();
 	}
 
 	@Test

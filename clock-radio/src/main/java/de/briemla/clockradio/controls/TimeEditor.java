@@ -10,7 +10,7 @@ import javafx.scene.layout.StackPane;
 import jfxtras.scene.layout.CircularPane;
 import de.briemla.clockradio.FXUtil;
 
-public class Time extends AnchorPane {
+public class TimeEditor extends AnchorPane {
 
 	@FXML
 	private Label hour;
@@ -34,7 +34,7 @@ public class Time extends AnchorPane {
 	private final SimpleIntegerProperty hourProperty;
 	private final SimpleIntegerProperty minuteProperty;
 
-	public Time() {
+	public TimeEditor() {
 		super();
 		FXUtil.load(this, this);
 

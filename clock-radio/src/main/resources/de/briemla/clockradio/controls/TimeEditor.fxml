@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleButton?>
 <?import de.briemla.clockradio.controls.Pointer?>
@@ -24,22 +25,22 @@
 				<Label id="minute" fx:id="minute" text="00" />
 			</children>
 		</HBox>
-		<StackPane styleClass="setting" maxHeight="300.0" maxWidth="300.0" minHeight="300.0" minWidth="300.0" prefHeight="300.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+		<VBox styleClass="setting" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
 			<children>
-				<StackPane fx:id="hourParent">
+				<StackPane fx:id="hourParent" maxHeight="300.0" maxWidth="300.0" minHeight="300.0" minWidth="300.0">
 					<children>
 						<Pointer2Circle fx:id="hourPointer"/>
 						<CircularPane fx:id="afternoon" diameter="250.0" startAngle="-15.0" />
 						<CircularPane fx:id="morning" diameter="180" startAngle="-15.0" />
 					</children>
 				</StackPane>
-				<StackPane fx:id="minuteParent" visible="false">
+				<StackPane fx:id="minuteParent" maxHeight="300.0" maxWidth="300.0" minHeight="300.0" minWidth="300.0">
 					<children>
 						<Pointer fx:id="minutePointer"/>
 						<CircularPane fx:id="minuteCircle" diameter="250.0" startAngle="15.0" />
 					</children>
 				</StackPane>
 			</children>
-		</StackPane>
+		</VBox>
 	</children>
 </fx:root>

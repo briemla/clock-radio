@@ -4,12 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import de.briemla.clockradio.controls.MediaSelector;
-import de.briemla.clockradio.controls.Time;
+import de.briemla.clockradio.controls.TimeEditor;
 
 public class AlarmSettings extends HBox {
 
 	@FXML
-	private Time time;
+	private TimeEditor time;
 	@FXML
 	private MediaSelector source;
 	private Alarm lastAlarm;
