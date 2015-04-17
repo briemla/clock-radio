@@ -1,10 +1,12 @@
 package de.briemla.clockradio;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -106,6 +108,7 @@ public class Alarm {
 	private final SimpleObjectProperty<Duration> durationProperty;
 	private final SimpleBooleanProperty alarmStartedProperty;
 	private final SimpleBooleanProperty alarmAlreadyStartedProperty;
+	private final SimpleObjectProperty<ActiveDays> activeDaysProperty;
 	private final SimpleObjectProperty<Media> mediaProperty;
 	private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
 	private final SimpleBooleanProperty activated = new SimpleBooleanProperty(true);
@@ -116,10 +119,12 @@ public class Alarm {
 		this.mediaPlayer = mediaPlayer;
 		durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
 		alarmStartedProperty = new SimpleBooleanProperty();
+		activeDaysProperty = new SimpleObjectProperty<>(initialActiveDays());
 		mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
 		wakeUpTimeProperty = new SimpleObjectProperty<>(initialWakeUpTime());
 		AlarmTimer alarmTimer = new AlarmTimer(this);
 		wakeUpTimeProperty.addListener(alarmTimer);
+		activeDaysProperty.addListener(alarmTimer);
 		alarmTimer.startTimer();
 		activated.addListener((change, oldValue, newValue) -> {
 			if (newValue) {
@@ -128,6 +133,10 @@ public class Alarm {
 			}
 			alarmTimer.stopTimer();
 		});
+	}
+
+	private static ActiveDays initialActiveDays() {
+		return new ActiveDays(EnumSet.range(DayOfWeek.MONDAY, DayOfWeek.FRIDAY));
 	}
 
 	private static WakeUpTime initialWakeUpTime() {
@@ -182,7 +191,8 @@ public class Alarm {
 
 	private LocalDateTime alarmLocalDate() {
 		LocalDateTime now = LocalDateTime.now();
-		return wakeUpTimeProperty.get().nextAlarm(now);
+		LocalDateTime nextTime = wakeUpTimeProperty.get().nextAlarm(now);
+		return activeDaysProperty.get().nextAlarm(nextTime);
 	}
 
 	private Date alarmStopDate() {
