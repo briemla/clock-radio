@@ -30,14 +30,12 @@ public class AlarmSettings extends HBox {
 		if (lastAlarm == null) {
 			return;
 		}
-		time.hourProperty().unbindBidirectional(lastAlarm.hourProperty());
-		time.minuteProperty().unbindBidirectional(lastAlarm.minuteProperty());
+		time.timeProperty().unbindBidirectional(lastAlarm.wakeUpTimeProperty());
 		source.mediaProperty().unbindBidirectional(lastAlarm.mediaProperty());
 	}
 
 	private void bindTo(Alarm alarm) {
-		time.hourProperty().bindBidirectional(alarm.hourProperty());
-		time.minuteProperty().bindBidirectional(alarm.minuteProperty());
+		time.timeProperty().bindBidirectional(alarm.wakeUpTimeProperty());
 		source.mediaProperty().bindBidirectional(alarm.mediaProperty());
 		lastAlarm = alarm;
 		time.switchToHour();

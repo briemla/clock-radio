@@ -1,7 +1,9 @@
 package de.briemla.clockradio.controls;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -9,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import jfxtras.scene.layout.CircularPane;
 import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.WakeUpTime;
 
 public class TimeEditor extends AnchorPane {
 
@@ -33,11 +36,13 @@ public class TimeEditor extends AnchorPane {
 
 	private final SimpleIntegerProperty hourProperty;
 	private final SimpleIntegerProperty minuteProperty;
+	private final SimpleObjectProperty<WakeUpTime> timeProperty;
 
 	public TimeEditor() {
 		super();
 		FXUtil.load(this, this);
 
+		timeProperty = new SimpleObjectProperty<>();
 		hourProperty = new SimpleIntegerProperty(0);
 		minuteProperty = new SimpleIntegerProperty(0);
 		for (int currentHour = 0; currentHour <= 11; currentHour++) {
@@ -106,5 +111,9 @@ public class TimeEditor extends AnchorPane {
 	public void switchToHour() {
 		hourParent.setVisible(true);
 		minuteParent.setVisible(false);
+	}
+
+	public ObjectProperty<WakeUpTime> timeProperty() {
+		return timeProperty;
 	}
 }

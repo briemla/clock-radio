@@ -1,6 +1,5 @@
 package de.briemla.clockradio;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.Event;
@@ -20,8 +19,7 @@ public class AlarmMenu extends GridPane {
 	@FXML
 	private Button mediaDescription;
 	private final SimpleObjectProperty<Media> mediaProperty;
-	private final SimpleIntegerProperty hourProperty;
-	private final SimpleIntegerProperty minuteProperty;
+	private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
 	private final SimpleStringProperty weekdaysProperty;
 	private final ViewSwitcher viewSwitcher;
 
@@ -30,18 +28,15 @@ public class AlarmMenu extends GridPane {
 		this.viewSwitcher = viewSwitcher;
 		FXUtil.load(this, this);
 		mediaProperty = new SimpleObjectProperty<>();
-		hourProperty = new SimpleIntegerProperty();
-		minuteProperty = new SimpleIntegerProperty();
+		wakeUpTimeProperty = new SimpleObjectProperty<>();
 		weekdaysProperty = new SimpleStringProperty("Mo - Fr");
-		time.textProperty().bind(
-				hourProperty.asString(TIME_FORMAT).concat(":").concat(minuteProperty.asString(TIME_FORMAT)));
+		time.textProperty().bind(wakeUpTimeProperty.asString());
 		mediaDescription.textProperty().bind(mediaProperty.asString());
 	}
 
 	public void unbind() {
-		hourProperty.unbind();
-		minuteProperty.unbind();
 		mediaProperty.unbind();
+		wakeUpTimeProperty.unbind();
 	}
 
 	public void setCurrentAlarm(Alarm alarm) {
@@ -50,9 +45,8 @@ public class AlarmMenu extends GridPane {
 	}
 
 	private void bindTo(Alarm alarm) {
-		hourProperty.bindBidirectional(alarm.hourProperty());
-		minuteProperty.bindBidirectional(alarm.minuteProperty());
 		mediaProperty.bindBidirectional(alarm.mediaProperty());
+		wakeUpTimeProperty.bind(alarm.wakeUpTimeProperty());
 	}
 
 	@FXML

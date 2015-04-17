@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyBooleanProperty;
@@ -112,6 +111,7 @@ public class Alarm {
 	private final SimpleObjectProperty<Media> mediaProperty;
 	private final SimpleBooleanProperty activated = new SimpleBooleanProperty(true);
 	private final Player mediaPlayer;
+	private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
 
 	public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, Player mediaPlayer) {
 		this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
@@ -122,6 +122,7 @@ public class Alarm {
 		durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
 		alarmStartedProperty = new SimpleBooleanProperty();
 		mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
+		wakeUpTimeProperty = new SimpleObjectProperty<>(new WakeUpTime(now.getHour(), now.getMinute()));
 		AlarmTimer alarmTimer = new AlarmTimer(this);
 		alarmTimer.startTimer();
 		hourProperty.addListener(alarmTimer);
@@ -147,16 +148,12 @@ public class Alarm {
 		return durationProperty.get();
 	}
 
-	public IntegerProperty hourProperty() {
-		return hourProperty;
-	}
-
-	public IntegerProperty minuteProperty() {
-		return minuteProperty;
-	}
-
 	public ObjectProperty<Media> mediaProperty() {
 		return mediaProperty;
+	}
+
+	public ObjectProperty<WakeUpTime> wakeUpTimeProperty() {
+		return wakeUpTimeProperty;
 	}
 
 	public void play() {
