@@ -51,6 +51,10 @@
 	-fx-text-alignement: left;
 }
 
+.check-box {
+	-fx-text-fill: text-color;
+}
+
 .check-box>.box {
   -fx-background-insets: 0.0;
   -fx-background-radius: 0.0;
