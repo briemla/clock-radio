@@ -106,9 +106,9 @@ public class Alarm {
 	private final SimpleBooleanProperty alarmStartedProperty;
 	private final SimpleBooleanProperty alarmAlreadyStartedProperty;
 	private final SimpleObjectProperty<Media> mediaProperty;
+	private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
 	private final SimpleBooleanProperty activated = new SimpleBooleanProperty(true);
 	private final Player mediaPlayer;
-	private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
 
 	public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, Player mediaPlayer) {
 		this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
