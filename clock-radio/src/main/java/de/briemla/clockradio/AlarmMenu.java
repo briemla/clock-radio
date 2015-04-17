@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import de.briemla.clockradio.controls.MediaSelector;
 import de.briemla.clockradio.controls.TimeEditor;
 
 public class AlarmMenu extends VBox {
@@ -40,6 +41,9 @@ public class AlarmMenu extends VBox {
 		TimeEditor editor = new TimeEditor();
 		viewSwitcher.addView(WakeUpTime.class, editor);
 		editor.timeProperty().bindBidirectional(wakeUpTimeProperty);
+		MediaSelector mediaSelector = new MediaSelector();
+		viewSwitcher.addView(Media.class, mediaSelector);
+		mediaSelector.mediaProperty().bindBidirectional(mediaProperty);
 	}
 
 	public void unbind() {
@@ -60,7 +64,7 @@ public class AlarmMenu extends VBox {
 
 	@FXML
 	public void selectMediaDescription(Event event) {
-
+		viewSwitcher.show(Media.class);
 	}
 
 	@FXML
