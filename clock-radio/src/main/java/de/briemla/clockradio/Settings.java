@@ -52,17 +52,8 @@ public class Settings {
 	}
 
 	public void select(Alarm alarm) {
-		// AlarmMenu menu = overlaySwitcher.show(Alarm.class);
-		// menu.setCurrentAlarm(alarm);
-		// AlarmMenu alarmMenu = new AlarmMenu();
-		// alarmMenu.setCurrentAlarm(alarm);
-		// Popup popup = new Popup();
-		// popup.setAutoHide(true);
-		// popup.getContent().add(alarmMenu);
-		// alarmMenu.getStylesheets().setAll(viewSwitcher.getScene().getRoot().getStylesheets());
 		AlarmMenu alarmSettings = viewSwitcher.show(Alarm.class);
 		alarmSettings.setCurrentAlarm(alarm);
-		// popup.show(alarmSettings.getScene().getWindow());
 	}
 
 	public void delete(Alarm alarm) {
