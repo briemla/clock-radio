@@ -10,7 +10,6 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleButton?>
 <?import de.briemla.clockradio.controls.Pointer?>
@@ -18,14 +17,8 @@
 
 <fx:root styleClass="time" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<HBox styleClass="display" alignment="CENTER" maxHeight="100.0" minHeight="100.0" prefHeight="100.0" prefWidth="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-			<children>
-				<Label id="hour" fx:id="hour" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="00" />
-				<Label text=":" />
-				<Label id="minute" fx:id="minute" text="00" />
-			</children>
-		</HBox>
-		<VBox styleClass="setting" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+		<Label fx:id="time" alignment="CENTER" contentDisplay="CENTER" text="00"  maxHeight="100.0" minHeight="100.0" prefWidth="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+		<HBox styleClass="setting" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
 			<children>
 				<StackPane fx:id="hourParent" maxHeight="300.0" maxWidth="300.0" minHeight="300.0" minWidth="300.0">
 					<children>
@@ -41,6 +34,6 @@
 					</children>
 				</StackPane>
 			</children>
-		</VBox>
+		</HBox>
 	</children>
 </fx:root>

@@ -5,6 +5,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import de.briemla.clockradio.controls.TimeEditor;
 
 public class AlarmMenu extends GridPane {
 
@@ -25,9 +26,16 @@ public class AlarmMenu extends GridPane {
 		this.viewSwitcher = viewSwitcher;
 		FXUtil.load(this, this);
 		mediaProperty = new SimpleObjectProperty<>();
-		wakeUpTimeProperty = new SimpleObjectProperty<>();
+		wakeUpTimeProperty = new SimpleObjectProperty<>(new WakeUpTime(0, 0));
 		time.textProperty().bind(wakeUpTimeProperty.asString());
 		mediaDescription.textProperty().bind(mediaProperty.asString());
+		registerViews();
+	}
+
+	private void registerViews() {
+		TimeEditor editor = new TimeEditor();
+		viewSwitcher.addView(WakeUpTime.class, editor);
+		editor.timeProperty().bindBidirectional(wakeUpTimeProperty);
 	}
 
 	public void unbind() {
@@ -42,7 +50,7 @@ public class AlarmMenu extends GridPane {
 
 	private void bindTo(Alarm alarm) {
 		mediaProperty.bindBidirectional(alarm.mediaProperty());
-		wakeUpTimeProperty.bind(alarm.wakeUpTimeProperty());
+		wakeUpTimeProperty.bindBidirectional(alarm.wakeUpTimeProperty());
 	}
 
 	@FXML
@@ -52,7 +60,7 @@ public class AlarmMenu extends GridPane {
 
 	@FXML
 	public void selectTime(Event event) {
-
+		viewSwitcher.show(WakeUpTime.class);
 	}
 
 	@FXML

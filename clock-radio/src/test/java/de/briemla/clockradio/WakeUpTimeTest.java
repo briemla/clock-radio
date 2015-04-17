@@ -107,6 +107,20 @@ public class WakeUpTimeTest {
 	}
 
 	@Test
+	public void getHour() throws Exception {
+		WakeUpTime wakeUpTime = new WakeUpTime(1, 2);
+
+		assertThat(wakeUpTime.getHour(), is(equalTo(1)));
+	}
+
+	@Test
+	public void getMinute() throws Exception {
+		WakeUpTime wakeUpTime = new WakeUpTime(1, 2);
+
+		assertThat(wakeUpTime.getMinute(), is(equalTo(2)));
+	}
+
+	@Test
 	public void equalsAndHashCode() throws Exception {
 		EqualsVerifier.forClass(WakeUpTime.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}

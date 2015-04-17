@@ -135,8 +135,8 @@ public class TimeEditorTest extends GuiTest {
 	}
 
 	private void checkHour(int hour) {
-		click("#" + hour);
-		assertThat("#hour", hasText(String.format("%02d", hour)));
+		click("#hour" + hour);
+		assertThat("#time", hasText(String.format("%02d:00", hour)));
 	}
 
 	@Test
@@ -195,13 +195,8 @@ public class TimeEditorTest extends GuiTest {
 	}
 
 	private void checkMinute(int minutes) {
-		switchToMinute();
-		click("#" + minutes);
-		assertThat("#minute", hasText(String.format("%02d", minutes)));
-	}
-
-	private void switchToMinute() {
-		click("#minute");
+		click("#minute" + minutes);
+		assertThat("#time", hasText(String.format("00:%02d", minutes)));
 	}
 
 }

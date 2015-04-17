@@ -78,4 +78,13 @@ public class WakeUpTime {
 		return new WakeUpTime(hour, newMinute);
 	}
 
+	// TODO try to find better way instead of getters
+	public Integer getHour() {
+		return hour;
+	}
+
+	public Integer getMinute() {
+		return minute;
+	}
+
 }
