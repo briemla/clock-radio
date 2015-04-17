@@ -45,7 +45,7 @@ public class MainPanel extends StackPane {
 		alarm.setSettings(settings);
 		Node clock = new DigitalClock();
 		viewSwitcher.setDefaultView(clock);
-		AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher);
+		AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher, settings);
 		viewSwitcher.addView(Alarm.class, alarmMenu);
 		addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
 			if (!active.get()) {
