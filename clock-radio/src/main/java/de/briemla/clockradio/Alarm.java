@@ -19,7 +19,7 @@ import de.briemla.clockradio.controls.LocalFolder;
 
 public class Alarm {
 
-	public static class AlarmTimer implements ChangeListener<Number> {
+	public static class AlarmTimer implements ChangeListener<Object> {
 
 		private Timer startTimer;
 		private final Alarm alarm;
@@ -31,7 +31,7 @@ public class Alarm {
 		}
 
 		@Override
-		public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+		public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object newValue) {
 			stopTimer();
 			startTimer();
 		}
@@ -118,6 +118,7 @@ public class Alarm {
 		mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
 		wakeUpTimeProperty = new SimpleObjectProperty<>(initialWakeUpTime());
 		AlarmTimer alarmTimer = new AlarmTimer(this);
+		wakeUpTimeProperty.addListener(alarmTimer);
 		alarmTimer.startTimer();
 		activated.addListener((change, oldValue, newValue) -> {
 			if (newValue) {
