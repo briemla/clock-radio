@@ -182,14 +182,9 @@ public class Alarm {
 	}
 
 	private LocalDateTime alarmLocalDate() {
-		LocalDateTime date = LocalDateTime.now();
-		if (date.getHour() > hourProperty.get() || date.getHour() == hourProperty.get()
-				&& date.getMinute() >= minuteProperty.get()) {
-			date = date.plusDays(1);
-		}
-		date = date.withHour(hourProperty.get());
-		date = date.withMinute(minuteProperty.get());
-		return date.withSecond(0).withNano(0);
+		LocalDateTime now = LocalDateTime.now();
+		return wakeUpTimeProperty.get().nextAlarm(now);
+
 	}
 
 	private Date alarmStopDate() {

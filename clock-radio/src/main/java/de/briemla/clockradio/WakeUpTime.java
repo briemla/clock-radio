@@ -1,7 +1,11 @@
 package de.briemla.clockradio;
 
+import java.time.LocalDateTime;
+
 public class WakeUpTime {
 
+	private static final int CORRECTION = 1;
+	private static final int ZERO = 0;
 	private static final String TIME_FORMAT = "%02d:%02d";
 	private final Integer hour;
 	private final Integer minute;
@@ -54,4 +58,15 @@ public class WakeUpTime {
 		return String.format(TIME_FORMAT, hour, minute);
 	}
 
+	public LocalDateTime nextAlarm(LocalDateTime now) {
+		LocalDateTime alarmDate = now;
+		if (now.getHour() > hour || now.getHour() == hour && now.getMinute() >= minute) {
+			alarmDate = alarmDate.plusDays(CORRECTION);
+		}
+		return aligne(alarmDate.withHour(hour).withMinute(minute));
+	}
+
+	private static LocalDateTime aligne(LocalDateTime time) {
+		return time.withSecond(ZERO).withNano(ZERO);
+	}
 }
