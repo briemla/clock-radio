@@ -12,7 +12,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -103,8 +102,6 @@ public class Alarm {
 		}
 	}
 
-	private final SimpleIntegerProperty hourProperty;
-	private final SimpleIntegerProperty minuteProperty;
 	private final SimpleObjectProperty<Duration> durationProperty;
 	private final SimpleBooleanProperty alarmStartedProperty;
 	private final SimpleBooleanProperty alarmAlreadyStartedProperty;
@@ -117,16 +114,12 @@ public class Alarm {
 		this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
 		this.mediaPlayer = mediaPlayer;
 		LocalTime now = LocalTime.now().plusMinutes(1);
-		hourProperty = new SimpleIntegerProperty(now.getHour());
-		minuteProperty = new SimpleIntegerProperty(now.getMinute());
 		durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
 		alarmStartedProperty = new SimpleBooleanProperty();
 		mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
 		wakeUpTimeProperty = new SimpleObjectProperty<>(new WakeUpTime(now.getHour(), now.getMinute()));
 		AlarmTimer alarmTimer = new AlarmTimer(this);
 		alarmTimer.startTimer();
-		hourProperty.addListener(alarmTimer);
-		minuteProperty.addListener(alarmTimer);
 		activated.addListener((change, oldValue, newValue) -> {
 			if (newValue) {
 				alarmTimer.startTimer();
@@ -184,7 +177,6 @@ public class Alarm {
 	private LocalDateTime alarmLocalDate() {
 		LocalDateTime now = LocalDateTime.now();
 		return wakeUpTimeProperty.get().nextAlarm(now);
-
 	}
 
 	private Date alarmStopDate() {
