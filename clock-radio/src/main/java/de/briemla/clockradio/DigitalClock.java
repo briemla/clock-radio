@@ -5,14 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
-public class Clock extends StackPane {
+public class DigitalClock extends StackPane {
 
 	@FXML
 	private Label time;
 
 	private final TimeProvider timeProvider;
 
-	public Clock() {
+	public DigitalClock() {
 		super();
 		FXUtil.load(this, this);
 		timeProvider = new TimeProvider();

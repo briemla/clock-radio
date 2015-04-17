@@ -43,7 +43,7 @@ public class MainPanel extends StackPane {
 		active = new ActivePseudoClassProperty(this);
 		settings = new Settings(viewSwitcher, player);
 		alarm.setSettings(settings);
-		Node clock = new Clock();
+		Node clock = new DigitalClock();
 		viewSwitcher.setDefaultView(clock);
 		AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher);
 		viewSwitcher.addView(Alarm.class, alarmMenu);
