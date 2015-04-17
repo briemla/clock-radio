@@ -9,7 +9,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
 import de.briemla.clockradio.Media;
-import de.briemla.clockradio.Player;
+import de.briemla.clockradio.player.Player;
 
 public class LocalFolder implements Media {
 

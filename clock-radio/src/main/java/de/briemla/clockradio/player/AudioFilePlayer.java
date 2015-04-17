@@ -1,4 +1,4 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.player;
 
 import static javax.sound.sampled.AudioFormat.Encoding.PCM_SIGNED;
 import static javax.sound.sampled.AudioSystem.getAudioInputStream;

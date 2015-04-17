@@ -20,6 +20,10 @@ import de.briemla.clockradio.dabpi.DabpiCommandFactory;
 import de.briemla.clockradio.dabpi.DabpiController;
 import de.briemla.clockradio.dabpi.DabpiExecutor;
 import de.briemla.clockradio.dabpi.RadioExecutor;
+import de.briemla.clockradio.player.AudioFilePlayer;
+import de.briemla.clockradio.player.BasePlayer;
+import de.briemla.clockradio.player.Player;
+import de.briemla.clockradio.player.RadioPlayer;
 
 public class ClockRadio extends Application {
 

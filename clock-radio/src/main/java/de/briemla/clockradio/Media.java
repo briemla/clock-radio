@@ -1,5 +1,7 @@
 package de.briemla.clockradio;
 
+import de.briemla.clockradio.player.Player;
+
 
 public interface Media {
 

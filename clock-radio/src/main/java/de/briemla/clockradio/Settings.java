@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import de.briemla.clockradio.controls.AlarmMenu;
 import de.briemla.clockradio.controls.ViewSwitcher;
+import de.briemla.clockradio.player.Player;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;

@@ -1,4 +1,4 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.player;
 
 import java.io.IOException;
 import java.util.ArrayList;

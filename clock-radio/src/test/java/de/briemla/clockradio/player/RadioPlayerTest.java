@@ -1,4 +1,4 @@
-package de.briemla.clockradio;
+package de.briemla.clockradio.player;
 
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
@@ -24,6 +24,7 @@ import de.briemla.clockradio.dabpi.result.DABChannelList;
 import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.FMStatus;
+import de.briemla.clockradio.player.RadioPlayer;
 
 public class RadioPlayerTest {
 

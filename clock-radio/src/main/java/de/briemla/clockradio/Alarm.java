@@ -16,6 +16,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import de.briemla.clockradio.controls.LocalFolder;
+import de.briemla.clockradio.player.Player;
 
 public class Alarm {
 
