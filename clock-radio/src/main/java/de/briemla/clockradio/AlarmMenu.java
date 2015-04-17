@@ -1,7 +1,6 @@
 package de.briemla.clockradio;
 
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +8,6 @@ import javafx.scene.layout.GridPane;
 
 public class AlarmMenu extends GridPane {
 
-	private static final String TIME_FORMAT = "%02d";
 	@FXML
 	private GridPane container;
 	@FXML
@@ -20,7 +18,6 @@ public class AlarmMenu extends GridPane {
 	private Button mediaDescription;
 	private final SimpleObjectProperty<Media> mediaProperty;
 	private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
-	private final SimpleStringProperty weekdaysProperty;
 	private final ViewSwitcher viewSwitcher;
 
 	public AlarmMenu(ViewSwitcher viewSwitcher) {
@@ -29,7 +26,6 @@ public class AlarmMenu extends GridPane {
 		FXUtil.load(this, this);
 		mediaProperty = new SimpleObjectProperty<>();
 		wakeUpTimeProperty = new SimpleObjectProperty<>();
-		weekdaysProperty = new SimpleStringProperty("Mo - Fr");
 		time.textProperty().bind(wakeUpTimeProperty.asString());
 		mediaDescription.textProperty().bind(mediaProperty.asString());
 	}
