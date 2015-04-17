@@ -58,6 +58,17 @@ public class ActiveDaysTest {
 	}
 
 	@Test
+	public void dayAfterNextIsAllowedWhenMultipleAreAllowed() throws Exception {
+		LocalDateTime day = LocalDateTime.of(0, 1, 4, 0, 0);
+		LocalDateTime correctedDay = day.plusDays(2);
+		ActiveDays activeDays = new ActiveDays(EnumSet.of(DayOfWeek.THURSDAY, DayOfWeek.SATURDAY, DayOfWeek.MONDAY));
+
+		LocalDateTime nextAlarm = activeDays.nextAlarm(day);
+
+		assertThat(nextAlarm, is(equalTo(correctedDay)));
+	}
+
+	@Test
 	public void equalsAndHashCode() throws Exception {
 		EqualsVerifier.forClass(ActiveDays.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}
