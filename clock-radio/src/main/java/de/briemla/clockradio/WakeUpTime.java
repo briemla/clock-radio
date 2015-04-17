@@ -69,4 +69,13 @@ public class WakeUpTime {
 	private static LocalDateTime aligne(LocalDateTime time) {
 		return time.withSecond(ZERO).withNano(ZERO);
 	}
+
+	public WakeUpTime withHour(Integer newHour) {
+		return new WakeUpTime(newHour, minute);
+	}
+
+	public WakeUpTime withMinute(Integer newMinute) {
+		return new WakeUpTime(hour, newMinute);
+	}
+
 }

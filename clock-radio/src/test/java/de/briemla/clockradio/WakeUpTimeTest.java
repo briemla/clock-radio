@@ -91,6 +91,22 @@ public class WakeUpTimeTest {
 	}
 
 	@Test
+	public void withHour() throws Exception {
+		WakeUpTime wakeUpTime = new WakeUpTime(1, 2);
+		WakeUpTime derivedTime = wakeUpTime.withHour(2);
+
+		assertThat(derivedTime, is(equalTo(new WakeUpTime(2, 2))));
+	}
+
+	@Test
+	public void withMinute() throws Exception {
+		WakeUpTime wakeUpTime = new WakeUpTime(1, 2);
+		WakeUpTime derivedTime = wakeUpTime.withMinute(5);
+
+		assertThat(derivedTime, is(equalTo(new WakeUpTime(1, 5))));
+	}
+
+	@Test
 	public void equalsAndHashCode() throws Exception {
 		EqualsVerifier.forClass(WakeUpTime.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}
