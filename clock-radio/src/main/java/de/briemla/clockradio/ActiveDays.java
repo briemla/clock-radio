@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.Locale;
 
 public class ActiveDays {
@@ -98,7 +99,16 @@ public class ActiveDays {
 
 	@Override
 	public String toString() {
-		return days.iterator().next().getDisplayName(TextStyle.SHORT, Locale.GERMAN);
+		StringBuffer output = new StringBuffer();
+		Iterator<DayOfWeek> iterator = days.iterator();
+		while (iterator.hasNext()) {
+			DayOfWeek dayOfWeek = iterator.next();
+			String name = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.GERMAN);
+			String separator = iterator.hasNext() ? ", " : "";
+			output.append(name);
+			output.append(separator);
+		}
+		return output.toString();
 	}
 
 }
