@@ -9,7 +9,7 @@ public class ActiveDays {
 	private final EnumSet<DayOfWeek> days;
 
 	public ActiveDays(EnumSet<DayOfWeek> days) {
-		this.days = days;
+		this.days = days.isEmpty() ? daily() : days;
 	}
 
 	public LocalDateTime nextAlarm(LocalDateTime nextTime) {
@@ -35,6 +35,29 @@ public class ActiveDays {
 			}
 		}
 		return days.iterator().next();
+	}
+
+	public ActiveDays with(DayOfWeek dayOfWeek) {
+		EnumSet<DayOfWeek> newDays = days.clone();
+		newDays.add(dayOfWeek);
+		return new ActiveDays(newDays);
+	}
+
+	public ActiveDays without(DayOfWeek dayOfWeek) {
+		EnumSet<DayOfWeek> newDays = days.clone();
+		newDays.remove(dayOfWeek);
+		if (newDays.isEmpty()) {
+			return new ActiveDays(daily());
+		}
+		return new ActiveDays(newDays);
+	}
+
+	private static EnumSet<DayOfWeek> daily() {
+		return EnumSet.allOf(DayOfWeek.class);
+	}
+
+	public boolean contains(DayOfWeek dayOfWeek) {
+		return days.contains(dayOfWeek);
 	}
 
 	@Override

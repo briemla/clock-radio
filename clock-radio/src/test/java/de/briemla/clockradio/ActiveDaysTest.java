@@ -69,6 +69,77 @@ public class ActiveDaysTest {
 	}
 
 	@Test
+	public void with() throws Exception {
+		ActiveDays extectedActiveDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY, DayOfWeek.TUESDAY));
+		ActiveDays activeDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+
+		ActiveDays withTuesday = activeDays.with(DayOfWeek.TUESDAY);
+
+		assertThat(withTuesday, is(equalTo(extectedActiveDays)));
+	}
+
+	@Test
+	public void withAlreadyExistingElement() throws Exception {
+		ActiveDays extectedActiveDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+		ActiveDays activeDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+
+		ActiveDays withMonday = activeDays.with(DayOfWeek.MONDAY);
+
+		assertThat(withMonday, is(equalTo(extectedActiveDays)));
+	}
+
+	@Test
+	public void without() throws Exception {
+		ActiveDays extectedActiveDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+		ActiveDays activeDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY, DayOfWeek.TUESDAY));
+
+		ActiveDays withMonday = activeDays.without(DayOfWeek.TUESDAY);
+
+		assertThat(withMonday, is(equalTo(extectedActiveDays)));
+	}
+
+	@Test
+	public void withoutAlreadyMissingElement() throws Exception {
+		ActiveDays extectedActiveDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+		ActiveDays activeDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+
+		ActiveDays withMonday = activeDays.without(DayOfWeek.TUESDAY);
+
+		assertThat(withMonday, is(equalTo(extectedActiveDays)));
+	}
+
+	@Test
+	public void withoutResultsInEmptySet() throws Exception {
+		ActiveDays activeDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+		ActiveDays daily = new ActiveDays(EnumSet.allOf(DayOfWeek.class));
+		ActiveDays without = activeDays.without(DayOfWeek.MONDAY);
+
+		assertThat(without, is(equalTo(daily)));
+	}
+
+	@Test
+	public void newActiveDaysWithEmptyEnumSet() throws Exception {
+		ActiveDays activeDays = new ActiveDays(EnumSet.noneOf(DayOfWeek.class));
+		ActiveDays daily = new ActiveDays(EnumSet.allOf(DayOfWeek.class));
+
+		assertThat(activeDays, is(equalTo(daily)));
+	}
+
+	@Test
+	public void contains() throws Exception {
+		ActiveDays activeDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+
+		assertThat(activeDays.contains(DayOfWeek.MONDAY), is(true));
+	}
+
+	@Test
+	public void doesNotContain() throws Exception {
+		ActiveDays activeDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+
+		assertThat(activeDays.contains(DayOfWeek.TUESDAY), is(false));
+	}
+
+	@Test
 	public void equalsAndHashCode() throws Exception {
 		EqualsVerifier.forClass(ActiveDays.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}
