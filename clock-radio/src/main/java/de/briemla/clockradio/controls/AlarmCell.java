@@ -1,14 +1,14 @@
 package de.briemla.clockradio.controls;
 
-import de.briemla.clockradio.Alarm;
-import de.briemla.clockradio.FXUtil;
-import de.briemla.clockradio.Settings;
 import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import de.briemla.clockradio.Alarm;
+import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.Settings;
 
 public class AlarmCell extends AnchorPane {
 
@@ -34,6 +34,7 @@ public class AlarmCell extends AnchorPane {
 		// TODO maybe create timeProperty in Alarm class
 		time.textProperty().bind(alarm.wakeUpTimeProperty().asString());
 		mediaDescription.textProperty().bind(alarm.mediaProperty().asString());
+		weekdays.textProperty().bind(alarm.activeDaysProperty().asString());
 		activeProperty.bindBidirectional(alarm.activatedProperty());
 		active.selectedProperty().bindBidirectional(activeProperty);
 		setOnMouseClicked(event -> settings.select(alarm));

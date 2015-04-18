@@ -150,6 +150,10 @@ public class Alarm {
 		return durationProperty.get();
 	}
 
+	public ObjectProperty<ActiveDays> activeDaysProperty() {
+		return activeDaysProperty;
+	}
+
 	public ObjectProperty<Media> mediaProperty() {
 		return mediaProperty;
 	}
@@ -201,4 +205,5 @@ public class Alarm {
 		stop();
 		activated.set(false);
 	}
+
 }

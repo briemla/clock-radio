@@ -23,7 +23,7 @@ public class AlarmMenu extends VBox {
 	private Button weekdays;
 	@FXML
 	private Button mediaDescription;
-	private final SimpleObjectProperty<ActiveDays> activeDayProperty;
+	private final SimpleObjectProperty<ActiveDays> activesDayProperty;
 	private final SimpleObjectProperty<Media> mediaProperty;
 	private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
 	private final ViewSwitcher viewSwitcher;
@@ -35,11 +35,12 @@ public class AlarmMenu extends VBox {
 		this.viewSwitcher = viewSwitcher;
 		this.settings = settings;
 		FXUtil.load(this, this);
-		activeDayProperty = new SimpleObjectProperty<>(new ActiveDays());
+		activesDayProperty = new SimpleObjectProperty<>(new ActiveDays());
 		mediaProperty = new SimpleObjectProperty<>();
 		wakeUpTimeProperty = new SimpleObjectProperty<>(new WakeUpTime(0, 0));
 		time.textProperty().bind(wakeUpTimeProperty.asString());
 		mediaDescription.textProperty().bind(mediaProperty.asString());
+		weekdays.textProperty().bind(activesDayProperty.asString());
 		registerViews();
 	}
 
@@ -52,12 +53,16 @@ public class AlarmMenu extends VBox {
 		mediaSelector.mediaProperty().bindBidirectional(mediaProperty);
 		ActiveDayEditor activeDayEditor = new ActiveDayEditor();
 		viewSwitcher.addView(ActiveDays.class, activeDayEditor);
-		activeDayEditor.daysProperty().bindBidirectional(activeDayProperty);
+		activeDayEditor.daysProperty().bindBidirectional(activesDayProperty);
 	}
 
 	public void unbind() {
-		mediaProperty.unbind();
-		wakeUpTimeProperty.unbind();
+		if (lastAlarm == null) {
+			return;
+		}
+		activesDayProperty.unbindBidirectional(lastAlarm.activeDaysProperty());
+		mediaProperty.unbindBidirectional(lastAlarm.mediaProperty());
+		wakeUpTimeProperty.unbindBidirectional(lastAlarm.wakeUpTimeProperty());
 	}
 
 	public void setCurrentAlarm(Alarm alarm) {
@@ -67,6 +72,7 @@ public class AlarmMenu extends VBox {
 	}
 
 	private void bindTo(Alarm alarm) {
+		activesDayProperty.bindBidirectional(alarm.activeDaysProperty());
 		mediaProperty.bindBidirectional(alarm.mediaProperty());
 		wakeUpTimeProperty.bindBidirectional(alarm.wakeUpTimeProperty());
 	}
