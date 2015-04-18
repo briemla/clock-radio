@@ -143,4 +143,53 @@ public class ActiveDaysTest {
 	public void equalsAndHashCode() throws Exception {
 		EqualsVerifier.forClass(ActiveDays.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}
+
+	@Test
+	public void mondayToString() throws Exception {
+		ActiveDays monday = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+
+		assertThat(monday.toString(), is(equalTo("Mo")));
+	}
+
+	@Test
+	public void tuesdayToString() throws Exception {
+		ActiveDays tuesday = new ActiveDays(EnumSet.of(DayOfWeek.TUESDAY));
+
+		assertThat(tuesday.toString(), is(equalTo("Di")));
+	}
+
+	@Test
+	public void wednesdayToString() throws Exception {
+		ActiveDays wednesday = new ActiveDays(EnumSet.of(DayOfWeek.WEDNESDAY));
+
+		assertThat(wednesday.toString(), is(equalTo("Mi")));
+	}
+
+	@Test
+	public void thursdayToString() throws Exception {
+		ActiveDays thursday = new ActiveDays(EnumSet.of(DayOfWeek.THURSDAY));
+
+		assertThat(thursday.toString(), is(equalTo("Do")));
+	}
+
+	@Test
+	public void fridayToString() throws Exception {
+		ActiveDays friday = new ActiveDays(EnumSet.of(DayOfWeek.FRIDAY));
+
+		assertThat(friday.toString(), is(equalTo("Fr")));
+	}
+
+	@Test
+	public void saturdayToString() throws Exception {
+		ActiveDays saturday = new ActiveDays(EnumSet.of(DayOfWeek.SATURDAY));
+
+		assertThat(saturday.toString(), is(equalTo("Sa")));
+	}
+
+	@Test
+	public void sundayToString() throws Exception {
+		ActiveDays sunday = new ActiveDays(EnumSet.of(DayOfWeek.SUNDAY));
+
+		assertThat(sunday.toString(), is(equalTo("So")));
+	}
 }

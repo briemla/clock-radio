@@ -2,7 +2,9 @@ package de.briemla.clockradio;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.format.TextStyle;
 import java.util.EnumSet;
+import java.util.Locale;
 
 public class ActiveDays {
 
@@ -96,7 +98,7 @@ public class ActiveDays {
 
 	@Override
 	public String toString() {
-		return "ActiveDays [days=" + days + "]";
+		return days.iterator().next().getDisplayName(TextStyle.SHORT, Locale.GERMAN);
 	}
 
 }
