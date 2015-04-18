@@ -342,6 +342,35 @@ public class ActiveDayEditorTest extends GuiTest {
 		allChecked();
 	}
 
+	@Test
+	public void checkWorkDays() throws Exception {
+		clickWorkDays();
+		workdaysUnchecked();
+		click(workdays);
+		workdaysChecked();
+	}
+
+	@Test
+	public void checkWeekend() throws Exception {
+		clickWeekendDays();
+		weekendUnchecked();
+		click(weekend);
+		weekendChecked();
+	}
+
+	@Test
+	public void checkDaily() throws Exception {
+		clickWorkDays();
+		workdaysUnchecked();
+		click(daily);
+		allChecked();
+
+		clickWeekendDays();
+		weekendUnchecked();
+		click(daily);
+		allChecked();
+	}
+
 	private void allChecked() {
 		workdaysChecked();
 		weekendChecked();

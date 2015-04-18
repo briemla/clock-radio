@@ -55,12 +55,13 @@ public class ActiveDayEditor extends GridPane {
 		wednesday.addEventHandler(MouseEvent.MOUSE_CLICKED, workdaysChanger);
 		thursday.addEventHandler(MouseEvent.MOUSE_CLICKED, workdaysChanger);
 		friday.addEventHandler(MouseEvent.MOUSE_CLICKED, workdaysChanger);
-		daily.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-			monday.setSelected(workdays.isSelected());
-			tuesday.setSelected(workdays.isSelected());
-			wednesday.setSelected(workdays.isSelected());
-			thursday.setSelected(workdays.isSelected());
-			friday.setSelected(workdays.isSelected());
+		workdays.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			boolean selected = workdays.isSelected();
+			monday.setSelected(selected);
+			tuesday.setSelected(selected);
+			wednesday.setSelected(selected);
+			thursday.setSelected(selected);
+			friday.setSelected(selected);
 		});
 	}
 
@@ -68,9 +69,10 @@ public class ActiveDayEditor extends GridPane {
 		EventHandler<MouseEvent> weekendChanger = (event) -> weekend.setSelected(isWeekend());
 		saturday.addEventHandler(MouseEvent.MOUSE_CLICKED, weekendChanger);
 		sunday.addEventHandler(MouseEvent.MOUSE_CLICKED, weekendChanger);
-		daily.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-			saturday.setSelected(weekend.isSelected());
-			sunday.setSelected(weekend.isSelected());
+		weekend.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			boolean selected = weekend.isSelected();
+			saturday.setSelected(selected);
+			sunday.setSelected(selected);
 		});
 	}
 
@@ -84,13 +86,14 @@ public class ActiveDayEditor extends GridPane {
 		saturday.addEventHandler(MouseEvent.MOUSE_CLICKED, dailyChanger);
 		sunday.addEventHandler(MouseEvent.MOUSE_CLICKED, dailyChanger);
 		daily.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-			monday.setSelected(daily.isSelected());
-			tuesday.setSelected(daily.isSelected());
-			wednesday.setSelected(daily.isSelected());
-			thursday.setSelected(daily.isSelected());
-			friday.setSelected(daily.isSelected());
-			saturday.setSelected(daily.isSelected());
-			sunday.setSelected(daily.isSelected());
+			boolean selected = daily.isSelected();
+			monday.setSelected(selected);
+			tuesday.setSelected(selected);
+			wednesday.setSelected(selected);
+			thursday.setSelected(selected);
+			friday.setSelected(selected);
+			saturday.setSelected(selected);
+			sunday.setSelected(selected);
 		});
 	}
 
