@@ -8,6 +8,10 @@ public class ActiveDays {
 
 	private final EnumSet<DayOfWeek> days;
 
+	public ActiveDays() {
+		this(daily());
+	}
+
 	public ActiveDays(EnumSet<DayOfWeek> days) {
 		this.days = days.isEmpty() ? daily() : days;
 	}
@@ -47,7 +51,7 @@ public class ActiveDays {
 		EnumSet<DayOfWeek> newDays = days.clone();
 		newDays.remove(dayOfWeek);
 		if (newDays.isEmpty()) {
-			return new ActiveDays(daily());
+			return new ActiveDays();
 		}
 		return new ActiveDays(newDays);
 	}

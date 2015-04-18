@@ -1,7 +1,6 @@
 package de.briemla.clockradio.controls;
 
 import java.time.DayOfWeek;
-import java.util.EnumSet;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -14,8 +13,6 @@ import de.briemla.clockradio.ActiveDays;
 import de.briemla.clockradio.FXUtil;
 
 public class ActiveDayEditor extends GridPane {
-
-	private static final ActiveDays DAILY = new ActiveDays(EnumSet.allOf(DayOfWeek.class));
 
 	@FXML
 	private CheckBox monday;
@@ -42,7 +39,7 @@ public class ActiveDayEditor extends GridPane {
 
 	public ActiveDayEditor() {
 		FXUtil.load(this, this);
-		daysProperty = new SimpleObjectProperty<>(DAILY);
+		daysProperty = new SimpleObjectProperty<>(new ActiveDays());
 		initWorkdaysBinding();
 		initWeekendBinding();
 		initDailyBinding();
