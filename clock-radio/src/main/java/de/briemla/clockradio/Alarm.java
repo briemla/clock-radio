@@ -1,12 +1,10 @@
 package de.briemla.clockradio;
 
-import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -119,7 +117,7 @@ public class Alarm {
 		this.mediaPlayer = mediaPlayer;
 		durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
 		alarmStartedProperty = new SimpleBooleanProperty();
-		activeDaysProperty = new SimpleObjectProperty<>(initialActiveDays());
+		activeDaysProperty = new SimpleObjectProperty<>(new ActiveDays());
 		mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
 		wakeUpTimeProperty = new SimpleObjectProperty<>(initialWakeUpTime());
 		AlarmTimer alarmTimer = new AlarmTimer(this);
@@ -133,10 +131,6 @@ public class Alarm {
 			}
 			alarmTimer.stopTimer();
 		});
-	}
-
-	private static ActiveDays initialActiveDays() {
-		return new ActiveDays(EnumSet.range(DayOfWeek.MONDAY, DayOfWeek.FRIDAY));
 	}
 
 	private static WakeUpTime initialWakeUpTime() {

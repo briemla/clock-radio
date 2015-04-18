@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import de.briemla.clockradio.ActiveDays;
 import de.briemla.clockradio.Alarm;
 import de.briemla.clockradio.FXUtil;
 import de.briemla.clockradio.Media;
@@ -22,6 +23,7 @@ public class AlarmMenu extends VBox {
 	private Button weekdays;
 	@FXML
 	private Button mediaDescription;
+	private final SimpleObjectProperty<ActiveDays> activeDayProperty;
 	private final SimpleObjectProperty<Media> mediaProperty;
 	private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
 	private final ViewSwitcher viewSwitcher;
@@ -33,6 +35,7 @@ public class AlarmMenu extends VBox {
 		this.viewSwitcher = viewSwitcher;
 		this.settings = settings;
 		FXUtil.load(this, this);
+		activeDayProperty = new SimpleObjectProperty<>(new ActiveDays());
 		mediaProperty = new SimpleObjectProperty<>();
 		wakeUpTimeProperty = new SimpleObjectProperty<>(new WakeUpTime(0, 0));
 		time.textProperty().bind(wakeUpTimeProperty.asString());
@@ -47,6 +50,9 @@ public class AlarmMenu extends VBox {
 		MediaSelector mediaSelector = new MediaSelector();
 		viewSwitcher.addView(Media.class, mediaSelector);
 		mediaSelector.mediaProperty().bindBidirectional(mediaProperty);
+		ActiveDayEditor activeDayEditor = new ActiveDayEditor();
+		viewSwitcher.addView(ActiveDays.class, activeDayEditor);
+		activeDayEditor.daysProperty().bindBidirectional(activeDayProperty);
 	}
 
 	public void unbind() {
@@ -77,7 +83,7 @@ public class AlarmMenu extends VBox {
 
 	@FXML
 	public void selectWeekdays(Event event) {
-
+		viewSwitcher.show(ActiveDays.class);
 	}
 
 	@FXML
