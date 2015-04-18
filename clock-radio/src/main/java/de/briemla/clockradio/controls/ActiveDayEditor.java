@@ -1,5 +1,8 @@
 package de.briemla.clockradio.controls;
 
+import java.time.DayOfWeek;
+import java.util.EnumSet;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
@@ -11,6 +14,8 @@ import de.briemla.clockradio.ActiveDays;
 import de.briemla.clockradio.FXUtil;
 
 public class ActiveDayEditor extends GridPane {
+
+	private static final ActiveDays DAILY = new ActiveDays(EnumSet.allOf(DayOfWeek.class));
 
 	@FXML
 	private CheckBox monday;
@@ -37,10 +42,13 @@ public class ActiveDayEditor extends GridPane {
 
 	public ActiveDayEditor() {
 		FXUtil.load(this, this);
-		daysProperty = new SimpleObjectProperty<>();
+		daysProperty = new SimpleObjectProperty<>(DAILY);
 		initWorkdaysBinding();
 		initWeekendBinding();
 		initDailyBinding();
+		initUpdateActiveDays();
+		initDaysListener();
+		updateValues();
 	}
 
 	private void initWorkdaysBinding() {
@@ -87,6 +95,33 @@ public class ActiveDayEditor extends GridPane {
 			saturday.setSelected(daily.isSelected());
 			sunday.setSelected(daily.isSelected());
 		});
+	}
+
+	private void initUpdateActiveDays() {
+		monday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.MONDAY));
+		tuesday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.TUESDAY));
+		wednesday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.WEDNESDAY));
+		thursday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.THURSDAY));
+		friday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.FRIDAY));
+		saturday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.SATURDAY));
+		sunday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.SUNDAY));
+	}
+
+	private void initDaysListener() {
+		daysProperty.addListener((change, oldValue, newValue) -> updateValues());
+	}
+
+	private void updateValues() {
+		monday.setSelected(daysProperty.get().contains(DayOfWeek.MONDAY));
+		tuesday.setSelected(daysProperty.get().contains(DayOfWeek.TUESDAY));
+		wednesday.setSelected(daysProperty.get().contains(DayOfWeek.WEDNESDAY));
+		thursday.setSelected(daysProperty.get().contains(DayOfWeek.THURSDAY));
+		friday.setSelected(daysProperty.get().contains(DayOfWeek.FRIDAY));
+		saturday.setSelected(daysProperty.get().contains(DayOfWeek.SATURDAY));
+		sunday.setSelected(daysProperty.get().contains(DayOfWeek.SUNDAY));
+		workdays.setSelected(isWorkdays());
+		weekend.setSelected(isWeekend());
+		daily.setSelected(isDaily());
 	}
 
 	private Boolean isWorkdays() {
