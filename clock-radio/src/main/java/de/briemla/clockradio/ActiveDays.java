@@ -99,16 +99,43 @@ public class ActiveDays {
 
 	@Override
 	public String toString() {
+		if (days.size() <= 2) {
+			return twoDayRange();
+		}
+		return longRange();
+	}
+
+	private String twoDayRange() {
 		StringBuffer output = new StringBuffer();
 		Iterator<DayOfWeek> iterator = days.iterator();
 		while (iterator.hasNext()) {
 			DayOfWeek dayOfWeek = iterator.next();
-			String name = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.GERMAN);
+			String name = textOf(dayOfWeek);
 			String separator = iterator.hasNext() ? ", " : "";
 			output.append(name);
 			output.append(separator);
 		}
 		return output.toString();
+	}
+
+	private String longRange() {
+		Iterator<DayOfWeek> iterator = days.iterator();
+		StringBuffer output = new StringBuffer(textOf(iterator.next()));
+		while (iterator.hasNext()) {
+			DayOfWeek dayOfWeek = iterator.next();
+			if (iterator.hasNext()) {
+				continue;
+			}
+			String name = textOf(dayOfWeek);
+			String separator = " - ";
+			output.append(separator);
+			output.append(name);
+		}
+		return output.toString();
+	}
+
+	private String textOf(DayOfWeek dayOfWeek) {
+		return dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.GERMAN);
 	}
 
 }

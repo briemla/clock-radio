@@ -206,4 +206,18 @@ public class ActiveDaysTest {
 
 		assertThat(range.toString(), is(equalTo("Fr, Sa")));
 	}
+
+	@Test
+	public void moreThanTwoDayRange() throws Exception {
+		ActiveDays range = new ActiveDays(EnumSet.range(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY));
+
+		assertThat(range.toString(), is(equalTo("Mo - Mi")));
+	}
+
+	@Test
+	public void anotherMoreThanTwoDayRange() throws Exception {
+		ActiveDays range = new ActiveDays(EnumSet.range(DayOfWeek.FRIDAY, DayOfWeek.SUNDAY));
+
+		assertThat(range.toString(), is(equalTo("Fr - So")));
+	}
 }
