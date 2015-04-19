@@ -3,13 +3,17 @@ package de.briemla.clockradio;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 
 public class ActiveDays {
 
+	private static final String SINGLE_SEPARATOR = ", ";
+	private static final String RANGE_SEPARATOR = " - ";
 	private final EnumSet<DayOfWeek> days;
 
 	public ActiveDays() {
@@ -112,7 +116,7 @@ public class ActiveDays {
 		while (iterator.hasNext()) {
 			DayOfWeek dayOfWeek = iterator.next();
 			String name = textOf(dayOfWeek);
-			String separator = iterator.hasNext() ? ", " : "";
+			String separator = iterator.hasNext() ? SINGLE_SEPARATOR : "";
 			output.append(name);
 			output.append(separator);
 		}
@@ -120,19 +124,47 @@ public class ActiveDays {
 	}
 
 	private String longRange(Collection<DayOfWeek> daysOfRange) {
-		Iterator<DayOfWeek> iterator = daysOfRange.iterator();
-		StringBuffer output = new StringBuffer(textOf(iterator.next()));
+		List<List<DayOfWeek>> groups = group(daysOfRange);
+		StringBuffer output = new StringBuffer();
+		Iterator<List<DayOfWeek>> iterator = groups.iterator();
 		while (iterator.hasNext()) {
-			DayOfWeek dayOfWeek = iterator.next();
-			if (iterator.hasNext()) {
-				continue;
+			List<DayOfWeek> group = iterator.next();
+			DayOfWeek first = group.get(0);
+			DayOfWeek last = group.get(group.size() - 1);
+			int difference = last.getValue() - first.getValue();
+			String separator = difference > 1 ? RANGE_SEPARATOR : SINGLE_SEPARATOR;
+			output.append(textOf(first));
+			if (group.size() > 1) {
+				output.append(separator);
+				output.append(textOf(last));
 			}
-			String name = textOf(dayOfWeek);
-			String separator = " - ";
-			output.append(separator);
-			output.append(name);
+			if (iterator.hasNext()) {
+				output.append(SINGLE_SEPARATOR);
+			}
 		}
 		return output.toString();
+	}
+
+	private List<List<DayOfWeek>> group(Collection<DayOfWeek> daysOfRange) {
+		DayOfWeek[] days = daysOfRange.toArray(new DayOfWeek[0]);
+		ArrayList<List<DayOfWeek>> groups = new ArrayList<>();
+		List<DayOfWeek> currentGroup = new ArrayList<>();
+		groups.add(currentGroup);
+		for (int index = 0; index < days.length; index++) {
+			DayOfWeek current = days[index];
+			currentGroup.add(current);
+			if (index + 1 >= days.length) {
+				break;
+			}
+			int currentValue = current.getValue();
+			int nextValue = days[index + 1].getValue();
+			int difference = nextValue - currentValue;
+			if (difference > 1) {
+				currentGroup = new ArrayList<>();
+				groups.add(currentGroup);
+			}
+		}
+		return groups;
 	}
 
 	private String textOf(DayOfWeek dayOfWeek) {

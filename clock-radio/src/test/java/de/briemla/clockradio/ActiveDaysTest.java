@@ -220,4 +220,35 @@ public class ActiveDaysTest {
 
 		assertThat(range.toString(), is(equalTo("Fr - So")));
 	}
+
+	@Test
+	public void notNeighbouringDays() throws Exception {
+		ActiveDays days = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY,
+				DayOfWeek.SUNDAY));
+
+		assertThat(days.toString(), is(equalTo("Mo, Mi, Fr, So")));
+	}
+
+	@Test
+	public void anotherNotNeighbouringDays() throws Exception {
+		ActiveDays days = new ActiveDays(EnumSet.of(DayOfWeek.TUESDAY, DayOfWeek.THURSDAY, DayOfWeek.SATURDAY));
+
+		assertThat(days.toString(), is(equalTo("Di, Do, Sa")));
+	}
+
+	@Test
+	public void notNeighbouringRanges() throws Exception {
+		ActiveDays days = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY,
+				DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY));
+
+		assertThat(days.toString(), is(equalTo("Mo - Mi, Fr - So")));
+	}
+
+	@Test
+	public void mixedNotNeighbouringRangesAndDays() throws Exception {
+		ActiveDays days = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY,
+				DayOfWeek.FRIDAY, DayOfWeek.SUNDAY));
+
+		assertThat(days.toString(), is(equalTo("Mo, Mi - Fr, So")));
+	}
 }
