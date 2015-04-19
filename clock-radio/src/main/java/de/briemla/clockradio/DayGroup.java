@@ -7,6 +7,9 @@ import java.util.Locale;
 
 public class DayGroup {
 
+	private static final String SINGLE_SEPARATOR = ", ";
+	private static final String RANGE_SEPARATOR = " - ";
+
 	private final ArrayList<DayOfWeek> days;
 
 	public DayGroup() {
@@ -55,9 +58,9 @@ public class DayGroup {
 		if (days.size() == 1) {
 			return textOf(days.get(0));
 		}
-		String separator = ", ";
+		String separator = SINGLE_SEPARATOR;
 		if (days.size() > 2) {
-			separator = " - ";
+			separator = RANGE_SEPARATOR;
 		}
 		return textOf(days.get(0)) + separator + textOf(days.get(days.size() - 1));
 	}

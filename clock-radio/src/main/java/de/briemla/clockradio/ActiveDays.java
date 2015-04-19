@@ -2,18 +2,15 @@ package de.briemla.clockradio;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 public class ActiveDays {
 
 	private static final String SINGLE_SEPARATOR = ", ";
-	private static final String RANGE_SEPARATOR = " - ";
 	private final EnumSet<DayOfWeek> days;
 
 	public ActiveDays() {
@@ -104,27 +101,7 @@ public class ActiveDays {
 
 	@Override
 	public String toString() {
-		if (days.size() <= 2) {
-			return twoDayRange(days);
-		}
-		return longRange(days);
-	}
-
-	private String twoDayRange(Collection<DayOfWeek> daysOfRange) {
-		StringBuffer output = new StringBuffer();
-		Iterator<DayOfWeek> iterator = daysOfRange.iterator();
-		while (iterator.hasNext()) {
-			DayOfWeek dayOfWeek = iterator.next();
-			String name = textOf(dayOfWeek);
-			String separator = iterator.hasNext() ? SINGLE_SEPARATOR : "";
-			output.append(name);
-			output.append(separator);
-		}
-		return output.toString();
-	}
-
-	private String longRange(Collection<DayOfWeek> daysOfRange) {
-		List<DayGroup> groups = group(daysOfRange);
+		List<DayGroup> groups = group(days);
 		StringBuffer output = new StringBuffer();
 		Iterator<DayGroup> iterator = groups.iterator();
 		while (iterator.hasNext()) {
@@ -138,29 +115,30 @@ public class ActiveDays {
 	}
 
 	private List<DayGroup> group(Collection<DayOfWeek> daysOfRange) {
-		DayOfWeek[] days = daysOfRange.toArray(new DayOfWeek[0]);
+		Iterator<DayOfWeek> iterator = daysOfRange.iterator();
+		if (!iterator.hasNext()) {
+			return new ArrayList<>();
+		}
 		ArrayList<DayGroup> groups = new ArrayList<>();
 		DayGroup currentGroup = new DayGroup();
 		groups.add(currentGroup);
-		for (int index = 0; index < days.length; index++) {
-			DayOfWeek current = days[index];
+		DayOfWeek current = iterator.next();
+		while (true) {
 			currentGroup.add(current);
-			if (index + 1 >= days.length) {
+			if (!iterator.hasNext()) {
 				break;
 			}
+			DayOfWeek next = iterator.next();
 			int currentValue = current.getValue();
-			int nextValue = days[index + 1].getValue();
+			int nextValue = next.getValue();
 			int difference = nextValue - currentValue;
 			if (difference > 1) {
 				currentGroup = new DayGroup();
 				groups.add(currentGroup);
 			}
+			current = next;
 		}
 		return groups;
-	}
-
-	private String textOf(DayOfWeek dayOfWeek) {
-		return dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.GERMAN);
 	}
 
 }
