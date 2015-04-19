@@ -3,6 +3,7 @@ package de.briemla.clockradio;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Locale;
@@ -100,14 +101,14 @@ public class ActiveDays {
 	@Override
 	public String toString() {
 		if (days.size() <= 2) {
-			return twoDayRange();
+			return twoDayRange(days);
 		}
-		return longRange();
+		return longRange(days);
 	}
 
-	private String twoDayRange() {
+	private String twoDayRange(Collection<DayOfWeek> daysOfRange) {
 		StringBuffer output = new StringBuffer();
-		Iterator<DayOfWeek> iterator = days.iterator();
+		Iterator<DayOfWeek> iterator = daysOfRange.iterator();
 		while (iterator.hasNext()) {
 			DayOfWeek dayOfWeek = iterator.next();
 			String name = textOf(dayOfWeek);
@@ -118,8 +119,8 @@ public class ActiveDays {
 		return output.toString();
 	}
 
-	private String longRange() {
-		Iterator<DayOfWeek> iterator = days.iterator();
+	private String longRange(Collection<DayOfWeek> daysOfRange) {
+		Iterator<DayOfWeek> iterator = daysOfRange.iterator();
 		StringBuffer output = new StringBuffer(textOf(iterator.next()));
 		while (iterator.hasNext()) {
 			DayOfWeek dayOfWeek = iterator.next();
