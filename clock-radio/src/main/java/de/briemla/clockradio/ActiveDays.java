@@ -124,20 +124,12 @@ public class ActiveDays {
 	}
 
 	private String longRange(Collection<DayOfWeek> daysOfRange) {
-		List<List<DayOfWeek>> groups = group(daysOfRange);
+		List<DayGroup> groups = group(daysOfRange);
 		StringBuffer output = new StringBuffer();
-		Iterator<List<DayOfWeek>> iterator = groups.iterator();
+		Iterator<DayGroup> iterator = groups.iterator();
 		while (iterator.hasNext()) {
-			List<DayOfWeek> group = iterator.next();
-			DayOfWeek first = group.get(0);
-			DayOfWeek last = group.get(group.size() - 1);
-			int difference = last.getValue() - first.getValue();
-			String separator = difference > 1 ? RANGE_SEPARATOR : SINGLE_SEPARATOR;
-			output.append(textOf(first));
-			if (group.size() > 1) {
-				output.append(separator);
-				output.append(textOf(last));
-			}
+			DayGroup group = iterator.next();
+			output.append(group.toString());
 			if (iterator.hasNext()) {
 				output.append(SINGLE_SEPARATOR);
 			}
@@ -145,10 +137,10 @@ public class ActiveDays {
 		return output.toString();
 	}
 
-	private List<List<DayOfWeek>> group(Collection<DayOfWeek> daysOfRange) {
+	private List<DayGroup> group(Collection<DayOfWeek> daysOfRange) {
 		DayOfWeek[] days = daysOfRange.toArray(new DayOfWeek[0]);
-		ArrayList<List<DayOfWeek>> groups = new ArrayList<>();
-		List<DayOfWeek> currentGroup = new ArrayList<>();
+		ArrayList<DayGroup> groups = new ArrayList<>();
+		DayGroup currentGroup = new DayGroup();
 		groups.add(currentGroup);
 		for (int index = 0; index < days.length; index++) {
 			DayOfWeek current = days[index];
@@ -160,7 +152,7 @@ public class ActiveDays {
 			int nextValue = days[index + 1].getValue();
 			int difference = nextValue - currentValue;
 			if (difference > 1) {
-				currentGroup = new ArrayList<>();
+				currentGroup = new DayGroup();
 				groups.add(currentGroup);
 			}
 		}
