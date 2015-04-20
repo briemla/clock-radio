@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import de.briemla.clockradio.controls.ViewSwitcher?>
 
-<fx:root type="VBox" styleClass="media-selector" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <HBox spacing="10.0">
-         <children>
-            <Label fx:id="source" minHeight="30.0" minWidth="200.0" />
-            <Button fx:id="browse" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#browse" text="..." />
-         </children>
-      </HBox>
-   </children>
+<fx:root styleClass="media-selector" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox fx:id="mediaType" />
+        <ViewSwitcher fx:id="selector" />
+    </children>
 </fx:root>

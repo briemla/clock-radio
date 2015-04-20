@@ -36,7 +36,7 @@ public class AlarmMenu extends VBox {
 		this.settings = settings;
 		FXUtil.load(this, this);
 		activesDayProperty = new SimpleObjectProperty<>(new ActiveDays());
-		mediaProperty = new SimpleObjectProperty<>();
+		mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
 		wakeUpTimeProperty = new SimpleObjectProperty<>(new WakeUpTime(0, 0));
 		time.textProperty().bind(wakeUpTimeProperty.asString());
 		mediaDescription.textProperty().bind(mediaProperty.asString());
