@@ -120,6 +120,7 @@ public class ActiveDays {
 		return output.toString();
 	}
 
+	// TODO clean up
 	private List<DayGroup> group(Collection<DayOfWeek> daysOfRange) {
 		Iterator<DayOfWeek> iterator = daysOfRange.iterator();
 		if (!iterator.hasNext()) {

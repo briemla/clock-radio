@@ -69,6 +69,7 @@ public class DayGroup {
 		return dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.GERMAN);
 	}
 
+	// TODO clean up
 	public boolean isRange() {
 		return days.size() > 2;
 	}
