@@ -24,7 +24,6 @@ import de.briemla.clockradio.dabpi.result.DABChannelList;
 import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.FMStatus;
-import de.briemla.clockradio.player.RadioPlayer;
 
 public class RadioPlayerTest {
 
@@ -49,7 +48,7 @@ public class RadioPlayerTest {
 		RadioController controller = mock(RadioController.class);
 		RadioPlayer player = new RadioPlayer(controller);
 		when(controller.fmStatus()).thenReturn(new FMStatus(105500)).thenReturn(new FMStatus(106700))
-				.thenReturn(new FMStatus(105500));
+		.thenReturn(new FMStatus(105500));
 
 		ArrayList<FMStation> frequencies = player.scanFM();
 
