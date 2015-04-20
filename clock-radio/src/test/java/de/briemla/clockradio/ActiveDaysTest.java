@@ -14,6 +14,8 @@ import org.junit.Test;
 
 public class ActiveDaysTest {
 
+	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
 	@Test
 	public void nextAlarmOnAllowedDay() throws Exception {
 		LocalDateTime day = LocalDateTime.of(0, 1, 1, 0, 0);
@@ -241,7 +243,7 @@ public class ActiveDaysTest {
 		ActiveDays days = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY,
 				DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY));
 
-		assertThat(days.toString(), is(equalTo("Mo - Mi, Fr - So")));
+		assertThat(days.toString(), is(equalTo("Mo - Mi, " + LINE_SEPARATOR + "Fr - So")));
 	}
 
 	@Test
@@ -249,6 +251,6 @@ public class ActiveDaysTest {
 		ActiveDays days = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY,
 				DayOfWeek.FRIDAY, DayOfWeek.SUNDAY));
 
-		assertThat(days.toString(), is(equalTo("Mo, Mi - Fr, So")));
+		assertThat(days.toString(), is(equalTo("Mo, " + LINE_SEPARATOR + "Mi - Fr, So")));
 	}
 }

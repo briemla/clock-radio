@@ -10,6 +10,7 @@ import java.util.List;
 
 public class ActiveDays {
 
+	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 	private static final String SINGLE_SEPARATOR = ", ";
 	private final EnumSet<DayOfWeek> days;
 
@@ -104,12 +105,17 @@ public class ActiveDays {
 		List<DayGroup> groups = group(days);
 		StringBuffer output = new StringBuffer();
 		Iterator<DayGroup> iterator = groups.iterator();
+		Boolean first = true;
 		while (iterator.hasNext()) {
 			DayGroup group = iterator.next();
+			if (group.isRange() && !first) {
+				output.append(LINE_SEPARATOR);
+			}
 			output.append(group.toString());
 			if (iterator.hasNext()) {
 				output.append(SINGLE_SEPARATOR);
 			}
+			first = false;
 		}
 		return output.toString();
 	}

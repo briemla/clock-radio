@@ -59,7 +59,7 @@ public class DayGroup {
 			return textOf(days.get(0));
 		}
 		String separator = SINGLE_SEPARATOR;
-		if (days.size() > 2) {
+		if (isRange()) {
 			separator = RANGE_SEPARATOR;
 		}
 		return textOf(days.get(0)) + separator + textOf(days.get(days.size() - 1));
@@ -67,6 +67,10 @@ public class DayGroup {
 
 	private static String textOf(DayOfWeek dayOfWeek) {
 		return dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.GERMAN);
+	}
+
+	public boolean isRange() {
+		return days.size() > 2;
 	}
 
 }

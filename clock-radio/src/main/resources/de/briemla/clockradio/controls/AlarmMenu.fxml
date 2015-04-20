@@ -9,7 +9,7 @@
 <fx:root alignment="TOP_RIGHT" spacing="5.0" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane VBox.vgrow="ALWAYS" />
-      <GridPane hgap="5.0" maxHeight="150.0" maxWidth="450.0" minHeight="150.0" minWidth="450.0" styleClass="alarm-menu" vgap="5.0" VBox.vgrow="NEVER">
+      <GridPane hgap="5.0" maxHeight="160.0" maxWidth="450.0" minHeight="160.0" minWidth="450.0" styleClass="alarm-menu" vgap="5.0" VBox.vgrow="NEVER">
          <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" percentWidth="70.0" />
             <ColumnConstraints hgrow="ALWAYS" percentWidth="30.0" />
@@ -21,7 +21,7 @@
          <children>
               <Button fx:id="mediaDescription" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#selectMediaDescription" styleClass="media-description" text="Media" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS" />
               <Button fx:id="time" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#selectTime" styleClass="time" text="time" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
-              <Button fx:id="weekdays" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#selectWeekdays" styleClass="weekdays" text="Mo - Fr" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
+              <Button fx:id="weekdays" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#selectWeekdays" styleClass="weekdays" text="Mo - Fr" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
          </children>
       </GridPane>
       <Button fx:id="delete" maxHeight="50.0" maxWidth="50.0" minHeight="50" minWidth="50" onAction="#delete" styleClass="delete" VBox.vgrow="NEVER" />
