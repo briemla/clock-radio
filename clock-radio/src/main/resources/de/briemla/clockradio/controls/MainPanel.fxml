@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import de.briemla.clockradio.controls.ViewSwitcher?>
+<?import de.briemla.clockradio.controls.DefaultableViewSwitcher?>
 <?import de.briemla.clockradio.controls.AlarmView?>
 <?import javafx.scene.layout.StackPane?>
 <?import de.briemla.clockradio.controls.AlarmMenu?>
@@ -26,7 +26,7 @@
                             text="Einstellungen" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                     </children>
                 </AnchorPane>
-                <ViewSwitcher fx:id="viewSwitcher" maxHeight="500.0" prefHeight="500.0" prefWidth="1024.0" />
+                <DefaultableViewSwitcher fx:id="viewSwitcher" maxHeight="500.0" prefHeight="500.0" prefWidth="1024.0" />
                 <AlarmView fx:id="alarm" />
             </children>
         </VBox>

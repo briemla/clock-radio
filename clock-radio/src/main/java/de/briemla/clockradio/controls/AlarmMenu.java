@@ -26,11 +26,11 @@ public class AlarmMenu extends VBox {
 	private final SimpleObjectProperty<ActiveDays> activesDayProperty;
 	private final SimpleObjectProperty<Media> mediaProperty;
 	private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
-	private final ViewSwitcher viewSwitcher;
+	private final DefaultableViewSwitcher viewSwitcher;
 	private final Settings settings;
 	private Alarm lastAlarm;
 
-	public AlarmMenu(ViewSwitcher viewSwitcher, Settings settings) {
+	public AlarmMenu(DefaultableViewSwitcher viewSwitcher, Settings settings) {
 		super();
 		this.viewSwitcher = viewSwitcher;
 		this.settings = settings;

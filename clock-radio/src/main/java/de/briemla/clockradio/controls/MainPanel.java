@@ -3,10 +3,6 @@ package de.briemla.clockradio.controls;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import de.briemla.clockradio.Alarm;
-import de.briemla.clockradio.FXUtil;
-import de.briemla.clockradio.Settings;
-import de.briemla.clockradio.player.Player;
 import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
@@ -14,6 +10,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import de.briemla.clockradio.Alarm;
+import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.Settings;
+import de.briemla.clockradio.player.Player;
 
 public class MainPanel extends StackPane {
 
@@ -33,7 +33,7 @@ public class MainPanel extends StackPane {
 
 	private static final long INACTIVE_TIMEOUT = 10 * 1000;
 	@FXML
-	private ViewSwitcher viewSwitcher;
+	private DefaultableViewSwitcher viewSwitcher;
 	@FXML
 	private AlarmView alarm;
 

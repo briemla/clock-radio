@@ -2,22 +2,22 @@ package de.briemla.clockradio;
 
 import java.util.Iterator;
 
-import de.briemla.clockradio.controls.AlarmMenu;
-import de.briemla.clockradio.controls.ViewSwitcher;
-import de.briemla.clockradio.player.Player;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import de.briemla.clockradio.controls.AlarmMenu;
+import de.briemla.clockradio.controls.DefaultableViewSwitcher;
+import de.briemla.clockradio.player.Player;
 
 public class Settings {
 
-	private final ViewSwitcher viewSwitcher;
+	private final DefaultableViewSwitcher viewSwitcher;
 	private final SimpleBooleanProperty alarmStartedProperty;
 	private final ObservableList<Alarm> alarms;
 	private final Player player;
 
-	public Settings(ViewSwitcher viewSwitcher, Player player) {
+	public Settings(DefaultableViewSwitcher viewSwitcher, Player player) {
 		this.viewSwitcher = viewSwitcher;
 		this.player = player;
 		alarmStartedProperty = new SimpleBooleanProperty();
