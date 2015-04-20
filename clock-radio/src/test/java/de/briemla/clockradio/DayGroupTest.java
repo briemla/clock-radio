@@ -114,6 +114,33 @@ public class DayGroupTest {
 	}
 
 	@Test
+	public void isRangeWithOneDay() throws Exception {
+		DayGroup group = new DayGroup();
+		group.add(DayOfWeek.MONDAY);
+
+		assertThat(group.isRange(), is(false));
+	}
+
+	@Test
+	public void isRangeWithTwoDays() throws Exception {
+		DayGroup group = new DayGroup();
+		group.add(DayOfWeek.MONDAY);
+		group.add(DayOfWeek.TUESDAY);
+
+		assertThat(group.isRange(), is(false));
+	}
+
+	@Test
+	public void isRangeWithMoreThanTwoDays() throws Exception {
+		DayGroup group = new DayGroup();
+		group.add(DayOfWeek.MONDAY);
+		group.add(DayOfWeek.TUESDAY);
+		group.add(DayOfWeek.WEDNESDAY);
+
+		assertThat(group.isRange(), is(true));
+	}
+
+	@Test
 	public void equalsAndHashCode() throws Exception {
 		EqualsVerifier.forClass(DayGroup.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}
