@@ -2,27 +2,13 @@ package de.briemla.clockradio.controls;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXML;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import de.briemla.clockradio.FXUtil;
 import de.briemla.clockradio.Media;
 
-public class MediaSelector extends HBox {
-
-	private final class MediaChanger implements ChangeListener<Media> {
-		@Override
-		public void changed(ObservableValue<? extends Media> change, Media oldValue, Media newValue) {
-			selector.show(newValue.getClass());
-		}
-	}
-
-	@FXML
-	private VBox mediaType;
-	@FXML
-	private ViewSwitcher selector;
+public class MediaSelector extends TabPane {
 
 	private final SimpleObjectProperty<Media> mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
 
@@ -30,14 +16,15 @@ public class MediaSelector extends HBox {
 		super();
 		FXUtil.load(this, this);
 		registerMediaTypes();
-		mediaProperty.addListener(new MediaChanger());
 	}
 
 	private void registerMediaTypes() {
 		FolderSelector folderSelector = new FolderSelector();
-		selector.addView(LocalFolder.class, folderSelector);
+		Tab tab = new Tab();
+		tab.setGraphic(new Label("Ordner"));
+		tab.setContent(folderSelector);
+		getTabs().add(tab);
 		mediaProperty.bindBidirectional(folderSelector.mediaProperty());
-		selector.show(LocalFolder.class);
 	}
 
 	public ObjectProperty<Media> mediaProperty() {

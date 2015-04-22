@@ -1,4 +1,5 @@
 .root {
+	active-color: rgba(128.0,205.0,255.0,0.25);
 	background-color: rgb(10.0,10.0,10.0);
 	border-color: rgba(128.0,205.0,255.0,0.3);
 	text-color: rgba(128.0,205.0,255.0,0.7);
@@ -21,7 +22,7 @@
 }
 
 .button:hover {
-	-fx-background-color: rgba(128.0,205.0,255.0,0.25);
+	-fx-background-color: active-color;
 }
 
 .add {
@@ -154,4 +155,101 @@
 
 .main-panel .alarm-view, .main-panel .top-bar {
 	-fx-opacity: 0.1;
+}
+
+.media-selector {
+	-fx-background-color: background-color;
+	-fx-border-color: border-color;
+	-fx-text-fill: text-color;
+}
+
+.list-view {
+    -fx-background-color: background-color;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.list-view:focused {
+    -fx-background-color: background-color; 
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.list-view > .virtual-flow > .scroll-bar:vertical {
+    -fx-background-color: background-color;
+    -fx-background-insets: 0;
+    -fx-padding: -1 -1 -1 0;
+}
+.list-view > .virtual-flow > .scroll-bar:horizontal {
+    -fx-background-color: background-color;
+    -fx-background-insets: 0;
+    -fx-padding: 0 -1 -1 -1;
+}
+.list-view > .virtual-flow > .corner {
+    -fx-background-color: derive(-fx-base,-1%);
+}
+
+.list-cell {
+    -fx-background-color: background-color;
+    -fx-text-fill: text-color;
+}
+
+.list-cell:odd {
+    -fx-background-color: derive(background-color, 20%);
+}
+
+.list-view:focused > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected {
+    -fx-background-color: text-color;
+    -fx-text-color: background-color;
+}
+
+.list-view:focused > .virtual-flow > .clipped-container > .sheet > .list-cell:focused {
+    -fx-background-color: text-color;
+    -fx-text-fill: background-color;
+}
+
+.scroll-bar > .thumb,
+.scroll-bar > .increment-button,
+.scroll-bar > .decrement-button,
+.scroll-bar > .thumb:pressed,
+.scroll-bar > .increment-button:pressed,
+.scroll-bar > .decrement-button:pressed {
+	-fx-color: text-color;
+}
+
+.scroll-bar > .increment-button,
+.scroll-bar > .decrement-button {
+	-fx-background-color: background-color;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane {
+    -fx-tab-min-width:90px;
+}
+
+.tab {
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.tab-pane .tab {
+    -fx-background-color: background-color;
+
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: active-color;
+}
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: text-color;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: text-color;
 }
