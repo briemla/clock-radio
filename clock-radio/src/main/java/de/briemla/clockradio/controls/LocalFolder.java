@@ -33,7 +33,7 @@ public class LocalFolder implements Media {
 			return new File("D:\\NAS-Lars\\Musik").toPath();
 		}
 		if ("amd64".equals(System.getProperty("os.arch").toLowerCase())) {
-			return new File("/home/lars/Musik/").toPath(); // WCG_Theme_Song.mp3
+			return new File("/home/lars/Musik/").toPath();
 		}
 		return new File("/opt/clock-radio/music/").toPath();
 	}
@@ -93,5 +93,47 @@ public class LocalFolder implements Media {
 		List<File> children = Arrays.asList(source.toFile().listFiles(new SupportedFileFilter()));
 		children.sort(new FileComparator());
 		return children;
+	}
+
+	/**
+	 * Returns the parent directory or itself if there is no parent directory
+	 *
+	 * @return
+	 */
+	public LocalFolder parent() {
+		if (source.getParent() == null) {
+			return this;
+		}
+		return new LocalFolder(source.getParent());
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((source == null) ? 0 : source.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		LocalFolder other = (LocalFolder) obj;
+		if (source == null) {
+			if (other.source != null) {
+				return false;
+			}
+		} else if (!source.equals(other.source)) {
+			return false;
+		}
+		return true;
 	}
 }

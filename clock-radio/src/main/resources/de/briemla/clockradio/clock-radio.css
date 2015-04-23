@@ -169,6 +169,15 @@
     -fx-border-width: 0 0 2 0;
 }
 
+.media-selector .previous {
+	-fx-background-image: url("previous.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+
+.media-selector .navigation {
+}
+
 .list-view {
     -fx-background-color: background-color;
     -fx-background-insets: 0;
