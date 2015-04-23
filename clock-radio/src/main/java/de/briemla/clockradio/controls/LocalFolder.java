@@ -9,7 +9,6 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 
 import de.briemla.clockradio.Media;
@@ -91,9 +90,8 @@ public class LocalFolder implements Media {
 	}
 
 	public Collection<File> children() {
-		List<File> children = Arrays.asList(source.toFile().listFiles());
-		children.sort((Comparator<? super File>) (first, second) -> first.getName().toLowerCase()
-				.compareTo(second.getName().toLowerCase()));
+		List<File> children = Arrays.asList(source.toFile().listFiles(new SupportedFileFilter()));
+		children.sort(new FileComparator());
 		return children;
 	}
 }
