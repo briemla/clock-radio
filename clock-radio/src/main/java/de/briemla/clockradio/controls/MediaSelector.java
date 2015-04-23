@@ -2,7 +2,6 @@ package de.briemla.clockradio.controls;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import de.briemla.clockradio.FXUtil;
@@ -21,7 +20,7 @@ public class MediaSelector extends TabPane {
 	private void registerMediaTypes() {
 		FolderSelector folderSelector = new FolderSelector();
 		Tab tab = new Tab();
-		tab.setGraphic(new Label("Ordner"));
+		tab.setText("Ordner");
 		tab.setContent(folderSelector);
 		getTabs().add(tab);
 		mediaProperty.bindBidirectional(folderSelector.mediaProperty());

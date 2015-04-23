@@ -159,8 +159,14 @@
 
 .media-selector {
 	-fx-background-color: background-color;
-	-fx-border-color: border-color;
 	-fx-text-fill: text-color;
+	-fx-font-size: 15.0pt;
+}
+
+.media-selector .label {
+	-fx-font-weight: bold;
+    -fx-border-color: border-color;
+    -fx-border-width: 0 0 2 0;
 }
 
 .list-view {
@@ -215,6 +221,7 @@
 .scroll-bar > .increment-button:pressed,
 .scroll-bar > .decrement-button:pressed {
 	-fx-color: text-color;
+	-fx-padding: 15px;
 }
 
 .scroll-bar > .increment-button,
@@ -227,15 +234,17 @@
 }
 
 .tab-pane {
-    -fx-tab-min-width:90px;
+    -fx-tab-min-height: 90px;
+    -fx-tab-min-width: 20px;
+    -fx-padding: 0;
 }
 
 .tab {
-    -fx-background-insets: 0 1 0 1,0,0;
+    -fx-background-insets: 0,0,0;
+    -fx-padding: 0;
 }
 .tab-pane .tab {
     -fx-background-color: background-color;
-
 }
 
 .tab-pane .tab:selected {
@@ -245,11 +254,16 @@
 .tab .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: text-color;
-    -fx-font-size: 12px;
+    -fx-font-size: 12pt;
     -fx-font-weight: bold;
+    -fx-rotate: 90;
 }
 
 .tab:selected .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: text-color;
+}
+
+.tab-pane .tab-content-area {
+	-fx-padding: 15;
 }
