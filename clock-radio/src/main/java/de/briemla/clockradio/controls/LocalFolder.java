@@ -31,7 +31,7 @@ public class LocalFolder implements Media {
 	 */
 	private static Path defaultFolder() {
 		if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
-			return new File("D:\\Bibliotheken\\Musik").toPath();
+			return new File("D:\\NAS-Lars\\Musik").toPath();
 		}
 		if ("amd64".equals(System.getProperty("os.arch").toLowerCase())) {
 			return new File("/home/lars/Musik/").toPath(); // WCG_Theme_Song.mp3
@@ -87,7 +87,7 @@ public class LocalFolder implements Media {
 
 	@Override
 	public String toString() {
-		return getSource().getName();
+		return getSource().getAbsolutePath();
 	}
 
 	public Collection<File> children() {
