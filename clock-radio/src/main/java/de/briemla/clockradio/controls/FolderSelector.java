@@ -46,7 +46,7 @@ public class FolderSelector extends VBox {
 	}
 
 	private void initializeContentViewer() {
-		directoryContent.setCellFactory(listView -> new FileCell());
+		directoryContent.setCellFactory(listView -> new FileCell(mediaProperty));
 		directoryContent.setItems(currentFiles);
 		localFolderProperty.addListener((observable, oldValue, newValue) -> {
 			currentFiles.clear();
