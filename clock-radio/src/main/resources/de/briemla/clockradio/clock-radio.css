@@ -175,7 +175,10 @@
 	-fx-background-position: center;
 }
 
-.media-selector .navigation {
+.media-selector .refresh {
+	-fx-background-image: url("refresh.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
 }
 
 .list-view {
