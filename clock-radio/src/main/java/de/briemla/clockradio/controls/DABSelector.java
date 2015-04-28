@@ -55,9 +55,6 @@ public class DABSelector extends VBox {
 	private void initializeContentViewer() {
 		station.setCellFactory(listView -> new DABStationCell(mediaProperty));
 		station.setItems(stationList);
-		dabStationProperty.addListener((observable, oldValue, newValue) -> {
-			updateStations();
-		});
 		updateStations();
 	}
 
