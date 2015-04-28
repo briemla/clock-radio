@@ -70,7 +70,7 @@ public class DABStation implements Station {
 
 	@Override
 	public String toString() {
-		return "DABStation [region=" + region + ", service=" + service + ", channel=" + channel + "]";
+		return service.toString();
 	}
 
 }

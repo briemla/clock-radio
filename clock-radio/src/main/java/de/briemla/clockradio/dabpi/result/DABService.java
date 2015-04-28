@@ -72,7 +72,7 @@ public class DABService {
 
 	@Override
 	public String toString() {
-		return "DABService [number=" + number + ", id=" + id + ", name=" + name + "]";
+		return name;
 	}
 
 }

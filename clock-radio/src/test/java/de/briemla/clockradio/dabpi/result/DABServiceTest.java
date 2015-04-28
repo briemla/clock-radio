@@ -80,6 +80,20 @@ public class DABServiceTest {
 	}
 
 	@Test
+	public void testToString() throws Exception {
+		DABService service = new DABService(0, "a3a0", "Station name");
+
+		assertThat(service.toString(), is(equalTo("Station name")));
+	}
+
+	@Test
+	public void toStringWithAnotherName() throws Exception {
+		DABService service = new DABService(0, "a3a0", "Some other station name");
+
+		assertThat(service.toString(), is(equalTo("Some other station name")));
+	}
+
+	@Test
 	public void equalsAndHashCode() throws Exception {
 		EqualsVerifier.forClass(DABService.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}
