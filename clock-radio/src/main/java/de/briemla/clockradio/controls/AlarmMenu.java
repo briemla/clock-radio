@@ -48,7 +48,7 @@ public class AlarmMenu extends VBox {
 		TimeEditor editor = new TimeEditor();
 		viewSwitcher.addView(WakeUpTime.class, editor);
 		editor.timeProperty().bindBidirectional(wakeUpTimeProperty);
-		MediaSelector mediaSelector = new MediaSelector();
+		MediaSelector mediaSelector = new MediaSelector(settings);
 		viewSwitcher.addView(Media.class, mediaSelector);
 		mediaSelector.mediaProperty().bindBidirectional(mediaProperty);
 		ActiveDayEditor activeDayEditor = new ActiveDayEditor();

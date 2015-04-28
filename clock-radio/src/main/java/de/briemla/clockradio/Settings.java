@@ -1,6 +1,8 @@
 package de.briemla.clockradio;
 
+import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -8,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import de.briemla.clockradio.controls.AlarmMenu;
 import de.briemla.clockradio.controls.DefaultableViewSwitcher;
+import de.briemla.clockradio.dabpi.DABStation;
 import de.briemla.clockradio.player.Player;
 
 public class Settings {
@@ -70,5 +73,9 @@ public class Settings {
 		for (Alarm alarm : alarms) {
 			alarm.stop();
 		}
+	}
+
+	public List<DABStation> searchDAB() throws IOException {
+		return player.searchDAB();
 	}
 }

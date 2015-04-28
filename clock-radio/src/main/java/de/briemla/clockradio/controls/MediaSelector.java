@@ -7,6 +7,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import de.briemla.clockradio.FXUtil;
 import de.briemla.clockradio.Media;
+import de.briemla.clockradio.Settings;
 
 public class MediaSelector extends TabPane {
 
@@ -14,17 +15,17 @@ public class MediaSelector extends TabPane {
 	private static final String DAB = "DAB";
 	private final SimpleObjectProperty<Media> mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
 
-	public MediaSelector() {
+	public MediaSelector(Settings settings) {
 		super();
 		FXUtil.load(this, this);
-		registerMediaTypes();
+		registerMediaTypes(settings);
 	}
 
-	private void registerMediaTypes() {
+	private void registerMediaTypes(Settings settings) {
 		FolderSelector folderSelector = new FolderSelector();
 		addTab(FOLDER, folderSelector);
 		mediaProperty.bindBidirectional(folderSelector.mediaProperty());
-		DABSelector dabSelector = new DABSelector();
+		DABSelector dabSelector = new DABSelector(settings);
 		addTab(DAB, dabSelector);
 		mediaProperty.bindBidirectional(dabSelector.mediaProperty());
 	}

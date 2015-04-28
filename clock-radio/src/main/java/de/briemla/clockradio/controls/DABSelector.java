@@ -1,5 +1,7 @@
 package de.briemla.clockradio.controls;
 
+import java.io.IOException;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -12,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import de.briemla.clockradio.FXUtil;
 import de.briemla.clockradio.Media;
+import de.briemla.clockradio.Settings;
 import de.briemla.clockradio.dabpi.DABStation;
 
 public class DABSelector extends VBox {
@@ -26,9 +29,11 @@ public class DABSelector extends VBox {
 	@FXML
 	private ListView<DABStation> station;
 	private final ObservableList<DABStation> stationList;
+	private final Settings settings;
 
-	public DABSelector() {
+	public DABSelector(Settings settings) {
 		super();
+		this.settings = settings;
 		FXUtil.load(this, this);
 		mediaProperty = new SimpleObjectProperty<>();
 		dabStationProperty = new SimpleObjectProperty<>(defaultStation());
@@ -48,15 +53,12 @@ public class DABSelector extends VBox {
 	}
 
 	private void initializeContentViewer() {
-		// station.setCellFactory(listView -> new DABStationCell(mediaProperty));
-		// station.setItems(stationList);
-		// dabStationProperty.addListener((observable, oldValue, newValue) -> {
-		// stationList.clear();
-		// stationList.addAll(newValue.children());
-		// });
-		// if (dabStationProperty.get() != null) {
-		// stationList.addAll(dabStationProperty.get().children());
-		// }
+		station.setCellFactory(listView -> new DABStationCell(mediaProperty));
+		station.setItems(stationList);
+		dabStationProperty.addListener((observable, oldValue, newValue) -> {
+			updateStations();
+		});
+		updateStations();
 	}
 
 	public ObjectProperty<Media> mediaProperty() {
@@ -65,6 +67,15 @@ public class DABSelector extends VBox {
 
 	@FXML
 	public void refresh(Event event) {
-		// TODO search stations
+		updateStations();
+	}
+
+	private void updateStations() {
+		try {
+			stationList.clear();
+			stationList.addAll(settings.searchDAB());
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
 	}
 }
