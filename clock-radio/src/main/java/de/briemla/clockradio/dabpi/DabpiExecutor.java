@@ -25,12 +25,13 @@ public class DabpiExecutor implements RadioExecutor {
 		Output output = new Output();
 		try {
 			Process process = Runtime.getRuntime().exec(DABPI_CTL + command.serialize());
+			System.out.println(DABPI_CTL + command.serialize());
 			try (BufferedReader standardOutput = createReader(process.getInputStream());
-			        BufferedReader errorOutput = createReader(process.getErrorStream())) {
+					BufferedReader errorOutput = createReader(process.getErrorStream())) {
 				process.waitFor();
 				standardOutput.lines().forEach(line -> {
 					output.addStandard(line);
-					System.out.println(line);
+					System.out.println("output: " + line);
 				});
 				errorOutput.lines().forEach(line -> output.addError(line));
 			}
