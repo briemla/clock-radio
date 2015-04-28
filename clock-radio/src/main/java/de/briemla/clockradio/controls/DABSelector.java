@@ -15,20 +15,20 @@ import javafx.scene.layout.VBox;
 import de.briemla.clockradio.FXUtil;
 import de.briemla.clockradio.Media;
 import de.briemla.clockradio.Settings;
-import de.briemla.clockradio.dabpi.DABStation;
+import de.briemla.clockradio.dabpi.IDABStation;
 
 public class DABSelector extends VBox {
 
 	private final SimpleObjectProperty<Media> mediaProperty;
-	private final SimpleObjectProperty<DABStation> dabStationProperty;
+	private final SimpleObjectProperty<IDABStation> dabStationProperty;
 
 	@FXML
 	private Button refresh;
 	@FXML
 	private Label source;
 	@FXML
-	private ListView<DABStation> station;
-	private final ObservableList<DABStation> stationList;
+	private ListView<IDABStation> station;
+	private final ObservableList<IDABStation> stationList;
 	private final Settings settings;
 
 	public DABSelector(Settings settings) {
@@ -39,8 +39,8 @@ public class DABSelector extends VBox {
 		dabStationProperty = new SimpleObjectProperty<>(defaultStation());
 		stationList = FXCollections.observableArrayList();
 		mediaProperty.addListener((change, oldValue, newValue) -> {
-			if (newValue != null && DABStation.class.equals(newValue.getClass())) {
-				DABStation dabStation = (DABStation) newValue;
+			if (newValue != null && IDABStation.class.equals(newValue.getClass())) {
+				IDABStation dabStation = (IDABStation) newValue;
 				dabStationProperty.set(dabStation);
 			}
 		});
@@ -48,8 +48,8 @@ public class DABSelector extends VBox {
 		initializeContentViewer();
 	}
 
-	private DABStation defaultStation() {
-		return new DABStation(null, null, null);
+	private IDABStation defaultStation() {
+		return new NoStation();
 	}
 
 	private void initializeContentViewer() {
