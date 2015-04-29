@@ -28,4 +28,9 @@ public class RadioMedia implements Media {
 		player.stop();
 	}
 
+	@Override
+	public String toString() {
+		return station.toString();
+	}
+
 }
