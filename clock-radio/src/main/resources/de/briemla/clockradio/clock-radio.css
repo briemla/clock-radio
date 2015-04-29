@@ -193,7 +193,7 @@
     -fx-background-radius: 0;
 }
 
-.list-view > .virtual-flow > .scroll-bar:vertical {
+/*.list-view > .virtual-flow > .scroll-bar:vertical {
     -fx-background-color: background-color;
     -fx-background-insets: 0;
     -fx-padding: -1 -1 -1 0;
@@ -206,6 +206,7 @@
 .list-view > .virtual-flow > .corner {
     -fx-background-color: derive(-fx-base,-1%);
 }
+*/
 
 .list-cell {
     -fx-background-color: background-color;
