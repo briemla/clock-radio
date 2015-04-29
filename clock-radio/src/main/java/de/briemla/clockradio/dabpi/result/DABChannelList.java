@@ -32,7 +32,8 @@ public class DABChannelList {
 		for (DABChannel channel : channels) {
 			controller.selectDABChannel(channel);
 			DABServiceList serviceList = controller.readDABServiceList();
-			serviceList.stream().map(service -> new DABStation(region, service, channel)).forEach(stations::add);
+			serviceList.stream().filter(service -> service.hasName())
+			        .map(service -> new DABStation(region, service, channel)).forEach(stations::add);
 		}
 		return stations;
 	}
