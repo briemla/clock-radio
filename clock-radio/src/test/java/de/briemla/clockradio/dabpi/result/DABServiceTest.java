@@ -94,6 +94,20 @@ public class DABServiceTest {
 	}
 
 	@Test
+	public void hasName() throws Exception {
+		DABService service = new DABService(0, "a3a0", "Some station name");
+
+		assertThat(service.hasName(), is(true));
+	}
+
+	@Test
+	public void hasEmptyName() throws Exception {
+		DABService service = new DABService(0, "a3a0", "");
+
+		assertThat(service.hasName(), is(false));
+	}
+
+	@Test
 	public void equalsAndHashCode() throws Exception {
 		EqualsVerifier.forClass(DABService.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}

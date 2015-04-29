@@ -85,12 +85,14 @@ public class DABChannelListTest {
 		channelList.add(channel);
 		DABService service1 = new DABService(0, "a0a3", "Some station name");
 		DABService service2 = new DABService(2, "d0d3", "Some other station name");
+		DABService service3 = new DABService(4, "a0d3", "");
 		DABStation station1 = new DABStation(region, service1, channel);
 		DABStation station2 = new DABStation(region, service2, channel);
 		DABStation[] expectedStations = { station1, station2 };
 		DABServiceList serviceList = new DABServiceList();
 		serviceList.add(service1);
 		serviceList.add(service2);
+		serviceList.add(service3);
 
 		RadioController controller = mock(RadioController.class);
 		when(controller.readDABServiceList()).thenReturn(serviceList);
@@ -114,6 +116,7 @@ public class DABChannelListTest {
 		channelList.add(channel2);
 		DABService service1 = new DABService(0, "a0a3", "Some station name");
 		DABService service2 = new DABService(2, "d0d3", "Some other station name");
+		DABService service3 = new DABService(4, "a0d3", "");
 		DABStation station1 = new DABStation(region, service1, channel1);
 		DABStation station2 = new DABStation(region, service2, channel2);
 		DABStation[] expectedStations = { station1, station2 };
@@ -121,6 +124,7 @@ public class DABChannelListTest {
 		serviceListOfChannel1.add(service1);
 		DABServiceList serviceListOfChannel2 = new DABServiceList();
 		serviceListOfChannel2.add(service2);
+		serviceListOfChannel2.add(service3);
 
 		RadioController controller = mock(RadioController.class);
 		when(controller.readDABServiceList()).thenReturn(serviceListOfChannel1).thenReturn(serviceListOfChannel2);
@@ -133,6 +137,28 @@ public class DABChannelListTest {
 		verify(controller).selectDABChannel(channel1);
 		verify(controller).selectDABChannel(channel2);
 		verify(controller, times(2)).readDABServiceList();
+	}
+
+	@Test
+	public void scanOneStationWithoutName() throws Exception {
+		Region region = Region.BADEN_WUERTEMBERG;
+		DABChannelList channelList = new DABChannelList(region);
+		DABChannel channel = new DABChannel(0);
+		channelList.add(channel);
+		DABService service = new DABService(2, "d0d3", "");
+		DABServiceList serviceList = new DABServiceList();
+		serviceList.add(service);
+
+		RadioController controller = mock(RadioController.class);
+		when(controller.readDABServiceList()).thenReturn(serviceList);
+
+		List<DABStation> stations = channelList.scanStations(controller);
+
+		assertThat(stations, is(empty()));
+
+		verify(controller).selectDABRegion(region);
+		verify(controller).selectDABChannel(channel);
+		verify(controller).readDABServiceList();
 	}
 
 	@Test

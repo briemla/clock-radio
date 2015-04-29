@@ -24,6 +24,10 @@ public class DABService {
 		return name.equals(nameToCheck);
 	}
 
+	public Boolean hasName() {
+		return name != null && !name.isEmpty();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
