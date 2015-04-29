@@ -67,6 +67,7 @@ public class DABSelector extends VBox {
 		updateStations();
 	}
 
+	// TODO should run in background
 	private void updateStations() {
 		try {
 			stationList.clear();
