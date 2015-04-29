@@ -20,7 +20,7 @@ import de.briemla.clockradio.dabpi.IDABStation;
 public class DABSelector extends VBox {
 
 	private final SimpleObjectProperty<Media> mediaProperty;
-	private final SimpleObjectProperty<IDABStation> dabStationProperty;
+	private final SimpleObjectProperty<RadioMedia> dabStationProperty;
 
 	@FXML
 	private Button refresh;
@@ -39,8 +39,8 @@ public class DABSelector extends VBox {
 		dabStationProperty = new SimpleObjectProperty<>(defaultStation());
 		stationList = FXCollections.observableArrayList();
 		mediaProperty.addListener((change, oldValue, newValue) -> {
-			if (newValue != null && IDABStation.class.equals(newValue.getClass())) {
-				IDABStation dabStation = (IDABStation) newValue;
+			if (newValue != null && newValue instanceof RadioMedia) {
+				RadioMedia dabStation = (RadioMedia) newValue;
 				dabStationProperty.set(dabStation);
 			}
 		});
@@ -48,8 +48,8 @@ public class DABSelector extends VBox {
 		initializeContentViewer();
 	}
 
-	private IDABStation defaultStation() {
-		return new NoStation();
+	private RadioMedia defaultStation() {
+		return new RadioMedia(new NoStation());
 	}
 
 	private void initializeContentViewer() {
