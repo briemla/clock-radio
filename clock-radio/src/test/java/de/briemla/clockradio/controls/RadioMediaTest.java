@@ -4,6 +4,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.Test;
 
@@ -36,6 +37,11 @@ public class RadioMediaTest {
 		verify(player).stop();
 		verifyNoMoreInteractions(player);
 		verifyZeroInteractions(station);
+	}
+
+	@Test
+	public void equalsAndHashCode() throws Exception {
+		EqualsVerifier.forClass(RadioMedia.class).allFieldsShouldBeUsed().usingGetClass().verify();
 	}
 
 }
