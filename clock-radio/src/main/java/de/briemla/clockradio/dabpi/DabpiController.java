@@ -24,10 +24,12 @@ public class DabpiController implements RadioController {
 
 	private final RadioExecutor executor;
 	private final CommandFactory factory;
+	private final AlsaController alsaController;
 
-	public DabpiController(RadioExecutor executor, CommandFactory factory) {
+	public DabpiController(RadioExecutor executor, CommandFactory factory, AlsaController alsaController) {
 		this.executor = executor;
 		this.factory = factory;
+		this.alsaController = alsaController;
 	}
 
 	@Override
@@ -95,6 +97,16 @@ public class DabpiController implements RadioController {
 
 	public DABSubchannelInfo readDABSubchannelInfo() throws IOException {
 		return executor.execute(factory.readDABSubchannelInfo());
+	}
+
+	@Override
+	public void playAudio() {
+		alsaController.play();
+	}
+
+	@Override
+	public void stopAudio() {
+		alsaController.stop();
 	}
 
 }

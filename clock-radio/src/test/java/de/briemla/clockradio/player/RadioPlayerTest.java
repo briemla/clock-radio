@@ -48,7 +48,7 @@ public class RadioPlayerTest {
 		RadioController controller = mock(RadioController.class);
 		RadioPlayer player = new RadioPlayer(controller);
 		when(controller.fmStatus()).thenReturn(new FMStatus(105500)).thenReturn(new FMStatus(106700))
-		.thenReturn(new FMStatus(105500));
+		        .thenReturn(new FMStatus(105500));
 
 		ArrayList<FMStation> frequencies = player.scanFM();
 
@@ -96,5 +96,17 @@ public class RadioPlayerTest {
 		player.play(station);
 
 		verify(station).tuneTo(controller);
+		verify(controller).playAudio();
+		verifyNoMoreInteractions(controller);
+	}
+
+	@Test
+	public void stop() throws Exception {
+		RadioController controller = mock(RadioController.class);
+		RadioPlayer player = new RadioPlayer(controller);
+		player.stop();
+
+		verify(controller).stopAudio();
+		verifyNoMoreInteractions(controller);
 	}
 }
