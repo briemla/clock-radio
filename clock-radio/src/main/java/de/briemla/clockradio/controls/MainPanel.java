@@ -39,10 +39,12 @@ public class MainPanel extends StackPane {
 
 	private final ActivePseudoClassProperty active;
 	private final Settings settings;
+	private final Player player;
 	private Timer timer;
 
 	public MainPanel(Player player) {
 		super();
+		this.player = player;
 		FXUtil.load(this, this);
 		active = new ActivePseudoClassProperty(this);
 		settings = new Settings(viewSwitcher, player);
@@ -86,7 +88,7 @@ public class MainPanel extends StackPane {
 	@FXML
 	public void stopSound(ActionEvent event) {
 		settings.stopCurrentAlarm();
-		// player.stop();
+		player.stop();
 	}
 
 	@FXML
