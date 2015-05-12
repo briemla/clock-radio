@@ -1,5 +1,6 @@
 package de.briemla.clockradio.dabpi;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
@@ -31,6 +32,13 @@ public class FMStationTest {
 
 		assertThat(lowerStation, is(lessThan(higherStation)));
 		assertThat(higherStation, is(greaterThan(lowerStation)));
+	}
+
+	@Test
+	public void testToString() throws Exception {
+		FMStation fmStation = new FMStation(106700);
+
+		assertThat(fmStation.toString(), is(equalTo("106700")));
 	}
 
 	@Test

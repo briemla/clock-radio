@@ -53,7 +53,7 @@ public class FMStation implements Comparable<FMStation>, Station {
 
 	@Override
 	public String toString() {
-		return "FMStation [frequency=" + frequency + "]";
+		return String.valueOf(frequency);
 	}
 
 }
