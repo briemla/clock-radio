@@ -6,7 +6,7 @@ import de.briemla.clockradio.dabpi.command.Region;
 import de.briemla.clockradio.dabpi.result.DABChannel;
 import de.briemla.clockradio.dabpi.result.DABService;
 
-public class DABStation implements IDABStation {
+public class DABStation implements Station {
 
 	private final Region region;
 	private final DABService service;

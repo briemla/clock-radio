@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import de.briemla.clockradio.FXUtil;
 import de.briemla.clockradio.Media;
 import de.briemla.clockradio.Settings;
-import de.briemla.clockradio.dabpi.IDABStation;
+import de.briemla.clockradio.dabpi.Station;
 
 public class DABSelector extends VBox {
 
@@ -27,8 +27,8 @@ public class DABSelector extends VBox {
 	@FXML
 	private Label source;
 	@FXML
-	private ListView<IDABStation> station;
-	private final ObservableList<IDABStation> stationList;
+	private ListView<Station> station;
+	private final ObservableList<Station> stationList;
 	private final Settings settings;
 
 	public DABSelector(Settings settings) {

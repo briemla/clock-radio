@@ -6,4 +6,7 @@ public interface Station {
 
 	void tuneTo(RadioController controller) throws IOException;
 
+	@Override
+    String toString();
+
 }
