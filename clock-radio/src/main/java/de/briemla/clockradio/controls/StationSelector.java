@@ -37,15 +37,14 @@ public class StationSelector extends VBox {
 		stationList = FXCollections.observableArrayList();
 		mediaProperty.addListener((change, oldValue, newValue) -> {
 			if (newValue != null && newValue instanceof RadioMedia) {
-				RadioMedia station = (RadioMedia) newValue;
-				radioMediaProperty.set(station);
+				radioMediaProperty.set((RadioMedia) newValue);
 			}
 		});
 		source.textProperty().bind(radioMediaProperty.asString());
 		initializeContentViewer();
 	}
 
-	private RadioMedia defaultStation() {
+	private static RadioMedia defaultStation() {
 		return new RadioMedia(new NoStation());
 	}
 
