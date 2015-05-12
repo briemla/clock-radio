@@ -44,7 +44,7 @@ public class StationSelector extends VBox {
 		initializeContentViewer();
 	}
 
-	private RadioMedia defaultStation() {
+	private static RadioMedia defaultStation() {
 		return new RadioMedia(new NoStation());
 	}
 
