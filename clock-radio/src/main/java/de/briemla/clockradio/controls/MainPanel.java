@@ -49,7 +49,7 @@ public class MainPanel extends StackPane {
 		alarm.setSettings(settings);
 		Node clock = new DigitalClock();
 		viewSwitcher.setDefaultView(clock);
-		AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher, settings);
+		AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher, settings, player);
 		viewSwitcher.addView(Alarm.class, alarmMenu);
 		addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
 			if (!active.get()) {
@@ -91,17 +91,6 @@ public class MainPanel extends StackPane {
 
 	@FXML
 	public void startRadio(ActionEvent event) {
-		// TODO implement this
-		// radioPlayer.scan();
-		// Runtime runtime = Runtime.getRuntime();
-		// try {
-		// alsaloop = runtime.exec("alsaloop -C hw:1,0");
-		// Process process = runtime.exec("/home/pi/dabpi_ctl/startRadio.sh");
-		// process.waitFor();
-		// } catch (IOException | InterruptedException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 	}
 
 }

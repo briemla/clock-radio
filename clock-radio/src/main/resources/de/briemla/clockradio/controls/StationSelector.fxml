@@ -11,6 +11,7 @@
         <HBox spacing="10.0" styleClass="navigation">
             <children>
                 <Label fx:id="source" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="200.0" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER" />
+                <Button fx:id="play" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#play" prefHeight="50.0" prefWidth="50.0" styleClass="start" HBox.hgrow="NEVER" />
                 <Button fx:id="refresh" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#refresh" prefHeight="50.0" prefWidth="50.0" styleClass="refresh" HBox.hgrow="NEVER" />
             </children>
         </HBox>

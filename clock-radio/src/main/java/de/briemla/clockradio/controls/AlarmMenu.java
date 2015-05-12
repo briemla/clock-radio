@@ -12,6 +12,7 @@ import de.briemla.clockradio.FXUtil;
 import de.briemla.clockradio.Media;
 import de.briemla.clockradio.Settings;
 import de.briemla.clockradio.WakeUpTime;
+import de.briemla.clockradio.player.Player;
 
 public class AlarmMenu extends VBox {
 
@@ -30,7 +31,7 @@ public class AlarmMenu extends VBox {
 	private final Settings settings;
 	private Alarm lastAlarm;
 
-	public AlarmMenu(DefaultableViewSwitcher viewSwitcher, Settings settings) {
+	public AlarmMenu(DefaultableViewSwitcher viewSwitcher, Settings settings, Player player) {
 		super();
 		this.viewSwitcher = viewSwitcher;
 		this.settings = settings;
@@ -41,14 +42,14 @@ public class AlarmMenu extends VBox {
 		time.textProperty().bind(wakeUpTimeProperty.asString());
 		mediaDescription.textProperty().bind(mediaProperty.asString());
 		weekdays.textProperty().bind(activesDayProperty.asString());
-		registerViews();
+		registerViews(player);
 	}
 
-	private void registerViews() {
+	private void registerViews(Player player) {
 		TimeEditor editor = new TimeEditor();
 		viewSwitcher.addView(WakeUpTime.class, editor);
 		editor.timeProperty().bindBidirectional(wakeUpTimeProperty);
-		MediaSelector mediaSelector = new MediaSelector(settings);
+		MediaSelector mediaSelector = new MediaSelector(settings, player);
 		viewSwitcher.addView(Media.class, mediaSelector);
 		mediaSelector.mediaProperty().bindBidirectional(mediaProperty);
 		ActiveDayEditor activeDayEditor = new ActiveDayEditor();
