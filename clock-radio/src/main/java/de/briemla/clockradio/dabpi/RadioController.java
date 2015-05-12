@@ -123,4 +123,17 @@ public interface RadioController {
 	 */
 	Void scanNextStation(ScanDirection direction) throws IOException;
 
+	/**
+	 * Start playing the tuned station. Maybe use alsa mixer to redirect audio interfaces or play in
+	 * in plain java.
+	 */
+	void playAudio();
+
+	/**
+	 * Stop playing audio.
+	 * 
+	 * @see #playAudio()
+	 */
+	void stopAudio();
+
 }

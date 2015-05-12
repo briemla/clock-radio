@@ -5,9 +5,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,11 +29,20 @@ public class DabpiControllerTest {
 
 	private RadioExecutor executor;
 	private CommandFactory factory;
+	private AlsaController alsaController;
 
 	@Before
 	public void initializeMocks() {
 		executor = mock(RadioExecutor.class);
 		factory = mock(CommandFactory.class);
+		alsaController = mock(AlsaController.class);
+	}
+
+	@After
+	public void verifyNoMoreInteraction() {
+		verifyNoMoreInteractions(executor);
+		verifyNoMoreInteractions(factory);
+		verifyNoMoreInteractions(alsaController);
 	}
 
 	@Test
@@ -43,7 +54,7 @@ public class DabpiControllerTest {
 		when(factory.switchToDAB()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		Void switchSuccessful = controller.switchToDAB();
 		assertThat("Return value", switchSuccessful, is(equalTo(result)));
 
@@ -62,7 +73,7 @@ public class DabpiControllerTest {
 		when(factory.switchToFM()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		Void switchSuccessful = controller.switchToFM();
 		assertThat("Return value", switchSuccessful, is(equalTo(expectedResult)));
 
@@ -82,7 +93,7 @@ public class DabpiControllerTest {
 		when(factory.tuneTo(frequency)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		TuneToFrequencyResult tunedFrequency = controller.tuneTo(frequency);
 		assertThat("Return value", tunedFrequency, is(equalTo(expectedResult)));
 
@@ -101,7 +112,7 @@ public class DabpiControllerTest {
 		when(factory.fmStatus()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		FMStatus fmStatus = controller.fmStatus();
 		assertThat("Result", fmStatus, is(equalTo(expectedResult)));
 
@@ -120,7 +131,7 @@ public class DabpiControllerTest {
 		when(factory.dabStatus()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		DABStatus dabStatus = controller.dabStatus();
 		assertThat("Result", dabStatus, is(equalTo(expectedResult)));
 
@@ -143,7 +154,7 @@ public class DabpiControllerTest {
 		when(factory.startDABService(dabService)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		DABService startDABService = controller.startDABService(dabService);
 		assertThat("Result", startDABService, is(equalTo(expectedResult)));
 
@@ -162,7 +173,7 @@ public class DabpiControllerTest {
 		when(factory.readDABServiceList()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		DABServiceList readDABServiceList = controller.readDABServiceList();
 		assertThat("Result", readDABServiceList, is(equalTo(expectedResult)));
 
@@ -183,7 +194,7 @@ public class DabpiControllerTest {
 		when(factory.selectDABChannel(original)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		DABChannel selectDABChannel = controller.selectDABChannel(original);
 		assertThat("Result", selectDABChannel, is(equalTo(expectedResult)));
 
@@ -203,7 +214,7 @@ public class DabpiControllerTest {
 		when(factory.selectDABRegion(region)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		Void selectDABRegion = controller.selectDABRegion(region);
 		assertThat("Result", selectDABRegion, is(equalTo(expectedResult)));
 
@@ -223,7 +234,7 @@ public class DabpiControllerTest {
 		when(factory.readFrequencyListFor(region)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		DABChannelList readFrequencyList = controller.readFrequencyListFor(region);
 		assertThat("Result", readFrequencyList, is(equalTo(expectedResult)));
 
@@ -243,7 +254,7 @@ public class DabpiControllerTest {
 		when(factory.scanNextStation(direction)).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		Void scanNextStation = controller.scanNextStation(direction);
 		assertThat("Result", scanNextStation, is(equalTo(expectedResult)));
 
@@ -262,7 +273,7 @@ public class DabpiControllerTest {
 		when(factory.readRDS()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		RDSInfo readRDS = controller.readRDS();
 		assertThat("Result", readRDS, is(equalTo(expectedResult)));
 
@@ -281,7 +292,7 @@ public class DabpiControllerTest {
 		when(factory.readDABAudioInfo()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		DABAudioInfo readDABAudioInfo = controller.readDABAudioInfo();
 		assertThat("Result", readDABAudioInfo, is(equalTo(expectedResult)));
 
@@ -300,12 +311,34 @@ public class DabpiControllerTest {
 		when(factory.readDABSubchannelInfo()).thenReturn(command);
 		when(executor.execute(command)).thenReturn(result);
 
-		DabpiController controller = new DabpiController(executor, factory);
+		DabpiController controller = newDabpiController();
 		DABSubchannelInfo readDABSubchannelInfo = controller.readDABSubchannelInfo();
 		assertThat("Result", readDABSubchannelInfo, is(equalTo(expectedResult)));
 
 		verify(factory).readDABSubchannelInfo();
 		verify(executor).execute(command);
 		verifyZeroInteractions(command);
+	}
+
+	private DabpiController newDabpiController() {
+		return new DabpiController(executor, factory, alsaController);
+	}
+
+	@Test
+	public void playAudio() throws Exception {
+		DabpiController controller = newDabpiController();
+
+		controller.playAudio();
+
+		verify(alsaController).play();
+	}
+
+	@Test
+	public void stopAudio() throws Exception {
+		DabpiController controller = newDabpiController();
+
+		controller.stopAudio();
+
+		verify(alsaController).stop();
 	}
 }

@@ -64,11 +64,11 @@ public class RadioPlayer {
 
 	public void play(Station station) throws IOException {
 		station.tuneTo(controller);
+		controller.playAudio();
 	}
 
 	public void stop() {
-		// TODO Stop alsa redirection
-
+		controller.stopAudio();
 	}
 
 }
