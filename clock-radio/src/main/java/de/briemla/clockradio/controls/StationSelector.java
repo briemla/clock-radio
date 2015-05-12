@@ -39,8 +39,8 @@ public class StationSelector extends VBox {
 		stationList = FXCollections.observableArrayList();
 		mediaProperty.addListener((change, oldValue, newValue) -> {
 			if (newValue != null && newValue instanceof RadioMedia) {
-				RadioMedia dabStation = (RadioMedia) newValue;
-				radioMediaProperty.set(dabStation);
+				RadioMedia station = (RadioMedia) newValue;
+				radioMediaProperty.set(station);
 			}
 		});
 		source.textProperty().bind(radioMediaProperty.asString());
