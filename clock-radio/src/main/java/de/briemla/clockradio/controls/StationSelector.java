@@ -14,7 +14,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import de.briemla.clockradio.FXUtil;
 import de.briemla.clockradio.Media;
-import de.briemla.clockradio.Settings;
 import de.briemla.clockradio.dabpi.Station;
 
 public class StationSelector extends VBox {
@@ -29,11 +28,11 @@ public class StationSelector extends VBox {
 	@FXML
 	private ListView<Station> station;
 	private final ObservableList<Station> stationList;
-	private final Settings settings;
+	private final SearchStation searcher;
 
-	public StationSelector(Settings settings) {
+	public StationSelector(SearchStation updater) {
 		super();
-		this.settings = settings;
+		this.searcher = updater;
 		FXUtil.load(this, this);
 		mediaProperty = new SimpleObjectProperty<>();
 		radioMediaProperty = new SimpleObjectProperty<>(defaultStation());
@@ -71,7 +70,7 @@ public class StationSelector extends VBox {
 	private void updateStations() {
 		try {
 			stationList.clear();
-			stationList.addAll(settings.searchDAB());
+			stationList.addAll(searcher.search());
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}

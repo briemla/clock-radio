@@ -26,10 +26,10 @@ public class MediaSelector extends TabPane {
 		FolderSelector folderSelector = new FolderSelector();
 		addTab(FOLDER, folderSelector);
 		mediaProperty.bindBidirectional(folderSelector.mediaProperty());
-		StationSelector dabSelector = new StationSelector(settings);
+		StationSelector dabSelector = new StationSelector(settings::searchDAB);
 		addTab(DAB, dabSelector);
 		mediaProperty.bindBidirectional(dabSelector.mediaProperty());
-		StationSelector fmSelector = new StationSelector(settings);
+		StationSelector fmSelector = new StationSelector(settings::searchFM);
 		addTab(FM, fmSelector);
 		mediaProperty.bindBidirectional(fmSelector.mediaProperty());
 	}
