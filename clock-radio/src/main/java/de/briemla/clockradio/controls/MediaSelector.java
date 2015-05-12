@@ -13,6 +13,7 @@ public class MediaSelector extends TabPane {
 
 	private static final String FOLDER = "Ordner";
 	private static final String DAB = "DAB";
+	private static final String FM = "FM";
 	private final SimpleObjectProperty<Media> mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
 
 	public MediaSelector(Settings settings) {
@@ -25,9 +26,12 @@ public class MediaSelector extends TabPane {
 		FolderSelector folderSelector = new FolderSelector();
 		addTab(FOLDER, folderSelector);
 		mediaProperty.bindBidirectional(folderSelector.mediaProperty());
-		DABSelector dabSelector = new DABSelector(settings);
+		StationSelector dabSelector = new StationSelector(settings);
 		addTab(DAB, dabSelector);
 		mediaProperty.bindBidirectional(dabSelector.mediaProperty());
+		StationSelector fmSelector = new StationSelector(settings);
+		addTab(FM, fmSelector);
+		mediaProperty.bindBidirectional(fmSelector.mediaProperty());
 	}
 
 	private void addTab(String description, Node node) {

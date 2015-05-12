@@ -17,7 +17,7 @@ import de.briemla.clockradio.Media;
 import de.briemla.clockradio.Settings;
 import de.briemla.clockradio.dabpi.Station;
 
-public class DABSelector extends VBox {
+public class StationSelector extends VBox {
 
 	private final SimpleObjectProperty<Media> mediaProperty;
 	private final SimpleObjectProperty<RadioMedia> radioMediaProperty;
@@ -31,7 +31,7 @@ public class DABSelector extends VBox {
 	private final ObservableList<Station> stationList;
 	private final Settings settings;
 
-	public DABSelector(Settings settings) {
+	public StationSelector(Settings settings) {
 		super();
 		this.settings = settings;
 		FXUtil.load(this, this);
