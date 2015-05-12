@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import de.briemla.clockradio.dabpi.DABStation;
+import de.briemla.clockradio.dabpi.FMStation;
 import de.briemla.clockradio.dabpi.Station;
 
 public interface Player {
@@ -18,6 +19,8 @@ public interface Player {
 
 	ReadOnlyBooleanProperty playingProperty();
 
-	List<DABStation> searchDAB() throws IOException;
+	List<DABStation> searchDAB();
+
+	List<FMStation> searchFM();
 
 }

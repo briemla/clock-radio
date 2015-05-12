@@ -4,15 +4,15 @@ import javafx.beans.property.ObjectProperty;
 import javafx.event.Event;
 import javafx.scene.control.ListCell;
 import de.briemla.clockradio.Media;
-import de.briemla.clockradio.dabpi.IDABStation;
+import de.briemla.clockradio.dabpi.Station;
 
-public class DABStationCell extends ListCell<IDABStation> {
+public class StationCell extends ListCell<Station> {
 
 	private static final String EMPTY = "";
 	private final ObjectProperty<Media> stationProperty;
-	private IDABStation station;
+	private Station station;
 
-	public DABStationCell(ObjectProperty<Media> stationProperty) {
+	public StationCell(ObjectProperty<Media> stationProperty) {
 		this.stationProperty = stationProperty;
 		setOnMouseClicked(this::updateStation);
 	}
@@ -24,7 +24,7 @@ public class DABStationCell extends ListCell<IDABStation> {
 	}
 
 	@Override
-	protected void updateItem(IDABStation item, boolean empty) {
+	protected void updateItem(Station item, boolean empty) {
 		super.updateItem(item, empty);
 		if (!empty && item != null) {
 			station = item;

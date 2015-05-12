@@ -1,7 +1,5 @@
 package de.briemla.clockradio.controls;
 
-import java.io.IOException;
-
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -14,10 +12,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import de.briemla.clockradio.FXUtil;
 import de.briemla.clockradio.Media;
-import de.briemla.clockradio.Settings;
-import de.briemla.clockradio.dabpi.IDABStation;
+import de.briemla.clockradio.dabpi.Station;
 
-public class DABSelector extends VBox {
+public class StationSelector extends VBox {
 
 	private final SimpleObjectProperty<Media> mediaProperty;
 	private final SimpleObjectProperty<RadioMedia> radioMediaProperty;
@@ -27,21 +24,21 @@ public class DABSelector extends VBox {
 	@FXML
 	private Label source;
 	@FXML
-	private ListView<IDABStation> station;
-	private final ObservableList<IDABStation> stationList;
-	private final Settings settings;
+	private ListView<Station> station;
+	private final ObservableList<Station> stationList;
+	private final SearchStation searcher;
 
-	public DABSelector(Settings settings) {
+	public StationSelector(SearchStation searcher) {
 		super();
-		this.settings = settings;
+		this.searcher = searcher;
 		FXUtil.load(this, this);
 		mediaProperty = new SimpleObjectProperty<>();
 		radioMediaProperty = new SimpleObjectProperty<>(defaultStation());
 		stationList = FXCollections.observableArrayList();
 		mediaProperty.addListener((change, oldValue, newValue) -> {
 			if (newValue != null && newValue instanceof RadioMedia) {
-				RadioMedia dabStation = (RadioMedia) newValue;
-				radioMediaProperty.set(dabStation);
+				RadioMedia station = (RadioMedia) newValue;
+				radioMediaProperty.set(station);
 			}
 		});
 		source.textProperty().bind(radioMediaProperty.asString());
@@ -53,7 +50,7 @@ public class DABSelector extends VBox {
 	}
 
 	private void initializeContentViewer() {
-		station.setCellFactory(listView -> new DABStationCell(mediaProperty));
+		station.setCellFactory(listView -> new StationCell(mediaProperty));
 		station.setItems(stationList);
 		updateStations();
 	}
@@ -69,11 +66,7 @@ public class DABSelector extends VBox {
 
 	// TODO should run in background
 	private void updateStations() {
-		try {
-			stationList.clear();
-			stationList.addAll(settings.searchDAB());
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
+		stationList.clear();
+		stationList.addAll(searcher.search());
 	}
 }
