@@ -6,13 +6,13 @@ import javafx.scene.control.ListCell;
 import de.briemla.clockradio.Media;
 import de.briemla.clockradio.dabpi.Station;
 
-public class DABStationCell extends ListCell<Station> {
+public class StationCell extends ListCell<Station> {
 
 	private static final String EMPTY = "";
 	private final ObjectProperty<Media> stationProperty;
 	private Station station;
 
-	public DABStationCell(ObjectProperty<Media> stationProperty) {
+	public StationCell(ObjectProperty<Media> stationProperty) {
 		this.stationProperty = stationProperty;
 		setOnMouseClicked(this::updateStation);
 	}

@@ -53,7 +53,7 @@ public class DABSelector extends VBox {
 	}
 
 	private void initializeContentViewer() {
-		station.setCellFactory(listView -> new DABStationCell(mediaProperty));
+		station.setCellFactory(listView -> new StationCell(mediaProperty));
 		station.setItems(stationList);
 		updateStations();
 	}
