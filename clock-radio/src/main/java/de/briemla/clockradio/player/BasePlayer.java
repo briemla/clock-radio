@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import de.briemla.clockradio.dabpi.DABStation;
+import de.briemla.clockradio.dabpi.FMStation;
 import de.briemla.clockradio.dabpi.Station;
 import de.briemla.clockradio.dabpi.command.Region;
 
@@ -53,8 +54,13 @@ public class BasePlayer implements Player {
 	}
 
 	@Override
-	public List<DABStation> searchDAB() throws IOException {
+	public List<DABStation> searchDAB() {
 		return radioPlayer.scanDAB(region);
+	}
+
+	@Override
+	public List<FMStation> searchFM() {
+		return radioPlayer.scanFM();
 	}
 
 }

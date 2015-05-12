@@ -1,7 +1,5 @@
 package de.briemla.clockradio.controls;
 
-import java.io.IOException;
-
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -30,9 +28,9 @@ public class StationSelector extends VBox {
 	private final ObservableList<Station> stationList;
 	private final SearchStation searcher;
 
-	public StationSelector(SearchStation updater) {
+	public StationSelector(SearchStation searcher) {
 		super();
-		this.searcher = updater;
+		this.searcher = searcher;
 		FXUtil.load(this, this);
 		mediaProperty = new SimpleObjectProperty<>();
 		radioMediaProperty = new SimpleObjectProperty<>(defaultStation());
@@ -68,11 +66,7 @@ public class StationSelector extends VBox {
 
 	// TODO should run in background
 	private void updateStations() {
-		try {
-			stationList.clear();
-			stationList.addAll(searcher.search());
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
+		stationList.clear();
+		stationList.addAll(searcher.search());
 	}
 }

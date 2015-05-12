@@ -1,7 +1,5 @@
 package de.briemla.clockradio;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -76,12 +74,11 @@ public class Settings {
 		}
 	}
 
-	public List<? extends Station> searchDAB() throws IOException {
+	public List<? extends Station> searchDAB() {
 		return player.searchDAB();
 	}
 
-	public List<? extends Station> searchFM() throws IOException {
-		return new ArrayList<>();
-		// return player.searchDAB();
+	public List<? extends Station> searchFM() {
+		return player.searchFM();
 	}
 }
