@@ -1,7 +1,6 @@
 package de.briemla.clockradio.dabpi.result;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.stream.Stream;
 
 public class DABServiceList {
