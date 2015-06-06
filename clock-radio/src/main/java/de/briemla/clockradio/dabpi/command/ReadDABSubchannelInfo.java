@@ -5,13 +5,13 @@ import de.briemla.clockradio.dabpi.result.DABSubchannelInfo;
 
 public class ReadDABSubchannelInfo extends BaseCommand<DABSubchannelInfo> {
 
-	public ReadDABSubchannelInfo() {
-		super("o");
-	}
+    public ReadDABSubchannelInfo() {
+        super("o");
+    }
 
-	@Override
-	protected DABSubchannelInfo parseSpecialized(Output output) {
-		throw new UnsupportedOperationException("Not yet implemented.");
-	}
+    @Override
+    protected DABSubchannelInfo parseSpecialized(Output output) {
+        throw new UnsupportedOperationException("Not yet implemented.");
+    }
 
 }

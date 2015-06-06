@@ -69,74 +69,74 @@ import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
  */
 public class DabpiCommandFactory implements CommandFactory {
 
-	@Override
-	public Command<Void> switchToDAB() {
-		return new SwitchToDAB();
-	}
+    @Override
+    public Command<Void> switchToDAB() {
+        return new SwitchToDAB();
+    }
 
-	@Override
-	public Command<Void> switchToFM() {
-		return new SwitchToFM();
-	}
+    @Override
+    public Command<Void> switchToFM() {
+        return new SwitchToFM();
+    }
 
-	@Override
-	public Command<TuneToFrequencyResult> tuneTo(Integer frequency) {
-		return new TuneToFrequency(frequency);
-	}
+    @Override
+    public Command<TuneToFrequencyResult> tuneTo(Integer frequency) {
+        return new TuneToFrequency(frequency);
+    }
 
-	@Override
-	public Command<FMStatus> fmStatus() {
-		return new FMStatusCommand();
-	}
+    @Override
+    public Command<FMStatus> fmStatus() {
+        return new FMStatusCommand();
+    }
 
-	@Override
-	public Command<DABStatus> dabStatus() {
-		return new DABStatusCommand();
-	}
+    @Override
+    public Command<DABStatus> dabStatus() {
+        return new DABStatusCommand();
+    }
 
-	@Override
-	public Command<DABService> startDABService(DABService service) {
-		return new StartDABService(service);
-	}
+    @Override
+    public Command<DABService> startDABService(DABService service) {
+        return new StartDABService(service);
+    }
 
-	@Override
-	public Command<DABServiceList> readDABServiceList() {
-		return new ReadDABServiceList();
-	}
+    @Override
+    public Command<DABServiceList> readDABServiceList() {
+        return new ReadDABServiceList();
+    }
 
-	@Override
-	public Command<DABChannel> selectDABChannel(DABChannel channel) {
-		return new SelectDABChannel(channel);
-	}
+    @Override
+    public Command<DABChannel> selectDABChannel(DABChannel channel) {
+        return new SelectDABChannel(channel);
+    }
 
-	@Override
-	public Command<Void> selectDABRegion(Region region) {
-		return new SelectDABRegion(region);
-	}
+    @Override
+    public Command<Void> selectDABRegion(Region region) {
+        return new SelectDABRegion(region);
+    }
 
-	@Override
-	public Command<DABChannelList> readFrequencyListFor(Region region) {
-		return new ReadFrequencyList(region);
-	}
+    @Override
+    public Command<DABChannelList> readFrequencyListFor(Region region) {
+        return new ReadFrequencyList(region);
+    }
 
-	@Override
-	public Command<Void> scanNextStation(ScanDirection direction) {
-		return new ScanNextStation(direction);
-	}
+    @Override
+    public Command<Void> scanNextStation(ScanDirection direction) {
+        return new ScanNextStation(direction);
+    }
 
-	@Override
-	public Command<RDSInfo> readRDS() {
-		return new ReadRDS();
-	}
+    @Override
+    public Command<RDSInfo> readRDS() {
+        return new ReadRDS();
+    }
 
-	@Override
-	public Command<DABAudioInfo> readDABAudioInfo() {
-		return new ReadDABAudioInfo();
-	}
+    @Override
+    public Command<DABAudioInfo> readDABAudioInfo() {
+        return new ReadDABAudioInfo();
+    }
 
-	@Override
-	public Command<DABSubchannelInfo> readDABSubchannelInfo() {
-		return new ReadDABSubchannelInfo();
-	}
+    @Override
+    public Command<DABSubchannelInfo> readDABSubchannelInfo() {
+        return new ReadDABSubchannelInfo();
+    }
 
 }

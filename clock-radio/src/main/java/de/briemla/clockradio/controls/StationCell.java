@@ -8,35 +8,35 @@ import de.briemla.clockradio.dabpi.Station;
 
 public class StationCell extends ListCell<Station> {
 
-	private static final String EMPTY = "";
-	private final ObjectProperty<Media> stationProperty;
-	private Station station;
+    private static final String EMPTY = "";
+    private final ObjectProperty<Media> stationProperty;
+    private Station station;
 
-	public StationCell(ObjectProperty<Media> stationProperty) {
-		this.stationProperty = stationProperty;
-		setOnMouseClicked(this::updateStation);
-	}
+    public StationCell(ObjectProperty<Media> stationProperty) {
+        this.stationProperty = stationProperty;
+        setOnMouseClicked(this::updateStation);
+    }
 
-	private void updateStation(Event event) {
-		if (station != null) {
-			stationProperty.set(new RadioMedia(station));
-		}
-	}
+    private void updateStation(Event event) {
+        if (station != null) {
+            stationProperty.set(new RadioMedia(station));
+        }
+    }
 
-	@Override
-	protected void updateItem(Station item, boolean empty) {
-		super.updateItem(item, empty);
-		if (!empty && item != null) {
-			station = item;
-			setText(item.toString());
-			return;
-		}
-		clear();
-	}
+    @Override
+    protected void updateItem(Station item, boolean empty) {
+        super.updateItem(item, empty);
+        if (!empty && item != null) {
+            station = item;
+            setText(item.toString());
+            return;
+        }
+        clear();
+    }
 
-	private void clear() {
-		station = null;
-		setText(EMPTY);
-	}
+    private void clear() {
+        station = null;
+        setText(EMPTY);
+    }
 
 }

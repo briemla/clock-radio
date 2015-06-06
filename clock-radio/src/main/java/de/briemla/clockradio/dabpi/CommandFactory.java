@@ -14,32 +14,32 @@ import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 public interface CommandFactory {
 
-	Command<Void> switchToDAB();
+    Command<Void> switchToDAB();
 
-	Command<Void> switchToFM();
+    Command<Void> switchToFM();
 
-	Command<TuneToFrequencyResult> tuneTo(Integer frequency);
+    Command<TuneToFrequencyResult> tuneTo(Integer frequency);
 
-	Command<FMStatus> fmStatus();
+    Command<FMStatus> fmStatus();
 
-	Command<DABStatus> dabStatus();
+    Command<DABStatus> dabStatus();
 
-	Command<DABService> startDABService(DABService service);
+    Command<DABService> startDABService(DABService service);
 
-	Command<DABServiceList> readDABServiceList();
+    Command<DABServiceList> readDABServiceList();
 
-	Command<DABChannel> selectDABChannel(DABChannel channelId);
+    Command<DABChannel> selectDABChannel(DABChannel channelId);
 
-	Command<Void> selectDABRegion(Region region);
+    Command<Void> selectDABRegion(Region region);
 
-	Command<DABChannelList> readFrequencyListFor(Region region);
+    Command<DABChannelList> readFrequencyListFor(Region region);
 
-	Command<Void> scanNextStation(ScanDirection direction);
+    Command<Void> scanNextStation(ScanDirection direction);
 
-	Command<RDSInfo> readRDS();
+    Command<RDSInfo> readRDS();
 
-	Command<DABAudioInfo> readDABAudioInfo();
+    Command<DABAudioInfo> readDABAudioInfo();
 
-	Command<DABSubchannelInfo> readDABSubchannelInfo();
+    Command<DABSubchannelInfo> readDABSubchannelInfo();
 
 }

@@ -5,13 +5,13 @@ import de.briemla.clockradio.dabpi.result.DABAudioInfo;
 
 public class ReadDABAudioInfo extends BaseCommand<DABAudioInfo> {
 
-	public ReadDABAudioInfo() {
-		super("n");
-	}
+    public ReadDABAudioInfo() {
+        super("n");
+    }
 
-	@Override
-	protected DABAudioInfo parseSpecialized(Output output) {
-		throw new UnsupportedOperationException("Not yet implemented.");
-	}
+    @Override
+    protected DABAudioInfo parseSpecialized(Output output) {
+        throw new UnsupportedOperationException("Not yet implemented.");
+    }
 
 }

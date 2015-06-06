@@ -4,5 +4,5 @@ import java.io.IOException;
 
 public interface RadioExecutor {
 
-	<T> T execute(Command<T> command) throws IOException;
+    <T> T execute(Command<T> command) throws IOException;
 }

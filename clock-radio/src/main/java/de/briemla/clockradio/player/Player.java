@@ -11,16 +11,16 @@ import de.briemla.clockradio.dabpi.Station;
 
 public interface Player {
 
-	void play(URI uriToPlay);
+    void play(URI uriToPlay);
 
-	void play(Station station) throws IOException;
+    void play(Station station) throws IOException;
 
-	void stop();
+    void stop();
 
-	ReadOnlyBooleanProperty playingProperty();
+    ReadOnlyBooleanProperty playingProperty();
 
-	List<DABStation> searchDAB();
+    List<DABStation> searchDAB();
 
-	List<FMStation> searchFM();
+    List<FMStation> searchFM();
 
 }

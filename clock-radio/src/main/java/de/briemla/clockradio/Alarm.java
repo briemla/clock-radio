@@ -20,190 +20,190 @@ import de.briemla.clockradio.player.Player;
 
 public class Alarm {
 
-	public static class AlarmTimer implements ChangeListener<Object> {
+    public static class AlarmTimer implements ChangeListener<Object> {
 
-		private Timer startTimer;
-		private final Alarm alarm;
-		private Timer stopTimer;
+        private Timer startTimer;
+        private final Alarm alarm;
+        private Timer stopTimer;
 
-		public AlarmTimer(Alarm alarm) {
-			super();
-			this.alarm = alarm;
-		}
+        public AlarmTimer(Alarm alarm) {
+            super();
+            this.alarm = alarm;
+        }
 
-		@Override
-		public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object newValue) {
-			stopTimer();
-			startTimer();
-		}
+        @Override
+        public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object newValue) {
+            stopTimer();
+            startTimer();
+        }
 
-		private void stopTimer() {
-			if (startTimer != null) {
-				startTimer.cancel();
-				startTimer = null;
-			}
-			if (stopTimer != null) {
-				stopTimer.cancel();
-				stopTimer = null;
-			}
-		}
+        private void stopTimer() {
+            if (startTimer != null) {
+                startTimer.cancel();
+                startTimer = null;
+            }
+            if (stopTimer != null) {
+                stopTimer.cancel();
+                stopTimer = null;
+            }
+        }
 
-		private void startTimer() {
-			startTimer = new Timer("AlarmTimer", true);
-			// TODO: Maybe use Timer#schedule to run the timer on specified
-			// dates:
-			// Timer timer new Timer();
-			// Thread myThread= // Your thread
-			// Calendar date = Calendar.getInstance();
-			// date.set(
-			// Calendar.DAY_OF_WEEK,
-			// Calendar.SUNDAY
-			// );
-			// date.set(Calendar.HOUR, 0);
-			// date.set(Calendar.MINUTE, 0);
-			// date.set(Calendar.SECOND, 0);
-			// date.set(Calendar.MILLISECOND, 0);
-			// // Schedule to run every Sunday in midnight
-			// timer.schedule(
-			// new SampleTask (myThread),
-			// date.getTime(),
-			// 1000 * 60 * 60 * 24 * 7
-			// );
-			startTimer.scheduleAtFixedRate(new AlarmTask(alarm), alarm.alarmDate(), Long.MAX_VALUE);
-			stopTimer = new Timer("AlarmStopTimer", true);
-			stopTimer.scheduleAtFixedRate(new AlarmStopTask(alarm), alarm.alarmStopDate(), Long.MAX_VALUE);
-		}
-	}
+        private void startTimer() {
+            startTimer = new Timer("AlarmTimer", true);
+            // TODO: Maybe use Timer#schedule to run the timer on specified
+            // dates:
+            // Timer timer new Timer();
+            // Thread myThread= // Your thread
+            // Calendar date = Calendar.getInstance();
+            // date.set(
+            // Calendar.DAY_OF_WEEK,
+            // Calendar.SUNDAY
+            // );
+            // date.set(Calendar.HOUR, 0);
+            // date.set(Calendar.MINUTE, 0);
+            // date.set(Calendar.SECOND, 0);
+            // date.set(Calendar.MILLISECOND, 0);
+            // // Schedule to run every Sunday in midnight
+            // timer.schedule(
+            // new SampleTask (myThread),
+            // date.getTime(),
+            // 1000 * 60 * 60 * 24 * 7
+            // );
+            startTimer.scheduleAtFixedRate(new AlarmTask(alarm), alarm.alarmDate(), Long.MAX_VALUE);
+            stopTimer = new Timer("AlarmStopTimer", true);
+            stopTimer.scheduleAtFixedRate(new AlarmStopTask(alarm), alarm.alarmStopDate(), Long.MAX_VALUE);
+        }
+    }
 
-	public static class AlarmTask extends TimerTask {
+    public static class AlarmTask extends TimerTask {
 
-		private final Alarm alarm;
+        private final Alarm alarm;
 
-		public AlarmTask(Alarm alarm) {
-			this.alarm = alarm;
-		}
+        public AlarmTask(Alarm alarm) {
+            this.alarm = alarm;
+        }
 
-		@Override
-		public void run() {
-			alarm.play();
-		}
-	}
+        @Override
+        public void run() {
+            alarm.play();
+        }
+    }
 
-	public static class AlarmStopTask extends TimerTask {
+    public static class AlarmStopTask extends TimerTask {
 
-		private final Alarm alarm;
+        private final Alarm alarm;
 
-		public AlarmStopTask(Alarm alarm) {
-			this.alarm = alarm;
-		}
+        public AlarmStopTask(Alarm alarm) {
+            this.alarm = alarm;
+        }
 
-		@Override
-		public void run() {
-			alarm.stop();
-		}
-	}
+        @Override
+        public void run() {
+            alarm.stop();
+        }
+    }
 
-	private final SimpleObjectProperty<Duration> durationProperty;
-	private final SimpleBooleanProperty alarmStartedProperty;
-	private final SimpleBooleanProperty alarmAlreadyStartedProperty;
-	private final SimpleObjectProperty<ActiveDays> activeDaysProperty;
-	private final SimpleObjectProperty<Media> mediaProperty;
-	private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
-	private final SimpleBooleanProperty activated = new SimpleBooleanProperty(true);
-	private final Player mediaPlayer;
+    private final SimpleObjectProperty<Duration> durationProperty;
+    private final SimpleBooleanProperty alarmStartedProperty;
+    private final SimpleBooleanProperty alarmAlreadyStartedProperty;
+    private final SimpleObjectProperty<ActiveDays> activeDaysProperty;
+    private final SimpleObjectProperty<Media> mediaProperty;
+    private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
+    private final SimpleBooleanProperty activated = new SimpleBooleanProperty(true);
+    private final Player mediaPlayer;
 
-	public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, Player mediaPlayer) {
-		this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
-		this.mediaPlayer = mediaPlayer;
-		durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
-		alarmStartedProperty = new SimpleBooleanProperty();
-		activeDaysProperty = new SimpleObjectProperty<>(new ActiveDays());
-		mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
-		wakeUpTimeProperty = new SimpleObjectProperty<>(initialWakeUpTime());
-		AlarmTimer alarmTimer = new AlarmTimer(this);
-		wakeUpTimeProperty.addListener(alarmTimer);
-		activeDaysProperty.addListener(alarmTimer);
-		alarmTimer.startTimer();
-		activated.addListener((change, oldValue, newValue) -> {
-			if (newValue) {
-				alarmTimer.startTimer();
-				return;
-			}
-			alarmTimer.stopTimer();
-		});
-	}
+    public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, Player mediaPlayer) {
+        this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
+        this.mediaPlayer = mediaPlayer;
+        durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
+        alarmStartedProperty = new SimpleBooleanProperty();
+        activeDaysProperty = new SimpleObjectProperty<>(new ActiveDays());
+        mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
+        wakeUpTimeProperty = new SimpleObjectProperty<>(initialWakeUpTime());
+        AlarmTimer alarmTimer = new AlarmTimer(this);
+        wakeUpTimeProperty.addListener(alarmTimer);
+        activeDaysProperty.addListener(alarmTimer);
+        alarmTimer.startTimer();
+        activated.addListener((change, oldValue, newValue) -> {
+            if (newValue) {
+                alarmTimer.startTimer();
+                return;
+            }
+            alarmTimer.stopTimer();
+        });
+    }
 
-	private static WakeUpTime initialWakeUpTime() {
-		LocalTime now = LocalTime.now().plusMinutes(1);
-		return new WakeUpTime(now.getHour(), now.getMinute());
-	}
+    private static WakeUpTime initialWakeUpTime() {
+        LocalTime now = LocalTime.now().plusMinutes(1);
+        return new WakeUpTime(now.getHour(), now.getMinute());
+    }
 
-	// TODO restart timer
-	public void stop() {
-		if (alarmStartedProperty.get()) {
-			mediaProperty().get().stop(mediaPlayer);
-			alarmStartedProperty.set(false);
-		}
-	}
+    // TODO restart timer
+    public void stop() {
+        if (alarmStartedProperty.get()) {
+            mediaProperty().get().stop(mediaPlayer);
+            alarmStartedProperty.set(false);
+        }
+    }
 
-	public Duration getDuration() {
-		return durationProperty.get();
-	}
+    public Duration getDuration() {
+        return durationProperty.get();
+    }
 
-	public ObjectProperty<ActiveDays> activeDaysProperty() {
-		return activeDaysProperty;
-	}
+    public ObjectProperty<ActiveDays> activeDaysProperty() {
+        return activeDaysProperty;
+    }
 
-	public ObjectProperty<Media> mediaProperty() {
-		return mediaProperty;
-	}
+    public ObjectProperty<Media> mediaProperty() {
+        return mediaProperty;
+    }
 
-	public ObjectProperty<WakeUpTime> wakeUpTimeProperty() {
-		return wakeUpTimeProperty;
-	}
+    public ObjectProperty<WakeUpTime> wakeUpTimeProperty() {
+        return wakeUpTimeProperty;
+    }
 
-	public void play() {
-		if (alarmAlreadyStartedProperty.get()) {
-			return;
-		}
-		alarmStartedProperty.set(true);
-		try {
-			mediaProperty.get().play(mediaPlayer);
-		} catch (Exception exception) {
-			exception.printStackTrace();
-			alarmStartedProperty.set(false);
-		}
-	}
+    public void play() {
+        if (alarmAlreadyStartedProperty.get()) {
+            return;
+        }
+        alarmStartedProperty.set(true);
+        try {
+            mediaProperty.get().play(mediaPlayer);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            alarmStartedProperty.set(false);
+        }
+    }
 
-	public ReadOnlyBooleanProperty alarmStartedProperty() {
-		return alarmStartedProperty;
-	}
+    public ReadOnlyBooleanProperty alarmStartedProperty() {
+        return alarmStartedProperty;
+    }
 
-	private Date alarmDate() {
-		return convertToDate(alarmLocalDate());
-	}
+    private Date alarmDate() {
+        return convertToDate(alarmLocalDate());
+    }
 
-	private static Date convertToDate(LocalDateTime date) {
-		return Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
-	}
+    private static Date convertToDate(LocalDateTime date) {
+        return Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
+    }
 
-	private LocalDateTime alarmLocalDate() {
-		LocalDateTime now = LocalDateTime.now();
-		LocalDateTime nextTime = wakeUpTimeProperty.get().nextAlarm(now);
-		return activeDaysProperty.get().nextAlarm(nextTime);
-	}
+    private LocalDateTime alarmLocalDate() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime nextTime = wakeUpTimeProperty.get().nextAlarm(now);
+        return activeDaysProperty.get().nextAlarm(nextTime);
+    }
 
-	private Date alarmStopDate() {
-		return convertToDate(alarmLocalDate().plus(getDuration()));
-	}
+    private Date alarmStopDate() {
+        return convertToDate(alarmLocalDate().plus(getDuration()));
+    }
 
-	public Property<Boolean> activatedProperty() {
-		return activated;
-	}
+    public Property<Boolean> activatedProperty() {
+        return activated;
+    }
 
-	public void kill() {
-		stop();
-		activated.set(false);
-	}
+    public void kill() {
+        stop();
+        activated.set(false);
+    }
 
 }

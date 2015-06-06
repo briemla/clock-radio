@@ -9,20 +9,20 @@ import javafx.scene.layout.StackPane;
 
 public class DigitalClock extends StackPane {
 
-	@FXML
-	private Label time;
+    @FXML
+    private Label time;
 
-	private final TimeProvider timeProvider;
+    private final TimeProvider timeProvider;
 
-	public DigitalClock() {
-		super();
-		FXUtil.load(this, this);
-		timeProvider = new TimeProvider();
-		time.textProperty().bind(providedTime());
-	}
+    public DigitalClock() {
+        super();
+        FXUtil.load(this, this);
+        timeProvider = new TimeProvider();
+        time.textProperty().bind(providedTime());
+    }
 
-	private StringBinding providedTime() {
-		return timeProvider.timeProperty().asString("%1$TH:%1$TM");
-	}
+    private StringBinding providedTime() {
+        return timeProvider.timeProperty().asString("%1$TH:%1$TM");
+    }
 
 }

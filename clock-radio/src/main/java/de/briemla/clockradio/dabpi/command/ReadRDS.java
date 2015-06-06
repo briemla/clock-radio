@@ -5,12 +5,12 @@ import de.briemla.clockradio.dabpi.result.RDSInfo;
 
 public class ReadRDS extends BaseCommand<RDSInfo> {
 
-	public ReadRDS() {
-		super("m");
-	}
+    public ReadRDS() {
+        super("m");
+    }
 
-	@Override
-	protected RDSInfo parseSpecialized(Output output) {
-		throw new UnsupportedOperationException("Not yet implemented");
-	}
+    @Override
+    protected RDSInfo parseSpecialized(Output output) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }

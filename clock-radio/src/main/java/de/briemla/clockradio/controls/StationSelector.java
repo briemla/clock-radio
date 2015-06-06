@@ -17,63 +17,63 @@ import de.briemla.clockradio.player.Player;
 
 public class StationSelector extends VBox {
 
-	private final SimpleObjectProperty<Media> mediaProperty;
-	private final SimpleObjectProperty<RadioMedia> radioMediaProperty;
+    private final SimpleObjectProperty<Media> mediaProperty;
+    private final SimpleObjectProperty<RadioMedia> radioMediaProperty;
 
-	@FXML
-	private Button refresh;
-	@FXML
-	private Label source;
-	@FXML
-	private ListView<Station> station;
-	private final ObservableList<Station> stationList;
-	private final SearchStation searcher;
-	private final Player player;
+    @FXML
+    private Button refresh;
+    @FXML
+    private Label source;
+    @FXML
+    private ListView<Station> station;
+    private final ObservableList<Station> stationList;
+    private final SearchStation searcher;
+    private final Player player;
 
-	public StationSelector(SearchStation searcher, Player player) {
-		super();
-		this.searcher = searcher;
-		this.player = player;
-		FXUtil.load(this, this);
-		mediaProperty = new SimpleObjectProperty<>();
-		radioMediaProperty = new SimpleObjectProperty<>(defaultStation());
-		stationList = FXCollections.observableArrayList();
-		mediaProperty.addListener((change, oldValue, newValue) -> {
-			if (newValue != null && newValue instanceof RadioMedia) {
-				radioMediaProperty.set((RadioMedia) newValue);
-			}
-		});
-		source.textProperty().bind(radioMediaProperty.asString());
-		initializeContentViewer();
-	}
+    public StationSelector(SearchStation searcher, Player player) {
+        super();
+        this.searcher = searcher;
+        this.player = player;
+        FXUtil.load(this, this);
+        mediaProperty = new SimpleObjectProperty<>();
+        radioMediaProperty = new SimpleObjectProperty<>(defaultStation());
+        stationList = FXCollections.observableArrayList();
+        mediaProperty.addListener((change, oldValue, newValue) -> {
+            if (newValue != null && newValue instanceof RadioMedia) {
+                radioMediaProperty.set((RadioMedia) newValue);
+            }
+        });
+        source.textProperty().bind(radioMediaProperty.asString());
+        initializeContentViewer();
+    }
 
-	private static RadioMedia defaultStation() {
-		return new RadioMedia(new NoStation());
-	}
+    private static RadioMedia defaultStation() {
+        return new RadioMedia(new NoStation());
+    }
 
-	private void initializeContentViewer() {
-		station.setCellFactory(listView -> new StationCell(mediaProperty));
-		station.setItems(stationList);
-		updateStations();
-	}
+    private void initializeContentViewer() {
+        station.setCellFactory(listView -> new StationCell(mediaProperty));
+        station.setItems(stationList);
+        updateStations();
+    }
 
-	public ObjectProperty<Media> mediaProperty() {
-		return mediaProperty;
-	}
+    public ObjectProperty<Media> mediaProperty() {
+        return mediaProperty;
+    }
 
-	@FXML
-	public void refresh(Event event) {
-		updateStations();
-	}
+    @FXML
+    public void refresh(Event event) {
+        updateStations();
+    }
 
-	@FXML
-	public void play(Event event) {
-		radioMediaProperty.get().play(player);
-	}
+    @FXML
+    public void play(Event event) {
+        radioMediaProperty.get().play(player);
+    }
 
-	// TODO should run in background
-	private void updateStations() {
-		stationList.clear();
-		stationList.addAll(searcher.search());
-	}
+    // TODO should run in background
+    private void updateStations() {
+        stationList.clear();
+        stationList.addAll(searcher.search());
+    }
 }

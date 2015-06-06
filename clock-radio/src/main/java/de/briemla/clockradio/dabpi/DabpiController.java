@@ -15,98 +15,99 @@ import de.briemla.clockradio.dabpi.result.RDSInfo;
 import de.briemla.clockradio.dabpi.result.TuneToFrequencyResult;
 
 /**
- * This class generates {@link Command}s and executes them on the given {@link RadioExecutor}
+ * This class generates {@link Command}s and executes them on the given
+ * {@link RadioExecutor}
  *
  * @author Lars
  *
  */
 public class DabpiController implements RadioController {
 
-	private final RadioExecutor executor;
-	private final CommandFactory factory;
-	private final AlsaController alsaController;
+    private final RadioExecutor executor;
+    private final CommandFactory factory;
+    private final AlsaController alsaController;
 
-	public DabpiController(RadioExecutor executor, CommandFactory factory, AlsaController alsaController) {
-		this.executor = executor;
-		this.factory = factory;
-		this.alsaController = alsaController;
-	}
+    public DabpiController(RadioExecutor executor, CommandFactory factory, AlsaController alsaController) {
+        this.executor = executor;
+        this.factory = factory;
+        this.alsaController = alsaController;
+    }
 
-	@Override
-	public Void switchToDAB() throws IOException {
-		return executor.execute(factory.switchToDAB());
-	}
+    @Override
+    public Void switchToDAB() throws IOException {
+        return executor.execute(factory.switchToDAB());
+    }
 
-	@Override
-	public Void switchToFM() throws IOException {
-		return executor.execute(factory.switchToFM());
-	}
+    @Override
+    public Void switchToFM() throws IOException {
+        return executor.execute(factory.switchToFM());
+    }
 
-	@Override
-	public TuneToFrequencyResult tuneTo(Integer frequency) throws IOException {
-		return executor.execute(factory.tuneTo(frequency));
-	}
+    @Override
+    public TuneToFrequencyResult tuneTo(Integer frequency) throws IOException {
+        return executor.execute(factory.tuneTo(frequency));
+    }
 
-	@Override
-	public FMStatus fmStatus() throws IOException {
-		return executor.execute(factory.fmStatus());
-	}
+    @Override
+    public FMStatus fmStatus() throws IOException {
+        return executor.execute(factory.fmStatus());
+    }
 
-	@Override
-	public DABStatus dabStatus() throws IOException {
-		return executor.execute(factory.dabStatus());
-	}
+    @Override
+    public DABStatus dabStatus() throws IOException {
+        return executor.execute(factory.dabStatus());
+    }
 
-	@Override
-	public DABService startDABService(DABService service) throws IOException {
-		return executor.execute(factory.startDABService(service));
-	}
+    @Override
+    public DABService startDABService(DABService service) throws IOException {
+        return executor.execute(factory.startDABService(service));
+    }
 
-	@Override
-	public DABServiceList readDABServiceList() throws IOException {
-		return executor.execute(factory.readDABServiceList());
-	}
+    @Override
+    public DABServiceList readDABServiceList() throws IOException {
+        return executor.execute(factory.readDABServiceList());
+    }
 
-	@Override
-	public DABChannel selectDABChannel(DABChannel channel) throws IOException {
-		return executor.execute(factory.selectDABChannel(channel));
-	}
+    @Override
+    public DABChannel selectDABChannel(DABChannel channel) throws IOException {
+        return executor.execute(factory.selectDABChannel(channel));
+    }
 
-	@Override
-	public Void selectDABRegion(Region region) throws IOException {
-		return executor.execute(factory.selectDABRegion(region));
-	}
+    @Override
+    public Void selectDABRegion(Region region) throws IOException {
+        return executor.execute(factory.selectDABRegion(region));
+    }
 
-	@Override
-	public DABChannelList readFrequencyListFor(Region region) throws IOException {
-		return executor.execute(factory.readFrequencyListFor(region));
-	}
+    @Override
+    public DABChannelList readFrequencyListFor(Region region) throws IOException {
+        return executor.execute(factory.readFrequencyListFor(region));
+    }
 
-	@Override
-	public Void scanNextStation(ScanDirection direction) throws IOException {
-		return executor.execute(factory.scanNextStation(direction));
-	}
+    @Override
+    public Void scanNextStation(ScanDirection direction) throws IOException {
+        return executor.execute(factory.scanNextStation(direction));
+    }
 
-	public RDSInfo readRDS() throws IOException {
-		return executor.execute(factory.readRDS());
-	}
+    public RDSInfo readRDS() throws IOException {
+        return executor.execute(factory.readRDS());
+    }
 
-	public DABAudioInfo readDABAudioInfo() throws IOException {
-		return executor.execute(factory.readDABAudioInfo());
-	}
+    public DABAudioInfo readDABAudioInfo() throws IOException {
+        return executor.execute(factory.readDABAudioInfo());
+    }
 
-	public DABSubchannelInfo readDABSubchannelInfo() throws IOException {
-		return executor.execute(factory.readDABSubchannelInfo());
-	}
+    public DABSubchannelInfo readDABSubchannelInfo() throws IOException {
+        return executor.execute(factory.readDABSubchannelInfo());
+    }
 
-	@Override
-	public void playAudio() {
-		alsaController.play();
-	}
+    @Override
+    public void playAudio() {
+        alsaController.play();
+    }
 
-	@Override
-	public void stopAudio() {
-		alsaController.stop();
-	}
+    @Override
+    public void stopAudio() {
+        alsaController.stop();
+    }
 
 }

@@ -4,8 +4,8 @@ import java.io.IOException;
 
 public interface Command<T> {
 
-	public String serialize();
+    public String serialize();
 
-	public T parse(Output output) throws IOException;
+    public T parse(Output output) throws IOException;
 
 }

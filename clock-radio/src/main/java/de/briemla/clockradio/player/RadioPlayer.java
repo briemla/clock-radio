@@ -22,63 +22,63 @@ import de.briemla.clockradio.dabpi.result.FMStatus;
  */
 public class RadioPlayer {
 
-	private final RadioController controller;
+    private final RadioController controller;
 
-	public RadioPlayer(RadioController controller) {
-		super();
-		this.controller = controller;
-	}
+    public RadioPlayer(RadioController controller) {
+        super();
+        this.controller = controller;
+    }
 
-	public ArrayList<FMStation> scanFM() {
-		try {
-			Integer startFrequency = currentFrequency();
-			Integer lastFrequency = startFrequency;
-			boolean search = true;
-			boolean overflow = false;
-			ArrayList<FMStation> frequency = new ArrayList<>();
-			controller.switchToFM();
-			while (search) {
-				controller.scanNextStation(ScanDirection.UP);
-				Integer currentFrequency = currentFrequency();
-				frequency.add(new FMStation(currentFrequency));
-				overflow |= lastFrequency > currentFrequency;
-				search = !startFrequency.equals(currentFrequency) && !(overflow && currentFrequency > startFrequency)
-				        && !(currentFrequency.equals(Integer.MIN_VALUE));
-				lastFrequency = currentFrequency;
-			}
-			Collections.sort(frequency);
-			return frequency;
-		} catch (IOException | IllegalArgumentException exception) {
-			exception.printStackTrace();
-		}
-		return new ArrayList<>();
+    public ArrayList<FMStation> scanFM() {
+        try {
+            Integer startFrequency = currentFrequency();
+            Integer lastFrequency = startFrequency;
+            boolean search = true;
+            boolean overflow = false;
+            ArrayList<FMStation> frequency = new ArrayList<>();
+            controller.switchToFM();
+            while (search) {
+                controller.scanNextStation(ScanDirection.UP);
+                Integer currentFrequency = currentFrequency();
+                frequency.add(new FMStation(currentFrequency));
+                overflow |= lastFrequency > currentFrequency;
+                search = !startFrequency.equals(currentFrequency) && !(overflow && currentFrequency > startFrequency)
+                        && !(currentFrequency.equals(Integer.MIN_VALUE));
+                lastFrequency = currentFrequency;
+            }
+            Collections.sort(frequency);
+            return frequency;
+        } catch (IOException | IllegalArgumentException exception) {
+            exception.printStackTrace();
+        }
+        return new ArrayList<>();
 
-	}
+    }
 
-	private Integer currentFrequency() throws IOException {
-		FMStatus fmStatus = controller.fmStatus();
-		return fmStatus.getFrequency();
-	}
+    private Integer currentFrequency() throws IOException {
+        FMStatus fmStatus = controller.fmStatus();
+        return fmStatus.getFrequency();
+    }
 
-	public List<DABStation> scanDAB(Region region) {
-		try {
-			controller.switchToDAB();
-			DABChannelList channels = controller.readFrequencyListFor(region);
-			return channels.scanStations(controller);
-		} catch (IOException | IllegalArgumentException exception) {
-			exception.printStackTrace();
-		}
-		return new ArrayList<>();
+    public List<DABStation> scanDAB(Region region) {
+        try {
+            controller.switchToDAB();
+            DABChannelList channels = controller.readFrequencyListFor(region);
+            return channels.scanStations(controller);
+        } catch (IOException | IllegalArgumentException exception) {
+            exception.printStackTrace();
+        }
+        return new ArrayList<>();
 
-	}
+    }
 
-	public void play(Station station) throws IOException {
-		station.tuneTo(controller);
-		controller.playAudio();
-	}
+    public void play(Station station) throws IOException {
+        station.tuneTo(controller);
+        controller.playAudio();
+    }
 
-	public void stop() {
-		controller.stopAudio();
-	}
+    public void stop() {
+        controller.stopAudio();
+    }
 
 }

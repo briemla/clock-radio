@@ -4,9 +4,9 @@ import java.io.IOException;
 
 public interface Station {
 
-	void tuneTo(RadioController controller) throws IOException;
+    void tuneTo(RadioController controller) throws IOException;
 
-	@Override
+    @Override
     String toString();
 
 }

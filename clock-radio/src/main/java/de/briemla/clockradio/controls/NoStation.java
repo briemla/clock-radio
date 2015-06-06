@@ -7,13 +7,13 @@ import de.briemla.clockradio.dabpi.Station;
 
 public class NoStation implements Station {
 
-	@Override
-	public void tuneTo(RadioController controller) throws IOException {
-	}
+    @Override
+    public void tuneTo(RadioController controller) throws IOException {
+    }
 
-	@Override
-	public String toString() {
-		return "No station selected";
-	}
+    @Override
+    public String toString() {
+        return "No station selected";
+    }
 
 }

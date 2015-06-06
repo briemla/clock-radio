@@ -17,54 +17,54 @@ import de.briemla.clockradio.Media;
 
 public class FolderSelector extends VBox {
 
-	private final SimpleObjectProperty<Media> mediaProperty;
-	private final SimpleObjectProperty<LocalFolder> localFolderProperty;
+    private final SimpleObjectProperty<Media> mediaProperty;
+    private final SimpleObjectProperty<LocalFolder> localFolderProperty;
 
-	@FXML
-	private Button previous;
-	@FXML
-	private Label source;
-	@FXML
-	private ListView<File> directoryContent;
-	private final ObservableList<File> currentFiles;
+    @FXML
+    private Button previous;
+    @FXML
+    private Label source;
+    @FXML
+    private ListView<File> directoryContent;
+    private final ObservableList<File> currentFiles;
 
-	public FolderSelector() {
-		super();
-		FXUtil.load(this, this);
-		mediaProperty = new SimpleObjectProperty<>();
-		localFolderProperty = new SimpleObjectProperty<>(new LocalFolder());
-		currentFiles = FXCollections.observableArrayList();
-		mediaProperty.addListener((change, oldValue, newValue) -> {
-			if (newValue != null && LocalFolder.class.equals(newValue.getClass())) {
-				LocalFolder localFolder = (LocalFolder) newValue;
-				localFolderProperty.set(localFolder);
-				previous.setDisable(localFolder.parent().equals(localFolder));
-			}
-		});
-		source.textProperty().bind(localFolderProperty.asString());
-		initializeContentViewer();
-	}
+    public FolderSelector() {
+        super();
+        FXUtil.load(this, this);
+        mediaProperty = new SimpleObjectProperty<>();
+        localFolderProperty = new SimpleObjectProperty<>(new LocalFolder());
+        currentFiles = FXCollections.observableArrayList();
+        mediaProperty.addListener((change, oldValue, newValue) -> {
+            if (newValue != null && LocalFolder.class.equals(newValue.getClass())) {
+                LocalFolder localFolder = (LocalFolder) newValue;
+                localFolderProperty.set(localFolder);
+                previous.setDisable(localFolder.parent().equals(localFolder));
+            }
+        });
+        source.textProperty().bind(localFolderProperty.asString());
+        initializeContentViewer();
+    }
 
-	private void initializeContentViewer() {
-		directoryContent.setCellFactory(listView -> new FileCell(mediaProperty));
-		directoryContent.setItems(currentFiles);
-		localFolderProperty.addListener((observable, oldValue, newValue) -> {
-			currentFiles.clear();
-			currentFiles.addAll(newValue.children());
-		});
-		if (localFolderProperty.get() != null) {
-			currentFiles.addAll(localFolderProperty.get().children());
-		}
-	}
+    private void initializeContentViewer() {
+        directoryContent.setCellFactory(listView -> new FileCell(mediaProperty));
+        directoryContent.setItems(currentFiles);
+        localFolderProperty.addListener((observable, oldValue, newValue) -> {
+            currentFiles.clear();
+            currentFiles.addAll(newValue.children());
+        });
+        if (localFolderProperty.get() != null) {
+            currentFiles.addAll(localFolderProperty.get().children());
+        }
+    }
 
-	public ObjectProperty<Media> mediaProperty() {
-		return mediaProperty;
-	}
+    public ObjectProperty<Media> mediaProperty() {
+        return mediaProperty;
+    }
 
-	@FXML
-	public void previous(Event event) {
-		LocalFolder localFolder = localFolderProperty.get();
-		mediaProperty.set(localFolder.parent());
-	}
+    @FXML
+    public void previous(Event event) {
+        LocalFolder localFolder = localFolderProperty.get();
+        mediaProperty.set(localFolder.parent());
+    }
 
 }

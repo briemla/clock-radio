@@ -6,6 +6,6 @@ import de.briemla.clockradio.dabpi.Station;
 
 public interface SearchStation {
 
-	List<? extends Station> search();
+    List<? extends Station> search();
 
 }

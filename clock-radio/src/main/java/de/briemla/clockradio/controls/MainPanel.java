@@ -17,82 +17,82 @@ import de.briemla.clockradio.player.Player;
 
 public class MainPanel extends StackPane {
 
-	private final class ActivationTask extends TimerTask {
+    private final class ActivationTask extends TimerTask {
 
-		private final Property<Boolean> property;
+        private final Property<Boolean> property;
 
-		public ActivationTask(Property<Boolean> property) {
-			this.property = property;
-		}
+        public ActivationTask(Property<Boolean> property) {
+            this.property = property;
+        }
 
-		@Override
-		public void run() {
-			Platform.runLater(() -> property.setValue(false));
-		}
-	}
+        @Override
+        public void run() {
+            Platform.runLater(() -> property.setValue(false));
+        }
+    }
 
-	private static final long INACTIVE_TIMEOUT = 10 * 1000;
-	@FXML
-	private DefaultableViewSwitcher viewSwitcher;
-	@FXML
-	private AlarmView alarm;
+    private static final long INACTIVE_TIMEOUT = 10 * 1000;
+    @FXML
+    private DefaultableViewSwitcher viewSwitcher;
+    @FXML
+    private AlarmView alarm;
 
-	private final ActivePseudoClassProperty active;
-	private final Settings settings;
-	private final Player player;
-	private Timer timer;
+    private final ActivePseudoClassProperty active;
+    private final Settings settings;
+    private final Player player;
+    private Timer timer;
 
-	public MainPanel(Player player) {
-		super();
-		this.player = player;
-		FXUtil.load(this, this);
-		active = new ActivePseudoClassProperty(this);
-		settings = new Settings(viewSwitcher, player);
-		alarm.setSettings(settings);
-		Node clock = new DigitalClock();
-		viewSwitcher.setDefaultView(clock);
-		AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher, settings, player);
-		viewSwitcher.addView(Alarm.class, alarmMenu);
-		addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-			if (!active.get()) {
-				event.consume();
-			}
-			active.set(true);
-			resetInactiveTimer();
-		});
-		active.set(true);
-		resetInactiveTimer();
-		settings.addAlarm();
-		viewSwitcher.showDefault();
-	}
+    public MainPanel(Player player) {
+        super();
+        this.player = player;
+        FXUtil.load(this, this);
+        active = new ActivePseudoClassProperty(this);
+        settings = new Settings(viewSwitcher, player);
+        alarm.setSettings(settings);
+        Node clock = new DigitalClock();
+        viewSwitcher.setDefaultView(clock);
+        AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher, settings, player);
+        viewSwitcher.addView(Alarm.class, alarmMenu);
+        addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+            if (!active.get()) {
+                event.consume();
+            }
+            active.set(true);
+            resetInactiveTimer();
+        });
+        active.set(true);
+        resetInactiveTimer();
+        settings.addAlarm();
+        viewSwitcher.showDefault();
+    }
 
-	private void resetInactiveTimer() {
-		if (timer != null) {
-			timer.cancel();
-			timer = null;
-		}
-		timer = new Timer("ActiveTimer", true);
-		timer.schedule(new ActivationTask(active), INACTIVE_TIMEOUT);
-	}
+    private void resetInactiveTimer() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+        timer = new Timer("ActiveTimer", true);
+        timer.schedule(new ActivationTask(active), INACTIVE_TIMEOUT);
+    }
 
-	@FXML
-	public void openSettings(ActionEvent event) {
+    @FXML
+    public void openSettings(ActionEvent event) {
 
-	}
+    }
 
-	@FXML
-	public void shutdown(ActionEvent event) {
-		Platform.exit();
-	}
+    @FXML
+    public void shutdown(ActionEvent event) {
+        Platform.exit();
+    }
 
-	@FXML
-	public void stopSound(ActionEvent event) {
-		settings.stopCurrentAlarm();
-		player.stop();
-	}
+    @FXML
+    public void stopSound(ActionEvent event) {
+        settings.stopCurrentAlarm();
+        player.stop();
+    }
 
-	@FXML
-	public void startRadio(ActionEvent event) {
-	}
+    @FXML
+    public void startRadio(ActionEvent event) {
+    }
 
 }

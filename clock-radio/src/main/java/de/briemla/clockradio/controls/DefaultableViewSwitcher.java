@@ -11,50 +11,50 @@ import de.briemla.clockradio.FXUtil;
 
 public class DefaultableViewSwitcher extends BorderPane {
 
-	private static final class DefaultKey {
-	}
+    private static final class DefaultKey {
+    }
 
-	@FXML
-	private ViewSwitcher container;
-	@FXML
-	private Button back;
+    @FXML
+    private ViewSwitcher container;
+    @FXML
+    private Button back;
 
-	private final SimpleBooleanProperty defaultVisisble;
-	private Node defaultView;
+    private final SimpleBooleanProperty defaultVisisble;
+    private Node defaultView;
 
-	public DefaultableViewSwitcher() {
-		super();
-		FXUtil.load(this, this);
-		defaultVisisble = new SimpleBooleanProperty(false);
-		back.visibleProperty().bind(defaultVisisble.not());
-	}
+    public DefaultableViewSwitcher() {
+        super();
+        FXUtil.load(this, this);
+        defaultVisisble = new SimpleBooleanProperty(false);
+        back.visibleProperty().bind(defaultVisisble.not());
+    }
 
-	public void setDefaultView(Node view) {
-		defaultView = view;
-		container.addView(DefaultKey.class, view);
-		defaultVisisble.bind(defaultView.visibleProperty());
-		showDefault();
-	}
+    public void setDefaultView(Node view) {
+        defaultView = view;
+        container.addView(DefaultKey.class, view);
+        defaultVisisble.bind(defaultView.visibleProperty());
+        showDefault();
+    }
 
-	public <T> T show(Class<?> clazz) {
-		return container.show(clazz);
-	}
+    public <T> T show(Class<?> clazz) {
+        return container.show(clazz);
+    }
 
-	public void addView(Class<?> clazz, Node node) {
-		container.addView(clazz, node);
-	}
+    public void addView(Class<?> clazz, Node node) {
+        container.addView(clazz, node);
+    }
 
-	@FXML
-	public void back(ActionEvent event) {
-		showDefault();
-	}
+    @FXML
+    public void back(ActionEvent event) {
+        showDefault();
+    }
 
-	public void showDefault() {
-		show(DefaultKey.class);
-	}
+    public void showDefault() {
+        show(DefaultKey.class);
+    }
 
-	public ReadOnlyBooleanProperty defaultVisisbleProperty() {
-		return defaultVisisble;
-	}
+    public ReadOnlyBooleanProperty defaultVisisbleProperty() {
+        return defaultVisisble;
+    }
 
 }

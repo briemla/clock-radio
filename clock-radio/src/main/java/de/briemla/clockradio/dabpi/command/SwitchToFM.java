@@ -4,13 +4,13 @@ import de.briemla.clockradio.dabpi.Output;
 
 public class SwitchToFM extends BaseCommand<Void> {
 
-	public SwitchToFM() {
-		super("b");
-	}
+    public SwitchToFM() {
+        super("b");
+    }
 
-	@Override
-	protected Void parseSpecialized(Output output) {
-		return null;
-	}
+    @Override
+    protected Void parseSpecialized(Output output) {
+        return null;
+    }
 
 }

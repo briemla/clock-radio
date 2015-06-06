@@ -4,12 +4,12 @@ import de.briemla.clockradio.dabpi.Output;
 
 public class SwitchToDAB extends BaseCommand<Void> {
 
-	public SwitchToDAB() {
-		super("a");
-	}
+    public SwitchToDAB() {
+        super("a");
+    }
 
-	@Override
-	protected Void parseSpecialized(Output output) {
-		return null;
-	}
+    @Override
+    protected Void parseSpecialized(Output output) {
+        return null;
+    }
 }

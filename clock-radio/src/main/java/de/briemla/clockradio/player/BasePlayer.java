@@ -14,53 +14,53 @@ import de.briemla.clockradio.dabpi.command.Region;
 
 public class BasePlayer implements Player {
 
-	private static final Region DEFAULT_REGION = Region.BADEN_WUERTEMBERG;
-	private final AudioFilePlayer streamPlayer;
-	private final RadioPlayer radioPlayer;
-	private final SimpleBooleanProperty playingProperty = new SimpleBooleanProperty(false);
-	private final Region region;
+    private static final Region DEFAULT_REGION = Region.BADEN_WUERTEMBERG;
+    private final AudioFilePlayer streamPlayer;
+    private final RadioPlayer radioPlayer;
+    private final SimpleBooleanProperty playingProperty = new SimpleBooleanProperty(false);
+    private final Region region;
 
-	public BasePlayer(AudioFilePlayer streamPlayer, RadioPlayer radioPlayer) {
-		this.streamPlayer = streamPlayer;
-		this.radioPlayer = radioPlayer;
-		region = DEFAULT_REGION;
-	}
+    public BasePlayer(AudioFilePlayer streamPlayer, RadioPlayer radioPlayer) {
+        this.streamPlayer = streamPlayer;
+        this.radioPlayer = radioPlayer;
+        region = DEFAULT_REGION;
+    }
 
-	/**
-	 * Method blocks until audio input is finished or closed.
-	 */
-	@Override
-	public void play(URI uriToPlay) {
-		System.out.println("Start: " + LocalTime.now());
-		streamPlayer.play(uriToPlay);
-	}
+    /**
+     * Method blocks until audio input is finished or closed.
+     */
+    @Override
+    public void play(URI uriToPlay) {
+        System.out.println("Start: " + LocalTime.now());
+        streamPlayer.play(uriToPlay);
+    }
 
-	@Override
-	public void stop() {
-		System.out.println("Stop: " + LocalTime.now());
-		streamPlayer.stop();
-		radioPlayer.stop();
-		playingProperty.set(false);
-	}
+    @Override
+    public void stop() {
+        System.out.println("Stop: " + LocalTime.now());
+        streamPlayer.stop();
+        radioPlayer.stop();
+        playingProperty.set(false);
+    }
 
-	@Override
-	public ReadOnlyBooleanProperty playingProperty() {
-		return playingProperty;
-	}
+    @Override
+    public ReadOnlyBooleanProperty playingProperty() {
+        return playingProperty;
+    }
 
-	@Override
-	public void play(Station station) throws IOException {
-		radioPlayer.play(station);
-	}
+    @Override
+    public void play(Station station) throws IOException {
+        radioPlayer.play(station);
+    }
 
-	@Override
-	public List<DABStation> searchDAB() {
-		return radioPlayer.scanDAB(region);
-	}
+    @Override
+    public List<DABStation> searchDAB() {
+        return radioPlayer.scanDAB(region);
+    }
 
-	@Override
-	public List<FMStation> searchFM() {
-		return radioPlayer.scanFM();
-	}
+    @Override
+    public List<FMStation> searchFM() {
+        return radioPlayer.scanFM();
+    }
 
 }
