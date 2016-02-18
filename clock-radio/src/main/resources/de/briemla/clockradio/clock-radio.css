@@ -50,7 +50,6 @@
 .alarm-cell .time {
 	-fx-font-size: 13.0pt;
 	-fx-text-alignement: left;
-  -fx-background-image: url("active.png");
 }
 
 .check-box {
@@ -63,7 +62,7 @@
   -fx-background-color: transparent;
 }
 
-.check-box>.box>.mark {
+.active {
   -fx-background-color: transparent;
   -fx-background-image: url("inactive.png");
   -fx-background-position: center;
@@ -72,7 +71,7 @@
   -fx-padding: 16px;
 }
 
-.check-box:selected>.box>.mark{
+.active:selected{
   -fx-background-color: transparent;
   -fx-background-image: url("active.png");
   -fx-background-position: center;
