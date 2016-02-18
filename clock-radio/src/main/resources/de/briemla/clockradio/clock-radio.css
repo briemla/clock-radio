@@ -17,7 +17,7 @@
 	-fx-text-fill: text-color;
 	-fx-border-color: border-color;
 	-fx-border-radius: 10.0px;
-	-fx-border-width: 1.0px;
+	-fx-border-width: 2.0px;
 	-fx-padding: 1.0px;
 }
 
@@ -50,6 +50,7 @@
 .alarm-cell .time {
 	-fx-font-size: 13.0pt;
 	-fx-text-alignement: left;
+  -fx-background-image: url("active.png");
 }
 
 .check-box {
