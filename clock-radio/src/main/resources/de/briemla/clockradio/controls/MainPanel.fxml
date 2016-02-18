@@ -19,11 +19,9 @@
                         <Button mnemonicParsing="false" styleClass="shutdown" onAction="#shutdown" prefHeight="50.0"
                             prefWidth="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                         <Button mnemonicParsing="false" styleClass="stop" onAction="#stopSound" prefHeight="50.0"
-                            prefWidth="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="0.0" />
-                        <Button mnemonicParsing="false" styleClass="start" onAction="#startRadio" prefHeight="50.0"
-                            prefWidth="50.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="0.0" />
-                        <Button mnemonicParsing="false" onAction="#openSettings" prefHeight="50.0" prefWidth="100.0"
-                            text="Einstellungen" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            prefWidth="50.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
+<!--                         <Button mnemonicParsing="false" styleClass="start" onAction="#startRadio" prefHeight="50.0" -->
+<!--                             prefWidth="50.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="0.0" /> -->
                     </children>
                 </AnchorPane>
                 <DefaultableViewSwitcher fx:id="viewSwitcher" maxHeight="500.0" prefHeight="500.0" prefWidth="1024.0" />

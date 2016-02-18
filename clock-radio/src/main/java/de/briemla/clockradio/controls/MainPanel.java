@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+
 import de.briemla.clockradio.Alarm;
 import de.briemla.clockradio.FXUtil;
 import de.briemla.clockradio.Settings;
@@ -76,11 +77,6 @@ public class MainPanel extends StackPane {
     }
 
     @FXML
-    public void openSettings(ActionEvent event) {
-
-    }
-
-    @FXML
     public void shutdown(ActionEvent event) {
         Platform.exit();
     }
@@ -89,10 +85,6 @@ public class MainPanel extends StackPane {
     public void stopSound(ActionEvent event) {
         settings.stopCurrentAlarm();
         player.stop();
-    }
-
-    @FXML
-    public void startRadio(ActionEvent event) {
     }
 
 }
