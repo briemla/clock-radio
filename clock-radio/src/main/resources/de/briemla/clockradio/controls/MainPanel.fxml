@@ -4,53 +4,31 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
-
-<!-- <?import de.briemla.clockradio.controls.DefaultableViewSwitcher?> -->
-<!-- <?import de.briemla.clockradio.controls.AlarmView?> -->
-
+<?import de.briemla.clockradio.controls.DefaultableViewSwitcher?>
+<?import de.briemla.clockradio.controls.AlarmView?>
 <?import javafx.scene.layout.StackPane?>
+<?import de.briemla.clockradio.controls.AlarmMenu?>
 
-<!-- <?import de.briemla.clockradio.controls.AlarmMenu?> -->
-
-<fx:root prefHeight="600.0" prefWidth="1024.0" styleClass="main-panel" type="StackPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root styleClass="main-panel" prefHeight="600.0" prefWidth="1024.0" type="StackPane" xmlns="http://javafx.com/javafx/8"
+    xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <VBox>
-         <children>
-            <GridPane gridLinesVisible="true" hgap="1.0" vgap="1.0" VBox.vgrow="ALWAYS">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0" minWidth="64.0" prefWidth="64.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-         </children>
+            <children>
+                <AnchorPane styleClass="top-bar" maxHeight="50.0" prefHeight="50.0">
+                    <children>
+                        <Button mnemonicParsing="false" styleClass="shutdown" onAction="#shutdown" prefHeight="50.0"
+                            prefWidth="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button mnemonicParsing="false" styleClass="stop" onAction="#stopSound" prefHeight="50.0"
+                            prefWidth="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="0.0" />
+                        <Button mnemonicParsing="false" styleClass="start" onAction="#startRadio" prefHeight="50.0"
+                            prefWidth="50.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="0.0" />
+                        <Button mnemonicParsing="false" onAction="#openSettings" prefHeight="50.0" prefWidth="100.0"
+                            text="Einstellungen" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    </children>
+                </AnchorPane>
+                <DefaultableViewSwitcher fx:id="viewSwitcher" maxHeight="500.0" prefHeight="500.0" prefWidth="1024.0" />
+                <AlarmView fx:id="alarm" />
+            </children>
         </VBox>
     </children>
 </fx:root>
