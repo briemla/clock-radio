@@ -62,7 +62,7 @@
   -fx-background-color: transparent;
 }
 
-.active {
+.check-box > .box > .mark {
   -fx-background-color: transparent;
   -fx-background-image: url("inactive.png");
   -fx-background-position: center;
@@ -71,7 +71,7 @@
   -fx-padding: 16px;
 }
 
-.active:selected{
+.check-box:selected > .box > .mark {
   -fx-background-color: transparent;
   -fx-background-image: url("active.png");
   -fx-background-position: center;
