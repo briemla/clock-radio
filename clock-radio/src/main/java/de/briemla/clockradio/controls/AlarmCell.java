@@ -3,8 +3,8 @@ package de.briemla.clockradio.controls;
 import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -38,7 +38,7 @@ public class AlarmCell extends AnchorPane {
     @FXML
     private AnchorPane container;
     @FXML
-    private CheckBox active;
+    private ToggleButton active;
     @FXML
     private Label time;
     @FXML
@@ -60,7 +60,7 @@ public class AlarmCell extends AnchorPane {
         weekdays.textProperty().bind(alarm.activeDaysProperty().asString());
         activeProperty.bindBidirectional(alarm.activatedProperty());
         active.selectedProperty().bindBidirectional(activeProperty);
-        active.addEventHandler(MouseEvent.MOUSE_CLICKED, this::switchIcon);
+        // active.addEventHandler(MouseEvent.MOUSE_CLICKED, this::switchIcon);
         setOnMouseClicked(event -> settings.select(alarm));
     }
 

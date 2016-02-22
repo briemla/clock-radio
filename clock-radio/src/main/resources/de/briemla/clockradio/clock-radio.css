@@ -29,6 +29,10 @@
 	-fx-graphic: url("add.png");
 }
 
+.something {
+	-fx-graphic: url("active.png");
+}
+
 .alarm-cell {
 	-fx-opacity: 0.2;
 }
