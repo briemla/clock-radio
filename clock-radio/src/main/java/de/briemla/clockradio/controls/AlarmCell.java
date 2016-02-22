@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import de.briemla.clockradio.Alarm;
@@ -13,6 +16,25 @@ import de.briemla.clockradio.Settings;
 
 public class AlarmCell extends AnchorPane {
 
+    private static enum State {
+        ACTIVE("active.png"), INACTIVE("inactive.png");
+
+        private ImageView image;
+
+        private State(String fileName) {
+            image = new ImageView(image(fileName));
+        }
+
+        private ImageView image() {
+            return image;
+        }
+
+        private static Image image(String fileName) {
+            return new Image(State.class.getResourceAsStream(fileName));
+        }
+    }
+
+    private static final String activeImage = "active.png";
     @FXML
     private AnchorPane container;
     @FXML
@@ -38,6 +60,7 @@ public class AlarmCell extends AnchorPane {
         weekdays.textProperty().bind(alarm.activeDaysProperty().asString());
         activeProperty.bindBidirectional(alarm.activatedProperty());
         active.selectedProperty().bindBidirectional(activeProperty);
+        active.addEventHandler(MouseEvent.MOUSE_CLICKED, this::switchIcon);
         setOnMouseClicked(event -> settings.select(alarm));
     }
 
@@ -49,5 +72,10 @@ public class AlarmCell extends AnchorPane {
 
     public BooleanProperty activatedProperty() {
         return activeProperty;
+    }
+
+    private void switchIcon(MouseEvent event) {
+        ImageView icon = active.isSelected() ? State.ACTIVE.image() : State.INACTIVE.image();
+        active.setGraphic(icon);
     }
 }
