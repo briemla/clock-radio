@@ -29,7 +29,13 @@
 	-fx-graphic: url("add.png");
 }
 
-.something {
+.active {
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+	-fx-graphic: url("inactive.png");
+}
+
+.active:selected {
 	-fx-graphic: url("active.png");
 }
 
