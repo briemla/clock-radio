@@ -3,6 +3,7 @@
 	background-color: rgb(10.0,10.0,10.0);
 	border-color: rgba(128.0,205.0,255.0,0.3);
 	text-color: rgba(128.0,205.0,255.0,0.7);
+	selected-color: rgba(0.0,255.0,0.0,1.0);
 }
 
 .main-panel {
@@ -62,20 +63,22 @@
   -fx-background-color: transparent;
 }
 
-.check-box > .box {
-  -fx-background-color: transparent;
+.check-box {
+	-fx-color: selected-color;
+  /*-fx-background-color: transparent;
   -fx-background-image: url("inactive.png");
   -fx-background-position: center;
   -fx-background-repeat: no-repeat;
   -fx-shape: none;
-  -fx-padding: 16px;
+  -fx-padding: 16px;*/
 }
 
-.check-box:selected > .box {
-  -fx-background-color: transparent;
+.check-box:selected {
+	-fx-color: selected-color;
+  /*-fx-background-color: transparent;
   -fx-background-image: url("active.png");
   -fx-background-position: center;
-  -fx-background-repeat: no-repeat;
+  -fx-background-repeat: no-repeat;*/
 }
 
 .alarm-cell .media-description {
