@@ -63,7 +63,7 @@
 }
 
 .check-box>.box>.mark {
-  -fx-background-color: transparent;
+  -fx-background-color: white;
   -fx-background-image: url("inactive.png");
   -fx-background-position: center;
   -fx-background-repeat: no-repeat;
@@ -72,7 +72,7 @@
 }
 
 .check-box:selected>.box>.mark{
-  -fx-background-color: transparent;
+  -fx-background-color: white;
   -fx-background-image: url("add.png");
   -fx-background-position: center;
   -fx-background-repeat: no-repeat;
