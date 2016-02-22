@@ -17,7 +17,7 @@ import de.briemla.clockradio.Settings;
 public class AlarmCell extends AnchorPane {
 
     private static enum State {
-        ACTIVE("active.png"), INACTIVE("inactive.png");
+        ACTIVE("add.png"), INACTIVE("inactive.png");
 
         private ImageView image;
 
