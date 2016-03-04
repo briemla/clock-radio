@@ -51,7 +51,12 @@ public class LocalFolder implements Media {
         cancelled = false;
         List<Path> files = collectFiles();
         Collections.shuffle(files);
-        files.forEach(fileOn -> play(fileOn, player));
+        for (Path fileOn : files) {
+            if (cancelled) {
+                break;
+            }
+            play(fileOn, player);
+        }
     }
 
     private List<Path> collectFiles() {
