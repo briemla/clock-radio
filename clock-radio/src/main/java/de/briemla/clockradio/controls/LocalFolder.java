@@ -7,8 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import de.briemla.clockradio.Media;
@@ -47,21 +49,30 @@ public class LocalFolder implements Media {
     @Override
     public void play(Player player) {
         cancelled = false;
+        List<Path> files = collectFiles();
+        Collections.shuffle(files);
+        files.forEach(fileOn -> play(fileOn, player));
+    }
+
+    private List<Path> collectFiles() {
+        List<Path> files = new ArrayList<>();
         try {
             Files.walkFileTree(source, new SimpleFileVisitor<Path>() {
 
                 @Override
-                public FileVisitResult visitFile(Path fileOn, BasicFileAttributes attrs) throws IOException {
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+                        throws IOException {
                     if (cancelled) {
                         return FileVisitResult.TERMINATE;
                     }
-                    play(fileOn, player);
+                    files.add(file);
                     return FileVisitResult.CONTINUE;
                 }
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return files;
     }
 
     private static void play(Path path, Player player) {
