@@ -33,6 +33,7 @@
 	-fx-background-color: transparent;
 	-fx-border-color: transparent;
 	-fx-graphic: url("inactive.png");
+	-fx-text-fill: text-color;
 }
 
 .active:selected {
@@ -72,28 +73,12 @@
   -fx-background-color: transparent;
 }
 
-/*.check-box>.box>.mark {
-  -fx-background-color: white;
-  -fx-background-image: url("inactive.png");
-  -fx-background-position: center;
-  -fx-background-repeat: no-repeat;
-  -fx-shape: none;
-  -fx-padding: 16px;
-}
-
-.check-box:selected>.box>.mark{
-  -fx-background-color: white;
-  -fx-background-image: url("add.png");
-  -fx-background-position: center;
-  -fx-background-repeat: no-repeat;
-}*/
-
 .alarm-cell .media-description {
-	-fx-font-size: 7.0pt;
+	-fx-font-size: 9.0pt;
 }
 
 .alarm-cell .weekdays {
-	-fx-font-size: 7.0pt;
+	-fx-font-size: 9.0pt;
 	-fx-padding: 0.0 5.0px 0.0 0.0;
 }
 

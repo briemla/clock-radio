@@ -19,15 +19,15 @@
       <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <CheckBox fx:id="monday" mnemonicParsing="false" text="Montag" />
-      <CheckBox fx:id="tuesday" mnemonicParsing="false" text="Dienstag" GridPane.rowIndex="1" />
-      <CheckBox fx:id="wednesday" mnemonicParsing="false" text="Mittwoch" GridPane.rowIndex="2" />
-      <CheckBox fx:id="thursday" mnemonicParsing="false" text="Donnerstag" GridPane.rowIndex="3" />
-      <CheckBox fx:id="friday" mnemonicParsing="false" text="Freitag" GridPane.rowIndex="4" />
-      <CheckBox fx:id="saturday" mnemonicParsing="false" text="Samstag" GridPane.columnIndex="1" />
-      <CheckBox fx:id="sunday" mnemonicParsing="false" text="Sonntag" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <CheckBox fx:id="workdays" mnemonicParsing="false" text="Werktags" GridPane.columnIndex="2" />
-      <CheckBox fx:id="weekend" mnemonicParsing="false" text="Wochenende" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <CheckBox fx:id="daily" mnemonicParsing="false" text="Täglich" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <ToggleButton fx:id="monday" styleClass="active" mnemonicParsing="false" text="Montag" />
+      <ToggleButton fx:id="tuesday" styleClass="active" mnemonicParsing="false" text="Dienstag" GridPane.rowIndex="1" />
+      <ToggleButton fx:id="wednesday" styleClass="active" mnemonicParsing="false" text="Mittwoch" GridPane.rowIndex="2" />
+      <ToggleButton fx:id="thursday" styleClass="active" mnemonicParsing="false" text="Donnerstag" GridPane.rowIndex="3" />
+      <ToggleButton fx:id="friday" styleClass="active" mnemonicParsing="false" text="Freitag" GridPane.rowIndex="4" />
+      <ToggleButton fx:id="saturday" styleClass="active" mnemonicParsing="false" text="Samstag" GridPane.columnIndex="1" />
+      <ToggleButton fx:id="sunday" styleClass="active" mnemonicParsing="false" text="Sonntag" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <ToggleButton fx:id="workdays" styleClass="active" mnemonicParsing="false" text="Werktags" GridPane.columnIndex="2" />
+      <ToggleButton fx:id="weekend" styleClass="active" mnemonicParsing="false" text="Wochenende" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <ToggleButton fx:id="daily" styleClass="active" mnemonicParsing="false" text="Täglich" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
 </fx:root>

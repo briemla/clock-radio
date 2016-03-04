@@ -6,34 +6,35 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import de.briemla.clockradio.ActiveDays;
 import de.briemla.clockradio.FXUtil;
 
 public class ActiveDayEditor extends GridPane {
 
     @FXML
-    private CheckBox monday;
+    private ToggleButton monday;
     @FXML
-    private CheckBox tuesday;
+    private ToggleButton tuesday;
     @FXML
-    private CheckBox wednesday;
+    private ToggleButton wednesday;
     @FXML
-    private CheckBox thursday;
+    private ToggleButton thursday;
     @FXML
-    private CheckBox friday;
+    private ToggleButton friday;
     @FXML
-    private CheckBox saturday;
+    private ToggleButton saturday;
     @FXML
-    private CheckBox sunday;
+    private ToggleButton sunday;
     @FXML
-    private CheckBox workdays;
+    private ToggleButton workdays;
     @FXML
-    private CheckBox weekend;
+    private ToggleButton weekend;
     @FXML
-    private CheckBox daily;
+    private ToggleButton daily;
 
     private final ObjectProperty<ActiveDays> daysProperty;
 
@@ -98,13 +99,20 @@ public class ActiveDayEditor extends GridPane {
     }
 
     private void initUpdateActiveDays() {
-        monday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.MONDAY));
-        tuesday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.TUESDAY));
-        wednesday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.WEDNESDAY));
-        thursday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.THURSDAY));
-        friday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.FRIDAY));
-        saturday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.SATURDAY));
-        sunday.selectedProperty().addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.SUNDAY));
+        monday.selectedProperty()
+                .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.MONDAY));
+        tuesday.selectedProperty()
+                .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.TUESDAY));
+        wednesday.selectedProperty()
+                .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.WEDNESDAY));
+        thursday.selectedProperty()
+                .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.THURSDAY));
+        friday.selectedProperty()
+                .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.FRIDAY));
+        saturday.selectedProperty()
+                .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.SATURDAY));
+        sunday.selectedProperty()
+                .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.SUNDAY));
     }
 
     private void initDaysListener() {
@@ -125,7 +133,8 @@ public class ActiveDayEditor extends GridPane {
     }
 
     private Boolean isWorkdays() {
-        return monday.isSelected() && tuesday.isSelected() && wednesday.isSelected() && thursday.isSelected() && friday.isSelected();
+        return monday.isSelected() && tuesday.isSelected() && wednesday.isSelected()
+                && thursday.isSelected() && friday.isSelected();
     }
 
     private boolean isWeekend() {
@@ -133,7 +142,8 @@ public class ActiveDayEditor extends GridPane {
     }
 
     private boolean isDaily() {
-        return monday.isSelected() && tuesday.isSelected() && wednesday.isSelected() && thursday.isSelected() && friday.isSelected() && saturday.isSelected()
+        return monday.isSelected() && tuesday.isSelected() && wednesday.isSelected()
+                && thursday.isSelected() && friday.isSelected() && saturday.isSelected()
                 && sunday.isSelected();
     }
 
