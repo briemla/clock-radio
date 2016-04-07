@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Optional;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.Property;
@@ -24,10 +25,12 @@ public class Alarm {
     private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
     private final SimpleBooleanProperty activated = new SimpleBooleanProperty(true);
     private final PlayerFactory playerFactory;
+    private Optional<PlayerWorker> player;
 
-    public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, PlayerFactory player) {
+    public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, PlayerFactory playerFactory) {
         this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
-        playerFactory = player;
+        player = Optional.empty();
+        this.playerFactory = playerFactory;
         durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
         alarmStartedProperty = new SimpleBooleanProperty();
         activeDaysProperty = new SimpleObjectProperty<>(new ActiveDays());
@@ -54,6 +57,8 @@ public class Alarm {
 
     // TODO restart timer
     public void stop() {
+        player.ifPresent(PlayerWorker::stop);
+        player = Optional.empty();
         // if (alarmStartedProperty.get()) {
         // mediaProperty().get()
         // .stop(playerFactory);
@@ -92,6 +97,7 @@ public class Alarm {
         // }
         // return false;
         PlayerWorker player = playerFactory.create(mediaProperty.get());
+        this.player = Optional.of(player);
         player.start();
         return true;
     }

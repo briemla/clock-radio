@@ -4,4 +4,6 @@ public interface PlayerWorker {
 
     void start();
 
+    void stop();
+
 }
