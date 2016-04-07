@@ -13,33 +13,37 @@ import de.briemla.clockradio.player.Player;
 
 public class SettingsTest {
 
-	private DefaultableViewSwitcher switcher;
-	private Player player;
-	private Settings settings;
+    private DefaultableViewSwitcher switcher;
+    private Player player;
+    private Settings settings;
+    private PlayerFactory playerFactory;
 
-	@Before
-	public void initializeMockups() {
-		switcher = mock(DefaultableViewSwitcher.class);
-		player = mock(Player.class);
-		settings = new Settings(switcher, player);
-	}
+    @Before
+    public void initializeMockups() {
+        switcher = mock(DefaultableViewSwitcher.class);
+        player = mock(Player.class);
+        playerFactory = mock(PlayerFactory.class);
+        settings = new Settings(switcher, player, playerFactory);
+    }
 
-	@Test
-	public void searchDAB() throws Exception {
-		settings.searchDAB();
+    @Test
+    public void searchDAB() throws Exception {
+        settings.searchDAB();
 
-		verify(player).searchDAB();
-		verifyNoMoreInteractions(player);
-		verifyZeroInteractions(switcher);
-	}
+        verify(player).searchDAB();
+        verifyNoMoreInteractions(player);
+        verifyZeroInteractions(switcher);
+        verifyZeroInteractions(playerFactory);
+    }
 
-	@Test
-	public void searchFM() throws Exception {
-		settings.searchFM();
+    @Test
+    public void searchFM() throws Exception {
+        settings.searchFM();
 
-		verify(player).searchFM();
-		verifyNoMoreInteractions(player);
-		verifyZeroInteractions(switcher);
-	}
+        verify(player).searchFM();
+        verifyNoMoreInteractions(player);
+        verifyZeroInteractions(switcher);
+        verifyZeroInteractions(playerFactory);
+    }
 
 }

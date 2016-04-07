@@ -13,7 +13,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 import de.briemla.clockradio.controls.LocalFolder;
-import de.briemla.clockradio.player.Player;
 
 public class Alarm {
 
@@ -24,11 +23,11 @@ public class Alarm {
     private final SimpleObjectProperty<Media> mediaProperty;
     private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
     private final SimpleBooleanProperty activated = new SimpleBooleanProperty(true);
-    private final Player mediaPlayer;
+    private final PlayerFactory playerFactory;
 
-    public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, Player mediaPlayer) {
+    public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, PlayerFactory player) {
         this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
-        this.mediaPlayer = mediaPlayer;
+        playerFactory = player;
         durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
         alarmStartedProperty = new SimpleBooleanProperty();
         activeDaysProperty = new SimpleObjectProperty<>(new ActiveDays());
@@ -55,11 +54,11 @@ public class Alarm {
 
     // TODO restart timer
     public void stop() {
-        if (alarmStartedProperty.get()) {
-            mediaProperty().get()
-                           .stop(mediaPlayer);
-            alarmStartedProperty.set(false);
-        }
+        // if (alarmStartedProperty.get()) {
+        // mediaProperty().get()
+        // .stop(playerFactory);
+        // alarmStartedProperty.set(false);
+        // }
     }
 
     public Duration getDuration() {
@@ -79,19 +78,22 @@ public class Alarm {
     }
 
     public boolean play() {
-        if (alarmAlreadyStartedProperty.get()) {
-            return false;
-        }
-        alarmStartedProperty.set(true);
-        try {
-            mediaProperty.get()
-                         .play(mediaPlayer);
-            return true;
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            alarmStartedProperty.set(false);
-        }
-        return false;
+        // if (alarmAlreadyStartedProperty.get()) {
+        // return false;
+        // }
+        // alarmStartedProperty.set(true);
+        // try {
+        // mediaProperty.get()
+        // .play(playerFactory);
+        // return true;
+        // } catch (Exception exception) {
+        // exception.printStackTrace();
+        // alarmStartedProperty.set(false);
+        // }
+        // return false;
+        PlayerWorker player = playerFactory.create(mediaProperty.get());
+        player.start();
+        return true;
     }
 
     public ReadOnlyBooleanProperty alarmStartedProperty() {

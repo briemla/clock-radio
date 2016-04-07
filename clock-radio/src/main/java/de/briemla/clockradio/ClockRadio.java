@@ -29,12 +29,17 @@ public class ClockRadio extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Trigger trigger = new AlarmTrigger();
-        MainPanel mainPanel = new MainPanel(availablePlayer(), trigger );
+        MainPanel mainPanel = new MainPanel(availablePlayer(), trigger, playerFactory());
         mainPanel.getStylesheets()
                 .add(ClockRadio.class.getResource("clock-radio.css").toExternalForm());
         watchCssFile(mainPanel);
         primaryStage.setScene(new Scene(mainPanel));
         primaryStage.show();
+    }
+
+    private PlayerFactory playerFactory() {
+        // TODO
+        return null;
     }
 
     private static void watchCssFile(MainPanel mainPanel)

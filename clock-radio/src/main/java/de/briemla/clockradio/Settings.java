@@ -19,16 +19,19 @@ public class Settings {
     private final SimpleBooleanProperty alarmStartedProperty;
     private final ObservableList<Alarm> alarms;
     private final Player player;
+    private final PlayerFactory playerFactory;
 
-    public Settings(DefaultableViewSwitcher viewSwitcher, Player player) {
+    public Settings(DefaultableViewSwitcher viewSwitcher, Player player,
+            PlayerFactory playerFactory) {
         this.viewSwitcher = viewSwitcher;
         this.player = player;
+        this.playerFactory = playerFactory;
         alarmStartedProperty = new SimpleBooleanProperty();
         alarms = FXCollections.observableArrayList();
     }
 
     public void addAlarm() {
-        Alarm alarm = new Alarm(alarmStartedProperty, player);
+        Alarm alarm = new Alarm(alarmStartedProperty, playerFactory);
         alarms.add(alarm);
         rebindAlarms();
         AlarmMenu alarmMenu = viewSwitcher.show(Alarm.class);
