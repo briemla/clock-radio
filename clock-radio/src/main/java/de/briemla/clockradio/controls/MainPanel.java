@@ -84,7 +84,6 @@ public class MainPanel extends StackPane {
     @FXML
     public void stopSound(ActionEvent event) {
         settings.stopCurrentAlarm();
-        player.stop();
     }
 
 }

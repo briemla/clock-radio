@@ -7,6 +7,7 @@ import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import de.briemla.clockradio.controls.AlarmMenu;
 import de.briemla.clockradio.controls.DefaultableViewSwitcher;
 import de.briemla.clockradio.dabpi.Station;
@@ -72,6 +73,7 @@ public class Settings {
         for (Alarm alarm : alarms) {
             alarm.stop();
         }
+        player.stop();
     }
 
     public List<? extends Station> searchDAB() {
