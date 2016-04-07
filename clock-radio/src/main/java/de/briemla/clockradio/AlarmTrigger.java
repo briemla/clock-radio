@@ -25,7 +25,9 @@ public class AlarmTrigger implements Trigger {
     @Override
     public void start() {
         for (Alarm alarm : alarms) {
-            alarm.play();
+            if (alarm.play()) {
+                break;
+            }
         }
     }
 
