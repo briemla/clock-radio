@@ -55,15 +55,9 @@ public class Alarm {
         return new WakeUpTime(now.getHour(), now.getMinute());
     }
 
-    // TODO restart timer
     public void stop() {
         player.ifPresent(PlayerWorker::stop);
         player = Optional.empty();
-        // if (alarmStartedProperty.get()) {
-        // mediaProperty().get()
-        // .stop(playerFactory);
-        // alarmStartedProperty.set(false);
-        // }
     }
 
     public Duration getDuration() {
@@ -83,19 +77,6 @@ public class Alarm {
     }
 
     public boolean play() {
-        // if (alarmAlreadyStartedProperty.get()) {
-        // return false;
-        // }
-        // alarmStartedProperty.set(true);
-        // try {
-        // mediaProperty.get()
-        // .play(playerFactory);
-        // return true;
-        // } catch (Exception exception) {
-        // exception.printStackTrace();
-        // alarmStartedProperty.set(false);
-        // }
-        // return false;
         PlayerWorker player = playerFactory.create(mediaProperty.get());
         this.player = Optional.of(player);
         player.start();
