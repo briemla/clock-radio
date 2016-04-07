@@ -48,14 +48,16 @@ public class Alarm {
     }
 
     private static WakeUpTime initialWakeUpTime() {
-        LocalTime now = LocalTime.now().plusMinutes(1);
+        LocalTime now = LocalTime.now()
+                                 .plusMinutes(1);
         return new WakeUpTime(now.getHour(), now.getMinute());
     }
 
     // TODO restart timer
     public void stop() {
         if (alarmStartedProperty.get()) {
-            mediaProperty().get().stop(mediaPlayer);
+            mediaProperty().get()
+                           .stop(mediaPlayer);
             alarmStartedProperty.set(false);
         }
     }
@@ -76,17 +78,20 @@ public class Alarm {
         return wakeUpTimeProperty;
     }
 
-    public void play() {
+    public boolean play() {
         if (alarmAlreadyStartedProperty.get()) {
-            return;
+            return false;
         }
         alarmStartedProperty.set(true);
         try {
-            mediaProperty.get().play(mediaPlayer);
+            mediaProperty.get()
+                         .play(mediaPlayer);
+            return true;
         } catch (Exception exception) {
             exception.printStackTrace();
             alarmStartedProperty.set(false);
         }
+        return false;
     }
 
     public ReadOnlyBooleanProperty alarmStartedProperty() {
@@ -98,13 +103,16 @@ public class Alarm {
     }
 
     private static Date convertToDate(LocalDateTime date) {
-        return Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
+        return Date.from(date.atZone(ZoneId.systemDefault())
+                             .toInstant());
     }
 
     private LocalDateTime alarmLocalDate() {
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime nextTime = wakeUpTimeProperty.get().nextAlarm(now);
-        return activeDaysProperty.get().nextAlarm(nextTime);
+        LocalDateTime nextTime = wakeUpTimeProperty.get()
+                                                   .nextAlarm(now);
+        return activeDaysProperty.get()
+                                 .nextAlarm(nextTime);
     }
 
     Date alarmStopDate() {

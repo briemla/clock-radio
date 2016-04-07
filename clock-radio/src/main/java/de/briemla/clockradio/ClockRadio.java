@@ -28,7 +28,7 @@ public class ClockRadio extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Trigger trigger = new RealTime();
+        Trigger trigger = new AlarmTrigger();
         MainPanel mainPanel = new MainPanel(availablePlayer(), trigger );
         mainPanel.getStylesheets()
                 .add(ClockRadio.class.getResource("clock-radio.css").toExternalForm());
