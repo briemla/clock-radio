@@ -5,8 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import de.briemla.clockradio.Alarm;
@@ -14,24 +12,6 @@ import de.briemla.clockradio.FXUtil;
 import de.briemla.clockradio.Settings;
 
 public class AlarmCell extends AnchorPane {
-
-    private static enum State {
-        ACTIVE("add.png"), INACTIVE("inactive.png");
-
-        private ImageView image;
-
-        private State(String fileName) {
-            image = new ImageView(image(fileName));
-        }
-
-        private ImageView image() {
-            return image;
-        }
-
-        private static Image image(String fileName) {
-            return new Image(State.class.getResourceAsStream(fileName));
-        }
-    }
 
     @FXML
     private AnchorPane container;
@@ -53,18 +33,28 @@ public class AlarmCell extends AnchorPane {
         FXUtil.load(this, this);
         activeProperty = new ActivePseudoClassProperty(this);
         // TODO maybe create timeProperty in Alarm class
-        time.textProperty().bind(alarm.wakeUpTimeProperty().asString());
-        mediaDescription.textProperty().bind(alarm.mediaProperty().asString());
-        weekdays.textProperty().bind(alarm.activeDaysProperty().asString());
+        time.textProperty()
+            .bind(alarm.wakeUpTimeProperty()
+                       .asString());
+        mediaDescription.textProperty()
+                        .bind(alarm.mediaProperty()
+                                   .asString());
+        weekdays.textProperty()
+                .bind(alarm.activeDaysProperty()
+                           .asString());
         activeProperty.bindBidirectional(alarm.activatedProperty());
-        active.selectedProperty().bindBidirectional(activeProperty);
+        active.selectedProperty()
+              .bindBidirectional(activeProperty);
         setOnMouseClicked(event -> settings.select(alarm));
     }
 
     public void unbind() {
-        time.textProperty().unbind();
-        weekdays.textProperty().unbind();
-        mediaDescription.textProperty().unbind();
+        time.textProperty()
+            .unbind();
+        weekdays.textProperty()
+                .unbind();
+        mediaDescription.textProperty()
+                        .unbind();
     }
 
     public BooleanProperty activatedProperty() {
