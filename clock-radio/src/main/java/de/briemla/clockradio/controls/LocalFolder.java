@@ -31,11 +31,14 @@ public class LocalFolder implements Media {
      * @return
      */
     private static Path defaultFolder() {
-        if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
+        if (System.getProperty("os.name")
+                  .toLowerCase()
+                  .startsWith("win")) {
             return new File("D:\\NAS-Lars\\Musik").toPath();
         }
-        if ("amd64".equals(System.getProperty("os.arch").toLowerCase())) {
-            return new File("/home/lars/Musik/").toPath();
+        if ("amd64".equals(System.getProperty("os.arch")
+                                 .toLowerCase())) {
+            return new File("/media/lars/data/Musik/").toPath();
         }
         return new File("/opt/clock-radio/music/").toPath();
     }
@@ -87,7 +90,9 @@ public class LocalFolder implements Media {
     }
 
     private static boolean isMedia(Path file) {
-        return file.toFile().getName().endsWith(".mp3");
+        return file.toFile()
+                   .getName()
+                   .endsWith(".mp3");
     }
 
     @Override
@@ -106,7 +111,8 @@ public class LocalFolder implements Media {
     }
 
     public Collection<File> children() {
-        List<File> children = Arrays.asList(source.toFile().listFiles(new SupportedFileFilter()));
+        List<File> children = Arrays.asList(source.toFile()
+                                                  .listFiles(new SupportedFileFilter()));
         children.sort(new FileComparator());
         return children;
     }
