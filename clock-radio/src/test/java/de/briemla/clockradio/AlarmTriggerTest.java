@@ -1,5 +1,6 @@
 package de.briemla.clockradio;
 
+import static java.time.LocalDateTime.now;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -55,4 +56,21 @@ public class AlarmTriggerTest {
         verify(matching).play(any(LocalDateTime.class));
         verifyZeroInteractions(later);
     }
+
+    @Test
+    public void doNotStartAnotherAlarmWhenOneIsRunning() throws Exception {
+        Alarm running = mock(Alarm.class);
+        when(running.play(any())).thenReturn(true);
+        Alarm another = mock(Alarm.class);
+        alarms.add(running);
+        alarms.add(another);
+
+        trigger.start(now());
+        trigger.start(now());
+
+        verify(running).play(any());
+        verifyZeroInteractions(running);
+        verifyZeroInteractions(another);
+    }
+
 }

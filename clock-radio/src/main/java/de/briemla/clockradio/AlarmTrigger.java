@@ -12,10 +12,12 @@ import de.briemla.clockradio.controls.Trigger;
 public class AlarmTrigger implements Trigger {
 
     private final List<Alarm> alarms;
+    private boolean running;
 
     public AlarmTrigger() {
         super();
         alarms = new ArrayList<>();
+        running = false;
     }
 
     @Override
@@ -25,8 +27,12 @@ public class AlarmTrigger implements Trigger {
 
     @Override
     public void start(LocalDateTime time) {
+        if (running) {
+            return;
+        }
         for (Alarm alarm : alarms) {
-            if (alarm.play(time)) {
+            running = alarm.play(time);
+            if (running) {
                 break;
             }
         }
