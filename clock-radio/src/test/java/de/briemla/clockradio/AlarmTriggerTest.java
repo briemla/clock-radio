@@ -1,9 +1,12 @@
 package de.briemla.clockradio;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
+
+import java.time.LocalDateTime;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,26 +33,26 @@ public class AlarmTriggerTest {
         Alarm alarm = mock(Alarm.class);
         alarms.add(alarm);
 
-        trigger.start();
+        trigger.startNow();
 
-        verify(alarm).play();
+        verify(alarm).play(any(LocalDateTime.class));
     }
 
     @Test
     public void startFirstMatchingAlarmAndIgnoreLaterAlarms() throws Exception {
         Alarm notMatching = mock(Alarm.class);
-        when(notMatching.play()).thenReturn(false);
+        when(notMatching.play(any(LocalDateTime.class))).thenReturn(false);
         Alarm matching = mock(Alarm.class);
-        when(matching.play()).thenReturn(true);
+        when(matching.play(any(LocalDateTime.class))).thenReturn(true);
         Alarm later = mock(Alarm.class);
         alarms.add(notMatching);
         alarms.add(matching);
         alarms.add(later);
 
-        trigger.start();
+        trigger.startNow();
 
-        verify(notMatching).play();
-        verify(matching).play();
+        verify(notMatching).play(any(LocalDateTime.class));
+        verify(matching).play(any(LocalDateTime.class));
         verifyZeroInteractions(later);
     }
 }

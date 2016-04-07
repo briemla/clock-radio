@@ -74,7 +74,10 @@ public class Alarm {
         return wakeUpTimeProperty;
     }
 
-    public boolean play() {
+    public boolean play(LocalDateTime atTime) {
+        if (alarmLocalDate().isAfter(atTime)) {
+            return false;
+        }
         PlayerWorker player = playerFactory.create(mediaProperty.get());
         this.player = Optional.of(player);
         player.start();

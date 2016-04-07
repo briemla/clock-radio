@@ -1,5 +1,6 @@
 package de.briemla.clockradio;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +24,17 @@ public class AlarmTrigger implements Trigger {
     }
 
     @Override
-    public void start() {
+    public void start(LocalDateTime time) {
         for (Alarm alarm : alarms) {
-            if (alarm.play()) {
+            if (alarm.play(time)) {
                 break;
             }
         }
+    }
+
+    @Override
+    public void startNow() {
+        start(LocalDateTime.now());
     }
 
 }

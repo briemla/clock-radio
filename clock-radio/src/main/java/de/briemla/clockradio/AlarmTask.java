@@ -1,5 +1,6 @@
 package de.briemla.clockradio;
 
+import java.time.LocalDateTime;
 import java.util.TimerTask;
 
 public class AlarmTask extends TimerTask {
@@ -12,6 +13,6 @@ public class AlarmTask extends TimerTask {
 
     @Override
     public void run() {
-        alarm.play();
+        alarm.play(LocalDateTime.now());
     }
 }
