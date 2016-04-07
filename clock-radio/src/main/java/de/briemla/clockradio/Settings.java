@@ -31,7 +31,7 @@ public class Settings {
     }
 
     public void addAlarm() {
-        Alarm alarm = new Alarm(alarmStartedProperty, playerFactory);
+        Alarm alarm = new Alarm(playerFactory);
         alarms.add(alarm);
         rebindAlarms();
         AlarmMenu alarmMenu = viewSwitcher.show(Alarm.class);

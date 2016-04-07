@@ -16,19 +16,18 @@ public class AlarmTest {
 
     private PlayerFactory player;
     private PlayerWorker worker;
-    private SimpleBooleanProperty started;
 
     @Before
     public void initialise() {
         player = mock(PlayerFactory.class);
         worker = mock(PlayerWorker.class);
-        started = new SimpleBooleanProperty();
+        new SimpleBooleanProperty();
     }
 
     @Test
     public void playMusicInBackground() throws Exception {
         when(player.create(any(Media.class))).thenReturn(worker);
-        Alarm alarm = new Alarm(started, player);
+        Alarm alarm = new Alarm(player);
 
         boolean playing = alarm.play();
 
@@ -40,7 +39,7 @@ public class AlarmTest {
     @Test
     public void playAndStopMusic() throws Exception {
         when(player.create(any(Media.class))).thenReturn(worker);
-        Alarm alarm = new Alarm(started, player);
+        Alarm alarm = new Alarm(player);
 
         boolean playing = alarm.play();
         alarm.stop();

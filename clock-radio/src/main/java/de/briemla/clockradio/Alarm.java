@@ -19,7 +19,6 @@ public class Alarm {
 
     private final SimpleObjectProperty<Duration> durationProperty;
     private final SimpleBooleanProperty alarmStartedProperty;
-    private final SimpleBooleanProperty alarmAlreadyStartedProperty;
     private final SimpleObjectProperty<ActiveDays> activeDaysProperty;
     private final SimpleObjectProperty<Media> mediaProperty;
     private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
@@ -27,8 +26,7 @@ public class Alarm {
     private final PlayerFactory playerFactory;
     private Optional<PlayerWorker> player;
 
-    public Alarm(SimpleBooleanProperty alarmAlreadyStartedProperty, PlayerFactory playerFactory) {
-        this.alarmAlreadyStartedProperty = alarmAlreadyStartedProperty;
+    public Alarm(PlayerFactory playerFactory) {
         player = Optional.empty();
         this.playerFactory = playerFactory;
         durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
