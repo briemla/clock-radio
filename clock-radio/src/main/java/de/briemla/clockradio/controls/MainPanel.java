@@ -42,12 +42,13 @@ public class MainPanel extends StackPane {
     private final Settings settings;
     private Timer timer;
 
-    public MainPanel(Player player) {
+    public MainPanel(Player player, Trigger trigger) {
         super();
         FXUtil.load(this, this);
         active = new ActivePseudoClassProperty(this);
         settings = new Settings(viewSwitcher, player);
         alarm.setSettings(settings);
+        trigger.bind(settings.getAlarms());
         Node clock = new DigitalClock();
         viewSwitcher.setDefaultView(clock);
         AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher, settings, player);

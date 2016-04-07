@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import de.briemla.clockradio.controls.MainPanel;
+import de.briemla.clockradio.controls.Trigger;
 import de.briemla.clockradio.dabpi.AlsaController;
 import de.briemla.clockradio.dabpi.CommandFactory;
 import de.briemla.clockradio.dabpi.DabpiCommandFactory;
@@ -27,7 +28,8 @@ public class ClockRadio extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        MainPanel mainPanel = new MainPanel(availablePlayer());
+        Trigger trigger = new RealTime();
+        MainPanel mainPanel = new MainPanel(availablePlayer(), trigger );
         mainPanel.getStylesheets()
                 .add(ClockRadio.class.getResource("clock-radio.css").toExternalForm());
         watchCssFile(mainPanel);
