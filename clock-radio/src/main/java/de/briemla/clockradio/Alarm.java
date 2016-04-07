@@ -5,103 +5,17 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+
 import de.briemla.clockradio.controls.LocalFolder;
 import de.briemla.clockradio.player.Player;
 
 public class Alarm {
-
-    public static class AlarmTimer implements ChangeListener<Object> {
-
-        private Timer startTimer;
-        private final Alarm alarm;
-        private Timer stopTimer;
-
-        public AlarmTimer(Alarm alarm) {
-            super();
-            this.alarm = alarm;
-        }
-
-        @Override
-        public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object newValue) {
-            stopTimer();
-            startTimer();
-        }
-
-        private void stopTimer() {
-            if (startTimer != null) {
-                startTimer.cancel();
-                startTimer = null;
-            }
-            if (stopTimer != null) {
-                stopTimer.cancel();
-                stopTimer = null;
-            }
-        }
-
-        private void startTimer() {
-            startTimer = new Timer("AlarmTimer", true);
-            // TODO: Maybe use Timer#schedule to run the timer on specified
-            // dates:
-            // Timer timer new Timer();
-            // Thread myThread= // Your thread
-            // Calendar date = Calendar.getInstance();
-            // date.set(
-            // Calendar.DAY_OF_WEEK,
-            // Calendar.SUNDAY
-            // );
-            // date.set(Calendar.HOUR, 0);
-            // date.set(Calendar.MINUTE, 0);
-            // date.set(Calendar.SECOND, 0);
-            // date.set(Calendar.MILLISECOND, 0);
-            // // Schedule to run every Sunday in midnight
-            // timer.schedule(
-            // new SampleTask (myThread),
-            // date.getTime(),
-            // 1000 * 60 * 60 * 24 * 7
-            // );
-            startTimer.scheduleAtFixedRate(new AlarmTask(alarm), alarm.alarmDate(), Long.MAX_VALUE);
-            stopTimer = new Timer("AlarmStopTimer", true);
-            stopTimer.scheduleAtFixedRate(new AlarmStopTask(alarm), alarm.alarmStopDate(), Long.MAX_VALUE);
-        }
-    }
-
-    public static class AlarmTask extends TimerTask {
-
-        private final Alarm alarm;
-
-        public AlarmTask(Alarm alarm) {
-            this.alarm = alarm;
-        }
-
-        @Override
-        public void run() {
-            alarm.play();
-        }
-    }
-
-    public static class AlarmStopTask extends TimerTask {
-
-        private final Alarm alarm;
-
-        public AlarmStopTask(Alarm alarm) {
-            this.alarm = alarm;
-        }
-
-        @Override
-        public void run() {
-            alarm.stop();
-        }
-    }
 
     private final SimpleObjectProperty<Duration> durationProperty;
     private final SimpleBooleanProperty alarmStartedProperty;
@@ -179,7 +93,7 @@ public class Alarm {
         return alarmStartedProperty;
     }
 
-    private Date alarmDate() {
+    Date alarmDate() {
         return convertToDate(alarmLocalDate());
     }
 
@@ -193,7 +107,7 @@ public class Alarm {
         return activeDaysProperty.get().nextAlarm(nextTime);
     }
 
-    private Date alarmStopDate() {
+    Date alarmStopDate() {
         return convertToDate(alarmLocalDate().plus(getDuration()));
     }
 
