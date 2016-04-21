@@ -13,9 +13,10 @@ import javafx.scene.layout.StackPane;
 
 import de.briemla.clockradio.Alarm;
 import de.briemla.clockradio.FXUtil;
-import de.briemla.clockradio.PlayerFactory;
 import de.briemla.clockradio.Settings;
+import de.briemla.clockradio.TimeProvider;
 import de.briemla.clockradio.player.Player;
+import de.briemla.clockradio.player.PlayerFactory;
 
 public class MainPanel extends StackPane {
 
@@ -50,7 +51,8 @@ public class MainPanel extends StackPane {
         settings = new Settings(viewSwitcher, player, playerFactory);
         alarm.setSettings(settings);
         trigger.bind(settings.getAlarms());
-        Node clock = new DigitalClock();
+        TimeProvider timeProvider = new TimeProvider();
+        Node clock = new DigitalClock(timeProvider);
         viewSwitcher.setDefaultView(clock);
         AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher, settings, player);
         viewSwitcher.addView(Alarm.class, alarmMenu);
@@ -65,6 +67,7 @@ public class MainPanel extends StackPane {
         resetInactiveTimer();
         settings.addAlarm();
         viewSwitcher.showDefault();
+        timeProvider.timeProperty().addListener(event -> trigger.startNow());
     }
 
     private void resetInactiveTimer() {

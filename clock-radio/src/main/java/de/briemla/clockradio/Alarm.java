@@ -1,6 +1,7 @@
 package de.briemla.clockradio;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -14,8 +15,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 import de.briemla.clockradio.controls.LocalFolder;
+import de.briemla.clockradio.player.PlayerFactory;
+import de.briemla.clockradio.player.PlayerWorker;
 
 public class Alarm {
+
+    private static final LocalTime startOfTheDay = LocalTime.of(0, 0);
 
     private final SimpleObjectProperty<Duration> durationProperty;
     private final SimpleBooleanProperty alarmStartedProperty;
@@ -34,22 +39,21 @@ public class Alarm {
         activeDaysProperty = new SimpleObjectProperty<>(new ActiveDays());
         mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
         wakeUpTimeProperty = new SimpleObjectProperty<>(initialWakeUpTime());
-        AlarmTimer alarmTimer = new AlarmTimer(this);
-        wakeUpTimeProperty.addListener(alarmTimer);
-        activeDaysProperty.addListener(alarmTimer);
-        alarmTimer.startTimer();
-        activated.addListener((change, oldValue, newValue) -> {
-            if (newValue) {
-                alarmTimer.startTimer();
-                return;
-            }
-            alarmTimer.stopTimer();
-        });
+        // AlarmTimer alarmTimer = new AlarmTimer(this);
+        // wakeUpTimeProperty.addListener(alarmTimer);
+        // activeDaysProperty.addListener(alarmTimer);
+        // alarmTimer.startTimer();
+        // activated.addListener((change, oldValue, newValue) -> {
+        // if (newValue) {
+        // alarmTimer.startTimer();
+        // return;
+        // }
+        // alarmTimer.stopTimer();
+        // });
     }
 
     private static WakeUpTime initialWakeUpTime() {
-        LocalTime now = LocalTime.now()
-                                 .plusMinutes(1);
+        LocalTime now = LocalTime.now().plusMinutes(1);
         return new WakeUpTime(now.getHour(), now.getMinute());
     }
 
@@ -93,16 +97,17 @@ public class Alarm {
     }
 
     private static Date convertToDate(LocalDateTime date) {
-        return Date.from(date.atZone(ZoneId.systemDefault())
-                             .toInstant());
+        return Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
     }
 
     private LocalDateTime alarmLocalDate() {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime nextTime = wakeUpTimeProperty.get()
-                                                   .nextAlarm(now);
-        return activeDaysProperty.get()
-                                 .nextAlarm(nextTime);
+        LocalDateTime now = today();
+        LocalDateTime nextTime = wakeUpTimeProperty.get().nextAlarm(now);
+        return activeDaysProperty.get().nextAlarm(nextTime);
+    }
+
+    private LocalDateTime today() {
+        return LocalDateTime.of(LocalDate.now(), startOfTheDay);
     }
 
     Date alarmStopDate() {

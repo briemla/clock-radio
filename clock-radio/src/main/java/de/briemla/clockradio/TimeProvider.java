@@ -6,8 +6,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.util.Duration;
 
 public class TimeProvider {
@@ -20,13 +18,7 @@ public class TimeProvider {
         updateTime();
         timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                updateTime();
-            }
-        }));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), event -> updateTime()));
         timeline.playFromStart();
     }
 

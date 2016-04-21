@@ -14,4 +14,6 @@ public interface Trigger {
 
     void startNow();
 
+    void stop();
+
 }

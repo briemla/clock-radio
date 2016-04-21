@@ -9,8 +9,8 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.briemla.clockradio.PlayerFactory;
 import de.briemla.clockradio.player.Player;
+import de.briemla.clockradio.player.PlayerFactory;
 import de.briemla.utils.FxUtils;
 
 public class MainPanelTest {

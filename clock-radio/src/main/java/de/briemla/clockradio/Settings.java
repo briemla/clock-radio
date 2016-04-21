@@ -12,6 +12,7 @@ import de.briemla.clockradio.controls.AlarmMenu;
 import de.briemla.clockradio.controls.DefaultableViewSwitcher;
 import de.briemla.clockradio.dabpi.Station;
 import de.briemla.clockradio.player.Player;
+import de.briemla.clockradio.player.PlayerFactory;
 
 public class Settings {
 

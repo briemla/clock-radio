@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import de.briemla.clockradio.controls.DefaultableViewSwitcher;
 import de.briemla.clockradio.player.Player;
+import de.briemla.clockradio.player.PlayerFactory;
 
 public class SettingsTest {
 

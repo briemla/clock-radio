@@ -1,11 +1,12 @@
 package de.briemla.clockradio.controls;
 
-import de.briemla.clockradio.FXUtil;
-import de.briemla.clockradio.TimeProvider;
 import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+
+import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.TimeProvider;
 
 public class DigitalClock extends StackPane {
 
@@ -14,10 +15,10 @@ public class DigitalClock extends StackPane {
 
     private final TimeProvider timeProvider;
 
-    public DigitalClock() {
+    public DigitalClock(TimeProvider timeProvider) {
         super();
         FXUtil.load(this, this);
-        timeProvider = new TimeProvider();
+        this.timeProvider = timeProvider;
         time.textProperty().bind(providedTime());
     }
 

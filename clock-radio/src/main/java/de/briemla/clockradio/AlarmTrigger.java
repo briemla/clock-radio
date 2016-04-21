@@ -43,4 +43,9 @@ public class AlarmTrigger implements Trigger {
         start(LocalDateTime.now());
     }
 
+    @Override
+    public void stop() {
+        alarms.stream().forEach(Alarm::stop);
+    }
+
 }

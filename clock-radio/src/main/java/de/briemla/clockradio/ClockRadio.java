@@ -18,7 +18,9 @@ import de.briemla.clockradio.dabpi.RadioExecutor;
 import de.briemla.clockradio.player.AudioFilePlayer;
 import de.briemla.clockradio.player.BasePlayer;
 import de.briemla.clockradio.player.Player;
+import de.briemla.clockradio.player.PlayerFactory;
 import de.briemla.clockradio.player.RadioPlayer;
+import de.briemla.clockradio.player.RealPlayerFactory;
 
 public class ClockRadio extends Application {
 
@@ -29,17 +31,18 @@ public class ClockRadio extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Trigger trigger = new AlarmTrigger();
-        MainPanel mainPanel = new MainPanel(availablePlayer(), trigger, playerFactory());
+        Player availablePlayer = availablePlayer();
+        MainPanel mainPanel = new MainPanel(availablePlayer, trigger,
+                playerFactory(availablePlayer));
         mainPanel.getStylesheets()
-                .add(ClockRadio.class.getResource("clock-radio.css").toExternalForm());
+                 .add(ClockRadio.class.getResource("clock-radio.css").toExternalForm());
         watchCssFile(mainPanel);
         primaryStage.setScene(new Scene(mainPanel));
         primaryStage.show();
     }
 
-    private PlayerFactory playerFactory() {
-        // TODO
-        return null;
+    private PlayerFactory playerFactory(Player availablePlayer) {
+        return new RealPlayerFactory(availablePlayer);
     }
 
     private static void watchCssFile(MainPanel mainPanel)

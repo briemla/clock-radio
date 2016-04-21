@@ -4,6 +4,7 @@ import static java.time.LocalDateTime.now;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
@@ -71,6 +72,24 @@ public class AlarmTriggerTest {
         verify(running).play(any());
         verifyZeroInteractions(running);
         verifyZeroInteractions(another);
+    }
+
+    @Test
+    public void startOneAlarmAndStopAllAlarms() throws Exception {
+        Alarm running = mock(Alarm.class);
+        when(running.play(any())).thenReturn(true);
+        Alarm notRunning = mock(Alarm.class);
+        alarms.add(running);
+        alarms.add(notRunning);
+
+        trigger.start(now());
+        trigger.stop();
+
+        verify(running).play(any());
+        verify(running).stop();
+        verify(notRunning).stop();
+        verifyNoMoreInteractions(running);
+        verifyNoMoreInteractions(notRunning);
     }
 
 }

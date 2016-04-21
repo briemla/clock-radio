@@ -15,6 +15,9 @@ import java.time.LocalTime;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.briemla.clockradio.player.PlayerFactory;
+import de.briemla.clockradio.player.PlayerWorker;
+
 public class AlarmTest {
 
     private PlayerFactory player;
