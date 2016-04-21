@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.time.LocalTime;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -19,11 +18,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class AudioFilePlayer {
 
-    private final AtomicBoolean stopped;
+    private volatile boolean stopped;
 
     public AudioFilePlayer() {
         super();
-        stopped = new AtomicBoolean(false);
+        stopped = false;
     }
 
     /**
@@ -43,7 +42,7 @@ public class AudioFilePlayer {
     private void stream(AudioInputStream in, SourceDataLine line) throws IOException {
         byte[] buffer = new byte[65536];
         for (int n = 0; n != -1; n = in.read(buffer, 0, buffer.length)) {
-            if (stopped.get()) {
+            if (stopped) {
                 return;
             }
             line.write(buffer, 0, n);
@@ -52,7 +51,7 @@ public class AudioFilePlayer {
 
     public void stop() {
         System.out.println("Stop: " + LocalTime.now());
-        stopped.set(true);
+        stopped = true;
     }
 
     private void startAudio(File file) {
@@ -61,7 +60,7 @@ public class AudioFilePlayer {
             AudioFormat outFormat = getOutFormat(in.getFormat());
             Info info = new Info(SourceDataLine.class, outFormat);
 
-            stopped.set(false);
+            stopped = false;
             SourceDataLine line = (SourceDataLine) AudioSystem.getLine(info);
             if (line != null) {
                 try {
