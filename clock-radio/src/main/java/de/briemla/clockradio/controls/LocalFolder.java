@@ -1,16 +1,9 @@
 package de.briemla.clockradio.controls;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import de.briemla.clockradio.Media;
@@ -20,15 +13,9 @@ import de.briemla.clockradio.player.Player;
 public class LocalFolder implements Media {
 
     private final Path source;
-    private boolean cancelled;
 
     public LocalFolder() {
         this(defaultFolder());
-    }
-
-    @Override
-    public PlayableMedia create() {
-        return null;
     }
 
     /**
@@ -49,63 +36,23 @@ public class LocalFolder implements Media {
     public LocalFolder(Path source) {
         super();
         this.source = source;
-        cancelled = false;
     }
 
     @Override
     public void play(Player player) {
-        // cancelled = false;
-        List<Path> files = collectFiles();
-        Collections.shuffle(files);
-        for (Path fileOn : files) {
-            if (cancelled) {
-                break;
-            }
-            play(fileOn, player);
-        }
-    }
-
-    private List<Path> collectFiles() {
-        List<Path> files = new ArrayList<>();
-        try {
-            Files.walkFileTree(source, new SimpleFileVisitor<Path>() {
-
-                @Override
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
-                        throws IOException {
-                    files.add(file);
-                    return FileVisitResult.CONTINUE;
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return files;
-    }
-
-    private static void play(Path path, Player player) {
-        if (isMedia(path)) {
-            player.play(path.toUri());
-        }
-    }
-
-    private static boolean isMedia(Path file) {
-        return file.toFile().getName().endsWith(".mp3");
     }
 
     @Override
     public void stop(Player player) {
-        cancelled = true;
-        player.stop();
+    }
+
+    @Override
+    public PlayableMedia create() {
+        return new PlayableLocalFolder(source);
     }
 
     public File getSource() {
         return source.toFile();
-    }
-
-    @Override
-    public String toString() {
-        return getSource().getAbsolutePath();
     }
 
     public Collection<File> children() {
@@ -154,5 +101,10 @@ public class LocalFolder implements Media {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return getSource().getAbsolutePath();
     }
 }
