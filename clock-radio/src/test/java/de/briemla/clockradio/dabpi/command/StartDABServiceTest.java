@@ -159,7 +159,7 @@ public class StartDABServiceTest {
 
 	@Test
 	public void equalsAndHashCode() throws Exception {
-		EqualsVerifier.forClass(StartDABService.class).allFieldsShouldBeUsed().usingGetClass().verify();
+		EqualsVerifier.forClass(StartDABService.class).usingGetClass().verify();
 	}
 
 }

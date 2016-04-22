@@ -78,7 +78,7 @@ public class ReadFrequencyListTest {
 
 	@Test
 	public void equalsAndHashCode() throws Exception {
-		EqualsVerifier.forClass(ReadFrequencyList.class).allFieldsShouldBeUsed().usingGetClass().verify();
+		EqualsVerifier.forClass(ReadFrequencyList.class).usingGetClass().verify();
 	}
 
 }

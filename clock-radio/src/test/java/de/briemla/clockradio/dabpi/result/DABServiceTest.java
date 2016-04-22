@@ -3,113 +3,114 @@ package de.briemla.clockradio.dabpi.result;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+
 import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.Test;
 
 public class DABServiceTest {
 
-	@Test
-	public void serializeService0() throws Exception {
-		DABService service = new DABService(0, "d3d0", "Some Name");
+    @Test
+    public void serializeService0() throws Exception {
+        DABService service = new DABService(0, "d3d0", "Some Name");
 
-		assertThat(service.serialize(), is(equalTo("0")));
-	}
+        assertThat(service.serialize(), is(equalTo("0")));
+    }
 
-	@Test
-	public void serializeService1() throws Exception {
-		DABService service = new DABService(1, "d1d3", "Some other Name");
+    @Test
+    public void serializeService1() throws Exception {
+        DABService service = new DABService(1, "d1d3", "Some other Name");
 
-		assertThat(service.serialize(), is(equalTo("1")));
-	}
+        assertThat(service.serialize(), is(equalTo("1")));
+    }
 
-	@Test
-	public void checkCorrectId() throws Exception {
-		DABService service = new DABService(0, "d3d0", "Some Name");
+    @Test
+    public void checkCorrectId() throws Exception {
+        DABService service = new DABService(0, "d3d0", "Some Name");
 
-		assertThat(service.checkId("d3d0"), is(true));
-	}
+        assertThat(service.checkId("d3d0"), is(true));
+    }
 
-	@Test
-	public void checkAnotherCorrectId() throws Exception {
-		DABService service = new DABService(0, "a6d3", "Some other Name");
+    @Test
+    public void checkAnotherCorrectId() throws Exception {
+        DABService service = new DABService(0, "a6d3", "Some other Name");
 
-		assertThat(service.checkId("a6d3"), is(true));
-	}
+        assertThat(service.checkId("a6d3"), is(true));
+    }
 
-	@Test
-	public void checkIncorrectId() throws Exception {
-		DABService service = new DABService(0, "a6d3", "Some Name");
+    @Test
+    public void checkIncorrectId() throws Exception {
+        DABService service = new DABService(0, "a6d3", "Some Name");
 
-		assertThat(service.checkId("d3d0"), is(false));
-	}
+        assertThat(service.checkId("d3d0"), is(false));
+    }
 
-	@Test
-	public void checkAnotherIncorrectId() throws Exception {
-		DABService service = new DABService(0, "d3d0", "Some other Name");
+    @Test
+    public void checkAnotherIncorrectId() throws Exception {
+        DABService service = new DABService(0, "d3d0", "Some other Name");
 
-		assertThat(service.checkId("a6d3"), is(false));
-	}
+        assertThat(service.checkId("a6d3"), is(false));
+    }
 
-	@Test
-	public void checkCorrectName() throws Exception {
-		DABService service = new DABService(0, "d3d0", "Some Name");
+    @Test
+    public void checkCorrectName() throws Exception {
+        DABService service = new DABService(0, "d3d0", "Some Name");
 
-		assertThat(service.checkName("Some Name"), is(true));
-	}
+        assertThat(service.checkName("Some Name"), is(true));
+    }
 
-	@Test
-	public void checkAnotherCorrectName() throws Exception {
-		DABService service = new DABService(0, "a6d3", "Some other Name");
+    @Test
+    public void checkAnotherCorrectName() throws Exception {
+        DABService service = new DABService(0, "a6d3", "Some other Name");
 
-		assertThat(service.checkName("Some other Name"), is(true));
-	}
+        assertThat(service.checkName("Some other Name"), is(true));
+    }
 
-	@Test
-	public void checkIncorrectName() throws Exception {
-		DABService service = new DABService(0, "d3d0", "Some Name");
+    @Test
+    public void checkIncorrectName() throws Exception {
+        DABService service = new DABService(0, "d3d0", "Some Name");
 
-		assertThat(service.checkName("Some other Name"), is(false));
-	}
+        assertThat(service.checkName("Some other Name"), is(false));
+    }
 
-	@Test
-	public void checkAnotherIncorrectName() throws Exception {
-		DABService service = new DABService(0, "a6d3", "Some other Name");
+    @Test
+    public void checkAnotherIncorrectName() throws Exception {
+        DABService service = new DABService(0, "a6d3", "Some other Name");
 
-		assertThat(service.checkName("Some Name"), is(false));
-	}
+        assertThat(service.checkName("Some Name"), is(false));
+    }
 
-	@Test
-	public void testToString() throws Exception {
-		DABService service = new DABService(0, "a3a0", "Station name");
+    @Test
+    public void testToString() throws Exception {
+        DABService service = new DABService(0, "a3a0", "Station name");
 
-		assertThat(service.toString(), is(equalTo("Station name")));
-	}
+        assertThat(service.toString(), is(equalTo("Station name")));
+    }
 
-	@Test
-	public void toStringWithAnotherName() throws Exception {
-		DABService service = new DABService(0, "a3a0", "Some other station name");
+    @Test
+    public void toStringWithAnotherName() throws Exception {
+        DABService service = new DABService(0, "a3a0", "Some other station name");
 
-		assertThat(service.toString(), is(equalTo("Some other station name")));
-	}
+        assertThat(service.toString(), is(equalTo("Some other station name")));
+    }
 
-	@Test
-	public void hasName() throws Exception {
-		DABService service = new DABService(0, "a3a0", "Some station name");
+    @Test
+    public void hasName() throws Exception {
+        DABService service = new DABService(0, "a3a0", "Some station name");
 
-		assertThat(service.hasName(), is(true));
-	}
+        assertThat(service.hasName(), is(true));
+    }
 
-	@Test
-	public void hasEmptyName() throws Exception {
-		DABService service = new DABService(0, "a3a0", "");
+    @Test
+    public void hasEmptyName() throws Exception {
+        DABService service = new DABService(0, "a3a0", "");
 
-		assertThat(service.hasName(), is(false));
-	}
+        assertThat(service.hasName(), is(false));
+    }
 
-	@Test
-	public void equalsAndHashCode() throws Exception {
-		EqualsVerifier.forClass(DABService.class).allFieldsShouldBeUsed().usingGetClass().verify();
-	}
+    @Test
+    public void equalsAndHashCode() throws Exception {
+        EqualsVerifier.forClass(DABService.class).usingGetClass().verify();
+    }
 
 }

@@ -73,7 +73,7 @@ public class ReadDABServiceListTest {
 
 	@Test
 	public void equalsAndHashCode() throws Exception {
-		EqualsVerifier.forClass(ReadDABServiceList.class).allFieldsShouldBeUsed().usingGetClass().verify();
+		EqualsVerifier.forClass(ReadDABServiceList.class).usingGetClass().verify();
 	}
 
 }

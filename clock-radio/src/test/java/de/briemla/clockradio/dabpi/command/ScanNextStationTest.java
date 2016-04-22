@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
+
 import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.Test;
@@ -13,41 +14,41 @@ import de.briemla.clockradio.dabpi.ScanDirection;
 
 public class ScanNextStationTest {
 
-	@Test
-	public void serializeScanUp() throws Exception {
-		ScanDirection direction = ScanDirection.UP;
+    @Test
+    public void serializeScanUp() throws Exception {
+        ScanDirection direction = ScanDirection.UP;
 
-		ScanNextStation command = new ScanNextStation(direction);
-		String serialized = command.serialize();
+        ScanNextStation command = new ScanNextStation(direction);
+        String serialized = command.serialize();
 
-		assertThat(serialized, is(equalTo(" -l up")));
-	}
+        assertThat(serialized, is(equalTo(" -l up")));
+    }
 
-	@Test
-	public void serializeScanDown() throws Exception {
-		ScanDirection direction = ScanDirection.DOWN;
+    @Test
+    public void serializeScanDown() throws Exception {
+        ScanDirection direction = ScanDirection.DOWN;
 
-		ScanNextStation command = new ScanNextStation(direction);
-		String serialized = command.serialize();
+        ScanNextStation command = new ScanNextStation(direction);
+        String serialized = command.serialize();
 
-		assertThat(serialized, is(equalTo(" -l down")));
-	}
+        assertThat(serialized, is(equalTo(" -l down")));
+    }
 
-	@Test
-	public void parse() throws Exception {
-		Output output = new Output();
-		output.addStandard("");
-		ScanDirection direction = ScanDirection.UP;
+    @Test
+    public void parse() throws Exception {
+        Output output = new Output();
+        output.addStandard("");
+        ScanDirection direction = ScanDirection.UP;
 
-		ScanNextStation command = new ScanNextStation(direction);
-		Void result = command.parse(output);
+        ScanNextStation command = new ScanNextStation(direction);
+        Void result = command.parse(output);
 
-		assertThat(result, is(nullValue()));
-	}
+        assertThat(result, is(nullValue()));
+    }
 
-	@Test
-	public void equalsAndHashCode() throws Exception {
-		EqualsVerifier.forClass(ScanNextStation.class).allFieldsShouldBeUsed().usingGetClass().verify();
-	}
+    @Test
+    public void equalsAndHashCode() throws Exception {
+        EqualsVerifier.forClass(ScanNextStation.class).usingGetClass().verify();
+    }
 
 }

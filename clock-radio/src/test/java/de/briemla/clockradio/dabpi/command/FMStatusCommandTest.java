@@ -63,6 +63,6 @@ public class FMStatusCommandTest {
 
 	@Test
 	public void equalsAndHashCode() throws Exception {
-		EqualsVerifier.forClass(FMStatusCommand.class).allFieldsShouldBeUsed().usingGetClass().verify();
+		EqualsVerifier.forClass(FMStatusCommand.class).usingGetClass().verify();
 	}
 }

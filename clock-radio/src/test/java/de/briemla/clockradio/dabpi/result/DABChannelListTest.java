@@ -163,6 +163,6 @@ public class DABChannelListTest {
 
 	@Test
 	public void equalsAndHashCode() throws Exception {
-		EqualsVerifier.forClass(DABChannelList.class).allFieldsShouldBeUsed().usingGetClass().verify();
+		EqualsVerifier.forClass(DABChannelList.class).usingGetClass().verify();
 	}
 }

@@ -85,7 +85,7 @@ public class SelectDABChannelTest {
 
 	@Test
 	public void equalsAndHashCode() throws Exception {
-		EqualsVerifier.forClass(SelectDABChannel.class).allFieldsShouldBeUsed().usingGetClass().verify();
+		EqualsVerifier.forClass(SelectDABChannel.class).usingGetClass().verify();
 	}
 
 }

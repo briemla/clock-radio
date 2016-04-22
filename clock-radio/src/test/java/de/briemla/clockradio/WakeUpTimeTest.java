@@ -122,6 +122,6 @@ public class WakeUpTimeTest {
 
 	@Test
 	public void equalsAndHashCode() throws Exception {
-		EqualsVerifier.forClass(WakeUpTime.class).allFieldsShouldBeUsed().usingGetClass().verify();
+		EqualsVerifier.forClass(WakeUpTime.class).usingGetClass().verify();
 	}
 }
