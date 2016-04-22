@@ -65,8 +65,7 @@ public class ActiveDayEditorTest extends GuiTest {
 
         ActiveDays allWithoutOne = new ActiveDays(
                 EnumSet.complementOf(EnumSet.of(DayOfWeek.MONDAY)));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(allWithoutOne)));
 
@@ -88,8 +87,7 @@ public class ActiveDayEditorTest extends GuiTest {
 
         ActiveDays allWithoutOne = new ActiveDays(
                 EnumSet.complementOf(EnumSet.of(DayOfWeek.TUESDAY)));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(allWithoutOne)));
 
@@ -111,8 +109,7 @@ public class ActiveDayEditorTest extends GuiTest {
 
         ActiveDays allWithoutOne = new ActiveDays(
                 EnumSet.complementOf(EnumSet.of(DayOfWeek.WEDNESDAY)));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(allWithoutOne)));
 
@@ -134,8 +131,7 @@ public class ActiveDayEditorTest extends GuiTest {
 
         ActiveDays allWithoutOne = new ActiveDays(
                 EnumSet.complementOf(EnumSet.of(DayOfWeek.THURSDAY)));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(allWithoutOne)));
 
@@ -157,8 +153,7 @@ public class ActiveDayEditorTest extends GuiTest {
 
         ActiveDays allWithoutOne = new ActiveDays(
                 EnumSet.complementOf(EnumSet.of(DayOfWeek.FRIDAY)));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(allWithoutOne)));
 
@@ -177,8 +172,7 @@ public class ActiveDayEditorTest extends GuiTest {
 
         ActiveDays allWithoutOne = new ActiveDays(
                 EnumSet.complementOf(EnumSet.of(DayOfWeek.SATURDAY)));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(allWithoutOne)));
 
@@ -197,8 +191,7 @@ public class ActiveDayEditorTest extends GuiTest {
 
         ActiveDays allWithoutOne = new ActiveDays(
                 EnumSet.complementOf(EnumSet.of(DayOfWeek.SUNDAY)));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(allWithoutOne)));
 
@@ -223,8 +216,7 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(daily.isSelected(), is(false));
 
         ActiveDays workdaysActive = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(workdaysActive)));
     }
@@ -246,8 +238,7 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(daily.isSelected(), is(false));
 
         ActiveDays workdaysActive = new ActiveDays(EnumSet.of(DayOfWeek.TUESDAY));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(workdaysActive)));
     }
@@ -269,8 +260,7 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(daily.isSelected(), is(false));
 
         ActiveDays workdaysActive = new ActiveDays(EnumSet.of(DayOfWeek.WEDNESDAY));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(workdaysActive)));
     }
@@ -292,8 +282,7 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(daily.isSelected(), is(false));
 
         ActiveDays workdaysActive = new ActiveDays(EnumSet.of(DayOfWeek.THURSDAY));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(workdaysActive)));
     }
@@ -315,8 +304,7 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(daily.isSelected(), is(false));
 
         ActiveDays workdaysActive = new ActiveDays(EnumSet.of(DayOfWeek.FRIDAY));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(workdaysActive)));
     }
@@ -332,8 +320,7 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(daily.isSelected(), is(false));
 
         ActiveDays weekendActive = new ActiveDays(EnumSet.of(DayOfWeek.SATURDAY));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(weekendActive)));
     }
@@ -349,8 +336,7 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(daily.isSelected(), is(false));
 
         ActiveDays weekendActive = new ActiveDays(EnumSet.of(DayOfWeek.SUNDAY));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(weekendActive)));
     }
@@ -397,8 +383,7 @@ public class ActiveDayEditorTest extends GuiTest {
         weekendChecked();
         assertThat(daily.isSelected(), is(true));
         ActiveDays allActive = new ActiveDays(EnumSet.allOf(DayOfWeek.class));
-        ActiveDays activeDays = activeDayEditor.daysProperty()
-                .get();
+        ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
         assertThat(activeDays, is(equalTo(allActive)));
     }

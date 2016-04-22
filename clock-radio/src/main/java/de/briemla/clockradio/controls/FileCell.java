@@ -5,6 +5,7 @@ import java.io.File;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.Event;
 import javafx.scene.control.ListCell;
+
 import de.briemla.clockradio.Media;
 
 public class FileCell extends ListCell<File> {
