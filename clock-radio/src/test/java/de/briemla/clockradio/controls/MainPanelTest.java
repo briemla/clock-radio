@@ -6,29 +6,33 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
-import org.junit.Before;
+import javafx.scene.Parent;
+
 import org.junit.Test;
+import org.loadui.testfx.GuiTest;
 
 import de.briemla.clockradio.player.Player;
 import de.briemla.clockradio.player.PlayerFactory;
-import de.briemla.utils.FxUtils;
 
-public class MainPanelTest {
+public class MainPanelTest extends GuiTest {
 
-    @Before
-    public void startFxApplicationThread() throws InterruptedException {
-        FxUtils.startFxApplicationThread();
-    }
+    private Player player;
+    private Trigger trigger;
+    private PlayerFactory playerFactory;
 
     @Test
     public void alarmTriggerInitialisation() throws Exception {
-        Player player = mock(Player.class);
-        Trigger trigger = mock(Trigger.class);
-        PlayerFactory playerFactory = mock(PlayerFactory.class);
-        new MainPanel(player, trigger, playerFactory);
 
         verify(trigger).bind(any());
         verifyNoMoreInteractions(trigger);
         verifyZeroInteractions(playerFactory);
+    }
+
+    @Override
+    protected Parent getRootNode() {
+        player = mock(Player.class);
+        trigger = mock(Trigger.class);
+        playerFactory = mock(PlayerFactory.class);
+        return new MainPanel(player, trigger, playerFactory);
     }
 }
