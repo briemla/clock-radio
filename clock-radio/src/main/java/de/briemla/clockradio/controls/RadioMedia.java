@@ -1,7 +1,5 @@
 package de.briemla.clockradio.controls;
 
-import java.io.IOException;
-
 import de.briemla.clockradio.Media;
 import de.briemla.clockradio.PlayableMedia;
 import de.briemla.clockradio.dabpi.Station;
@@ -17,21 +15,15 @@ public class RadioMedia implements Media {
 
     @Override
     public void play(Player player) {
-        try {
-            player.play(station);
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
     }
 
     @Override
     public void stop(Player player) {
-        player.stop();
     }
 
     @Override
     public PlayableMedia create() {
-        return null;
+        return new PlayableRadio(station);
     }
 
     @Override

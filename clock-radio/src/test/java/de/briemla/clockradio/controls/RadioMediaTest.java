@@ -1,43 +1,30 @@
 package de.briemla.clockradio.controls;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.verifyZeroInteractions;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.Test;
 
+import de.briemla.clockradio.PlayableMedia;
 import de.briemla.clockradio.dabpi.Station;
-import de.briemla.clockradio.player.Player;
 
 public class RadioMediaTest {
 
     @Test
-    public void play() throws Exception {
+    public void whenCreateImmutableMedia() throws Exception {
         Station station = mock(Station.class);
-        Player player = mock(Player.class);
-        RadioMedia media = new RadioMedia(station);
+        RadioMedia radio = new RadioMedia(station);
+        PlayableMedia firstMedia = radio.create();
+        PlayableMedia anotherMedia = radio.create();
 
-        media.play(player);
-
-        verify(player).play(station);
-        verifyNoMoreInteractions(player);
-        verifyZeroInteractions(station);
-    }
-
-    @Test
-    public void stop() throws Exception {
-        Station station = mock(Station.class);
-        Player player = mock(Player.class);
-        RadioMedia media = new RadioMedia(station);
-
-        media.stop(player);
-
-        verify(player).stop();
-        verifyNoMoreInteractions(player);
-        verifyZeroInteractions(station);
+        assertThat(firstMedia, is(not(sameInstance(anotherMedia))));
+        assertThat(firstMedia, is(equalTo(anotherMedia)));
     }
 
     @Test
