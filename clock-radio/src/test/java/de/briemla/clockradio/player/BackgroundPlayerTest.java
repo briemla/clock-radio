@@ -13,6 +13,8 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
+import de.briemla.clockradio.PlayableMedia;
+
 public class BackgroundPlayerTest {
 
     private static final class Dummy implements Answer<Void> {

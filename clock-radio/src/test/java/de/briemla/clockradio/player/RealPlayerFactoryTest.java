@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import org.junit.Test;
 
 import de.briemla.clockradio.Media;
+import de.briemla.clockradio.PlayableMedia;
 
 public class RealPlayerFactoryTest {
 

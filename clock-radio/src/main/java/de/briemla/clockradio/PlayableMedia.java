@@ -1,6 +1,6 @@
-package de.briemla.clockradio.player;
+package de.briemla.clockradio;
 
-import de.briemla.clockradio.Media;
+import de.briemla.clockradio.player.Player;
 
 public interface PlayableMedia {
 

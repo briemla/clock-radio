@@ -2,6 +2,8 @@ package de.briemla.clockradio.player;
 
 import java.util.Optional;
 
+import de.briemla.clockradio.PlayableMedia;
+
 public class BackgroundPlayer implements PlayerWorker {
 
     private final PlayableMedia media;
