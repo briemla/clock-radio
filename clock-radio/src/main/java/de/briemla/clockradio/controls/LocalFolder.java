@@ -8,7 +8,6 @@ import java.util.List;
 
 import de.briemla.clockradio.Media;
 import de.briemla.clockradio.PlayableMedia;
-import de.briemla.clockradio.player.Player;
 
 public class LocalFolder implements Media {
 
@@ -36,14 +35,6 @@ public class LocalFolder implements Media {
     public LocalFolder(Path source) {
         super();
         this.source = source;
-    }
-
-    @Override
-    public void play(Player player) {
-    }
-
-    @Override
-    public void stop(Player player) {
     }
 
     @Override

@@ -3,7 +3,6 @@ package de.briemla.clockradio.controls;
 import de.briemla.clockradio.Media;
 import de.briemla.clockradio.PlayableMedia;
 import de.briemla.clockradio.dabpi.Station;
-import de.briemla.clockradio.player.Player;
 
 public class RadioMedia implements Media {
 
@@ -11,14 +10,6 @@ public class RadioMedia implements Media {
 
     public RadioMedia(Station station) {
         this.station = station;
-    }
-
-    @Override
-    public void play(Player player) {
-    }
-
-    @Override
-    public void stop(Player player) {
     }
 
     @Override
