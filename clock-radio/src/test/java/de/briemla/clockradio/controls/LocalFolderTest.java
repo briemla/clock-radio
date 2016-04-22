@@ -9,6 +9,8 @@ import static org.mockito.Mockito.mock;
 
 import java.nio.file.Path;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 import org.junit.Test;
 
 import de.briemla.clockradio.PlayableMedia;
@@ -25,5 +27,10 @@ public class LocalFolderTest {
 
         assertThat(firstMedia, is(not(sameInstance(anotherMedia))));
         assertThat(firstMedia, is(equalTo(anotherMedia)));
+    }
+
+    @Test
+    public void equalsAndHashCode() throws Exception {
+        EqualsVerifier.forClass(LocalFolder.class).usingGetClass().verify();
     }
 }
