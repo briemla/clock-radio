@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -56,18 +57,22 @@ public class MainPanel extends StackPane {
         viewSwitcher.setDefaultView(clock);
         AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher, settings, player);
         viewSwitcher.addView(Alarm.class, alarmMenu);
-        addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-            if (!active.get()) {
-                event.consume();
-            }
-            active.set(true);
-            resetInactiveTimer();
-        });
+        addEventFilter(MouseEvent.MOUSE_PRESSED, showControls());
         active.set(true);
         resetInactiveTimer();
         settings.addAlarm();
         viewSwitcher.showDefault();
         timeProvider.timeProperty().addListener(event -> trigger.startNow());
+    }
+
+    private EventHandler<? super MouseEvent> showControls() {
+        return event -> {
+            if (!active.get()) {
+                event.consume();
+            }
+            active.set(true);
+            resetInactiveTimer();
+        };
     }
 
     private void resetInactiveTimer() {
