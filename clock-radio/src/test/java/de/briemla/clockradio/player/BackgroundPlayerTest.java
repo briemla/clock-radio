@@ -13,19 +13,17 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import de.briemla.clockradio.Media;
-import de.briemla.clockradio.player.BackgroundPlayer;
-import de.briemla.clockradio.player.Player;
-
 public class BackgroundPlayerTest {
 
     private static final class Dummy implements Answer<Void> {
         private final CountDownLatch latch;
+        private final CountDownLatch interrupted;
         private boolean isInterrupted;
 
         public Dummy(CountDownLatch latch) {
             super();
             isInterrupted = false;
+            interrupted = new CountDownLatch(1);
             this.latch = latch;
         }
 
@@ -34,9 +32,14 @@ public class BackgroundPlayerTest {
             try {
                 latch.await();
             } catch (InterruptedException exception) {
+                interrupted.countDown();
                 isInterrupted = true;
             }
             return null;
+        }
+
+        public void awaitInterrupted() throws InterruptedException {
+            interrupted.await();
         }
     }
 
@@ -44,15 +47,16 @@ public class BackgroundPlayerTest {
     public void startAndStopMedia() throws Exception {
         CountDownLatch latch = new CountDownLatch(1);
         Player player = mock(Player.class);
-        Media media = mock(Media.class);
+        PlayableMedia media = mock(PlayableMedia.class);
         Dummy answer = new Dummy(latch);
-        doAnswer(answer).when(media)
-                        .play(any());
+        doAnswer(answer).when(media).play(any());
 
         BackgroundPlayer worker = new BackgroundPlayer(player, media);
 
         worker.start();
         worker.stop();
+
+        answer.awaitInterrupted();
 
         verify(media).play(player);
         verify(media).stop(player);

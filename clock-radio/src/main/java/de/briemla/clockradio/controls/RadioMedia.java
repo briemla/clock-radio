@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import de.briemla.clockradio.Media;
 import de.briemla.clockradio.dabpi.Station;
+import de.briemla.clockradio.player.PlayableMedia;
 import de.briemla.clockradio.player.Player;
 
 public class RadioMedia implements Media {
@@ -26,6 +27,11 @@ public class RadioMedia implements Media {
     @Override
     public void stop(Player player) {
         player.stop();
+    }
+
+    @Override
+    public PlayableMedia create() {
+        return null;
     }
 
     @Override

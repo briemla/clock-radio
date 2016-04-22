@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import de.briemla.clockradio.Media;
+import de.briemla.clockradio.player.PlayableMedia;
 import de.briemla.clockradio.player.Player;
 
 public class LocalFolder implements Media {
@@ -23,6 +24,11 @@ public class LocalFolder implements Media {
 
     public LocalFolder() {
         this(defaultFolder());
+    }
+
+    @Override
+    public PlayableMedia create() {
+        return null;
     }
 
     /**

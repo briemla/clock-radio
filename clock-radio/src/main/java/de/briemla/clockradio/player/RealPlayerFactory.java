@@ -13,7 +13,7 @@ public class RealPlayerFactory implements PlayerFactory {
 
     @Override
     public PlayerWorker create(Media media) {
-        return new BackgroundPlayer(player, media);
+        return new BackgroundPlayer(player, media.create());
     }
 
     @Override
