@@ -1,8 +1,9 @@
 .root {
-	active-color: rgba(128.0,205.0,255.0,0.25);
+	base-color: rgb(255.0,128.0,0.0);
+	active-color: derive(base-color, -75%);
 	background-color: rgb(10.0,10.0,10.0);
-	border-color: rgba(128.0,205.0,255.0,0.3);
-	text-color: rgba(255.0,128.0,0.0,0.7);
+	border-color: derive(base-color, -70%);
+	text-color: derive(base-color, -30%);
 }
 
 .main-panel {
@@ -12,7 +13,7 @@
 	-fx-text-fill: text-color;
 }
 .button {
-	-fx-background-color: rgba(128.0,205.0,255.0,0.1);
+	-fx-background-color: derive(base-color, -90%);
 	-fx-background-radius: 10.0px;
 	-fx-text-fill: text-color;
 	-fx-border-color: border-color;
@@ -129,13 +130,14 @@
 }
 
 .pointer .circle {
-	-fx-fill: background-color;
-	-fx-stroke: border-color;
+	-fx-fill: border-color;
 }
 
 .pointer .line {
-	-fx-fill: background-color;
+	-fx-fill: border-color;
 	-fx-stroke: border-color;
+    -fx-stroke-width: 15;
+    -fx-stroke-line-cap: round; 
 }
 
 .delete {
