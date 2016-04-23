@@ -33,28 +33,18 @@ public class AlarmCell extends AnchorPane {
         FXUtil.load(this, this);
         activeProperty = new ActivePseudoClassProperty(this);
         // TODO maybe create timeProperty in Alarm class
-        time.textProperty()
-            .bind(alarm.wakeUpTimeProperty()
-                       .asString());
-        mediaDescription.textProperty()
-                        .bind(alarm.mediaProperty()
-                                   .asString());
-        weekdays.textProperty()
-                .bind(alarm.activeDaysProperty()
-                           .asString());
+        time.textProperty().bind(alarm.wakeUpTimeProperty().asString());
+        mediaDescription.textProperty().bind(alarm.mediaProperty().asString());
+        weekdays.textProperty().bind(alarm.activeDaysProperty().asString());
         activeProperty.bindBidirectional(alarm.activatedProperty());
-        active.selectedProperty()
-              .bindBidirectional(activeProperty);
+        active.selectedProperty().bindBidirectional(activeProperty);
         setOnMouseClicked(event -> settings.select(alarm));
     }
 
     public void unbind() {
-        time.textProperty()
-            .unbind();
-        weekdays.textProperty()
-                .unbind();
-        mediaDescription.textProperty()
-                        .unbind();
+        time.textProperty().unbind();
+        weekdays.textProperty().unbind();
+        mediaDescription.textProperty().unbind();
     }
 
     public BooleanProperty activatedProperty() {
