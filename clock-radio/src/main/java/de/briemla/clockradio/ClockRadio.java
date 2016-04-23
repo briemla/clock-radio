@@ -30,7 +30,7 @@ public class ClockRadio extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        TimeProvider timeProvider = new TimeProvider();
+        TimeProvider timeProvider = new RealTimeProvider();
         Trigger trigger = new AlarmTrigger(timeProvider);
         Player availablePlayer = availablePlayer();
         MainPanel mainPanel = new MainPanel(availablePlayer, trigger,
