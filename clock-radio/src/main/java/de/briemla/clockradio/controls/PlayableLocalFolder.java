@@ -1,6 +1,11 @@
 package de.briemla.clockradio.controls;
 
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,20 +44,19 @@ public class PlayableLocalFolder implements PlayableMedia {
 
     private List<Path> collectFiles() {
         List<Path> files = new ArrayList<>();
-        source.forEach(files::add);
-        // try {
-        // Files.walkFileTree(source, new SimpleFileVisitor<Path>() {
-        //
-        // @Override
-        // public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
-        // throws IOException {
-        // files.add(file);
-        // return FileVisitResult.CONTINUE;
-        // }
-        // });
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // }
+        try {
+            Files.walkFileTree(source, new SimpleFileVisitor<Path>() {
+
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+                        throws IOException {
+                    files.add(file);
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return files;
     }
 

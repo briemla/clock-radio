@@ -1,7 +1,6 @@
 package de.briemla.clockradio;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -20,8 +19,6 @@ import de.briemla.clockradio.player.PlayerWorker;
 
 public class Alarm {
 
-    private static final LocalTime startOfTheDay = LocalTime.of(0, 0);
-
     private final SimpleObjectProperty<Duration> durationProperty;
     private final SimpleBooleanProperty alarmStartedProperty;
     private final SimpleObjectProperty<ActiveDays> activeDaysProperty;
@@ -31,14 +28,17 @@ public class Alarm {
     private final PlayerFactory playerFactory;
     private Optional<PlayerWorker> player;
 
-    public Alarm(PlayerFactory playerFactory) {
+    private final TimeProvider timeProvider;
+
+    public Alarm(PlayerFactory playerFactory, TimeProvider timeProvider) {
+        this.timeProvider = timeProvider;
         player = Optional.empty();
         this.playerFactory = playerFactory;
         durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
         alarmStartedProperty = new SimpleBooleanProperty();
         activeDaysProperty = new SimpleObjectProperty<>(new ActiveDays());
         mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
-        wakeUpTimeProperty = new SimpleObjectProperty<>(initialWakeUpTime());
+        wakeUpTimeProperty = new SimpleObjectProperty<>(initialWakeUpTime(timeProvider));
         // AlarmTimer alarmTimer = new AlarmTimer(this);
         // wakeUpTimeProperty.addListener(alarmTimer);
         // activeDaysProperty.addListener(alarmTimer);
@@ -52,8 +52,8 @@ public class Alarm {
         // });
     }
 
-    private static WakeUpTime initialWakeUpTime() {
-        LocalTime now = LocalTime.now().plusMinutes(1);
+    private static WakeUpTime initialWakeUpTime(TimeProvider timeProvider) {
+        LocalTime now = timeProvider.nextMinute();
         return new WakeUpTime(now.getHour(), now.getMinute());
     }
 
@@ -107,7 +107,7 @@ public class Alarm {
     }
 
     private LocalDateTime today() {
-        return LocalDateTime.of(LocalDate.now(), startOfTheDay);
+        return timeProvider.today();
     }
 
     Date alarmStopDate() {

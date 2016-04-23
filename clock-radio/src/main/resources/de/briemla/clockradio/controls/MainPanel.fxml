@@ -18,7 +18,7 @@
                     <children>
                         <Button mnemonicParsing="false" styleClass="shutdown" onAction="#shutdown" prefHeight="50.0"
                             prefWidth="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <Button mnemonicParsing="false" styleClass="stop" onAction="#stopSound" prefHeight="50.0"
+                        <Button fx:id="stopSound" mnemonicParsing="false" styleClass="stop" onAction="#stopSound" prefHeight="50.0"
                             prefWidth="50.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
 <!--                         <Button mnemonicParsing="false" styleClass="start" onAction="#startRadio" prefHeight="50.0" -->
 <!--                             prefWidth="50.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="0.0" /> -->

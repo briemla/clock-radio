@@ -13,9 +13,11 @@ public class AlarmTrigger implements Trigger {
 
     private final List<Alarm> alarms;
     private boolean running;
+    private final TimeProvider timeProvider;
 
-    public AlarmTrigger() {
+    public AlarmTrigger(TimeProvider timeProvider) {
         super();
+        this.timeProvider = timeProvider;
         alarms = new ArrayList<>();
         running = false;
     }
@@ -40,12 +42,13 @@ public class AlarmTrigger implements Trigger {
 
     @Override
     public void startNow() {
-        start(LocalDateTime.now());
+        start(timeProvider.now());
     }
 
     @Override
     public void stop() {
         alarms.stream().forEach(Alarm::stop);
+        running = false;
     }
 
 }

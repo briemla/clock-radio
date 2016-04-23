@@ -1,5 +1,6 @@
 package de.briemla.clockradio;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javafx.animation.KeyFrame;
@@ -9,6 +10,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.util.Duration;
 
 public class TimeProvider {
+
+    private static final LocalTime startOfTheDay = LocalTime.of(0, 0);
     private final Timeline timeline;
     private final SimpleObjectProperty<LocalTime> timeProperty;
 
@@ -28,6 +31,18 @@ public class TimeProvider {
 
     private void updateTime() {
         timeProperty.set(LocalTime.now());
+    }
+
+    public LocalTime nextMinute() {
+        return LocalTime.now().plusMinutes(1);
+    }
+
+    public LocalDateTime now() {
+        return LocalDateTime.now();
+    }
+
+    public LocalDateTime today() {
+        return now().with(startOfTheDay);
     }
 
 }

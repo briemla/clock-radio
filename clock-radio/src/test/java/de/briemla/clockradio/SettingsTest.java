@@ -18,13 +18,15 @@ public class SettingsTest {
     private Player player;
     private Settings settings;
     private PlayerFactory playerFactory;
+    private TimeProvider timeProvider;
 
     @Before
     public void initializeMockups() {
         switcher = mock(DefaultableViewSwitcher.class);
         player = mock(Player.class);
         playerFactory = mock(PlayerFactory.class);
-        settings = new Settings(switcher, player, playerFactory);
+        timeProvider = mock(TimeProvider.class);
+        settings = new Settings(switcher, player, playerFactory, timeProvider);
     }
 
     @Test

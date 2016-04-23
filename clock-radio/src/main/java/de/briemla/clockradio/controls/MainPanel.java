@@ -44,15 +44,17 @@ public class MainPanel extends StackPane {
     private final ActivePseudoClassProperty active;
     private final Settings settings;
     private Timer timer;
+    private final Trigger trigger;
 
-    public MainPanel(Player player, Trigger trigger, PlayerFactory playerFactory) {
+    public MainPanel(Player player, Trigger trigger, PlayerFactory playerFactory,
+            TimeProvider timeProvider) {
         super();
+        this.trigger = trigger;
         FXUtil.load(this, this);
         active = new ActivePseudoClassProperty(this);
-        settings = new Settings(viewSwitcher, player, playerFactory);
+        settings = new Settings(viewSwitcher, player, playerFactory, timeProvider);
         alarm.setSettings(settings);
         trigger.bind(settings.getAlarms());
-        TimeProvider timeProvider = new TimeProvider();
         Node clock = new DigitalClock(timeProvider);
         viewSwitcher.setDefaultView(clock);
         AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher, settings, player);
@@ -91,6 +93,8 @@ public class MainPanel extends StackPane {
 
     @FXML
     public void stopSound(ActionEvent event) {
+        // TODO cleanup and call only one of both
+        trigger.stop();
         settings.stopCurrentAlarm();
     }
 

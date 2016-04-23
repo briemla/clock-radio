@@ -3,6 +3,7 @@ package de.briemla.clockradio;
 import static java.time.LocalDateTime.now;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -16,17 +17,17 @@ import javafx.collections.ObservableList;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.briemla.clockradio.controls.Trigger;
-
 public class AlarmTriggerTest {
 
     private ObservableList<Alarm> alarms;
-    private Trigger trigger;
+    private AlarmTrigger trigger;
+    private TimeProvider timeProvider;
 
     @Before
     public void initialise() {
         alarms = FXCollections.observableArrayList();
-        trigger = new AlarmTrigger();
+        timeProvider = mock(TimeProvider.class);
+        trigger = new AlarmTrigger(timeProvider);
         trigger.bind(alarms);
     }
 
@@ -38,6 +39,7 @@ public class AlarmTriggerTest {
         trigger.startNow();
 
         verify(alarm).play(any(LocalDateTime.class));
+        verify(timeProvider).now();
     }
 
     @Test
@@ -56,6 +58,7 @@ public class AlarmTriggerTest {
         verify(notMatching).play(any(LocalDateTime.class));
         verify(matching).play(any(LocalDateTime.class));
         verifyZeroInteractions(later);
+        verify(timeProvider).now();
     }
 
     @Test
@@ -90,6 +93,20 @@ public class AlarmTriggerTest {
         verify(notRunning).stop();
         verifyNoMoreInteractions(running);
         verifyNoMoreInteractions(notRunning);
+    }
+
+    @Test
+    public void startAlarmAfterAlarmsHaveBeenStopped() throws Exception {
+        Alarm alarm = mock(Alarm.class);
+        when(alarm.play(any())).thenReturn(true);
+        alarms.add(alarm);
+
+        trigger.start(now());
+        trigger.stop();
+        trigger.start(now());
+
+        verify(alarm, times(2)).play(any());
+        verify(alarm).stop();
     }
 
 }

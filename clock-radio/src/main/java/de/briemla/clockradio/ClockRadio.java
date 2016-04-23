@@ -30,10 +30,11 @@ public class ClockRadio extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Trigger trigger = new AlarmTrigger();
+        TimeProvider timeProvider = new TimeProvider();
+        Trigger trigger = new AlarmTrigger(timeProvider);
         Player availablePlayer = availablePlayer();
         MainPanel mainPanel = new MainPanel(availablePlayer, trigger,
-                playerFactory(availablePlayer));
+                playerFactory(availablePlayer), timeProvider);
         mainPanel.getStylesheets()
                  .add(ClockRadio.class.getResource("clock-radio.css").toExternalForm());
         watchCssFile(mainPanel);

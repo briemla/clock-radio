@@ -1,15 +1,11 @@
 package de.briemla.clockradio.controls;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 import java.io.File;
-import java.net.URI;
 import java.nio.file.Path;
-import java.util.function.Consumer;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 
@@ -21,22 +17,27 @@ public class PlayableLocalFolderTest {
 
     @Test
     public void whenSourceContainsOneMp3File() throws Exception {
-        Path path = mock(Path.class);
-        Path filePath = mock(Path.class);
-        File file = new File("something.mp3");
-        URI uri = file.toURI();
-        when(filePath.toFile()).thenReturn(file);
-        when(filePath.toUri()).thenReturn(uri);
+        File mp3Folder = new File(PlayableLocalFolderTest.class.getResource("mp3").toURI());
+        Path path = mp3Folder.toPath();
         Player player = mock(Player.class);
-        doAnswer(invocation -> {
-            invocation.getArgumentAt(0, Consumer.class).accept(filePath);
-            return null;
-        }).when(path).forEach(any());
 
         PlayableLocalFolder folder = new PlayableLocalFolder(path);
         folder.play(player);
 
-        verify(player).play(file.toURI());
+        File mp3 = new File(mp3Folder, "something.mp3");
+        verify(player).play(mp3.toURI());
+    }
+
+    @Test
+    public void whenSourceContainsNoMp3Files() throws Exception {
+        File noMp3 = new File(PlayableLocalFolderTest.class.getResource("noMp3").toURI());
+        Path path = noMp3.toPath();
+        Player player = mock(Player.class);
+
+        PlayableLocalFolder folder = new PlayableLocalFolder(path);
+        folder.play(player);
+
+        verifyZeroInteractions(player);
     }
 
     @Test
