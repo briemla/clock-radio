@@ -79,13 +79,19 @@ public class Alarm {
     }
 
     public boolean play(LocalDateTime atTime) {
-        if (alarmLocalDate().isAfter(atTime)) {
+        if (withinOneMinute(atTime)) {
             return false;
         }
         PlayerWorker player = playerFactory.create(mediaProperty.get());
         this.player = Optional.of(player);
         player.start();
         return true;
+    }
+
+    private boolean withinOneMinute(LocalDateTime atTime) {
+        LocalDateTime alarmDate = alarmLocalDate().withSecond(0).withNano(0);
+        LocalDateTime roundedStart = atTime.withSecond(0).withNano(0);
+        return !alarmDate.isEqual(roundedStart);
     }
 
     public ReadOnlyBooleanProperty alarmStartedProperty() {

@@ -88,14 +88,15 @@ public class MainPanel extends StackPane {
 
     @FXML
     public void shutdown(ActionEvent event) {
+        stopSound(event);
         Platform.exit();
     }
 
     @FXML
     public void stopSound(ActionEvent event) {
         // TODO cleanup and call only one of both
-        trigger.stop();
         settings.stopCurrentAlarm();
+        trigger.stop();
     }
 
 }

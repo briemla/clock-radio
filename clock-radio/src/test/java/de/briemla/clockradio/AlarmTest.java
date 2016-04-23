@@ -1,5 +1,6 @@
 package de.briemla.clockradio;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -21,10 +22,12 @@ import de.briemla.clockradio.player.PlayerWorker;
 
 public class AlarmTest {
 
+    private static final LocalDate date = LocalDate.of(0, 1, 1);
     private PlayerFactory player;
     private PlayerWorker worker;
     private TimeProvider timeProvider;
     private LocalTime now;
+    private Alarm alarm;
 
     @Before
     public void initialise() {
@@ -32,32 +35,25 @@ public class AlarmTest {
         worker = mock(PlayerWorker.class);
         when(player.create(any(Media.class))).thenReturn(worker);
         timeProvider = mock(TimeProvider.class);
-        now = LocalTime.now();
+        now = LocalTime.of(1, 2);
         when(timeProvider.nextMinute()).thenReturn(now);
-        LocalDateTime todayMorning = LocalDateTime.now().withHour(0).withMinute(0);
+        LocalDateTime todayMorning = LocalDateTime.of(date, now).withHour(0).withMinute(0);
         when(timeProvider.today()).thenReturn(todayMorning);
+        alarm = new Alarm(player, timeProvider);
     }
 
     @Test
     public void playMusicInBackground() throws Exception {
-        Alarm alarm = new Alarm(player, timeProvider);
-
-        boolean playing = alarm.play(playAlwaysTime());
+        boolean playing = alarm.play(playTime());
 
         assertThat(playing, is(true));
         verify(player).create(any(Media.class));
         verify(worker).start();
     }
 
-    private static LocalDateTime playAlwaysTime() {
-        return playTime().plusDays(1);
-    }
-
     @Test
     public void playAndStopMusic() throws Exception {
-        Alarm alarm = new Alarm(player, timeProvider);
-
-        boolean playing = alarm.play(playAlwaysTime());
+        boolean playing = alarm.play(playTime());
         alarm.stop();
 
         assertThat(playing, is(true));
@@ -67,12 +63,11 @@ public class AlarmTest {
     }
 
     @Test
-    public void playAtCorrectTime() throws Exception {
-        Alarm running = new Alarm(player, timeProvider);
-        running.wakeUpTimeProperty().set(new WakeUpTime(0, 2));
+    public void whenAlarmIsStartedInTheMinuteBeforeWakeupTime() throws Exception {
+        alarm.wakeUpTimeProperty().set(new WakeUpTime(1, 1));
 
         LocalDateTime atTime = playTime();
-        boolean playing = running.play(atTime);
+        boolean playing = alarm.play(atTime);
 
         assertThat(playing, is(false));
         verifyZeroInteractions(player);
@@ -80,14 +75,25 @@ public class AlarmTest {
 
     @Test
     public void requestInitialWakeUpTimeFromTimeProvider() throws Exception {
-        Alarm alarm = new Alarm(player, timeProvider);
-
         WakeUpTime wakeUpTime = alarm.wakeUpTimeProperty().get();
         assertThat(wakeUpTime, is(equalTo(new WakeUpTime(now.getHour(), now.getMinute()))));
         verify(timeProvider).nextMinute();
     }
 
+    @Test
+    public void whenAlarmIsStartedStoppedAndStartedInTheSameMinute() throws Exception {
+
+    }
+
+    @Test
+    public void whenAlarmIsStartedInTheMinuteAfterWakeuptime() throws Exception {
+        boolean playing = alarm.play(playTime().plus(1, MINUTES));
+
+        assertThat(playing, is(false));
+        verifyZeroInteractions(player);
+    }
+
     private static LocalDateTime playTime() {
-        return LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 1));
+        return LocalDateTime.of(date, LocalTime.of(1, 2));
     }
 }
