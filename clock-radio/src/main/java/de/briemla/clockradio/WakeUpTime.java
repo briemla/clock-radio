@@ -63,10 +63,10 @@ public class WakeUpTime {
         if (now.getHour() > hour || now.getHour() == hour && now.getMinute() >= minute) {
             alarmDate = alarmDate.plusDays(CORRECTION);
         }
-        return aligne(alarmDate.withHour(hour).withMinute(minute));
+        return align(alarmDate.withHour(hour).withMinute(minute));
     }
 
-    private static LocalDateTime aligne(LocalDateTime time) {
+    private static LocalDateTime align(LocalDateTime time) {
         return time.withSecond(ZERO).withNano(ZERO);
     }
 
