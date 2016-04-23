@@ -12,14 +12,13 @@ import javafx.util.Duration;
 public class RealTimeProvider implements TimeProvider {
 
     private static final LocalTime startOfTheDay = LocalTime.of(0, 0);
-    private final Timeline timeline;
     private final SimpleObjectProperty<LocalTime> timeProperty;
 
     public RealTimeProvider() {
         super();
         timeProperty = new SimpleObjectProperty<>();
         updateTime();
-        timeline = new Timeline();
+        Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), event -> updateTime()));
         timeline.playFromStart();
@@ -31,12 +30,20 @@ public class RealTimeProvider implements TimeProvider {
     }
 
     private void updateTime() {
-        timeProperty.set(LocalTime.now());
+        LocalTime now = currentMinute();
+        if (now.equals(timeProperty.get())) {
+            return;
+        }
+        timeProperty.set(now);
+    }
+
+    private LocalTime currentMinute() {
+        return LocalTime.now().withSecond(0).withNano(0);
     }
 
     @Override
     public LocalTime nextMinute() {
-        return LocalTime.now().plusMinutes(1);
+        return currentMinute().plusMinutes(1);
     }
 
     @Override
