@@ -1,4 +1,4 @@
-package de.briemla.clockradio;
+package de.briemla.utils.matcher;
 
 import java.io.File;
 

@@ -1,6 +1,6 @@
-package de.briemla.clockradio;
+package de.briemla.utils.matcher;
 
-import static de.briemla.clockradio.FileStorageMatcher.isEmpty;
+import static de.briemla.utils.matcher.FileStorageMatcher.isEmpty;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+
+import de.briemla.clockradio.FileStorage;
 
 public class FileStorageTest {
 
