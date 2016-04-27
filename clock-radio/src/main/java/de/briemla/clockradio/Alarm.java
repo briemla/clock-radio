@@ -57,6 +57,7 @@ public class Alarm {
         wakeUpTimeProperty.addListener((change, oldValue, newValue) -> storage.save());
         mediaProperty.addListener((change, oldValue, newValue) -> storage.save());
         activeDaysProperty.addListener((change, oldValue, newValue) -> storage.save());
+        activated.addListener((change, oldValue, newValue) -> storage.save());
     }
 
     private static WakeUpTime initialWakeUpTime(TimeProvider timeProvider) {

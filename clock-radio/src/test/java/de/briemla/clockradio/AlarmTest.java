@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
@@ -126,5 +127,13 @@ public class AlarmTest {
         alarm.activeDaysProperty().set(toOtherActiveDays);
 
         verify(storage).save();
+    }
+
+    @Test
+    public void saveToStorageWhenAlarmIsActivatedOrDeactivated() throws Exception {
+        alarm.activatedProperty().setValue(false);
+        alarm.activatedProperty().setValue(true);
+
+        verify(storage, times(2)).save();
     }
 }
