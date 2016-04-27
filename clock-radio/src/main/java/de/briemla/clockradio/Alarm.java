@@ -30,7 +30,7 @@ public class Alarm {
 
     private final TimeProvider timeProvider;
 
-    public Alarm(PlayerFactory playerFactory, TimeProvider timeProvider) {
+    public Alarm(PlayerFactory playerFactory, TimeProvider timeProvider, SaveTrigger storage) {
         this.timeProvider = timeProvider;
         player = Optional.empty();
         this.playerFactory = playerFactory;
@@ -39,6 +39,7 @@ public class Alarm {
         activeDaysProperty = new SimpleObjectProperty<>(new ActiveDays());
         mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
         wakeUpTimeProperty = new SimpleObjectProperty<>(initialWakeUpTime(timeProvider));
+        saveOnChangeTo(storage);
         // AlarmTimer alarmTimer = new AlarmTimer(this);
         // wakeUpTimeProperty.addListener(alarmTimer);
         // activeDaysProperty.addListener(alarmTimer);
@@ -50,6 +51,10 @@ public class Alarm {
         // }
         // alarmTimer.stopTimer();
         // });
+    }
+
+    private void saveOnChangeTo(SaveTrigger storage) {
+        wakeUpTimeProperty.addListener((change, oldValue, newValue) -> storage.save());
     }
 
     private static WakeUpTime initialWakeUpTime(TimeProvider timeProvider) {

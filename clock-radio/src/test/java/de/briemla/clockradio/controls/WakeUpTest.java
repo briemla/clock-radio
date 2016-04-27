@@ -31,6 +31,7 @@ import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
+import de.briemla.clockradio.AlarmStorage;
 import de.briemla.clockradio.AlarmTrigger;
 import de.briemla.clockradio.TimeProvider;
 import de.briemla.clockradio.dabpi.DABStation;
@@ -158,7 +159,8 @@ public class WakeUpTest extends GuiTest {
         player = new MockedPlayer();
         trigger = new AlarmTrigger(timeProvider);
         playerFactory = new RealPlayerFactory(player);
-        return new MainPanel(player, trigger, playerFactory, timeProvider);
+        AlarmStorage storage = mock(AlarmStorage.class);
+        return new MainPanel(player, trigger, playerFactory, timeProvider, storage);
     }
 
     private static Matcher<MockedPlayer> hasBeenPlayed() {

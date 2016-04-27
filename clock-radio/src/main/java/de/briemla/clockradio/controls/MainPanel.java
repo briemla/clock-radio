@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
 import de.briemla.clockradio.Alarm;
+import de.briemla.clockradio.AlarmStorage;
 import de.briemla.clockradio.FXUtil;
 import de.briemla.clockradio.Settings;
 import de.briemla.clockradio.TimeProvider;
@@ -47,12 +48,12 @@ public class MainPanel extends StackPane {
     private final Trigger trigger;
 
     public MainPanel(Player player, Trigger trigger, PlayerFactory playerFactory,
-            TimeProvider timeProvider) {
+            TimeProvider timeProvider, AlarmStorage storage) {
         super();
         this.trigger = trigger;
         FXUtil.load(this, this);
         active = new ActivePseudoClassProperty(this);
-        settings = new Settings(viewSwitcher, player, playerFactory, timeProvider);
+        settings = new Settings(viewSwitcher, player, playerFactory, timeProvider, storage);
         alarm.setSettings(settings);
         trigger.bind(settings.getAlarms());
         Node clock = new DigitalClock(timeProvider);

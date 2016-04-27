@@ -28,6 +28,7 @@ public class AlarmTest {
     private TimeProvider timeProvider;
     private LocalTime now;
     private Alarm alarm;
+    private SaveTrigger storage;
 
     @Before
     public void initialise() {
@@ -39,7 +40,8 @@ public class AlarmTest {
         when(timeProvider.nextMinute()).thenReturn(now);
         LocalDateTime todayMorning = LocalDateTime.of(date, now).withHour(0).withMinute(0);
         when(timeProvider.today()).thenReturn(todayMorning);
-        alarm = new Alarm(player, timeProvider);
+        storage = mock(SaveTrigger.class);
+        alarm = new Alarm(player, timeProvider, storage);
     }
 
     @Test
@@ -95,5 +97,14 @@ public class AlarmTest {
 
     private static LocalDateTime playTime() {
         return LocalDateTime.of(date, LocalTime.of(1, 2));
+    }
+
+    @Test
+    public void saveToStorageWhenWakeUpTimeIsAltered() throws Exception {
+        WakeUpTime toAnotherWakeUpTime = new WakeUpTime(12, 34);
+
+        alarm.wakeUpTimeProperty().set(toAnotherWakeUpTime);
+
+        verify(storage).save();
     }
 }

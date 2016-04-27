@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
+import de.briemla.clockradio.AlarmStorage;
 import de.briemla.clockradio.TimeProvider;
 import de.briemla.clockradio.player.Player;
 import de.briemla.clockradio.player.PlayerFactory;
@@ -28,6 +29,7 @@ public class MainPanelTest extends GuiTest {
     private PlayerFactory playerFactory;
     private TimeProvider timeProvider;
     private SimpleObjectProperty<LocalTime> time;
+    private AlarmStorage storage;
 
     @Test
     public void alarmTriggerInitialisation() throws Exception {
@@ -47,10 +49,12 @@ public class MainPanelTest extends GuiTest {
         trigger = mock(Trigger.class);
         playerFactory = mock(PlayerFactory.class);
         timeProvider = mock(TimeProvider.class);
+        storage = mock(AlarmStorage.class);
+
         LocalTime now = LocalTime.of(0, 0);
         time = new SimpleObjectProperty<>(now);
         when(timeProvider.timeProperty()).thenReturn(time);
         when(timeProvider.nextMinute()).thenReturn(now.plus(1, MINUTES));
-        return new MainPanel(player, trigger, playerFactory, timeProvider);
+        return new MainPanel(player, trigger, playerFactory, timeProvider, storage);
     }
 }
