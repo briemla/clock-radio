@@ -10,9 +10,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.EnumSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -113,6 +115,15 @@ public class AlarmTest {
         Media toAnotherMedia = mock(Media.class);
 
         alarm.mediaProperty().set(toAnotherMedia);
+
+        verify(storage).save();
+    }
+
+    @Test
+    public void saveToStorageWhenActiveDaysAreAltered() throws Exception {
+        ActiveDays toOtherActiveDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+
+        alarm.activeDaysProperty().set(toOtherActiveDays);
 
         verify(storage).save();
     }
