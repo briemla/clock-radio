@@ -15,4 +15,15 @@ public class FileStorageMatcher {
         return new IsEmpty();
     }
 
+    /**
+     * Tests whether a given file contains only the given line
+     *
+     * @param line
+     *            which should be contained in the file
+     * @return true if the file only contains this line, false otherwise
+     */
+    public static Matcher<File> containsSingleLine(String line) {
+        return new ContainsSingleLine(line);
+    }
+
 }
