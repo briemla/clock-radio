@@ -107,4 +107,13 @@ public class AlarmTest {
 
         verify(storage).save();
     }
+
+    @Test
+    public void saveToStorageWhenMediaPropertyIsAltered() throws Exception {
+        Media toAnotherMedia = mock(Media.class);
+
+        alarm.mediaProperty().set(toAnotherMedia);
+
+        verify(storage).save();
+    }
 }

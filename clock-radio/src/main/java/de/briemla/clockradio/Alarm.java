@@ -55,6 +55,7 @@ public class Alarm {
 
     private void saveOnChangeTo(SaveTrigger storage) {
         wakeUpTimeProperty.addListener((change, oldValue, newValue) -> storage.save());
+        mediaProperty.addListener((change, oldValue, newValue) -> storage.save());
     }
 
     private static WakeUpTime initialWakeUpTime(TimeProvider timeProvider) {
