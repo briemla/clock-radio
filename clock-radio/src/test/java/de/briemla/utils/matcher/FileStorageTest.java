@@ -1,5 +1,6 @@
 package de.briemla.utils.matcher;
 
+import static de.briemla.utils.matcher.FileStorageMatcher.contains;
 import static de.briemla.utils.matcher.FileStorageMatcher.containsSingleLine;
 import static de.briemla.utils.matcher.FileStorageMatcher.isEmpty;
 import static org.junit.Assert.assertThat;
@@ -9,6 +10,7 @@ import static org.mockito.Mockito.when;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class FileStorageTest {
     private FileStorage storage;
     private PlayerFactory notUsedFactory;
     private TimeProvider timeProvider;
-    private SaveTrigger notUsedStorage;
+    private SaveTrigger notUsedTrigger;
 
     @Before
     public void initialise() throws IOException {
@@ -55,15 +57,37 @@ public class FileStorageTest {
 
     @Test
     public void saveOneAlarmToFile() throws Exception {
-        Alarm ofAlarm = new Alarm(notUsedFactory, timeProvider, notUsedStorage);
+        Alarm ofAlarm = new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
         List<Alarm> oneAlarm = Collections.singletonList(ofAlarm);
         storage.save(oneAlarm);
 
         String wakeUpTime = "12:34";
         String media = LocalFolder.defaultFolder().toString();
         String activeDays = "[MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]";
-        assertThat(storageFile,
-            containsSingleLine(wakeUpTime + separator + media + separator + activeDays));
+        String activated = "true";
+        assertThat(storageFile, containsSingleLine(
+            wakeUpTime + separator + media + separator + activeDays + separator + activated));
+    }
+
+    @Test
+    public void saveSeveralAlarmsToFile() throws Exception {
+        Alarm firstAlarm = new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
+        Alarm secondAlarm = new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
+        secondAlarm.activatedProperty().setValue(false);
+        List<Alarm> alarms = Arrays.asList(firstAlarm, secondAlarm);
+
+        storage.save(alarms);
+
+        String wakeUpTime = "12:34";
+        String media = LocalFolder.defaultFolder().toString();
+        String activeDays = "[MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]";
+        String activated = "true";
+        String firstLine = wakeUpTime + separator + media + separator + activeDays + separator
+                + activated;
+        String deactivated = "false";
+        String secondLine = wakeUpTime + separator + media + separator + activeDays + separator
+                + deactivated;
+        assertThat(storageFile, contains(firstLine, secondLine));
     }
 
 }

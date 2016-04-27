@@ -26,4 +26,15 @@ public class FileStorageMatcher {
         return new ContainsSingleLine(line);
     }
 
+    /**
+     * Tests whether a given file contains all given lines
+     *
+     * @param lines
+     *            which should be contained in the file
+     * @return true if the file contains all given lines, false otherwise
+     */
+    public static Matcher<File> contains(String... lines) {
+        return new Contains(lines);
+    }
+
 }
