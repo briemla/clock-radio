@@ -21,11 +21,15 @@ import java.util.EnumSet;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.briemla.clockradio.controls.LocalFolder;
 import de.briemla.clockradio.player.PlayerFactory;
 import de.briemla.clockradio.player.PlayerWorker;
 
 public class AlarmTest {
 
+    private static final String defaultWakeUpTime = "01:02";
+    private static final String separator = ";";
+    private static final String defaultMedia = LocalFolder.defaultFolder().toString();
     private static final LocalDate date = LocalDate.of(0, 1, 1);
     private static final LocalTime now = LocalTime.of(1, 2);
     private PlayerFactory player;
@@ -138,11 +142,11 @@ public class AlarmTest {
     }
 
     @Test
-    public void storeInitialWakeUpTimeToOutput() throws Exception {
+    public void storeInitialAlarmToOutput() throws Exception {
         PrintStream output = mock(PrintStream.class);
         alarm.storeTo(output);
 
-        verify(output).println("01:02");
+        verify(output).println(defaultWakeUpTime + separator + defaultMedia);
     }
 
     @Test
@@ -153,6 +157,8 @@ public class AlarmTest {
         PrintStream output = mock(PrintStream.class);
         alarm.storeTo(output);
 
-        verify(output).println("12:34");
+        String changedWakeUpTime = "12:34";
+        verify(output).println(changedWakeUpTime + separator + defaultMedia);
     }
+
 }

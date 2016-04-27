@@ -20,6 +20,7 @@ import de.briemla.clockradio.player.PlayerWorker;
 
 public class Alarm {
 
+    private static final String separator = ";";
     private final SimpleObjectProperty<Duration> durationProperty;
     private final SimpleBooleanProperty alarmStartedProperty;
     private final SimpleObjectProperty<ActiveDays> activeDaysProperty;
@@ -139,7 +140,9 @@ public class Alarm {
     }
 
     public void storeTo(PrintStream output) {
-        output.println(wakeUpTimeProperty.get().toString());
+        String wakeUpTime = wakeUpTimeProperty.get().toString();
+        String media = mediaProperty.get().toString();
+        output.println(wakeUpTime + separator + media);
     }
 
 }
