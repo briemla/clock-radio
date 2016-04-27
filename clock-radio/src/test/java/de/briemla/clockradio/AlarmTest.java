@@ -30,6 +30,7 @@ public class AlarmTest {
     private static final String defaultWakeUpTime = "01:02";
     private static final String separator = ";";
     private static final String defaultMedia = LocalFolder.defaultFolder().toString();
+    private static final String defaultActiveDays = "[MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]";
     private static final LocalDate date = LocalDate.of(0, 1, 1);
     private static final LocalTime now = LocalTime.of(1, 2);
     private PlayerFactory player;
@@ -146,7 +147,8 @@ public class AlarmTest {
         PrintStream output = mock(PrintStream.class);
         alarm.storeTo(output);
 
-        verify(output).println(defaultWakeUpTime + separator + defaultMedia);
+        verify(output).println(
+            defaultWakeUpTime + separator + defaultMedia + separator + defaultActiveDays);
     }
 
     @Test
@@ -158,7 +160,8 @@ public class AlarmTest {
         alarm.storeTo(output);
 
         String changedWakeUpTime = "12:34";
-        verify(output).println(changedWakeUpTime + separator + defaultMedia);
+        verify(output).println(
+            changedWakeUpTime + separator + defaultMedia + separator + defaultActiveDays);
     }
 
     @Test
@@ -171,7 +174,8 @@ public class AlarmTest {
         alarm.storeTo(output);
 
         String media = "myMedia";
-        verify(output).println(defaultWakeUpTime + separator + media);
+        verify(output).println(
+            defaultWakeUpTime + separator + media + separator + defaultActiveDays);
     }
 
 }

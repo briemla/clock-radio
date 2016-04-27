@@ -148,4 +148,8 @@ public class ActiveDays {
         return groups;
     }
 
+    public String serialize() {
+        return days.toString();
+    }
+
 }

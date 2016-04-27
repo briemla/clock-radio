@@ -22,7 +22,7 @@ public class LocalFolder implements Media {
      *
      * @return
      */
-    private static Path defaultFolder() {
+    public static Path defaultFolder() {
         if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
             return new File("D:\\NAS-Lars\\Musik").toPath();
         }
