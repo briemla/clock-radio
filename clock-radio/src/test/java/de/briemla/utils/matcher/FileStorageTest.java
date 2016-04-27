@@ -19,16 +19,16 @@ public class FileStorageTest {
     @Rule
     public final TemporaryFolder folder = new TemporaryFolder();
     private File storageFile;
+    private FileStorage storage;
 
     @Before
     public void initialise() throws IOException {
         storageFile = folder.newFile("alarm.storage");
+        storage = new FileStorage(storageFile);
     }
 
     @Test
     public void saveEmptyListOfAlarmsToFile() throws Exception {
-        FileStorage storage = new FileStorage(storageFile);
-
         storage.save(Collections.emptyList());
 
         assertThat(storageFile, isEmpty());
