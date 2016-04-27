@@ -144,4 +144,15 @@ public class AlarmTest {
 
         verify(output).println("01:02");
     }
+
+    @Test
+    public void storeChangedWakeUpTimeToOutput() throws Exception {
+        WakeUpTime toAnotherWakeUpTime = new WakeUpTime(12, 34);
+        alarm.wakeUpTimeProperty().set(toAnotherWakeUpTime);
+
+        PrintStream output = mock(PrintStream.class);
+        alarm.storeTo(output);
+
+        verify(output).println("12:34");
+    }
 }
