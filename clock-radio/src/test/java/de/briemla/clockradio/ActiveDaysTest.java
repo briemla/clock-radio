@@ -256,4 +256,12 @@ public class ActiveDaysTest {
 
         assertThat(days.toString(), is(equalTo("Mo, " + LINE_SEPARATOR + "Mi - Fr, So")));
     }
+
+    @Test
+    public void serializeWhenAllDaysAreActive() throws Exception {
+        ActiveDays days = new ActiveDays(EnumSet.allOf(DayOfWeek.class));
+
+        assertThat(days.serialize(),
+            is(equalTo("[MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]")));
+    }
 }

@@ -178,4 +178,16 @@ public class AlarmTest {
             defaultWakeUpTime + separator + media + separator + defaultActiveDays);
     }
 
+    @Test
+    public void storeChangedActiveDaysToOutput() throws Exception {
+        ActiveDays changedActiveDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+        alarm.activeDaysProperty().set(changedActiveDays);
+        PrintStream output = mock(PrintStream.class);
+        alarm.storeTo(output);
+
+        String activeDays = "[MONDAY]";
+        verify(output).println(
+            defaultWakeUpTime + separator + defaultMedia + separator + activeDays);
+    }
+
 }
