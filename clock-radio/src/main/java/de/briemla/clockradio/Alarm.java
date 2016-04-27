@@ -143,7 +143,9 @@ public class Alarm {
         String wakeUpTime = wakeUpTimeProperty.get().toString();
         String media = mediaProperty.get().toString();
         String activeDays = activeDaysProperty.get().serialize();
-        output.println(wakeUpTime + separator + media + separator + activeDays);
+        String activated = this.activated.getValue().toString();
+        output.println(
+            wakeUpTime + separator + media + separator + activeDays + separator + activated);
     }
 
 }
