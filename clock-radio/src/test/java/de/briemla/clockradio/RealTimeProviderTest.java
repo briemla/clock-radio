@@ -9,6 +9,8 @@ import static org.exparity.hamcrest.date.LocalDateTimeMatchers.sameMonthOfYear;
 import static org.exparity.hamcrest.date.LocalDateTimeMatchers.sameOrAfter;
 import static org.exparity.hamcrest.date.LocalDateTimeMatchers.sameOrBefore;
 import static org.exparity.hamcrest.date.LocalDateTimeMatchers.sameYear;
+import static org.exparity.hamcrest.date.LocalTimeMatchers.after;
+import static org.exparity.hamcrest.date.LocalTimeMatchers.before;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -17,9 +19,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.TemporalAmount;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -68,43 +67,4 @@ public class RealTimeProviderTest {
         assertThat(nextMinute, is(before(after)));
     }
 
-    private Matcher<LocalTime> after(LocalTime time) {
-        return new TypeSafeMatcher<LocalTime>() {
-
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("is after: " + time);
-            }
-
-            @Override
-            protected boolean matchesSafely(LocalTime item) {
-                return item.isAfter(time);
-            }
-
-            @Override
-            protected void describeMismatchSafely(LocalTime item, Description description) {
-                description.appendText(item + "not after: " + time);
-            }
-        };
-    }
-
-    private Matcher<LocalTime> before(LocalTime time) {
-        return new TypeSafeMatcher<LocalTime>() {
-
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("before " + time);
-            }
-
-            @Override
-            protected boolean matchesSafely(LocalTime item) {
-                return item.isBefore(time);
-            }
-
-            @Override
-            protected void describeMismatchSafely(LocalTime item, Description description) {
-                description.appendText(item + " is not before " + time);
-            }
-        };
-    }
 }
