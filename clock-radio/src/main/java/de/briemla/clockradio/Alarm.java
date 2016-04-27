@@ -70,7 +70,7 @@ public class Alarm {
         player = Optional.empty();
     }
 
-    public Duration getDuration() {
+    private Duration getDuration() {
         return durationProperty.get();
     }
 
