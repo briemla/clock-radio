@@ -161,4 +161,17 @@ public class AlarmTest {
         verify(output).println(changedWakeUpTime + separator + defaultMedia);
     }
 
+    @Test
+    public void storeChangedMediaToOutput() throws Exception {
+        Media myMedia = mock(Media.class);
+        when(myMedia.toString()).thenReturn("myMedia");
+        alarm.mediaProperty().set(myMedia);
+
+        PrintStream output = mock(PrintStream.class);
+        alarm.storeTo(output);
+
+        String media = "myMedia";
+        verify(output).println(defaultWakeUpTime + separator + media);
+    }
+
 }
