@@ -11,6 +11,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
+import java.io.PrintStream;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,10 +27,10 @@ import de.briemla.clockradio.player.PlayerWorker;
 public class AlarmTest {
 
     private static final LocalDate date = LocalDate.of(0, 1, 1);
+    private static final LocalTime now = LocalTime.of(1, 2);
     private PlayerFactory player;
     private PlayerWorker worker;
     private TimeProvider timeProvider;
-    private LocalTime now;
     private Alarm alarm;
     private SaveTrigger storage;
 
@@ -39,7 +40,6 @@ public class AlarmTest {
         worker = mock(PlayerWorker.class);
         when(player.create(any(Media.class))).thenReturn(worker);
         timeProvider = mock(TimeProvider.class);
-        now = LocalTime.of(1, 2);
         when(timeProvider.nextMinute()).thenReturn(now);
         LocalDateTime todayMorning = LocalDateTime.of(date, now).withHour(0).withMinute(0);
         when(timeProvider.today()).thenReturn(todayMorning);
@@ -135,5 +135,13 @@ public class AlarmTest {
         alarm.activatedProperty().setValue(true);
 
         verify(storage, times(2)).save();
+    }
+
+    @Test
+    public void storeInitialWakeUpTimeToOutput() throws Exception {
+        PrintStream output = mock(PrintStream.class);
+        alarm.storeTo(output);
+
+        verify(output).println("01:02");
     }
 }

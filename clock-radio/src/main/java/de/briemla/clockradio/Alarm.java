@@ -1,5 +1,6 @@
 package de.briemla.clockradio;
 
+import java.io.PrintStream;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -135,6 +136,10 @@ public class Alarm {
     public void kill() {
         stop();
         activated.set(false);
+    }
+
+    public void storeTo(PrintStream output) {
+        output.println(wakeUpTimeProperty.get().toString());
     }
 
 }
