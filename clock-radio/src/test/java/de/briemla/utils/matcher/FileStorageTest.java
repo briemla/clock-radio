@@ -24,6 +24,7 @@ import org.junit.rules.TemporaryFolder;
 import de.briemla.clockradio.Alarm;
 import de.briemla.clockradio.AlarmFactory;
 import de.briemla.clockradio.FileStorage;
+import de.briemla.clockradio.Media;
 import de.briemla.clockradio.RealAlarmFactory;
 import de.briemla.clockradio.SaveTrigger;
 import de.briemla.clockradio.TimeProvider;
@@ -103,6 +104,8 @@ public class FileStorageTest {
         Alarm alarmBeforeSave = new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
         WakeUpTime wakeUpTimeBeforeSave = new WakeUpTime(23, 56);
         alarmBeforeSave.wakeUpTimeProperty().set(wakeUpTimeBeforeSave);
+        Media mediaBeforeSave = new LocalFolder(new File("/home/somewhere/").toPath());
+        alarmBeforeSave.mediaProperty().set(mediaBeforeSave);
         List<Alarm> alarms = Collections.singletonList(alarmBeforeSave);
         storage.save(alarms);
 
@@ -110,6 +113,7 @@ public class FileStorageTest {
 
         Alarm alarmAfterLoad = loaded.get(singleAlarm);
         assertThat(alarmAfterLoad.wakeUpTimeProperty(), hasValue(equalTo(wakeUpTimeBeforeSave)));
+        assertThat(alarmAfterLoad.mediaProperty(), hasValue(equalTo(mediaBeforeSave)));
     }
 
 }
