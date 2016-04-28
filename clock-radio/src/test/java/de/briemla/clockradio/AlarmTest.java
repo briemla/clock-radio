@@ -1,6 +1,5 @@
 package de.briemla.clockradio;
 
-import static de.briemla.clockradio.ObservableValueMatchers.hasValue;
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -190,15 +189,6 @@ public class AlarmTest {
         String activeDays = "[MONDAY]";
         verify(output).println(defaultWakeUpTime + separator + defaultMedia + separator + activeDays
                 + separator + defaultActivated);
-    }
-
-    @Test
-    public void createFromStorage() throws Exception {
-        WakeUpTime storedWakeUpTime = new WakeUpTime(12, 36);
-        String storedAlarm = storedWakeUpTime.toString();
-        Alarm fromStorage = Alarm.fromStorage(storedAlarm, player, timeProvider, storage);
-
-        assertThat(fromStorage.wakeUpTimeProperty(), hasValue(equalTo(storedWakeUpTime)));
     }
 
 }

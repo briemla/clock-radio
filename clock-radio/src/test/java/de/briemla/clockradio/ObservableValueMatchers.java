@@ -14,6 +14,7 @@ public class ObservableValueMatchers {
             @Override
             public void describeTo(Description description) {
                 description.appendText("has value ");
+                matcher.describeTo(description);
             }
 
             @Override

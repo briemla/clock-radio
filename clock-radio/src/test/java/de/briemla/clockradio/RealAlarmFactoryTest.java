@@ -47,7 +47,7 @@ public class RealAlarmFactoryTest {
 
     @Test
     public void wireAlarmTogetherWhenCreatedFromStorage() throws Exception {
-        Alarm alarm = factory.fromStorage("12:40");
+        Alarm alarm = factory.fromStorage("12:40;/media/nas/something/");
         alarm.activatedProperty().setValue(false);
 
         assertThat(alarm, is(not(nullValue())));

@@ -1,10 +1,16 @@
 package de.briemla.clockradio;
 
+import java.io.File;
+
+import de.briemla.clockradio.controls.LocalFolder;
 import de.briemla.clockradio.player.PlayerFactory;
 
 // TODO find a better name
 public class RealAlarmFactory implements AlarmFactory {
 
+    private static final int wakeUpField = 0;
+    private static final int mediaField = 1;
+    private static final String separator = ";";
     private final TimeProvider timeProvider;
     private final PlayerFactory playerFactory;
     private SaveTrigger saveTrigger;
@@ -27,7 +33,20 @@ public class RealAlarmFactory implements AlarmFactory {
 
     @Override
     public Alarm fromStorage(String storedAlarm) {
-        return Alarm.fromStorage(storedAlarm, playerFactory, timeProvider, saveTrigger);
+        Alarm alarm = new Alarm(playerFactory, timeProvider, saveTrigger);
+        String[] fromStoredAlarm = storedAlarm.split(separator);
+        alarm.wakeUpTimeProperty().set(toWakeUpTime(fromStoredAlarm));
+        alarm.mediaProperty().set(toMedia(fromStoredAlarm));
+        return alarm;
+    }
+
+    private WakeUpTime toWakeUpTime(String[] values) {
+        return WakeUpTime.from(values[wakeUpField]);
+    }
+
+    private Media toMedia(String[] values) {
+        String mediaValue = values[mediaField];
+        return new LocalFolder(new File(mediaValue).toPath());
     }
 
 }
