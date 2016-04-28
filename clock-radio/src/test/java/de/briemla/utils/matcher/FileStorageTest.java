@@ -11,9 +11,11 @@ import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 
 import org.junit.Before;
@@ -21,6 +23,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import de.briemla.clockradio.ActiveDays;
 import de.briemla.clockradio.Alarm;
 import de.briemla.clockradio.AlarmFactory;
 import de.briemla.clockradio.FileStorage;
@@ -106,6 +109,8 @@ public class FileStorageTest {
         alarmBeforeSave.wakeUpTimeProperty().set(wakeUpTimeBeforeSave);
         Media mediaBeforeSave = new LocalFolder(new File("/home/somewhere/").toPath());
         alarmBeforeSave.mediaProperty().set(mediaBeforeSave);
+        ActiveDays activeDaysBeforeSave = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+        alarmBeforeSave.activeDaysProperty().set(activeDaysBeforeSave);
         List<Alarm> alarms = Collections.singletonList(alarmBeforeSave);
         storage.save(alarms);
 
@@ -114,6 +119,7 @@ public class FileStorageTest {
         Alarm alarmAfterLoad = loaded.get(singleAlarm);
         assertThat(alarmAfterLoad.wakeUpTimeProperty(), hasValue(equalTo(wakeUpTimeBeforeSave)));
         assertThat(alarmAfterLoad.mediaProperty(), hasValue(equalTo(mediaBeforeSave)));
+        assertThat(alarmAfterLoad.activeDaysProperty(), hasValue(equalTo(activeDaysBeforeSave)));
     }
 
 }

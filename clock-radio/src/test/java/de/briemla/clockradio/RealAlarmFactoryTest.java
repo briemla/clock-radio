@@ -10,11 +10,15 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.File;
+import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.EnumSet;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import de.briemla.clockradio.controls.LocalFolder;
 import de.briemla.clockradio.player.PlayerFactory;
 
 public class RealAlarmFactoryTest {
@@ -47,12 +51,20 @@ public class RealAlarmFactoryTest {
 
     @Test
     public void wireAlarmTogetherWhenCreatedFromStorage() throws Exception {
-        Alarm alarm = factory.fromStorage("12:40;/media/nas/something/");
+        Alarm alarm = factory.fromStorage("12:40;/media/nas/something/;[MONDAY]");
         alarm.activatedProperty().setValue(false);
 
         assertThat(alarm, is(not(nullValue())));
         WakeUpTime expectedWakeUpTime = new WakeUpTime(12, 40);
         assertThat(alarm.wakeUpTimeProperty(), hasValue(equalTo(expectedWakeUpTime)));
+        Media expectedMedia = localFolderFrom("/media/nas/something/");
+        assertThat(alarm.mediaProperty(), hasValue(equalTo(expectedMedia)));
+        ActiveDays expectedActiveDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
+        assertThat(alarm.activeDaysProperty(), hasValue(equalTo(expectedActiveDays)));
         verify(timeProvider).nextMinute();
+    }
+
+    private LocalFolder localFolderFrom(String pathname) {
+        return new LocalFolder(new File(pathname).toPath());
     }
 }
