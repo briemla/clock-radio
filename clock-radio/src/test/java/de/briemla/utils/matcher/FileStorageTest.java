@@ -27,6 +27,7 @@ import de.briemla.clockradio.FileStorage;
 import de.briemla.clockradio.RealAlarmFactory;
 import de.briemla.clockradio.SaveTrigger;
 import de.briemla.clockradio.TimeProvider;
+import de.briemla.clockradio.WakeUpTime;
 import de.briemla.clockradio.controls.LocalFolder;
 import de.briemla.clockradio.player.PlayerFactory;
 
@@ -100,14 +101,15 @@ public class FileStorageTest {
     @Test
     public void restoreSavedAlarmsFromFile() throws Exception {
         Alarm alarmBeforeSave = new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
+        WakeUpTime wakeUpTimeBeforeSave = new WakeUpTime(23, 56);
+        alarmBeforeSave.wakeUpTimeProperty().set(wakeUpTimeBeforeSave);
         List<Alarm> alarms = Collections.singletonList(alarmBeforeSave);
         storage.save(alarms);
 
         List<Alarm> loaded = storage.load();
 
         Alarm alarmAfterLoad = loaded.get(singleAlarm);
-        assertThat(alarmAfterLoad.wakeUpTimeProperty(),
-            hasValue(equalTo(alarmBeforeSave.wakeUpTimeProperty().get())));
+        assertThat(alarmAfterLoad.wakeUpTimeProperty(), hasValue(equalTo(wakeUpTimeBeforeSave)));
     }
 
 }
