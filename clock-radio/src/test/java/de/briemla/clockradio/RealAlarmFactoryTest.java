@@ -51,8 +51,7 @@ public class RealAlarmFactoryTest {
 
     @Test
     public void wireAlarmTogetherWhenCreatedFromStorage() throws Exception {
-        Alarm alarm = factory.fromStorage("12:40;/media/nas/something/;[MONDAY]");
-        alarm.activatedProperty().setValue(false);
+        Alarm alarm = factory.fromStorage("12:40;/media/nas/something/;[MONDAY];false");
 
         assertThat(alarm, is(not(nullValue())));
         WakeUpTime expectedWakeUpTime = new WakeUpTime(12, 40);
@@ -61,6 +60,7 @@ public class RealAlarmFactoryTest {
         assertThat(alarm.mediaProperty(), hasValue(equalTo(expectedMedia)));
         ActiveDays expectedActiveDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
         assertThat(alarm.activeDaysProperty(), hasValue(equalTo(expectedActiveDays)));
+        assertThat(alarm.activatedProperty(), hasValue(equalTo(false)));
         verify(timeProvider).nextMinute();
     }
 

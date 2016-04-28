@@ -8,9 +8,10 @@ import de.briemla.clockradio.player.PlayerFactory;
 // TODO find a better name
 public class RealAlarmFactory implements AlarmFactory {
 
-    private static final int activeDaysField = 2;
     private static final int wakeUpField = 0;
     private static final int mediaField = 1;
+    private static final int activeDaysField = 2;
+    private static final int activatedField = 3;
     private static final String separator = ";";
     private final TimeProvider timeProvider;
     private final PlayerFactory playerFactory;
@@ -39,7 +40,12 @@ public class RealAlarmFactory implements AlarmFactory {
         alarm.wakeUpTimeProperty().set(toWakeUpTime(fromStoredAlarm));
         alarm.mediaProperty().set(toMedia(fromStoredAlarm));
         alarm.activeDaysProperty().set(toActiveDays(fromStoredAlarm));
+        alarm.activatedProperty().setValue(isActivated(fromStoredAlarm));
         return alarm;
+    }
+
+    private Boolean isActivated(String[] fromStoredAlarm) {
+        return Boolean.valueOf(fromStoredAlarm[activatedField]);
     }
 
     private ActiveDays toActiveDays(String[] fromStoredAlarm) {

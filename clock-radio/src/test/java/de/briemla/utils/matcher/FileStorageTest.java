@@ -111,6 +111,8 @@ public class FileStorageTest {
         alarmBeforeSave.mediaProperty().set(mediaBeforeSave);
         ActiveDays activeDaysBeforeSave = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
         alarmBeforeSave.activeDaysProperty().set(activeDaysBeforeSave);
+        boolean activatedBeforeSave = false;
+        alarmBeforeSave.activatedProperty().setValue(activatedBeforeSave);
         List<Alarm> alarms = Collections.singletonList(alarmBeforeSave);
         storage.save(alarms);
 
@@ -120,6 +122,7 @@ public class FileStorageTest {
         assertThat(alarmAfterLoad.wakeUpTimeProperty(), hasValue(equalTo(wakeUpTimeBeforeSave)));
         assertThat(alarmAfterLoad.mediaProperty(), hasValue(equalTo(mediaBeforeSave)));
         assertThat(alarmAfterLoad.activeDaysProperty(), hasValue(equalTo(activeDaysBeforeSave)));
+        assertThat(alarmAfterLoad.activatedProperty(), hasValue(equalTo(activatedBeforeSave)));
     }
 
 }
