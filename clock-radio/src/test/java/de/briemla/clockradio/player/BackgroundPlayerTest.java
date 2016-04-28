@@ -34,8 +34,8 @@ public class BackgroundPlayerTest {
             try {
                 latch.await();
             } catch (InterruptedException exception) {
-                interrupted.countDown();
                 isInterrupted = true;
+                interrupted.countDown();
             }
             return null;
         }
