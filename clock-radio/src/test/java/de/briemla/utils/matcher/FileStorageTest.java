@@ -1,8 +1,10 @@
 package de.briemla.utils.matcher;
 
+import static de.briemla.clockradio.ObservableValueMatchers.hasValue;
 import static de.briemla.utils.matcher.FileStorageMatcher.contains;
 import static de.briemla.utils.matcher.FileStorageMatcher.containsSingleLine;
 import static de.briemla.utils.matcher.FileStorageMatcher.isEmpty;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -20,7 +22,9 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import de.briemla.clockradio.Alarm;
+import de.briemla.clockradio.AlarmFactory;
 import de.briemla.clockradio.FileStorage;
+import de.briemla.clockradio.RealAlarmFactory;
 import de.briemla.clockradio.SaveTrigger;
 import de.briemla.clockradio.TimeProvider;
 import de.briemla.clockradio.controls.LocalFolder;
@@ -28,6 +32,7 @@ import de.briemla.clockradio.player.PlayerFactory;
 
 public class FileStorageTest {
 
+    private static final int singleAlarm = 0;
     private static final LocalTime nextMinute = LocalTime.of(12, 34);
     private static final String separator = ";";
 
@@ -39,13 +44,15 @@ public class FileStorageTest {
     private PlayerFactory notUsedFactory;
     private TimeProvider timeProvider;
     private SaveTrigger notUsedTrigger;
+    private AlarmFactory alarmFactory;
 
     @Before
     public void initialise() throws IOException {
         storageFile = folder.newFile("alarm.storage");
-        storage = new FileStorage(storageFile);
         timeProvider = mock(TimeProvider.class);
         when(timeProvider.nextMinute()).thenReturn(nextMinute);
+        alarmFactory = new RealAlarmFactory(notUsedFactory, timeProvider);
+        storage = new FileStorage(storageFile, alarmFactory);
     }
 
     @Test
@@ -88,6 +95,19 @@ public class FileStorageTest {
         String secondLine = wakeUpTime + separator + media + separator + activeDays + separator
                 + deactivated;
         assertThat(storageFile, contains(firstLine, secondLine));
+    }
+
+    @Test
+    public void restoreSavedAlarmsFromFile() throws Exception {
+        Alarm alarmBeforeSave = new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
+        List<Alarm> alarms = Collections.singletonList(alarmBeforeSave);
+        storage.save(alarms);
+
+        List<Alarm> loaded = storage.load();
+
+        Alarm alarmAfterLoad = loaded.get(singleAlarm);
+        assertThat(alarmAfterLoad.wakeUpTimeProperty(),
+            hasValue(equalTo(alarmBeforeSave.wakeUpTimeProperty().get())));
     }
 
 }
