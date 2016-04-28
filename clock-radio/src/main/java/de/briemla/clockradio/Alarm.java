@@ -20,6 +20,7 @@ import de.briemla.clockradio.player.PlayerWorker;
 
 public class Alarm {
 
+    private static final int wakeUpField = 0;
     private static final String separator = ";";
     private final SimpleObjectProperty<Duration> durationProperty;
     private final SimpleBooleanProperty alarmStartedProperty;
@@ -146,6 +147,14 @@ public class Alarm {
         String activated = this.activated.getValue().toString();
         output.println(
             wakeUpTime + separator + media + separator + activeDays + separator + activated);
+    }
+
+    public static Alarm fromStorage(String storedAlarm, PlayerFactory playerFactory,
+            TimeProvider timeProvider, SaveTrigger storage) {
+        Alarm alarm = new Alarm(playerFactory, timeProvider, storage);
+        String[] values = storedAlarm.split(separator);
+        alarm.wakeUpTimeProperty.set(WakeUpTime.from(values[wakeUpField]));
+        return alarm;
     }
 
 }
