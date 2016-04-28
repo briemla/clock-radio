@@ -1,8 +1,11 @@
 package de.briemla.clockradio;
 
+import static java.util.stream.Collectors.toList;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Iterator;
@@ -10,6 +13,7 @@ import java.util.List;
 
 public class ActiveDays {
 
+    private static final String separator = ",";
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
     private static final String SINGLE_SEPARATOR = ", ";
     private final EnumSet<DayOfWeek> days;
@@ -150,6 +154,20 @@ public class ActiveDays {
 
     public String serialize() {
         return days.toString();
+    }
+
+    public static ActiveDays from(String activeDays) {
+        String days = removeBracketsFrom(activeDays);
+        List<DayOfWeek> convertedDays = Arrays.asList(days.split(separator))
+                                              .stream()
+                                              .map(String::trim)
+                                              .map(DayOfWeek::valueOf)
+                                              .collect(toList());
+        return new ActiveDays(EnumSet.copyOf(convertedDays));
+    }
+
+    private static String removeBracketsFrom(String activeDays) {
+        return activeDays.substring(1, activeDays.length() - 1);
     }
 
 }

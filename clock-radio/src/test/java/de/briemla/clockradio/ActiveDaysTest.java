@@ -264,4 +264,15 @@ public class ActiveDaysTest {
         assertThat(days.serialize(),
             is(equalTo("[MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]")));
     }
+
+    @Test
+    public void createdFromSerializedOne() throws Exception {
+        ActiveDays expectedDays = new ActiveDays(
+                EnumSet.complementOf(EnumSet.of(DayOfWeek.MONDAY)));
+
+        ActiveDays days = ActiveDays.from(
+            "[TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]");
+
+        assertThat(days, is(equalTo(expectedDays)));
+    }
 }
