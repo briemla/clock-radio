@@ -4,15 +4,33 @@ import java.time.LocalDateTime;
 
 public class WakeUpTime {
 
+    private static final int hourIndex = 0;
+    private static final int minuteIndex = 1;
+    private static final String separator = ":";
     private static final int CORRECTION = 1;
     private static final int ZERO = 0;
-    private static final String TIME_FORMAT = "%02d:%02d";
+    private static final String TIME_FORMAT = "%02d" + separator + "%02d";
     private final Integer hour;
     private final Integer minute;
 
     public WakeUpTime(Integer hour, Integer minute) {
         this.hour = hour;
         this.minute = minute;
+    }
+
+    public static WakeUpTime from(String string) {
+        String[] values = string.split(separator);
+        int hour = hourOf(values);
+        int minute = minuteOf(values);
+        return new WakeUpTime(hour, minute);
+    }
+
+    private static int minuteOf(String[] values) {
+        return Integer.parseInt(values[minuteIndex]);
+    }
+
+    private static int hourOf(String[] values) {
+        return Integer.parseInt(values[hourIndex]);
     }
 
     @Override
