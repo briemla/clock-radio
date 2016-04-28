@@ -17,19 +17,19 @@ import javafx.scene.Parent;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
+import de.briemla.clockradio.AlarmFactory;
 import de.briemla.clockradio.AlarmStorage;
 import de.briemla.clockradio.TimeProvider;
 import de.briemla.clockradio.player.Player;
-import de.briemla.clockradio.player.PlayerFactory;
 
 public class MainPanelTest extends GuiTest {
 
     private Player player;
     private Trigger trigger;
-    private PlayerFactory playerFactory;
     private TimeProvider timeProvider;
     private SimpleObjectProperty<LocalTime> time;
     private AlarmStorage storage;
+    private AlarmFactory alarmFactory;
 
     @Test
     public void alarmTriggerInitialisation() throws Exception {
@@ -40,14 +40,14 @@ public class MainPanelTest extends GuiTest {
         verify(timeProvider, times(2)).timeProperty();
         verify(timeProvider).nextMinute();
         verifyNoMoreInteractions(timeProvider);
-        verifyZeroInteractions(playerFactory);
+        verifyZeroInteractions(alarmFactory);
     }
 
     @Override
     protected Parent getRootNode() {
         player = mock(Player.class);
         trigger = mock(Trigger.class);
-        playerFactory = mock(PlayerFactory.class);
+        alarmFactory = mock(AlarmFactory.class);
         timeProvider = mock(TimeProvider.class);
         storage = mock(AlarmStorage.class);
 
@@ -55,6 +55,6 @@ public class MainPanelTest extends GuiTest {
         time = new SimpleObjectProperty<>(now);
         when(timeProvider.timeProperty()).thenReturn(time);
         when(timeProvider.nextMinute()).thenReturn(now.plus(1, MINUTES));
-        return new MainPanel(player, trigger, playerFactory, timeProvider, storage);
+        return new MainPanel(player, trigger, alarmFactory, timeProvider, storage);
     }
 }

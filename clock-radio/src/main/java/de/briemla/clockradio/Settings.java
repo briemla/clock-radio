@@ -13,7 +13,6 @@ import de.briemla.clockradio.controls.AlarmMenu;
 import de.briemla.clockradio.controls.DefaultableViewSwitcher;
 import de.briemla.clockradio.dabpi.Station;
 import de.briemla.clockradio.player.Player;
-import de.briemla.clockradio.player.PlayerFactory;
 
 public class Settings {
 
@@ -21,16 +20,14 @@ public class Settings {
     private final SimpleBooleanProperty alarmStartedProperty;
     private final ObservableList<Alarm> alarms;
     private final Player player;
-    private final PlayerFactory playerFactory;
-    private final TimeProvider timeProvider;
     private final AlarmStorage storage;
+    private final AlarmFactory alarmFactory;
 
-    public Settings(DefaultableViewSwitcher viewSwitcher, Player player,
-            PlayerFactory playerFactory, TimeProvider timeProvider, AlarmStorage storage) {
+    public Settings(DefaultableViewSwitcher viewSwitcher, Player player, AlarmFactory alarmFactory,
+            AlarmStorage storage) {
+        this.alarmFactory = alarmFactory;
         this.viewSwitcher = viewSwitcher;
         this.player = player;
-        this.playerFactory = playerFactory;
-        this.timeProvider = timeProvider;
         this.storage = storage;
         alarmStartedProperty = new SimpleBooleanProperty();
         alarms = FXCollections.observableArrayList();
@@ -42,15 +39,11 @@ public class Settings {
     }
 
     public void addAlarm() {
-        Alarm alarm = new Alarm(playerFactory, timeProvider, saveToStorage());
+        Alarm alarm = alarmFactory.create();
         alarms.add(alarm);
         rebindAlarms();
         AlarmMenu alarmMenu = viewSwitcher.show(Alarm.class);
         alarmMenu.setCurrentAlarm(alarm);
-    }
-
-    private SaveTrigger saveToStorage() {
-        return () -> storage.save(alarms);
     }
 
     private void rebindAlarms() {

@@ -36,9 +36,11 @@ public class ClockRadio extends Application {
         TimeProvider timeProvider = new RealTimeProvider();
         Trigger trigger = new AlarmTrigger(timeProvider);
         Player availablePlayer = availablePlayer();
-        AlarmStorage storage = new FileStorage(storagePath);
-        MainPanel mainPanel = new MainPanel(availablePlayer, trigger,
-                playerFactory(availablePlayer), timeProvider, storage);
+        AlarmFactory alarmFactory = new RealAlarmFactory(playerFactory(availablePlayer),
+                timeProvider);
+        AlarmStorage storage = new FileStorage(storagePath, alarmFactory);
+        MainPanel mainPanel = new MainPanel(availablePlayer, trigger, alarmFactory, timeProvider,
+                storage);
         mainPanel.getStylesheets()
                  .add(ClockRadio.class.getResource("clock-radio.css").toExternalForm());
         watchCssFile(mainPanel);

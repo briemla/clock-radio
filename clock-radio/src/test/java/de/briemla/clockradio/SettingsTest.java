@@ -2,7 +2,6 @@ package de.briemla.clockradio;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -20,6 +19,7 @@ import de.briemla.clockradio.player.PlayerFactory;
 
 public class SettingsTest {
 
+    private static final int first = 0;
     private static final LocalTime nextMinute = LocalTime.of(0, 0);
     private static final WakeUpTime toAnotherTime = new WakeUpTime(12, 34);
     private DefaultableViewSwitcher switcher;
@@ -29,6 +29,8 @@ public class SettingsTest {
     private TimeProvider timeProvider;
     private AlarmStorage storage;
     private AlarmMenu alarmMenu;
+    private AlarmFactory alarmFactory;
+    private SaveTrigger storageTrigger;
 
     @Before
     public void initializeMockups() {
@@ -38,7 +40,9 @@ public class SettingsTest {
         timeProvider = mock(TimeProvider.class);
         storage = mock(AlarmStorage.class);
         alarmMenu = mock(AlarmMenu.class);
-        settings = new Settings(switcher, player, playerFactory, timeProvider, storage);
+        alarmFactory = mock(AlarmFactory.class);
+        storageTrigger = mock(SaveTrigger.class);
+        settings = new Settings(switcher, player, alarmFactory, storage);
     }
 
     @Test
@@ -64,6 +68,8 @@ public class SettingsTest {
     @Test
     public void saveNewAlarmWhenAlarmIsAdded() throws Exception {
         when(timeProvider.nextMinute()).thenReturn(nextMinute);
+        Alarm factoryAlarm = new Alarm(playerFactory, timeProvider, storageTrigger);
+        when(alarmFactory.create()).thenReturn(factoryAlarm);
         when(switcher.show(Alarm.class)).thenReturn(alarmMenu);
         settings.addAlarm();
 
@@ -73,13 +79,16 @@ public class SettingsTest {
     @Test
     public void saveWhenWakeUpTimeOfExistingAlarmIsAltered() throws Exception {
         when(timeProvider.nextMinute()).thenReturn(nextMinute);
+        Alarm factoryAlarm = new Alarm(playerFactory, timeProvider, storageTrigger);
+        when(alarmFactory.create()).thenReturn(factoryAlarm);
         when(switcher.show(Alarm.class)).thenReturn(alarmMenu);
         settings.addAlarm();
 
-        Alarm alarm = settings.getAlarms().get(0);
+        Alarm alarm = settings.getAlarms().get(first);
         alarm.wakeUpTimeProperty().set(toAnotherTime);
 
-        verify(storage, times(2)).save(any());
+        verify(storage).save(any());
+        verify(storageTrigger).save();
     }
 
 }

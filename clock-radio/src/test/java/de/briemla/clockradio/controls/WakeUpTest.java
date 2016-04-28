@@ -33,6 +33,8 @@ import org.loadui.testfx.GuiTest;
 
 import de.briemla.clockradio.AlarmStorage;
 import de.briemla.clockradio.AlarmTrigger;
+import de.briemla.clockradio.RealAlarmFactory;
+import de.briemla.clockradio.SaveTrigger;
 import de.briemla.clockradio.TimeProvider;
 import de.briemla.clockradio.dabpi.DABStation;
 import de.briemla.clockradio.dabpi.FMStation;
@@ -110,6 +112,7 @@ public class WakeUpTest extends GuiTest {
     private PlayerFactory playerFactory;
     private TimeProvider timeProvider;
     private SimpleObjectProperty<LocalTime> time;
+    private RealAlarmFactory alarmFactory;
 
     @Test
     public void whenCancelledAlarmIsTriggeredAgain() throws Exception {
@@ -159,8 +162,11 @@ public class WakeUpTest extends GuiTest {
         player = new MockedPlayer();
         trigger = new AlarmTrigger(timeProvider);
         playerFactory = new RealPlayerFactory(player);
+        alarmFactory = new RealAlarmFactory(playerFactory, timeProvider);
+        SaveTrigger saveTrigger = mock(SaveTrigger.class);
+        alarmFactory.initialize(saveTrigger);
         AlarmStorage storage = mock(AlarmStorage.class);
-        return new MainPanel(player, trigger, playerFactory, timeProvider, storage);
+        return new MainPanel(player, trigger, alarmFactory, timeProvider, storage);
     }
 
     private static Matcher<MockedPlayer> hasBeenPlayed() {
