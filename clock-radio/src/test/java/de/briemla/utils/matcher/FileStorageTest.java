@@ -148,6 +148,13 @@ public class FileStorageTest {
     }
 
     @Test
+    public void restoreNoAlarmsWhenFileDoesNotExist() throws Exception {
+        List<Alarm> storedAlarms = storage.load();
+
+        assertThat(storedAlarms, is(empty()));
+    }
+
+    @Test
     public void writesBackupFileBeforeSavingChanges() throws Exception {
         List<Alarm> alarms = Collections.singletonList(alarm());
 

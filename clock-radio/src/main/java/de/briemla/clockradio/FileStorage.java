@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 
 public class FileStorage implements AlarmStorage {
@@ -56,6 +57,9 @@ public class FileStorage implements AlarmStorage {
 
     @Override
     public List<Alarm> load() {
+        if (!storagepath.exists()) {
+            return Collections.emptyList();
+        }
         try {
             return Files.readAllLines(storagepath.toPath())
                         .stream()
