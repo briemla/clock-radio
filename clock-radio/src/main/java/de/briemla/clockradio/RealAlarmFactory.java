@@ -35,7 +35,7 @@ public class RealAlarmFactory implements AlarmFactory {
 
     @Override
     public Alarm fromStorage(String storedAlarm) {
-        Alarm alarm = new Alarm(playerFactory, timeProvider, saveTrigger);
+        Alarm alarm = create();
         String[] fromStoredAlarm = storedAlarm.split(separator);
         alarm.wakeUpTimeProperty().set(toWakeUpTime(fromStoredAlarm));
         alarm.mediaProperty().set(toMedia(fromStoredAlarm));
