@@ -24,6 +24,7 @@ public class RealAlarmFactory implements AlarmFactory {
         saveTrigger = () -> {};
     }
 
+    @Override
     public void initialize(SaveTrigger saveTrigger) {
         this.saveTrigger = saveTrigger;
     }

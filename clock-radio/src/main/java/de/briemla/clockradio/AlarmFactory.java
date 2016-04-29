@@ -6,4 +6,6 @@ public interface AlarmFactory {
 
     Alarm fromStorage(String storedAlarm);
 
+    void initialize(SaveTrigger saveTrigger);
+
 }

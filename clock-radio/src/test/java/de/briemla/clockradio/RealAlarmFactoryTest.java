@@ -27,7 +27,7 @@ public class RealAlarmFactoryTest {
     private PlayerFactory playerFactory;
     private TimeProvider timeProvider;
     private SaveTrigger saveTrigger;
-    private RealAlarmFactory factory;
+    private AlarmFactory factory;
 
     @Before
     public void initialise() {
