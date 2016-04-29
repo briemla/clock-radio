@@ -4,7 +4,9 @@ import static de.briemla.clockradio.ObservableValueMatchers.hasValue;
 import static de.briemla.utils.matcher.FileStorageMatcher.contains;
 import static de.briemla.utils.matcher.FileStorageMatcher.containsSingleLine;
 import static de.briemla.utils.matcher.FileStorageMatcher.isEmpty;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -123,6 +125,13 @@ public class FileStorageTest {
         assertThat(alarmAfterLoad.mediaProperty(), hasValue(equalTo(mediaBeforeSave)));
         assertThat(alarmAfterLoad.activeDaysProperty(), hasValue(equalTo(activeDaysBeforeSave)));
         assertThat(alarmAfterLoad.activatedProperty(), hasValue(equalTo(activatedBeforeSave)));
+    }
+
+    @Test
+    public void restoreNoAlarmsFromEmptyFile() throws Exception {
+        List<Alarm> storedAlarms = storage.load();
+
+        assertThat(storedAlarms, is(empty()));
     }
 
 }
