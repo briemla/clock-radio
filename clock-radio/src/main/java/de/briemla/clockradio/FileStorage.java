@@ -28,6 +28,7 @@ public class FileStorage implements AlarmStorage {
         }
     }
 
+    @Override
     public List<Alarm> load() {
         try {
             return Files.readAllLines(storagepath.toPath())

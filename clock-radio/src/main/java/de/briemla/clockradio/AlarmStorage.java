@@ -6,4 +6,6 @@ public interface AlarmStorage {
 
     void save(List<Alarm> alarms);
 
+    List<Alarm> load();
+
 }
