@@ -3,10 +3,12 @@ package de.briemla.utils.matcher;
 import static de.briemla.clockradio.ObservableValueMatchers.hasValue;
 import static de.briemla.utils.matcher.FileStorageMatcher.contains;
 import static de.briemla.utils.matcher.FileStorageMatcher.containsSingleLine;
+import static de.briemla.utils.matcher.FileStorageMatcher.exists;
 import static de.briemla.utils.matcher.FileStorageMatcher.isEmpty;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -39,6 +41,8 @@ import de.briemla.clockradio.player.PlayerFactory;
 
 public class FileStorageTest {
 
+    private static final String storageFileName = "alarm.storage";
+    private static final String backupFileName = storageFileName + ".backup";
     private static final int singleAlarm = 0;
     private static final LocalTime nextMinute = LocalTime.of(12, 34);
     private static final String separator = ";";
@@ -52,14 +56,20 @@ public class FileStorageTest {
     private TimeProvider timeProvider;
     private SaveTrigger notUsedTrigger;
     private AlarmFactory alarmFactory;
+    private File backupFile;
 
     @Before
     public void initialise() throws IOException {
-        storageFile = folder.newFile("alarm.storage");
+        storageFile = new File(folder.getRoot(), storageFileName);
+        backupFile = new File(folder.getRoot(), backupFileName);
         timeProvider = mock(TimeProvider.class);
         when(timeProvider.nextMinute()).thenReturn(nextMinute);
         alarmFactory = new RealAlarmFactory(notUsedFactory, timeProvider);
         storage = new FileStorage(storageFile, alarmFactory);
+    }
+
+    private Alarm alarm() {
+        return new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
     }
 
     @Test
@@ -71,7 +81,7 @@ public class FileStorageTest {
 
     @Test
     public void saveOneAlarmToFile() throws Exception {
-        Alarm ofAlarm = new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
+        Alarm ofAlarm = alarm();
         List<Alarm> oneAlarm = Collections.singletonList(ofAlarm);
         storage.save(oneAlarm);
 
@@ -85,8 +95,8 @@ public class FileStorageTest {
 
     @Test
     public void saveSeveralAlarmsToFile() throws Exception {
-        Alarm firstAlarm = new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
-        Alarm secondAlarm = new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
+        Alarm firstAlarm = alarm();
+        Alarm secondAlarm = alarm();
         secondAlarm.activatedProperty().setValue(false);
         List<Alarm> alarms = Arrays.asList(firstAlarm, secondAlarm);
 
@@ -106,7 +116,7 @@ public class FileStorageTest {
 
     @Test
     public void restoreSavedAlarmsFromFile() throws Exception {
-        Alarm alarmBeforeSave = new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
+        Alarm alarmBeforeSave = alarm();
         WakeUpTime wakeUpTimeBeforeSave = new WakeUpTime(23, 56);
         alarmBeforeSave.wakeUpTimeProperty().set(wakeUpTimeBeforeSave);
         Media mediaBeforeSave = new LocalFolder(new File("/home/somewhere/").toPath());
@@ -115,6 +125,7 @@ public class FileStorageTest {
         alarmBeforeSave.activeDaysProperty().set(activeDaysBeforeSave);
         boolean activatedBeforeSave = false;
         alarmBeforeSave.activatedProperty().setValue(activatedBeforeSave);
+
         List<Alarm> alarms = Collections.singletonList(alarmBeforeSave);
         storage.save(alarms);
 
@@ -129,9 +140,31 @@ public class FileStorageTest {
 
     @Test
     public void restoreNoAlarmsFromEmptyFile() throws Exception {
+        storageFile.createNewFile();
+
         List<Alarm> storedAlarms = storage.load();
 
         assertThat(storedAlarms, is(empty()));
     }
+
+    @Test
+    public void writesBackupFileBeforeSavingChanges() throws Exception {
+        List<Alarm> alarms = Collections.singletonList(alarm());
+
+        storage.save(alarms);
+        assertThat("first storage", backupFile, not(exists()));
+
+        storage.save(alarms);
+        assertThat("second storage", backupFile, exists());
+    }
+
+    // private Alarm failsOnWrite() {
+    // return new Alarm(notUsedFactory, timeProvider, notUsedTrigger) {
+    // @Override
+    // public void storeTo(PrintStream output) {
+    // throw new IOException("Fail storing of alarm");
+    // }
+    // };
+    // }
 
 }
