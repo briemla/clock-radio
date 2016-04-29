@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalTime;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,6 +44,11 @@ public class SettingsTest {
         alarmFactory = mock(AlarmFactory.class);
         storageTrigger = mock(SaveTrigger.class);
         settings = new Settings(switcher, player, alarmFactory, storage);
+    }
+
+    @After
+    public void verifyAlarmFactoryInitialization() {
+        verify(alarmFactory).initialize(any());
     }
 
     @Test

@@ -32,6 +32,7 @@ public class Settings {
         alarmStartedProperty = new SimpleBooleanProperty();
         alarms = FXCollections.observableArrayList();
         alarms.addListener(saveOnChangeTo(storage));
+        alarmFactory.initialize(() -> storage.save(alarms));
     }
 
     private ListChangeListener<Alarm> saveOnChangeTo(AlarmStorage storage) {
@@ -93,5 +94,17 @@ public class Settings {
 
     public List<? extends Station> searchFM() {
         return player.searchFM();
+    }
+
+    public void initialzeAlarms() {
+        List<Alarm> storedAlarms = storage.load();
+        alarms.addAll(storedAlarms);
+        ensureAtLeastOneAlarm();
+    }
+
+    private void ensureAtLeastOneAlarm() {
+        if (alarms.isEmpty()) {
+            addAlarm();
+        }
     }
 }

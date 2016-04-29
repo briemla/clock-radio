@@ -31,6 +31,7 @@ import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
+import de.briemla.clockradio.AlarmFactory;
 import de.briemla.clockradio.AlarmStorage;
 import de.briemla.clockradio.AlarmTrigger;
 import de.briemla.clockradio.RealAlarmFactory;
@@ -112,7 +113,7 @@ public class WakeUpTest extends GuiTest {
     private PlayerFactory playerFactory;
     private TimeProvider timeProvider;
     private SimpleObjectProperty<LocalTime> time;
-    private RealAlarmFactory alarmFactory;
+    private AlarmFactory alarmFactory;
 
     @Test
     public void whenCancelledAlarmIsTriggeredAgain() throws Exception {

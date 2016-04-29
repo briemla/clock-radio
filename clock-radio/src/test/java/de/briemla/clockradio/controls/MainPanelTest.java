@@ -9,6 +9,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalTime;
+import java.util.Collections;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Parent;
@@ -33,7 +34,9 @@ public class MainPanelTest extends GuiTest {
     private AlarmFactory alarmFactory;
 
     @Test
-    public void alarmTriggerInitialisation() throws Exception {
+    public void initializesAlarmTrigger() throws Exception {
+        when(storage.load()).thenReturn(Collections.emptyList());
+
         time.set(LocalTime.of(0, 0, 1));
         verify(trigger).bind(any());
         verify(trigger).startNow();
@@ -43,6 +46,7 @@ public class MainPanelTest extends GuiTest {
         verifyNoMoreInteractions(timeProvider);
         verify(alarmFactory).create();
         verifyNoMoreInteractions(alarmFactory);
+        verify(storage).load();
     }
 
     @Override

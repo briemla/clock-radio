@@ -63,7 +63,7 @@ public class MainPanel extends StackPane {
         addEventFilter(MouseEvent.MOUSE_PRESSED, showControls());
         active.set(true);
         resetInactiveTimer();
-        settings.addAlarm();
+        settings.initialzeAlarms();
         viewSwitcher.showDefault();
         timeProvider.timeProperty().addListener(event -> trigger.startNow());
     }
