@@ -1,5 +1,6 @@
 package de.briemla.clockradio;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.MalformedURLException;
@@ -39,7 +40,7 @@ public class ClockRadio extends Application {
         Player availablePlayer = availablePlayer();
         AlarmFactory alarmFactory = new RealAlarmFactory(playerFactory(availablePlayer),
                 timeProvider);
-        AlarmStorage storage = new FileStorage(storagePath, alarmFactory, FileWriter::new);
+        AlarmStorage storage = new FileStorage(storagePath, alarmFactory, outputFactory());
         MainPanel mainPanel = new MainPanel(availablePlayer, trigger, alarmFactory, timeProvider,
                 storage);
         mainPanel.getStylesheets()
@@ -47,6 +48,10 @@ public class ClockRadio extends Application {
         watchCssFile(mainPanel);
         primaryStage.setScene(new Scene(mainPanel));
         primaryStage.show();
+    }
+
+    private static OutputFactory outputFactory() {
+        return (file) -> new BufferedWriter(new FileWriter(file));
     }
 
     private PlayerFactory playerFactory(Player availablePlayer) {
