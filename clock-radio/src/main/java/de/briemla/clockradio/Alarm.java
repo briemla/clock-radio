@@ -1,7 +1,6 @@
 package de.briemla.clockradio;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.Writer;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -140,10 +139,6 @@ public class Alarm {
     public void kill() {
         stop();
         activated.set(false);
-    }
-
-    public void storeTo(PrintStream output) {
-        output.println(storedRepresentation());
     }
 
     private String storedRepresentation() {

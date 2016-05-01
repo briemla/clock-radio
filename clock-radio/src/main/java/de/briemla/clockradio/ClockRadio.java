@@ -1,7 +1,7 @@
 package de.briemla.clockradio;
 
 import java.io.File;
-import java.io.PrintStream;
+import java.io.FileWriter;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
@@ -39,7 +39,7 @@ public class ClockRadio extends Application {
         Player availablePlayer = availablePlayer();
         AlarmFactory alarmFactory = new RealAlarmFactory(playerFactory(availablePlayer),
                 timeProvider);
-        AlarmStorage storage = new FileStorage(storagePath, alarmFactory, PrintStream::new);
+        AlarmStorage storage = new FileStorage(storagePath, alarmFactory, FileWriter::new);
         MainPanel mainPanel = new MainPanel(availablePlayer, trigger, alarmFactory, timeProvider,
                 storage);
         mainPanel.getStylesheets()

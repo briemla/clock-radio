@@ -17,8 +17,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -81,7 +81,7 @@ public class FileStorageTest {
 
     private void initializeOutputFactory() throws IOException {
         when(outputFactory.create(storageFile)).thenAnswer(
-            invocation -> new PrintStream(storageFile));
+            invocation -> new FileWriter(storageFile));
     }
 
     @Test

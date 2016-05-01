@@ -4,7 +4,7 @@ import static java.util.stream.Collectors.toList;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
@@ -18,12 +18,11 @@ public class FileStorage implements AlarmStorage {
     private final Path backupFile;
     private final OutputFactory outputFactory;
 
-    public FileStorage(File storagepath, AlarmFactory alarmFactory,
-            OutputFactory streamFactory) {
+    public FileStorage(File storagepath, AlarmFactory alarmFactory, OutputFactory streamFactory) {
         super();
         this.storagepath = storagepath;
         this.alarmFactory = alarmFactory;
-        this.outputFactory = streamFactory;
+        outputFactory = streamFactory;
         backupFile = backFileFrom(storagepath);
     }
 
@@ -39,8 +38,10 @@ public class FileStorage implements AlarmStorage {
         if (backupFile()) {
             return;
         }
-        try (PrintStream file = outputFactory.create(storagepath)) {
-            alarms.stream().forEach(alarm -> alarm.storeTo(file));
+        try (Writer file = outputFactory.create(storagepath)) {
+            for (Alarm alarm : alarms) {
+                alarm.storeTo(file);
+            }
         } catch (IOException exception) {
             throw new RuntimeException("Could not save alarms", exception);
         }
