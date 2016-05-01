@@ -16,14 +16,14 @@ public class FileStorage implements AlarmStorage {
     private final File storagepath;
     private final AlarmFactory alarmFactory;
     private final Path backupFile;
-    private final PrintStreamFactory streamFactory;
+    private final OutputFactory outputFactory;
 
     public FileStorage(File storagepath, AlarmFactory alarmFactory,
-            PrintStreamFactory streamFactory) {
+            OutputFactory streamFactory) {
         super();
         this.storagepath = storagepath;
         this.alarmFactory = alarmFactory;
-        this.streamFactory = streamFactory;
+        this.outputFactory = streamFactory;
         backupFile = backFileFrom(storagepath);
     }
 
@@ -39,7 +39,7 @@ public class FileStorage implements AlarmStorage {
         if (backupFile()) {
             return;
         }
-        try (PrintStream file = streamFactory.create(storagepath)) {
+        try (PrintStream file = outputFactory.create(storagepath)) {
             alarms.stream().forEach(alarm -> alarm.storeTo(file));
         } catch (IOException exception) {
             throw new RuntimeException("Could not save alarms", exception);

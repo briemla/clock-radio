@@ -52,7 +52,7 @@ public class FileStorageTest {
     private SaveTrigger notUsedTrigger;
     private AlarmFactory alarmFactory;
     private File backupFile;
-    private PrintStreamFactory printStreamFactory;
+    private OutputFactory outputFactory;
 
     @Before
     public void initialise() throws IOException {
@@ -61,8 +61,8 @@ public class FileStorageTest {
         timeProvider = mock(TimeProvider.class);
         when(timeProvider.nextMinute()).thenReturn(nextMinute);
         alarmFactory = new RealAlarmFactory(notUsedFactory, timeProvider);
-        printStreamFactory = mock(PrintStreamFactory.class);
-        storage = new FileStorage(storageFile, alarmFactory, printStreamFactory);
+        outputFactory = mock(OutputFactory.class);
+        storage = new FileStorage(storageFile, alarmFactory, outputFactory);
     }
 
     private Alarm alarm() {
@@ -71,16 +71,16 @@ public class FileStorageTest {
 
     @Test
     public void saveEmptyListOfAlarmsToFile() throws Exception {
-        initializeStreamFactory();
+        initializeOutputFactory();
 
         storage.save(Collections.emptyList());
 
         assertThat(storageFile, isEmpty());
-        verify(printStreamFactory).create(storageFile);
+        verify(outputFactory).create(storageFile);
     }
 
-    private void initializeStreamFactory() throws IOException {
-        when(printStreamFactory.create(storageFile)).thenAnswer(
+    private void initializeOutputFactory() throws IOException {
+        when(outputFactory.create(storageFile)).thenAnswer(
             invocation -> new PrintStream(storageFile));
     }
 
@@ -88,7 +88,7 @@ public class FileStorageTest {
     public void saveOneAlarmToFile() throws Exception {
         Alarm ofAlarm = alarm();
         List<Alarm> oneAlarm = Collections.singletonList(ofAlarm);
-        initializeStreamFactory();
+        initializeOutputFactory();
 
         storage.save(oneAlarm);
 
@@ -98,7 +98,7 @@ public class FileStorageTest {
         String activated = "true";
         assertThat(storageFile, containsSingleLine(
             wakeUpTime + separator + media + separator + activeDays + separator + activated));
-        verify(printStreamFactory).create(storageFile);
+        verify(outputFactory).create(storageFile);
     }
 
     @Test
@@ -107,7 +107,7 @@ public class FileStorageTest {
         Alarm secondAlarm = alarm();
         secondAlarm.activatedProperty().setValue(false);
         List<Alarm> alarms = Arrays.asList(firstAlarm, secondAlarm);
-        initializeStreamFactory();
+        initializeOutputFactory();
 
         storage.save(alarms);
 
@@ -121,7 +121,7 @@ public class FileStorageTest {
         String secondLine = wakeUpTime + separator + media + separator + activeDays + separator
                 + deactivated;
         assertThat(storageFile, contains(firstLine, secondLine));
-        verify(printStreamFactory).create(storageFile);
+        verify(outputFactory).create(storageFile);
     }
 
     @Test
@@ -137,7 +137,7 @@ public class FileStorageTest {
         alarmBeforeSave.activatedProperty().setValue(activatedBeforeSave);
 
         List<Alarm> alarms = Collections.singletonList(alarmBeforeSave);
-        initializeStreamFactory();
+        initializeOutputFactory();
 
         storage.save(alarms);
 
@@ -148,12 +148,12 @@ public class FileStorageTest {
         assertThat(alarmAfterLoad.mediaProperty(), hasValue(equalTo(mediaBeforeSave)));
         assertThat(alarmAfterLoad.activeDaysProperty(), hasValue(equalTo(activeDaysBeforeSave)));
         assertThat(alarmAfterLoad.activatedProperty(), hasValue(equalTo(activatedBeforeSave)));
-        verify(printStreamFactory).create(storageFile);
+        verify(outputFactory).create(storageFile);
     }
 
     @Test
     public void restoreNoAlarmsFromEmptyFile() throws Exception {
-        initializeStreamFactory();
+        initializeOutputFactory();
 
         storageFile.createNewFile();
 
@@ -164,7 +164,7 @@ public class FileStorageTest {
 
     @Test
     public void restoreNoAlarmsWhenFileDoesNotExist() throws Exception {
-        initializeStreamFactory();
+        initializeOutputFactory();
 
         List<Alarm> storedAlarms = storage.load();
 
@@ -174,14 +174,14 @@ public class FileStorageTest {
     @Test
     public void writesBackupFileBeforeSavingChanges() throws Exception {
         List<Alarm> alarms = Collections.singletonList(alarm());
-        initializeStreamFactory();
+        initializeOutputFactory();
 
         storage.save(alarms);
         assertThat("first storage", backupFile, not(exists()));
 
         storage.save(alarms);
         assertThat("second storage", backupFile, exists());
-        verify(printStreamFactory, times(2)).create(any());
+        verify(outputFactory, times(2)).create(any());
     }
 
     @Test
