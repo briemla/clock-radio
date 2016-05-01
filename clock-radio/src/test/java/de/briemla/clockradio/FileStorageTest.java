@@ -1,4 +1,4 @@
-package de.briemla.utils.matcher;
+package de.briemla.clockradio;
 
 import static de.briemla.clockradio.ObservableValueMatchers.hasValue;
 import static de.briemla.utils.matcher.FileStorageMatcher.contains;
@@ -10,11 +10,15 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -27,15 +31,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import de.briemla.clockradio.ActiveDays;
-import de.briemla.clockradio.Alarm;
-import de.briemla.clockradio.AlarmFactory;
-import de.briemla.clockradio.FileStorage;
-import de.briemla.clockradio.Media;
-import de.briemla.clockradio.RealAlarmFactory;
-import de.briemla.clockradio.SaveTrigger;
-import de.briemla.clockradio.TimeProvider;
-import de.briemla.clockradio.WakeUpTime;
 import de.briemla.clockradio.controls.LocalFolder;
 import de.briemla.clockradio.player.PlayerFactory;
 
@@ -57,6 +52,7 @@ public class FileStorageTest {
     private SaveTrigger notUsedTrigger;
     private AlarmFactory alarmFactory;
     private File backupFile;
+    private PrintStreamFactory printStreamFactory;
 
     @Before
     public void initialise() throws IOException {
@@ -65,7 +61,8 @@ public class FileStorageTest {
         timeProvider = mock(TimeProvider.class);
         when(timeProvider.nextMinute()).thenReturn(nextMinute);
         alarmFactory = new RealAlarmFactory(notUsedFactory, timeProvider);
-        storage = new FileStorage(storageFile, alarmFactory);
+        printStreamFactory = mock(PrintStreamFactory.class);
+        storage = new FileStorage(storageFile, alarmFactory, printStreamFactory);
     }
 
     private Alarm alarm() {
@@ -74,15 +71,25 @@ public class FileStorageTest {
 
     @Test
     public void saveEmptyListOfAlarmsToFile() throws Exception {
+        initializeStreamFactory();
+
         storage.save(Collections.emptyList());
 
         assertThat(storageFile, isEmpty());
+        verify(printStreamFactory).create(storageFile);
+    }
+
+    private void initializeStreamFactory() throws IOException {
+        when(printStreamFactory.create(storageFile)).thenAnswer(
+            invocation -> new PrintStream(storageFile));
     }
 
     @Test
     public void saveOneAlarmToFile() throws Exception {
         Alarm ofAlarm = alarm();
         List<Alarm> oneAlarm = Collections.singletonList(ofAlarm);
+        initializeStreamFactory();
+
         storage.save(oneAlarm);
 
         String wakeUpTime = "12:34";
@@ -91,6 +98,7 @@ public class FileStorageTest {
         String activated = "true";
         assertThat(storageFile, containsSingleLine(
             wakeUpTime + separator + media + separator + activeDays + separator + activated));
+        verify(printStreamFactory).create(storageFile);
     }
 
     @Test
@@ -99,6 +107,7 @@ public class FileStorageTest {
         Alarm secondAlarm = alarm();
         secondAlarm.activatedProperty().setValue(false);
         List<Alarm> alarms = Arrays.asList(firstAlarm, secondAlarm);
+        initializeStreamFactory();
 
         storage.save(alarms);
 
@@ -112,6 +121,7 @@ public class FileStorageTest {
         String secondLine = wakeUpTime + separator + media + separator + activeDays + separator
                 + deactivated;
         assertThat(storageFile, contains(firstLine, secondLine));
+        verify(printStreamFactory).create(storageFile);
     }
 
     @Test
@@ -127,6 +137,8 @@ public class FileStorageTest {
         alarmBeforeSave.activatedProperty().setValue(activatedBeforeSave);
 
         List<Alarm> alarms = Collections.singletonList(alarmBeforeSave);
+        initializeStreamFactory();
+
         storage.save(alarms);
 
         List<Alarm> loaded = storage.load();
@@ -136,10 +148,13 @@ public class FileStorageTest {
         assertThat(alarmAfterLoad.mediaProperty(), hasValue(equalTo(mediaBeforeSave)));
         assertThat(alarmAfterLoad.activeDaysProperty(), hasValue(equalTo(activeDaysBeforeSave)));
         assertThat(alarmAfterLoad.activatedProperty(), hasValue(equalTo(activatedBeforeSave)));
+        verify(printStreamFactory).create(storageFile);
     }
 
     @Test
     public void restoreNoAlarmsFromEmptyFile() throws Exception {
+        initializeStreamFactory();
+
         storageFile.createNewFile();
 
         List<Alarm> storedAlarms = storage.load();
@@ -149,6 +164,8 @@ public class FileStorageTest {
 
     @Test
     public void restoreNoAlarmsWhenFileDoesNotExist() throws Exception {
+        initializeStreamFactory();
+
         List<Alarm> storedAlarms = storage.load();
 
         assertThat(storedAlarms, is(empty()));
@@ -157,21 +174,19 @@ public class FileStorageTest {
     @Test
     public void writesBackupFileBeforeSavingChanges() throws Exception {
         List<Alarm> alarms = Collections.singletonList(alarm());
+        initializeStreamFactory();
 
         storage.save(alarms);
         assertThat("first storage", backupFile, not(exists()));
 
         storage.save(alarms);
         assertThat("second storage", backupFile, exists());
+        verify(printStreamFactory, times(2)).create(any());
     }
 
-    // private Alarm failsOnWrite() {
-    // return new Alarm(notUsedFactory, timeProvider, notUsedTrigger) {
-    // @Override
-    // public void storeTo(PrintStream output) {
-    // throw new IOException("Fail storing of alarm");
-    // }
-    // };
-    // }
+    @Test
+    public void restoresFromBackupFileWhenNormalFileIsCorrupt() throws Exception {
+        // TODO store alarm and load from corrupted file
+    }
 
 }
