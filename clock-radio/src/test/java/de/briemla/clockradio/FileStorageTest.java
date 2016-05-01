@@ -66,6 +66,12 @@ public class FileStorageTest {
         alarmFactory = new RealAlarmFactory(notUsedFactory, timeProvider);
         outputFactory = mock(OutputFactory.class);
         storage = new FileStorage(storageFile, alarmFactory, outputFactory);
+        initializeOutputFactory();
+    }
+
+    private void initializeOutputFactory() throws IOException {
+        when(outputFactory.create(storageFile)).thenAnswer(
+            invocation -> new FileWriter(storageFile));
     }
 
     private Alarm alarm() {
@@ -74,24 +80,16 @@ public class FileStorageTest {
 
     @Test
     public void saveEmptyListOfAlarmsToFile() throws Exception {
-        initializeOutputFactory();
-
         storage.save(Collections.emptyList());
 
         assertThat(storageFile, containsSingleLine(closing));
         verify(outputFactory).create(storageFile);
     }
 
-    private void initializeOutputFactory() throws IOException {
-        when(outputFactory.create(storageFile)).thenAnswer(
-            invocation -> new FileWriter(storageFile));
-    }
-
     @Test
     public void saveOneAlarmToFile() throws Exception {
         Alarm ofAlarm = alarm();
         List<Alarm> oneAlarm = Collections.singletonList(ofAlarm);
-        initializeOutputFactory();
 
         storage.save(oneAlarm);
 
@@ -115,7 +113,6 @@ public class FileStorageTest {
         Alarm secondAlarm = alarm();
         secondAlarm.activatedProperty().setValue(false);
         List<Alarm> alarms = Arrays.asList(firstAlarm, secondAlarm);
-        initializeOutputFactory();
 
         storage.save(alarms);
 
@@ -143,7 +140,6 @@ public class FileStorageTest {
         alarmBeforeSave.activatedProperty().setValue(activatedBeforeSave);
 
         List<Alarm> alarms = Collections.singletonList(alarmBeforeSave);
-        initializeOutputFactory();
 
         storage.save(alarms);
 
@@ -159,8 +155,6 @@ public class FileStorageTest {
 
     @Test
     public void restoreNoAlarmsFromEmptyFile() throws Exception {
-        initializeOutputFactory();
-
         storageFile.createNewFile();
 
         List<Alarm> storedAlarms = storage.load();
@@ -170,8 +164,6 @@ public class FileStorageTest {
 
     @Test
     public void restoreNoAlarmsWhenFileDoesNotExist() throws Exception {
-        initializeOutputFactory();
-
         List<Alarm> storedAlarms = storage.load();
 
         assertThat(storedAlarms, is(empty()));
@@ -180,7 +172,6 @@ public class FileStorageTest {
     @Test
     public void writesBackupFileBeforeSavingChanges() throws Exception {
         List<Alarm> alarms = Collections.singletonList(alarm());
-        initializeOutputFactory();
 
         storage.save(alarms);
         assertThat("first storage", backupFile, not(exists()));
@@ -192,7 +183,6 @@ public class FileStorageTest {
 
     @Test
     public void restoresFromBackupFileWhenNormalFileIsCorrupt() throws Exception {
-        initializeOutputFactory();
         saveBackupFile();
 
         List<Alarm> alarms = new ArrayList<>();
@@ -222,5 +212,20 @@ public class FileStorageTest {
                 throw new IOException("Failing to store me for test purpose");
             }
         };
+    }
+
+    @Test
+    public void restoresAsMuchAsPossibleFromCorruptFileWhenBackupIsMissing() throws Exception {
+        List<Alarm> alarms = new ArrayList<>();
+        alarms.add(alarm());
+        alarms.add(alarmFailingToStoreItself());
+
+        storage.save(alarms);
+
+        assertThat(backupFile, not(exists()));
+        assertThat(storageFile, containsSingleLine(defaultStoredAlarm()));
+
+        List<Alarm> storedAlarms = storage.load();
+        assertThat(storedAlarms, hasSize(1));
     }
 }
