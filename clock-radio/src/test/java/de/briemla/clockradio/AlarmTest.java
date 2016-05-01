@@ -11,7 +11,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-import java.io.PrintStream;
+import java.io.Writer;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,6 +27,7 @@ import de.briemla.clockradio.player.PlayerWorker;
 
 public class AlarmTest {
 
+    private static final String newLine = System.lineSeparator();
     private static final String defaultWakeUpTime = "01:02";
     private static final String separator = ";";
     private static final String defaultMedia = LocalFolder.defaultFolder().toString();
@@ -145,11 +146,12 @@ public class AlarmTest {
 
     @Test
     public void storeInitialAlarmToOutput() throws Exception {
-        PrintStream output = mock(PrintStream.class);
+        Writer output = mock(Writer.class);
+
         alarm.storeTo(output);
 
-        verify(output).println(defaultWakeUpTime + separator + defaultMedia + separator
-                + defaultActiveDays + separator + defaultActivated);
+        verify(output).write(defaultWakeUpTime + separator + defaultMedia + separator
+                + defaultActiveDays + separator + defaultActivated + newLine);
     }
 
     @Test
@@ -157,12 +159,12 @@ public class AlarmTest {
         WakeUpTime toAnotherWakeUpTime = new WakeUpTime(12, 34);
         alarm.wakeUpTimeProperty().set(toAnotherWakeUpTime);
 
-        PrintStream output = mock(PrintStream.class);
+        Writer output = mock(Writer.class);
         alarm.storeTo(output);
 
         String changedWakeUpTime = "12:34";
-        verify(output).println(changedWakeUpTime + separator + defaultMedia + separator
-                + defaultActiveDays + separator + defaultActivated);
+        verify(output).write(changedWakeUpTime + separator + defaultMedia + separator
+                + defaultActiveDays + separator + defaultActivated + newLine);
     }
 
     @Test
@@ -171,24 +173,25 @@ public class AlarmTest {
         when(myMedia.toString()).thenReturn("myMedia");
         alarm.mediaProperty().set(myMedia);
 
-        PrintStream output = mock(PrintStream.class);
+        Writer output = mock(Writer.class);
         alarm.storeTo(output);
 
         String media = "myMedia";
-        verify(output).println(defaultWakeUpTime + separator + media + separator + defaultActiveDays
-                + separator + defaultActivated);
+        verify(output).write(defaultWakeUpTime + separator + media + separator + defaultActiveDays
+                + separator + defaultActivated + newLine);
     }
 
     @Test
     public void storeChangedActiveDaysToOutput() throws Exception {
         ActiveDays changedActiveDays = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
         alarm.activeDaysProperty().set(changedActiveDays);
-        PrintStream output = mock(PrintStream.class);
+
+        Writer output = mock(Writer.class);
         alarm.storeTo(output);
 
         String activeDays = "[MONDAY]";
-        verify(output).println(defaultWakeUpTime + separator + defaultMedia + separator + activeDays
-                + separator + defaultActivated);
+        verify(output).write(defaultWakeUpTime + separator + defaultMedia + separator + activeDays
+                + separator + defaultActivated + newLine);
     }
 
 }

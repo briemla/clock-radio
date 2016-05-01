@@ -1,6 +1,8 @@
 package de.briemla.clockradio;
 
+import java.io.IOException;
 import java.io.PrintStream;
+import java.io.Writer;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -20,6 +22,7 @@ import de.briemla.clockradio.player.PlayerWorker;
 
 public class Alarm {
 
+    private static final String newLine = System.lineSeparator();
     private static final String separator = ";";
     private final SimpleObjectProperty<Duration> durationProperty;
     private final SimpleBooleanProperty alarmStartedProperty;
@@ -140,12 +143,21 @@ public class Alarm {
     }
 
     public void storeTo(PrintStream output) {
+        output.println(storedRepresentation());
+    }
+
+    private String storedRepresentation() {
         String wakeUpTime = wakeUpTimeProperty.get().toString();
         String media = mediaProperty.get().toString();
         String activeDays = activeDaysProperty.get().serialize();
         String activated = this.activated.getValue().toString();
-        output.println(
-            wakeUpTime + separator + media + separator + activeDays + separator + activated);
+        String storedRepresentation = wakeUpTime + separator + media + separator + activeDays
+                + separator + activated;
+        return storedRepresentation;
+    }
+
+    public void storeTo(Writer output) throws IOException {
+        output.write(storedRepresentation() + newLine);
     }
 
 }
