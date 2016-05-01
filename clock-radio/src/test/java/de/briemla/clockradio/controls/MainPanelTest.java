@@ -44,6 +44,7 @@ public class MainPanelTest extends GuiTest {
         verify(timeProvider, times(2)).timeProperty();
         verify(timeProvider).nextMinute();
         verifyNoMoreInteractions(timeProvider);
+        verify(alarmFactory).initialize(any());
         verify(alarmFactory).create();
         verifyNoMoreInteractions(alarmFactory);
         verify(storage).load();
