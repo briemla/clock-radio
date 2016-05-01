@@ -1,5 +1,6 @@
 package de.briemla.clockradio;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static java.util.stream.Collectors.toList;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class FileStorage implements AlarmStorage {
 
+    private static final String closing = "closing";
     private static final String backupExtension = ".backup";
     private final File storagepath;
     private final AlarmFactory alarmFactory;
@@ -42,9 +44,15 @@ public class FileStorage implements AlarmStorage {
             for (Alarm alarm : alarms) {
                 alarm.storeTo(file);
             }
+            addClosingTo(file);
         } catch (IOException exception) {
-            throw new RuntimeException("Could not save alarms", exception);
+            // TODO log write failure
+            // throw new RuntimeException("Could not save alarms", exception);
         }
+    }
+
+    private void addClosingTo(Writer file) throws IOException {
+        file.write(closing);
     }
 
     private boolean backupFile() {
@@ -64,14 +72,51 @@ public class FileStorage implements AlarmStorage {
         if (!storagepath.exists()) {
             return Collections.emptyList();
         }
+        restoreFromBackupIfNeeded();
+        return loadUndamagedFile();
+    }
+
+    private void restoreFromBackupIfNeeded() {
         try {
-            return Files.readAllLines(storagepath.toPath())
-                        .stream()
-                        .map(alarmFactory::fromStorage)
-                        .collect(toList());
+            if (fileIsUndamaged()) {
+                return;
+            }
+            restoreFromBackup();
+        } catch (IOException exception) {
+            // TODO log when backup could not be restored
+        }
+    }
+
+    private boolean fileIsUndamaged() throws IOException {
+        List<String> fileContent = fileContent();
+        if (fileContent.isEmpty()) {
+            // TODO is this really allowed???
+            return true;
+        }
+        String lastElement = fileContent.get(fileContent.size() - 1);
+        return closing.equals(lastElement);
+    }
+
+    private void restoreFromBackup() throws IOException {
+        if (backupFile.toFile().exists()) {
+            Files.copy(backupFile, storagepath.toPath(), REPLACE_EXISTING);
+        }
+        // TODO log when backup could not be restored
+    }
+
+    private List<Alarm> loadUndamagedFile() {
+        try {
+            return fileContent().stream()
+                                .filter(line -> !closing.equals(line))
+                                .map(alarmFactory::fromStorage)
+                                .collect(toList());
         } catch (IOException exception) {
             throw new RuntimeException("Could not load alarms", exception);
         }
+    }
+
+    private List<String> fileContent() throws IOException {
+        return Files.readAllLines(storagepath.toPath());
     }
 
 }

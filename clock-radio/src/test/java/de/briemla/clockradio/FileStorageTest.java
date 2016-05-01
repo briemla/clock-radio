@@ -4,9 +4,9 @@ import static de.briemla.clockradio.ObservableValueMatchers.hasValue;
 import static de.briemla.utils.matcher.FileStorageMatcher.contains;
 import static de.briemla.utils.matcher.FileStorageMatcher.containsSingleLine;
 import static de.briemla.utils.matcher.FileStorageMatcher.exists;
-import static de.briemla.utils.matcher.FileStorageMatcher.isEmpty;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
@@ -19,8 +19,10 @@ import static org.mockito.Mockito.when;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -41,6 +43,7 @@ public class FileStorageTest {
     private static final int singleAlarm = 0;
     private static final LocalTime nextMinute = LocalTime.of(12, 34);
     private static final String separator = ";";
+    private static final String closing = "closing";
 
     @Rule
     public final TemporaryFolder folder = new TemporaryFolder();
@@ -75,7 +78,7 @@ public class FileStorageTest {
 
         storage.save(Collections.emptyList());
 
-        assertThat(storageFile, isEmpty());
+        assertThat(storageFile, containsSingleLine(closing));
         verify(outputFactory).create(storageFile);
     }
 
@@ -92,13 +95,18 @@ public class FileStorageTest {
 
         storage.save(oneAlarm);
 
+        assertThat(storageFile, contains(defaultStoredAlarm(), closing));
+        verify(outputFactory).create(storageFile);
+    }
+
+    private String defaultStoredAlarm() {
         String wakeUpTime = "12:34";
         String media = LocalFolder.defaultFolder().toString();
         String activeDays = "[MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]";
         String activated = "true";
-        assertThat(storageFile, containsSingleLine(
-            wakeUpTime + separator + media + separator + activeDays + separator + activated));
-        verify(outputFactory).create(storageFile);
+        String defaultStoredAlarm = wakeUpTime + separator + media + separator + activeDays
+                + separator + activated;
+        return defaultStoredAlarm;
     }
 
     @Test
@@ -111,16 +119,14 @@ public class FileStorageTest {
 
         storage.save(alarms);
 
+        String firstLine = defaultStoredAlarm();
         String wakeUpTime = "12:34";
         String media = LocalFolder.defaultFolder().toString();
         String activeDays = "[MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]";
-        String activated = "true";
-        String firstLine = wakeUpTime + separator + media + separator + activeDays + separator
-                + activated;
         String deactivated = "false";
         String secondLine = wakeUpTime + separator + media + separator + activeDays + separator
                 + deactivated;
-        assertThat(storageFile, contains(firstLine, secondLine));
+        assertThat(storageFile, contains(firstLine, secondLine, closing));
         verify(outputFactory).create(storageFile);
     }
 
@@ -186,7 +192,35 @@ public class FileStorageTest {
 
     @Test
     public void restoresFromBackupFileWhenNormalFileIsCorrupt() throws Exception {
-        // TODO store alarm and load from corrupted file
+        initializeOutputFactory();
+        saveBackupFile();
+
+        List<Alarm> alarms = new ArrayList<>();
+        alarms.add(alarm());
+        alarms.add(alarmFailingToStoreItself());
+
+        storage.save(alarms);
+
+        assertThat(backupFile, contains(defaultStoredAlarm(), defaultStoredAlarm(), closing));
+        assertThat(storageFile, containsSingleLine(defaultStoredAlarm()));
+
+        List<Alarm> storedAlarms = storage.load();
+        assertThat(storedAlarms, hasSize(2));
     }
 
+    private void saveBackupFile() {
+        List<Alarm> alarms = new ArrayList<>();
+        alarms.add(alarm());
+        alarms.add(alarm());
+        storage.save(alarms);
+    }
+
+    private Alarm alarmFailingToStoreItself() {
+        return new Alarm(notUsedFactory, timeProvider, notUsedTrigger) {
+            @Override
+            public void storeTo(Writer output) throws IOException {
+                throw new IOException("Failing to store me for test purpose");
+            }
+        };
+    }
 }
