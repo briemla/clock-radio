@@ -19,12 +19,15 @@ public class FileStorage implements AlarmStorage {
     private final AlarmFactory alarmFactory;
     private final Path backupFile;
     private final OutputFactory outputFactory;
+    private final ExceptionHandler exceptionHandler;
 
-    public FileStorage(File storagepath, AlarmFactory alarmFactory, OutputFactory streamFactory) {
+    public FileStorage(File storagepath, AlarmFactory alarmFactory, OutputFactory outputFactory,
+            ExceptionHandler exceptionHandler) {
         super();
         this.storagepath = storagepath;
         this.alarmFactory = alarmFactory;
-        outputFactory = streamFactory;
+        this.outputFactory = outputFactory;
+        this.exceptionHandler = exceptionHandler;
         backupFile = backFileFrom(storagepath);
     }
 
@@ -46,8 +49,7 @@ public class FileStorage implements AlarmStorage {
             }
             addClosingTo(file);
         } catch (IOException exception) {
-            // TODO log write failure
-            // throw new RuntimeException("Could not save alarms", exception);
+            exceptionHandler.handle(exception);
         }
     }
 

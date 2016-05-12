@@ -11,9 +11,11 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
@@ -28,6 +30,7 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -56,6 +59,7 @@ public class FileStorageTest {
     private AlarmFactory alarmFactory;
     private File backupFile;
     private OutputFactory outputFactory;
+    private ExceptionHandler exceptionHandler;
 
     @Before
     public void initialise() throws IOException {
@@ -65,7 +69,8 @@ public class FileStorageTest {
         when(timeProvider.nextMinute()).thenReturn(nextMinute);
         alarmFactory = new RealAlarmFactory(notUsedFactory, timeProvider);
         outputFactory = mock(OutputFactory.class);
-        storage = new FileStorage(storageFile, alarmFactory, outputFactory);
+        exceptionHandler = mock(ExceptionHandler.class);
+        storage = new FileStorage(storageFile, alarmFactory, outputFactory, exceptionHandler);
         initializeOutputFactory();
     }
 
@@ -76,6 +81,11 @@ public class FileStorageTest {
 
     private Alarm alarm() {
         return new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
+    }
+
+    @After
+    public void verifyExceptionHandler() {
+        verifyNoMoreInteractions(exceptionHandler);
     }
 
     @Test
@@ -142,7 +152,6 @@ public class FileStorageTest {
         List<Alarm> alarms = Collections.singletonList(alarmBeforeSave);
 
         storage.save(alarms);
-
         List<Alarm> loaded = storage.load();
 
         Alarm alarmAfterLoad = loaded.get(singleAlarm);
@@ -196,6 +205,7 @@ public class FileStorageTest {
 
         List<Alarm> storedAlarms = storage.load();
         assertThat(storedAlarms, hasSize(2));
+        verify(exceptionHandler).handle(any(IOException.class));
     }
 
     private void saveBackupFile() {
@@ -227,5 +237,17 @@ public class FileStorageTest {
 
         List<Alarm> storedAlarms = storage.load();
         assertThat(storedAlarms, hasSize(1));
+        verify(exceptionHandler).handle(any(IOException.class));
+    }
+
+    @Test
+    public void triggersExceptionHandlerWhenAlarmFileCanNotBeOpenedForSaving() throws Exception {
+        doAnswer((answer) -> (answer)).when(exceptionHandler).handle(any());
+        when(outputFactory.create(any())).thenThrow(new IOException("Exception in test"));
+        List<Alarm> alarms = Collections.emptyList();
+
+        storage.save(alarms);
+
+        verify(exceptionHandler).handle(any(IOException.class));
     }
 }

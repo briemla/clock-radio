@@ -40,7 +40,8 @@ public class ClockRadio extends Application {
         Player availablePlayer = availablePlayer();
         AlarmFactory alarmFactory = new RealAlarmFactory(playerFactory(availablePlayer),
                 timeProvider);
-        AlarmStorage storage = new FileStorage(storagePath, alarmFactory, outputFactory());
+        AlarmStorage storage = new FileStorage(storagePath, alarmFactory, outputFactory(),
+                playMusicOnError());
         MainPanel mainPanel = new MainPanel(availablePlayer, trigger, alarmFactory, timeProvider,
                 storage);
         mainPanel.getStylesheets()
@@ -48,6 +49,10 @@ public class ClockRadio extends Application {
         watchCssFile(mainPanel);
         primaryStage.setScene(new Scene(mainPanel));
         primaryStage.show();
+    }
+
+    private ExceptionHandler playMusicOnError() {
+        return null;
     }
 
     private static OutputFactory outputFactory() {
