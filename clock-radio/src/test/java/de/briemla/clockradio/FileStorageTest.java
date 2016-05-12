@@ -11,7 +11,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -242,9 +241,17 @@ public class FileStorageTest {
 
     @Test
     public void triggersExceptionHandlerWhenAlarmFileCanNotBeOpenedForSaving() throws Exception {
-        doAnswer((answer) -> (answer)).when(exceptionHandler).handle(any());
         when(outputFactory.create(any())).thenThrow(new IOException("Exception in test"));
         List<Alarm> alarms = Collections.emptyList();
+
+        storage.save(alarms);
+
+        verify(exceptionHandler).handle(any(IOException.class));
+    }
+
+    @Test
+    public void triggersExceptionHandlerWhenAlarmCanNotBeStored() throws Exception {
+        List<Alarm> alarms = Collections.singletonList(alarmFailingToStoreItself());
 
         storage.save(alarms);
 
