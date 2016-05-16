@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 
@@ -28,19 +29,19 @@ public class WakeUpTimeTest {
 
     @Test
     public void createWakeUpTimeFromStringWithIncorrectHour() throws Exception {
-        thrown.expect(NumberFormatException.class);
+        thrown.expect(DateTimeParseException.class);
         WakeUpTime.from("a2:40");
     }
 
     @Test
     public void createWakeUpTimeFromStringWithIncorrectMinute() throws Exception {
-        thrown.expect(NumberFormatException.class);
+        thrown.expect(DateTimeParseException.class);
         WakeUpTime.from("12:4a");
     }
 
     @Test
     public void createWakeUpTimeFromStringWithIncorrectFormat() throws Exception {
-        thrown.expect(NumberFormatException.class);
+        thrown.expect(DateTimeParseException.class);
         WakeUpTime.from("12.40");
     }
 

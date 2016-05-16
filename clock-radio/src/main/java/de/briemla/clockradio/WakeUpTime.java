@@ -1,16 +1,18 @@
 package de.briemla.clockradio;
 
+import static java.time.temporal.ChronoField.HOUR_OF_DAY;
+import static java.time.temporal.ChronoField.MINUTE_OF_HOUR;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAccessor;
 
 public class WakeUpTime {
 
     private static final int timeDigits = 2;
-    private static final int hourIndex = 0;
-    private static final int minuteIndex = 1;
     private static final String separator = ":";
     private static final int correction = 1;
     private static final int ZERO = 0;
@@ -18,7 +20,7 @@ public class WakeUpTime {
 
     private final LocalTime time;
 
-    public WakeUpTime(Integer hour, Integer minute) {
+    public WakeUpTime(int hour, int minute) {
         time = LocalTime.of(hour, minute);
     }
 
@@ -30,18 +32,10 @@ public class WakeUpTime {
     }
 
     public static WakeUpTime from(String string) {
-        String[] values = string.split(separator);
-        int hour = hourOf(values);
-        int minute = minuteOf(values);
+        TemporalAccessor time = timeFormat.parse(string);
+        int hour = time.get(HOUR_OF_DAY);
+        int minute = time.get(MINUTE_OF_HOUR);
         return new WakeUpTime(hour, minute);
-    }
-
-    private static int minuteOf(String[] values) {
-        return Integer.parseInt(values[minuteIndex]);
-    }
-
-    private static int hourOf(String[] values) {
-        return Integer.parseInt(values[hourIndex]);
     }
 
     public LocalDateTime nextAlarm(LocalDateTime now) {
