@@ -12,7 +12,7 @@ public class WakeUpTime {
     private static final int hourIndex = 0;
     private static final int minuteIndex = 1;
     private static final String separator = ":";
-    private static final int CORRECTION = 1;
+    private static final int correction = 1;
     private static final int ZERO = 0;
     private static final DateTimeFormatter timeFormat = timeFormatter();
 
@@ -49,11 +49,11 @@ public class WakeUpTime {
     }
 
     public LocalDateTime nextAlarm(LocalDateTime now) {
-        LocalDateTime alarmDate = now;
-        if (now.getHour() > hour || now.getHour() == hour && now.getMinute() >= minute) {
-            alarmDate = alarmDate.plusDays(CORRECTION);
+        LocalDateTime alarmDate = now.with(time);
+        if (now.isAfter(alarmDate) || now.isEqual(alarmDate)) {
+            alarmDate = alarmDate.plusDays(correction);
         }
-        return align(alarmDate.withHour(hour).withMinute(minute));
+        return align(alarmDate.with(time));
     }
 
     private static LocalDateTime align(LocalDateTime time) {
