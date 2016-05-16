@@ -69,8 +69,8 @@ public class WakeUpTime {
     }
 
     // TODO try to find better way instead of getters
-    public Integer getHour() {
-        return hour;
+    public int getHour() {
+        return time.getHour();
     }
 
     public Integer getMinute() {
