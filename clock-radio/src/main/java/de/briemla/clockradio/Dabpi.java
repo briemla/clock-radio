@@ -1,5 +1,7 @@
 package de.briemla.clockradio;
 
+import java.io.File;
+
 import de.briemla.clockradio.dabpi.AlsaController;
 import de.briemla.clockradio.dabpi.CommandFactory;
 import de.briemla.clockradio.dabpi.DabpiCommandFactory;
@@ -14,10 +16,17 @@ public class Dabpi {
     private static final String dabpiCtl = "sudo " + programPath;
 
     public static RadioPlayer createRadioPlayer() {
-        RadioExecutor executor = new DabpiExecutor(dabpiCtl);
-        CommandFactory factory = new DabpiCommandFactory();
-        AlsaController alsaController = new AlsaController();
-        return new DabpiRadioPlayer(new DabpiController(executor, factory, alsaController));
+        if (dabpiExists()) {
+            RadioExecutor executor = new DabpiExecutor(dabpiCtl);
+            CommandFactory factory = new DabpiCommandFactory();
+            AlsaController alsaController = new AlsaController();
+            return new DabpiRadioPlayer(new DabpiController(executor, factory, alsaController));
+        }
+        return new DoNothing();
+    }
+
+    private static boolean dabpiExists() {
+        return new File(programPath).exists();
     }
 
 }
