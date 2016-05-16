@@ -6,6 +6,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -14,6 +15,38 @@ import de.briemla.clockradio.ActiveDays;
 import de.briemla.clockradio.FXUtil;
 
 public class ActiveDayEditor extends GridPane {
+
+    private final class SelectWeekend implements EventHandler<MouseEvent> {
+        @Override
+        public void handle(MouseEvent event) {
+            saturday.setSelected(true);
+            sunday.setSelected(true);
+        }
+    }
+
+    private final class SelectWorkDays implements EventHandler<MouseEvent> {
+        @Override
+        public void handle(MouseEvent event) {
+            monday.setSelected(true);
+            tuesday.setSelected(true);
+            wednesday.setSelected(true);
+            thursday.setSelected(true);
+            friday.setSelected(true);
+        }
+    }
+
+    private final class SelectAll implements EventHandler<MouseEvent> {
+        @Override
+        public void handle(MouseEvent event) {
+            monday.setSelected(true);
+            tuesday.setSelected(true);
+            wednesday.setSelected(true);
+            thursday.setSelected(true);
+            friday.setSelected(true);
+            saturday.setSelected(true);
+            sunday.setSelected(true);
+        }
+    }
 
     @FXML
     private ToggleButton monday;
@@ -30,11 +63,11 @@ public class ActiveDayEditor extends GridPane {
     @FXML
     private ToggleButton sunday;
     @FXML
-    private ToggleButton workdays;
+    private Button workdays;
     @FXML
-    private ToggleButton weekend;
+    private Button weekend;
     @FXML
-    private ToggleButton daily;
+    private Button daily;
 
     private final ObjectProperty<ActiveDays> daysProperty;
 
@@ -50,69 +83,32 @@ public class ActiveDayEditor extends GridPane {
     }
 
     private void initWorkdaysBinding() {
-        EventHandler<MouseEvent> workdaysChanger = (event) -> workdays.setSelected(isWorkdays());
-        monday.addEventHandler(MouseEvent.MOUSE_CLICKED, workdaysChanger);
-        tuesday.addEventHandler(MouseEvent.MOUSE_CLICKED, workdaysChanger);
-        wednesday.addEventHandler(MouseEvent.MOUSE_CLICKED, workdaysChanger);
-        thursday.addEventHandler(MouseEvent.MOUSE_CLICKED, workdaysChanger);
-        friday.addEventHandler(MouseEvent.MOUSE_CLICKED, workdaysChanger);
-        workdays.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            boolean selected = workdays.isSelected();
-            monday.setSelected(selected);
-            tuesday.setSelected(selected);
-            wednesday.setSelected(selected);
-            thursday.setSelected(selected);
-            friday.setSelected(selected);
-        });
+        workdays.addEventHandler(MouseEvent.MOUSE_CLICKED, new SelectWorkDays());
     }
 
     private void initWeekendBinding() {
-        EventHandler<MouseEvent> weekendChanger = (event) -> weekend.setSelected(isWeekend());
-        saturday.addEventHandler(MouseEvent.MOUSE_CLICKED, weekendChanger);
-        sunday.addEventHandler(MouseEvent.MOUSE_CLICKED, weekendChanger);
-        weekend.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            boolean selected = weekend.isSelected();
-            saturday.setSelected(selected);
-            sunday.setSelected(selected);
-        });
+        weekend.addEventHandler(MouseEvent.MOUSE_CLICKED, new SelectWeekend());
     }
 
     private void initDailyBinding() {
-        EventHandler<MouseEvent> dailyChanger = (event) -> daily.setSelected(isDaily());
-        monday.addEventHandler(MouseEvent.MOUSE_CLICKED, dailyChanger);
-        tuesday.addEventHandler(MouseEvent.MOUSE_CLICKED, dailyChanger);
-        wednesday.addEventHandler(MouseEvent.MOUSE_CLICKED, dailyChanger);
-        thursday.addEventHandler(MouseEvent.MOUSE_CLICKED, dailyChanger);
-        friday.addEventHandler(MouseEvent.MOUSE_CLICKED, dailyChanger);
-        saturday.addEventHandler(MouseEvent.MOUSE_CLICKED, dailyChanger);
-        sunday.addEventHandler(MouseEvent.MOUSE_CLICKED, dailyChanger);
-        daily.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            boolean selected = daily.isSelected();
-            monday.setSelected(selected);
-            tuesday.setSelected(selected);
-            wednesday.setSelected(selected);
-            thursday.setSelected(selected);
-            friday.setSelected(selected);
-            saturday.setSelected(selected);
-            sunday.setSelected(selected);
-        });
+        daily.addEventHandler(MouseEvent.MOUSE_CLICKED, new SelectAll());
     }
 
     private void initUpdateActiveDays() {
         monday.selectedProperty()
-                .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.MONDAY));
+              .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.MONDAY));
         tuesday.selectedProperty()
-                .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.TUESDAY));
+               .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.TUESDAY));
         wednesday.selectedProperty()
-                .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.WEDNESDAY));
+                 .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.WEDNESDAY));
         thursday.selectedProperty()
                 .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.THURSDAY));
         friday.selectedProperty()
-                .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.FRIDAY));
+              .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.FRIDAY));
         saturday.selectedProperty()
                 .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.SATURDAY));
         sunday.selectedProperty()
-                .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.SUNDAY));
+              .addListener(new ActiveDaysChanger(daysProperty, DayOfWeek.SUNDAY));
     }
 
     private void initDaysListener() {
@@ -127,24 +123,6 @@ public class ActiveDayEditor extends GridPane {
         friday.setSelected(daysProperty.get().contains(DayOfWeek.FRIDAY));
         saturday.setSelected(daysProperty.get().contains(DayOfWeek.SATURDAY));
         sunday.setSelected(daysProperty.get().contains(DayOfWeek.SUNDAY));
-        workdays.setSelected(isWorkdays());
-        weekend.setSelected(isWeekend());
-        daily.setSelected(isDaily());
-    }
-
-    private Boolean isWorkdays() {
-        return monday.isSelected() && tuesday.isSelected() && wednesday.isSelected()
-                && thursday.isSelected() && friday.isSelected();
-    }
-
-    private boolean isWeekend() {
-        return saturday.isSelected() && sunday.isSelected();
-    }
-
-    private boolean isDaily() {
-        return monday.isSelected() && tuesday.isSelected() && wednesday.isSelected()
-                && thursday.isSelected() && friday.isSelected() && saturday.isSelected()
-                && sunday.isSelected();
     }
 
     public ObjectProperty<ActiveDays> daysProperty() {

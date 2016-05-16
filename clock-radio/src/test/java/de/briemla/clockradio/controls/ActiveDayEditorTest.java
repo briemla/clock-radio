@@ -8,6 +8,7 @@ import java.time.DayOfWeek;
 import java.util.EnumSet;
 
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 
 import org.junit.Before;
@@ -25,9 +26,9 @@ public class ActiveDayEditorTest extends GuiTest {
     private ToggleButton friday;
     private ToggleButton saturday;
     private ToggleButton sunday;
-    private ToggleButton workdays;
-    private ToggleButton weekend;
-    private ToggleButton daily;
+    private Button workdays;
+    private Button weekend;
+    private Button daily;
     private ActiveDayEditor activeDayEditor;
 
     @Override
@@ -59,8 +60,6 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(wednesday.isSelected(), is(true));
         assertThat(thursday.isSelected(), is(true));
         assertThat(friday.isSelected(), is(true));
-        assertThat(workdays.isSelected(), is(false));
-        assertThat(daily.isSelected(), is(false));
         weekendChecked();
 
         ActiveDays allWithoutOne = new ActiveDays(
@@ -81,8 +80,6 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(wednesday.isSelected(), is(true));
         assertThat(thursday.isSelected(), is(true));
         assertThat(friday.isSelected(), is(true));
-        assertThat(workdays.isSelected(), is(false));
-        assertThat(daily.isSelected(), is(false));
         weekendChecked();
 
         ActiveDays allWithoutOne = new ActiveDays(
@@ -103,8 +100,6 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(wednesday.isSelected(), is(false));
         assertThat(thursday.isSelected(), is(true));
         assertThat(friday.isSelected(), is(true));
-        assertThat(workdays.isSelected(), is(false));
-        assertThat(daily.isSelected(), is(false));
         weekendChecked();
 
         ActiveDays allWithoutOne = new ActiveDays(
@@ -125,8 +120,6 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(wednesday.isSelected(), is(true));
         assertThat(thursday.isSelected(), is(false));
         assertThat(friday.isSelected(), is(true));
-        assertThat(workdays.isSelected(), is(false));
-        assertThat(daily.isSelected(), is(false));
         weekendChecked();
 
         ActiveDays allWithoutOne = new ActiveDays(
@@ -147,8 +140,6 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(wednesday.isSelected(), is(true));
         assertThat(thursday.isSelected(), is(true));
         assertThat(friday.isSelected(), is(false));
-        assertThat(workdays.isSelected(), is(false));
-        assertThat(daily.isSelected(), is(false));
         weekendChecked();
 
         ActiveDays allWithoutOne = new ActiveDays(
@@ -166,8 +157,6 @@ public class ActiveDayEditorTest extends GuiTest {
         click(saturday);
         assertThat(saturday.isSelected(), is(false));
         assertThat(sunday.isSelected(), is(true));
-        assertThat(weekend.isSelected(), is(false));
-        assertThat(daily.isSelected(), is(false));
         workdaysChecked();
 
         ActiveDays allWithoutOne = new ActiveDays(
@@ -185,8 +174,6 @@ public class ActiveDayEditorTest extends GuiTest {
         click(sunday);
         assertThat(saturday.isSelected(), is(true));
         assertThat(sunday.isSelected(), is(false));
-        assertThat(weekend.isSelected(), is(false));
-        assertThat(daily.isSelected(), is(false));
         workdaysChecked();
 
         ActiveDays allWithoutOne = new ActiveDays(
@@ -211,9 +198,7 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(wednesday.isSelected(), is(false));
         assertThat(thursday.isSelected(), is(false));
         assertThat(friday.isSelected(), is(false));
-        assertThat(workdays.isSelected(), is(false));
         weekendUnchecked();
-        assertThat(daily.isSelected(), is(false));
 
         ActiveDays workdaysActive = new ActiveDays(EnumSet.of(DayOfWeek.MONDAY));
         ActiveDays activeDays = activeDayEditor.daysProperty().get();
@@ -233,9 +218,7 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(wednesday.isSelected(), is(false));
         assertThat(thursday.isSelected(), is(false));
         assertThat(friday.isSelected(), is(false));
-        assertThat(workdays.isSelected(), is(false));
         weekendUnchecked();
-        assertThat(daily.isSelected(), is(false));
 
         ActiveDays workdaysActive = new ActiveDays(EnumSet.of(DayOfWeek.TUESDAY));
         ActiveDays activeDays = activeDayEditor.daysProperty().get();
@@ -255,9 +238,7 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(wednesday.isSelected(), is(true));
         assertThat(thursday.isSelected(), is(false));
         assertThat(friday.isSelected(), is(false));
-        assertThat(workdays.isSelected(), is(false));
         weekendUnchecked();
-        assertThat(daily.isSelected(), is(false));
 
         ActiveDays workdaysActive = new ActiveDays(EnumSet.of(DayOfWeek.WEDNESDAY));
         ActiveDays activeDays = activeDayEditor.daysProperty().get();
@@ -277,9 +258,7 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(wednesday.isSelected(), is(false));
         assertThat(thursday.isSelected(), is(true));
         assertThat(friday.isSelected(), is(false));
-        assertThat(workdays.isSelected(), is(false));
         weekendUnchecked();
-        assertThat(daily.isSelected(), is(false));
 
         ActiveDays workdaysActive = new ActiveDays(EnumSet.of(DayOfWeek.THURSDAY));
         ActiveDays activeDays = activeDayEditor.daysProperty().get();
@@ -299,9 +278,7 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(wednesday.isSelected(), is(false));
         assertThat(thursday.isSelected(), is(false));
         assertThat(friday.isSelected(), is(true));
-        assertThat(workdays.isSelected(), is(false));
         weekendUnchecked();
-        assertThat(daily.isSelected(), is(false));
 
         ActiveDays workdaysActive = new ActiveDays(EnumSet.of(DayOfWeek.FRIDAY));
         ActiveDays activeDays = activeDayEditor.daysProperty().get();
@@ -316,8 +293,6 @@ public class ActiveDayEditorTest extends GuiTest {
         workdaysUnchecked();
         assertThat(saturday.isSelected(), is(true));
         assertThat(sunday.isSelected(), is(false));
-        assertThat(weekend.isSelected(), is(false));
-        assertThat(daily.isSelected(), is(false));
 
         ActiveDays weekendActive = new ActiveDays(EnumSet.of(DayOfWeek.SATURDAY));
         ActiveDays activeDays = activeDayEditor.daysProperty().get();
@@ -332,8 +307,6 @@ public class ActiveDayEditorTest extends GuiTest {
         workdaysUnchecked();
         assertThat(saturday.isSelected(), is(false));
         assertThat(sunday.isSelected(), is(true));
-        assertThat(weekend.isSelected(), is(false));
-        assertThat(daily.isSelected(), is(false));
 
         ActiveDays weekendActive = new ActiveDays(EnumSet.of(DayOfWeek.SUNDAY));
         ActiveDays activeDays = activeDayEditor.daysProperty().get();
@@ -381,7 +354,6 @@ public class ActiveDayEditorTest extends GuiTest {
     private void allChecked() {
         workdaysChecked();
         weekendChecked();
-        assertThat(daily.isSelected(), is(true));
         ActiveDays allActive = new ActiveDays(EnumSet.allOf(DayOfWeek.class));
         ActiveDays activeDays = activeDayEditor.daysProperty().get();
 
@@ -394,13 +366,11 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(wednesday.isSelected(), is(true));
         assertThat(thursday.isSelected(), is(true));
         assertThat(friday.isSelected(), is(true));
-        assertThat(workdays.isSelected(), is(true));
     }
 
     private void weekendChecked() {
         assertThat(saturday.isSelected(), is(true));
         assertThat(sunday.isSelected(), is(true));
-        assertThat(weekend.isSelected(), is(true));
     }
 
     private void workdaysUnchecked() {
@@ -409,13 +379,11 @@ public class ActiveDayEditorTest extends GuiTest {
         assertThat(wednesday.isSelected(), is(false));
         assertThat(thursday.isSelected(), is(false));
         assertThat(friday.isSelected(), is(false));
-        assertThat(workdays.isSelected(), is(false));
     }
 
     private void weekendUnchecked() {
         assertThat(saturday.isSelected(), is(false));
         assertThat(sunday.isSelected(), is(false));
-        assertThat(weekend.isSelected(), is(false));
     }
 
     private void clickWorkDays() {

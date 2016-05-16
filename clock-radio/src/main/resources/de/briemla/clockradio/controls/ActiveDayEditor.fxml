@@ -26,8 +26,8 @@
       <ToggleButton fx:id="friday" styleClass="active" mnemonicParsing="false" text="Freitag" GridPane.rowIndex="4" />
       <ToggleButton fx:id="saturday" styleClass="active" mnemonicParsing="false" text="Samstag" GridPane.columnIndex="1" />
       <ToggleButton fx:id="sunday" styleClass="active" mnemonicParsing="false" text="Sonntag" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <ToggleButton fx:id="workdays" styleClass="active" mnemonicParsing="false" text="Werktags" GridPane.columnIndex="2" />
-      <ToggleButton fx:id="weekend" styleClass="active" mnemonicParsing="false" text="Wochenende" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <ToggleButton fx:id="daily" styleClass="active" mnemonicParsing="false" text="Täglich" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Button fx:id="workdays" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Werktags" GridPane.columnIndex="2" />
+      <Button fx:id="weekend" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Wochenende" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <Button fx:id="daily" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Täglich" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
 </fx:root>
