@@ -12,18 +12,11 @@ import javafx.stage.Stage;
 
 import de.briemla.clockradio.controls.MainPanel;
 import de.briemla.clockradio.controls.Trigger;
-import de.briemla.clockradio.dabpi.AlsaController;
-import de.briemla.clockradio.dabpi.CommandFactory;
-import de.briemla.clockradio.dabpi.DabpiCommandFactory;
-import de.briemla.clockradio.dabpi.DabpiController;
-import de.briemla.clockradio.dabpi.DabpiExecutor;
-import de.briemla.clockradio.dabpi.RadioExecutor;
 import de.briemla.clockradio.player.AudioFilePlayer;
 import de.briemla.clockradio.player.BasePlayer;
 import de.briemla.clockradio.player.Player;
 import de.briemla.clockradio.player.PlayerFactory;
 import de.briemla.clockradio.player.RadioPlayer;
-import de.briemla.clockradio.player.DabpiRadioPlayer;
 import de.briemla.clockradio.player.RealPlayerFactory;
 
 public class ClockRadio extends Application {
@@ -76,10 +69,7 @@ public class ClockRadio extends Application {
     }
 
     private static RadioPlayer radioPlayer() {
-        RadioExecutor executor = new DabpiExecutor();
-        CommandFactory factory = new DabpiCommandFactory();
-        AlsaController alsaController = new AlsaController();
-        return new DabpiRadioPlayer(new DabpiController(executor, factory, alsaController));
+        return Dabpi.createRadioPlayer();
     }
 
     /**

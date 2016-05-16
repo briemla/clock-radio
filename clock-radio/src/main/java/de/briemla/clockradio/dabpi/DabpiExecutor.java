@@ -8,17 +8,20 @@ import java.io.InputStreamReader;
 
 public class DabpiExecutor implements RadioExecutor {
 
-    private static final String DABPI_CTL = "sudo /home/pi/dabpi_ctl/dabpi_ctl";
+    private final String dabpiCtl;
+
+    public DabpiExecutor(String dabpiCtl) {
+        super();
+        this.dabpiCtl = dabpiCtl;
+    }
 
     /**
-     * Executes the given {@link Command} and returns the parsed
-     * {@link RadioResult} matching the correct type specified by the
-     * {@link Command}.
+     * Executes the given {@link Command} and returns the parsed {@link RadioResult} matching the
+     * correct type specified by the {@link Command}.
      *
      * @param command
      *            command to execute
-     * @return instance of implemented {@link RadioResult} specified by given
-     *         command
+     * @return instance of implemented {@link RadioResult} specified by given command
      * @throws IOException
      *             when underlying application outputs errors
      */
@@ -26,9 +29,10 @@ public class DabpiExecutor implements RadioExecutor {
     public <T> T execute(Command<T> command) throws IOException {
         Output output = new Output();
         try {
-            Process process = Runtime.getRuntime().exec(DABPI_CTL + command.serialize());
-            System.out.println(DABPI_CTL + command.serialize());
-            try (BufferedReader standardOutput = createReader(process.getInputStream()); BufferedReader errorOutput = createReader(process.getErrorStream())) {
+            Process process = Runtime.getRuntime().exec(dabpiCtl + command.serialize());
+            System.out.println(dabpiCtl + command.serialize());
+            try (BufferedReader standardOutput = createReader(process.getInputStream());
+                    BufferedReader errorOutput = createReader(process.getErrorStream())) {
                 process.waitFor();
                 standardOutput.lines().forEach(line -> {
                     output.addStandard(line);
@@ -43,8 +47,7 @@ public class DabpiExecutor implements RadioExecutor {
     }
 
     /**
-     * Utility function to compose {@link BufferedReader} for given
-     * {@link InputStream}
+     * Utility function to compose {@link BufferedReader} for given {@link InputStream}
      *
      * @param input
      *
