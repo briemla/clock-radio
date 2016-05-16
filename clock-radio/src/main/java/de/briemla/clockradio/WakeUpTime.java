@@ -73,8 +73,8 @@ public class WakeUpTime {
         return time.getHour();
     }
 
-    public Integer getMinute() {
-        return minute;
+    public int getMinute() {
+        return time.getMinute();
     }
 
     @Override
