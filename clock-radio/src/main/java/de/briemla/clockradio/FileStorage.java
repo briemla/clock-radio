@@ -28,10 +28,10 @@ public class FileStorage implements AlarmStorage {
         this.alarmFactory = alarmFactory;
         this.outputFactory = outputFactory;
         this.exceptionHandler = exceptionHandler;
-        backupFile = backFileFrom(storagepath);
+        backupFile = backupFileFrom(storagepath);
     }
 
-    private static Path backFileFrom(File storagepath) {
+    private static Path backupFileFrom(File storagepath) {
         File folder = storagepath.getParentFile();
         String storageFileName = storagepath.getName();
         String backupFileName = storageFileName + backupExtension;
