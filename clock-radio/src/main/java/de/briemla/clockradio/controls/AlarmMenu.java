@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 
 import de.briemla.clockradio.ActiveDays;
 import de.briemla.clockradio.Alarm;
-import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.FxUtil;
 import de.briemla.clockradio.Media;
 import de.briemla.clockradio.Settings;
 import de.briemla.clockradio.WakeUpTime;
@@ -36,7 +36,7 @@ public class AlarmMenu extends VBox {
         super();
         this.viewSwitcher = viewSwitcher;
         this.settings = settings;
-        FXUtil.load(this, this);
+        FxUtil.load(this, this);
         activesDayProperty = new SimpleObjectProperty<>(new ActiveDays());
         mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
         wakeUpTimeProperty = new SimpleObjectProperty<>(new WakeUpTime(0, 0));

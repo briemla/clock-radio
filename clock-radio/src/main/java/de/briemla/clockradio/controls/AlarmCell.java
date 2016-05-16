@@ -8,7 +8,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 
 import de.briemla.clockradio.Alarm;
-import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.FxUtil;
 import de.briemla.clockradio.Settings;
 
 public class AlarmCell extends AnchorPane {
@@ -30,7 +30,7 @@ public class AlarmCell extends AnchorPane {
 
     public AlarmCell(Alarm alarm, Settings settings) {
         super();
-        FXUtil.load(this, this);
+        FxUtil.load(this, this);
         activeProperty = new ActivePseudoClassProperty(this);
         // TODO maybe create timeProperty in Alarm class
         time.textProperty().bind(alarm.wakeUpTimeProperty().asString());

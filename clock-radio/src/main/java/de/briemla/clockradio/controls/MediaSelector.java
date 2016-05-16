@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.FxUtil;
 import de.briemla.clockradio.Media;
 import de.briemla.clockradio.Settings;
 import de.briemla.clockradio.player.Player;
@@ -19,7 +19,7 @@ public class MediaSelector extends TabPane {
 
     public MediaSelector(Settings settings, Player player) {
         super();
-        FXUtil.load(this, this);
+        FxUtil.load(this, this);
         registerMediaTypes(settings, player);
     }
 

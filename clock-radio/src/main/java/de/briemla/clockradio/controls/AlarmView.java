@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.briemla.clockradio.Alarm;
-import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.FxUtil;
 import de.briemla.clockradio.Settings;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -25,7 +25,7 @@ public class AlarmView extends HBox {
 
     public AlarmView() {
         super();
-        FXUtil.load(this, this);
+        FxUtil.load(this, this);
         alarms = FXCollections.observableArrayList();
         alarmToCell = new HashMap<>();
         alarms.addListener(new ListChangeListener<Alarm>() {

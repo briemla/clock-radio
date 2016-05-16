@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.FxUtil;
 
 public class DefaultableViewSwitcher extends BorderPane {
 
@@ -24,7 +24,7 @@ public class DefaultableViewSwitcher extends BorderPane {
 
     public DefaultableViewSwitcher() {
         super();
-        FXUtil.load(this, this);
+        FxUtil.load(this, this);
         defaultVisisble = new SimpleBooleanProperty(false);
         back.visibleProperty().bind(defaultVisisble.not());
     }

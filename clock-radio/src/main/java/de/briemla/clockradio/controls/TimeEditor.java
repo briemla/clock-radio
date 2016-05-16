@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import jfxtras.scene.layout.CircularPane;
-import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.FxUtil;
 import de.briemla.clockradio.WakeUpTime;
 
 public class TimeEditor extends AnchorPane {
@@ -34,7 +34,7 @@ public class TimeEditor extends AnchorPane {
 
     public TimeEditor() {
         super();
-        FXUtil.load(this, this);
+        FxUtil.load(this, this);
 
         timeProperty = new SimpleObjectProperty<>(new WakeUpTime(0, 0));
         for (int currentHour = 0; currentHour <= 11; currentHour++) {

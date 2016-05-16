@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 
-import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.FxUtil;
 import de.briemla.clockradio.Media;
 
 public class FolderSelector extends VBox {
@@ -31,7 +31,7 @@ public class FolderSelector extends VBox {
 
     public FolderSelector() {
         super();
-        FXUtil.load(this, this);
+        FxUtil.load(this, this);
         mediaProperty = new SimpleObjectProperty<>();
         localFolderProperty = new SimpleObjectProperty<>(new LocalFolder());
         currentFiles = FXCollections.observableArrayList();

@@ -12,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import de.briemla.clockradio.ActiveDays;
-import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.FxUtil;
 
 public class ActiveDayEditor extends GridPane {
 
@@ -72,7 +72,7 @@ public class ActiveDayEditor extends GridPane {
     private final ObjectProperty<ActiveDays> daysProperty;
 
     public ActiveDayEditor() {
-        FXUtil.load(this, this);
+        FxUtil.load(this, this);
         daysProperty = new SimpleObjectProperty<>(new ActiveDays());
         initWorkdaysBinding();
         initWeekendBinding();

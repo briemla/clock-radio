@@ -15,7 +15,7 @@ import javafx.scene.layout.StackPane;
 import de.briemla.clockradio.Alarm;
 import de.briemla.clockradio.AlarmFactory;
 import de.briemla.clockradio.AlarmStorage;
-import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.FxUtil;
 import de.briemla.clockradio.Settings;
 import de.briemla.clockradio.TimeProvider;
 import de.briemla.clockradio.player.Player;
@@ -51,7 +51,7 @@ public class MainPanel extends StackPane {
             TimeProvider timeProvider, AlarmStorage storage) {
         super();
         this.trigger = trigger;
-        FXUtil.load(this, this);
+        FxUtil.load(this, this);
         active = new ActivePseudoClassProperty(this);
         settings = new Settings(viewSwitcher, player, alarmFactory, storage);
         alarm.setSettings(settings);

@@ -9,7 +9,7 @@ import javafx.fxml.FXMLLoader;
 import de.briemla.fxmltemplateloader.FxmlTemplateLoader;
 import de.briemla.fxmltemplateloader.template.ITemplate;
 
-public class FXUtil {
+public class FxUtil {
 
     private static final String FXML_EXTENSION = ".fxml";
 

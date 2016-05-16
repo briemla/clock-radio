@@ -9,7 +9,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import de.briemla.clockradio.FXUtil;
+import de.briemla.clockradio.FxUtil;
 
 public class Pointer2Circle extends AnchorPane {
 
@@ -27,7 +27,7 @@ public class Pointer2Circle extends AnchorPane {
 
     public Pointer2Circle() {
         super();
-        FXUtil.load(this, this);
+        FxUtil.load(this, this);
 
         line.startXProperty().bind(widthProperty().divide(2d));
         line.startYProperty().bind(heightProperty().divide(2d));
