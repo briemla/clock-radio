@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import de.briemla.clockradio.Media;
@@ -47,7 +48,15 @@ public class LocalFolder implements Media {
     }
 
     public Collection<File> children() {
-        List<File> children = Arrays.asList(source.toFile().listFiles(new SupportedFileFilter()));
+        File root = source.toFile();
+        if (root.exists()) {
+            return childrenOf(root);
+        }
+        return Collections.emptyList();
+    }
+
+    private Collection<File> childrenOf(File root) {
+        List<File> children = Arrays.asList(root.listFiles(new SupportedFileFilter()));
         children.sort(new FileComparator());
         return children;
     }
