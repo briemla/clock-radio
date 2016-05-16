@@ -1,5 +1,8 @@
 package de.briemla.clockradio.controls;
 
+import static java.time.temporal.ChronoUnit.SECONDS;
+
+import java.time.Duration;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,7 +39,7 @@ public class MainPanel extends StackPane {
         }
     }
 
-    private static final long INACTIVE_TIMEOUT = 10 * 1000;
+    private static final long inactiveTimeout = Duration.of(10, SECONDS).toMillis();;
     @FXML
     private DefaultableViewSwitcher viewSwitcher;
     @FXML
@@ -84,7 +87,7 @@ public class MainPanel extends StackPane {
             timer = null;
         }
         timer = new Timer("ActiveTimer", true);
-        timer.schedule(new ActivationTask(active), INACTIVE_TIMEOUT);
+        timer.schedule(new ActivationTask(active), inactiveTimeout);
     }
 
     @FXML
