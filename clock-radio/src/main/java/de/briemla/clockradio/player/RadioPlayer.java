@@ -1,7 +1,6 @@
 package de.briemla.clockradio.player;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import de.briemla.clockradio.dabpi.DABStation;
@@ -11,7 +10,7 @@ import de.briemla.clockradio.dabpi.command.Region;
 
 public interface RadioPlayer {
 
-    ArrayList<FMStation> scanFM();
+    List<FMStation> scanFM();
 
     List<DABStation> scanDAB(Region region);
 

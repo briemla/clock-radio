@@ -30,7 +30,7 @@ public class DabpiRadioPlayer implements RadioPlayer {
     }
 
     @Override
-    public ArrayList<FMStation> scanFM() {
+    public List<FMStation> scanFM() {
         try {
             Integer startFrequency = currentFrequency();
             Integer lastFrequency = startFrequency;
@@ -43,7 +43,8 @@ public class DabpiRadioPlayer implements RadioPlayer {
                 Integer currentFrequency = currentFrequency();
                 frequency.add(new FMStation(currentFrequency));
                 overflow |= lastFrequency > currentFrequency;
-                search = !startFrequency.equals(currentFrequency) && !(overflow && currentFrequency > startFrequency)
+                search = !startFrequency.equals(currentFrequency)
+                        && !(overflow && currentFrequency > startFrequency)
                         && !(currentFrequency.equals(Integer.MIN_VALUE));
                 lastFrequency = currentFrequency;
             }
