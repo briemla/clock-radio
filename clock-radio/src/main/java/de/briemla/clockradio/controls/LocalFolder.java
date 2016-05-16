@@ -49,7 +49,7 @@ public class LocalFolder implements Media {
 
     public Collection<File> children() {
         File root = source.toFile();
-        if (root.exists()) {
+        if (root.isDirectory()) {
             return childrenOf(root);
         }
         return Collections.emptyList();

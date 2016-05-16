@@ -9,10 +9,14 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -61,6 +65,34 @@ public class LocalFolderTest {
             runningNumber++;
         }
         return missingFolder.toPath();
+    }
+
+    @Test
+    public void doesNotFailWhenSourceIsNoDirectory() throws Exception {
+        LocalFolder media = new LocalFolder(existingButNoFolder());
+
+        assertThat(media.children(), is(empty()));
+    }
+
+    private Path existingButNoFolder() throws IOException {
+        File newFile = folder.newFile();
+        assertThat(newFile, is(file()));
+        return newFile.toPath();
+    }
+
+    private Matcher<File> file() {
+        return new TypeSafeMatcher<File>() {
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("file ");
+            }
+
+            @Override
+            protected boolean matchesSafely(File item) {
+                return item.isFile();
+            }
+        };
     }
 
     @Test
