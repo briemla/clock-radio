@@ -17,12 +17,8 @@ public class WakeUpTime {
     private static final DateTimeFormatter timeFormat = timeFormatter();
 
     private final LocalTime time;
-    private final Integer hour;
-    private final Integer minute;
 
     public WakeUpTime(Integer hour, Integer minute) {
-        this.hour = hour;
-        this.minute = minute;
         time = LocalTime.of(hour, minute);
     }
 
@@ -81,8 +77,6 @@ public class WakeUpTime {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((hour == null) ? 0 : hour.hashCode());
-        result = prime * result + ((minute == null) ? 0 : minute.hashCode());
         result = prime * result + ((time == null) ? 0 : time.hashCode());
         return result;
     }
@@ -99,20 +93,6 @@ public class WakeUpTime {
             return false;
         }
         WakeUpTime other = (WakeUpTime) obj;
-        if (hour == null) {
-            if (other.hour != null) {
-                return false;
-            }
-        } else if (!hour.equals(other.hour)) {
-            return false;
-        }
-        if (minute == null) {
-            if (other.minute != null) {
-                return false;
-            }
-        } else if (!minute.equals(other.minute)) {
-            return false;
-        }
         if (time == null) {
             if (other.time != null) {
                 return false;
