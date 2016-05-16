@@ -41,14 +41,4 @@ public class AlarmCell extends AnchorPane {
         setOnMouseClicked(event -> settings.select(alarm));
     }
 
-    public void unbind() {
-        time.textProperty().unbind();
-        weekdays.textProperty().unbind();
-        mediaDescription.textProperty().unbind();
-    }
-
-    public BooleanProperty activatedProperty() {
-        return activeProperty;
-    }
-
 }

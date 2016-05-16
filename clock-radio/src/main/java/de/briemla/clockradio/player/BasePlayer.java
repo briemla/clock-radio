@@ -5,8 +5,6 @@ import java.net.URI;
 import java.time.LocalTime;
 import java.util.List;
 
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import de.briemla.clockradio.dabpi.DABStation;
 import de.briemla.clockradio.dabpi.FMStation;
 import de.briemla.clockradio.dabpi.Station;
@@ -17,7 +15,6 @@ public class BasePlayer implements Player {
     private static final Region DEFAULT_REGION = Region.BADEN_WUERTEMBERG;
     private final AudioFilePlayer streamPlayer;
     private final RadioPlayer radioPlayer;
-    private final SimpleBooleanProperty playingProperty = new SimpleBooleanProperty(false);
     private final Region region;
 
     public BasePlayer(AudioFilePlayer streamPlayer, RadioPlayer radioPlayer) {
@@ -40,12 +37,6 @@ public class BasePlayer implements Player {
         System.out.println("Stop: " + LocalTime.now());
         streamPlayer.stop();
         radioPlayer.stop();
-        playingProperty.set(false);
-    }
-
-    @Override
-    public ReadOnlyBooleanProperty playingProperty() {
-        return playingProperty;
     }
 
     @Override

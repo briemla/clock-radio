@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import javafx.application.Platform;
-import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -72,11 +71,6 @@ public class WakeUpTest extends GuiTest {
         public List<DABStation> searchDAB() {
             searchDabCalled = true;
             return Collections.emptyList();
-        }
-
-        @Override
-        public ReadOnlyBooleanProperty playingProperty() {
-            throw new RuntimeException("Method accidently called in test");
         }
 
         @Override

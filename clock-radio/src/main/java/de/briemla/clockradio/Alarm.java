@@ -2,7 +2,6 @@ package de.briemla.clockradio;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -23,7 +22,6 @@ public class Alarm {
 
     private static final String newLine = System.lineSeparator();
     private static final String separator = ";";
-    private final SimpleObjectProperty<Duration> durationProperty;
     private final SimpleBooleanProperty alarmStartedProperty;
     private final SimpleObjectProperty<ActiveDays> activeDaysProperty;
     private final SimpleObjectProperty<Media> mediaProperty;
@@ -38,23 +36,11 @@ public class Alarm {
         this.timeProvider = timeProvider;
         player = Optional.empty();
         this.playerFactory = playerFactory;
-        durationProperty = new SimpleObjectProperty<>(Duration.ofHours(1));
         alarmStartedProperty = new SimpleBooleanProperty();
         activeDaysProperty = new SimpleObjectProperty<>(new ActiveDays());
         mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
         wakeUpTimeProperty = new SimpleObjectProperty<>(initialWakeUpTime(timeProvider));
         saveOnChangeTo(storage);
-        // AlarmTimer alarmTimer = new AlarmTimer(this);
-        // wakeUpTimeProperty.addListener(alarmTimer);
-        // activeDaysProperty.addListener(alarmTimer);
-        // alarmTimer.startTimer();
-        // activated.addListener((change, oldValue, newValue) -> {
-        // if (newValue) {
-        // alarmTimer.startTimer();
-        // return;
-        // }
-        // alarmTimer.stopTimer();
-        // });
     }
 
     private void saveOnChangeTo(SaveTrigger storage) {
@@ -72,10 +58,6 @@ public class Alarm {
     public void stop() {
         player.ifPresent(PlayerWorker::stop);
         player = Optional.empty();
-    }
-
-    private Duration getDuration() {
-        return durationProperty.get();
     }
 
     public ObjectProperty<ActiveDays> activeDaysProperty() {
@@ -110,10 +92,6 @@ public class Alarm {
         return alarmStartedProperty;
     }
 
-    Date alarmDate() {
-        return convertToDate(alarmLocalDate());
-    }
-
     private static Date convertToDate(LocalDateTime date) {
         return Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
     }
@@ -126,10 +104,6 @@ public class Alarm {
 
     private LocalDateTime today() {
         return timeProvider.today();
-    }
-
-    Date alarmStopDate() {
-        return convertToDate(alarmLocalDate().plus(getDuration()));
     }
 
     public Property<Boolean> activatedProperty() {

@@ -65,10 +65,6 @@ public class Settings {
         return alarms;
     }
 
-    public ReadOnlyBooleanProperty defaultVisisbleProperty() {
-        return viewSwitcher.defaultVisisbleProperty();
-    }
-
     public void select(Alarm alarm) {
         AlarmMenu alarmSettings = viewSwitcher.show(Alarm.class);
         alarmSettings.setCurrentAlarm(alarm);
