@@ -1,10 +1,7 @@
 package de.briemla.clockradio;
 
-import java.util.Iterator;
 import java.util.List;
 
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -17,7 +14,6 @@ import de.briemla.clockradio.player.Player;
 public class Settings {
 
     private final DefaultableViewSwitcher viewSwitcher;
-    private final SimpleBooleanProperty alarmStartedProperty;
     private final ObservableList<Alarm> alarms;
     private final Player player;
     private final AlarmStorage storage;
@@ -29,7 +25,6 @@ public class Settings {
         this.viewSwitcher = viewSwitcher;
         this.player = player;
         this.storage = storage;
-        alarmStartedProperty = new SimpleBooleanProperty();
         alarms = FXCollections.observableArrayList();
         alarms.addListener(saveOnChangeTo(storage));
         alarmFactory.initialize(() -> storage.save(alarms));
@@ -42,23 +37,8 @@ public class Settings {
     public void addAlarm() {
         Alarm alarm = alarmFactory.create();
         alarms.add(alarm);
-        rebindAlarms();
         AlarmMenu alarmMenu = viewSwitcher.show(Alarm.class);
         alarmMenu.setCurrentAlarm(alarm);
-    }
-
-    private void rebindAlarms() {
-        alarmStartedProperty.unbind();
-        if (alarms.isEmpty()) {
-            return;
-        }
-        Iterator<Alarm> alarmIterator = alarms.iterator();
-        Alarm nextAlarm = alarmIterator.next();
-        ReadOnlyBooleanProperty binding = nextAlarm.alarmStartedProperty();
-        for (Alarm alarm : alarms) {
-            binding.or(alarm.alarmStartedProperty());
-        }
-        alarmStartedProperty.bind(binding);
     }
 
     public ObservableList<Alarm> getAlarms() {
@@ -74,7 +54,6 @@ public class Settings {
         viewSwitcher.showDefault();
         alarm.kill();
         alarms.remove(alarm);
-        rebindAlarms();
     }
 
     public void stopCurrentAlarm() {

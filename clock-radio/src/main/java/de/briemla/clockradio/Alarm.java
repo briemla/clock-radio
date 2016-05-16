@@ -4,13 +4,10 @@ import java.io.IOException;
 import java.io.Writer;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Optional;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.Property;
-import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -22,7 +19,6 @@ public class Alarm {
 
     private static final String newLine = System.lineSeparator();
     private static final String separator = ";";
-    private final SimpleBooleanProperty alarmStartedProperty;
     private final SimpleObjectProperty<ActiveDays> activeDaysProperty;
     private final SimpleObjectProperty<Media> mediaProperty;
     private final SimpleObjectProperty<WakeUpTime> wakeUpTimeProperty;
@@ -36,7 +32,6 @@ public class Alarm {
         this.timeProvider = timeProvider;
         player = Optional.empty();
         this.playerFactory = playerFactory;
-        alarmStartedProperty = new SimpleBooleanProperty();
         activeDaysProperty = new SimpleObjectProperty<>(new ActiveDays());
         mediaProperty = new SimpleObjectProperty<>(new LocalFolder());
         wakeUpTimeProperty = new SimpleObjectProperty<>(initialWakeUpTime(timeProvider));
@@ -86,14 +81,6 @@ public class Alarm {
         LocalDateTime alarmDate = alarmLocalDate().withSecond(0).withNano(0);
         LocalDateTime roundedStart = atTime.withSecond(0).withNano(0);
         return !alarmDate.isEqual(roundedStart);
-    }
-
-    public ReadOnlyBooleanProperty alarmStartedProperty() {
-        return alarmStartedProperty;
-    }
-
-    private static Date convertToDate(LocalDateTime date) {
-        return Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
     }
 
     private LocalDateTime alarmLocalDate() {
