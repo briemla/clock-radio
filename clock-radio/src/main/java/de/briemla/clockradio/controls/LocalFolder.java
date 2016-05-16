@@ -29,7 +29,7 @@ public class LocalFolder implements Media {
         if ("amd64".equals(System.getProperty("os.arch").toLowerCase())) {
             return new File("/media/lars/data/Musik/").toPath();
         }
-        return new File("/opt/clock-radio/music/").toPath();
+        return new File("/home/pi/clock-radio/music/").toPath();
     }
 
     public LocalFolder(Path source) {
