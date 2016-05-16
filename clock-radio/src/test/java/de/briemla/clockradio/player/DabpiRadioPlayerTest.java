@@ -25,13 +25,13 @@ import de.briemla.clockradio.dabpi.result.DABService;
 import de.briemla.clockradio.dabpi.result.DABServiceList;
 import de.briemla.clockradio.dabpi.result.FMStatus;
 
-public class RadioPlayerTest {
+public class DabpiRadioPlayerTest {
 
 	@Test
 	public void scanOneFMStation() throws Exception {
 		FMStation[] expectedFrequencies = { new FMStation(105500) };
 		RadioController controller = mock(RadioController.class);
-		RadioPlayer player = new RadioPlayer(controller);
+		RadioPlayer player = new DabpiRadioPlayer(controller);
 		when(controller.fmStatus()).thenReturn(new FMStatus(105500));
 
 		ArrayList<FMStation> frequencies = player.scanFM();
@@ -46,7 +46,7 @@ public class RadioPlayerTest {
 	public void scanMultipleFMStations() throws Exception {
 		FMStation[] expectedFrequencies = { new FMStation(105500), new FMStation(106700) };
 		RadioController controller = mock(RadioController.class);
-		RadioPlayer player = new RadioPlayer(controller);
+		RadioPlayer player = new DabpiRadioPlayer(controller);
 		when(controller.fmStatus()).thenReturn(new FMStatus(105500)).thenReturn(new FMStatus(106700))
 		        .thenReturn(new FMStatus(105500));
 
@@ -74,7 +74,7 @@ public class RadioPlayerTest {
 		when(controller.readFrequencyListFor(region)).thenReturn(channelList);
 		when(controller.readDABServiceList()).thenReturn(serviceList);
 
-		RadioPlayer player = new RadioPlayer(controller);
+		RadioPlayer player = new DabpiRadioPlayer(controller);
 
 		List<DABStation> stationList = player.scanDAB(region);
 
@@ -92,7 +92,7 @@ public class RadioPlayerTest {
 	public void play() throws Exception {
 		RadioController controller = mock(RadioController.class);
 		Station station = mock(Station.class);
-		RadioPlayer player = new RadioPlayer(controller);
+		RadioPlayer player = new DabpiRadioPlayer(controller);
 		player.play(station);
 
 		verify(station).tuneTo(controller);
@@ -103,7 +103,7 @@ public class RadioPlayerTest {
 	@Test
 	public void stop() throws Exception {
 		RadioController controller = mock(RadioController.class);
-		RadioPlayer player = new RadioPlayer(controller);
+		RadioPlayer player = new DabpiRadioPlayer(controller);
 		player.stop();
 
 		verify(controller).stopAudio();

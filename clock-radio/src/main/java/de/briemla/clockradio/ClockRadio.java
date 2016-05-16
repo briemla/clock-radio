@@ -23,6 +23,7 @@ import de.briemla.clockradio.player.BasePlayer;
 import de.briemla.clockradio.player.Player;
 import de.briemla.clockradio.player.PlayerFactory;
 import de.briemla.clockradio.player.RadioPlayer;
+import de.briemla.clockradio.player.DabpiRadioPlayer;
 import de.briemla.clockradio.player.RealPlayerFactory;
 
 public class ClockRadio extends Application {
@@ -78,7 +79,7 @@ public class ClockRadio extends Application {
         RadioExecutor executor = new DabpiExecutor();
         CommandFactory factory = new DabpiCommandFactory();
         AlsaController alsaController = new AlsaController();
-        return new RadioPlayer(new DabpiController(executor, factory, alsaController));
+        return new DabpiRadioPlayer(new DabpiController(executor, factory, alsaController));
     }
 
     /**
