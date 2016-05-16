@@ -27,6 +27,7 @@ public class PlayableError implements PlayableMedia {
 
     @Override
     public void stop(Player player) {
+        player.stop();
     }
 
     private static URI errorSound() throws URISyntaxException {

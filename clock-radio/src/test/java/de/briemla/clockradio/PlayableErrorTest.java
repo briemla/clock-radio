@@ -31,4 +31,11 @@ public class PlayableErrorTest {
         URI uri = PlayableError.class.getResource("ErrorSound.mp3").toURI();
         verify(player).play(uri);
     }
+
+    @Test
+    public void stopsPlayingErrorMediaOnPlay() throws Exception {
+        error.stop(player);
+
+        verify(player).stop();
+    }
 }
