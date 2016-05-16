@@ -61,7 +61,7 @@ public class WakeUpTime {
     }
 
     public WakeUpTime withHour(Integer newHour) {
-        return new WakeUpTime(newHour, minute);
+        return new WakeUpTime(newHour, time.getMinute());
     }
 
     public WakeUpTime withMinute(Integer newMinute) {
