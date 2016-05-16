@@ -56,7 +56,7 @@ public class FileStorageTest {
     private FileStorage storage;
     private PlayerFactory notUsedFactory;
     private TimeProvider timeProvider;
-    private SaveTrigger notUsedTrigger;
+    private SaveTrigger saveTrigger;
     private AlarmFactory alarmFactory;
     private File backupFile;
     private OutputFactory outputFactory;
@@ -71,6 +71,7 @@ public class FileStorageTest {
         alarmFactory = new RealAlarmFactory(notUsedFactory, timeProvider);
         outputFactory = mock(OutputFactory.class);
         exceptionHandler = mock(ExceptionHandler.class);
+        saveTrigger = mock(SaveTrigger.class);
         storage = new FileStorage(storageFile, alarmFactory, outputFactory, exceptionHandler);
         initializeOutputFactory();
     }
@@ -81,7 +82,7 @@ public class FileStorageTest {
     }
 
     private Alarm alarm() {
-        return new Alarm(notUsedFactory, timeProvider, notUsedTrigger);
+        return new Alarm(notUsedFactory, timeProvider, saveTrigger);
     }
 
     @After
@@ -217,7 +218,7 @@ public class FileStorageTest {
     }
 
     private Alarm alarmFailingToStoreItself() {
-        return new Alarm(notUsedFactory, timeProvider, notUsedTrigger) {
+        return new Alarm(notUsedFactory, timeProvider, saveTrigger) {
             @Override
             public void storeTo(Writer output) throws IOException {
                 throw new IOException("Failing to store me for test purpose");
