@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -40,6 +41,7 @@ import de.briemla.clockradio.player.PlayerFactory;
 
 public class FileStorageTest {
 
+    private static final IOException testException = new IOException("Exception in test");
     private static final String storageFileName = "alarm.storage";
     private static final String backupFileName = storageFileName + ".backup";
     private static final int singleAlarm = 0;
@@ -241,7 +243,7 @@ public class FileStorageTest {
 
     @Test
     public void triggersExceptionHandlerWhenAlarmFileCanNotBeOpenedForSaving() throws Exception {
-        when(outputFactory.create(any())).thenThrow(new IOException("Exception in test"));
+        when(outputFactory.create(any())).thenThrow(testException);
         List<Alarm> alarms = Collections.emptyList();
 
         storage.save(alarms);
@@ -252,6 +254,18 @@ public class FileStorageTest {
     @Test
     public void triggersExceptionHandlerWhenAlarmCanNotBeStored() throws Exception {
         List<Alarm> alarms = Collections.singletonList(alarmFailingToStoreItself());
+
+        storage.save(alarms);
+
+        verify(exceptionHandler).handle(any(IOException.class));
+    }
+
+    @Test
+    public void triggersExceptionHandlerWhenWriterCanNotBeClosed() throws Exception {
+        Writer writer = mock(Writer.class);
+        doThrow(testException).when(writer).close();
+        when(outputFactory.create(storageFile)).thenReturn(writer);
+        List<Alarm> alarms = Collections.emptyList();
 
         storage.save(alarms);
 
