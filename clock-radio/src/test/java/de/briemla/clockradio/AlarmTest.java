@@ -93,11 +93,6 @@ public class AlarmTest {
     }
 
     @Test
-    public void whenAlarmIsStartedStoppedAndStartedInTheSameMinute() throws Exception {
-
-    }
-
-    @Test
     public void whenAlarmIsStartedInTheMinuteAfterWakeuptime() throws Exception {
         boolean playing = alarm.play(playTime().plus(1, MINUTES));
 
