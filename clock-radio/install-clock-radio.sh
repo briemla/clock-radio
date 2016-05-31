@@ -58,13 +58,35 @@ sudo apt-get -y install maven
 sudo apt-get -y install openjdk-8-jdk
 }
 
+installJavaFxSdk () {
+folder=javaFxInstall
+sdkFile=javaFxSdk.zip
+mkdir -p ${folder}
+cd ${folder}
+echo "Download JavaFX Embedded SDK"
+wget --output-document=${sdkFile} http://gluonhq.com/download/javafx-embedded-sdk/
+echo "Unzip JavaFX Embedded SDK"
+unzip ${sdkFile}
+armSdkFolder=armv6hf-sdk/rt/lib
+jreLibFolder=/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/jre/lib
+echo "Copy JavaFX files into jdk"
+sudo cp ${armSdkFolder}/ext/jfxrt.jar ${jreLibFolder}/ext/
+sudo cp ${armSdkFolder}/arm/* ${jreLibFolder}/arm/
+sudo cp ${armSdkFolder}/javafx.platform.properties ${jreLibFolder}/
+sudo cp ${armSdkFolder}/javafx.properties ${jreLibFolder}/
+sudo cp ${armSdkFolder}/jfxswt.jar ${jreLibFolder}/
+cd ..
+rm -r ${folder}
+}
+
 installFxmlTemplateLoader () {
 mkdir -p templateLoader
 cd templateLoader
-#git clone https://github.com/briemla/de.briemla.fxmltemplateloader.git .
+git clone https://github.com/briemla/de.briemla.fxmltemplateloader.git .
 cd fxml-template-loader
 pwd
 mvn test install
+rm -rf templateLoader
 }
 
-installFxmlTemplateLoader
+echo "Ready for deployment of clock-radio"
