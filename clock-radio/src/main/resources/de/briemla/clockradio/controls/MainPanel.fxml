@@ -9,22 +9,22 @@
 <?import javafx.scene.layout.StackPane?>
 <?import de.briemla.clockradio.controls.AlarmMenu?>
 
-<fx:root styleClass="main-panel" prefHeight="720.0" prefWidth="1280.0" type="StackPane" xmlns="http://javafx.com/javafx/8"
+<fx:root styleClass="main-panel" prefHeight="600.0" prefWidth="1024.0" type="StackPane" xmlns="http://javafx.com/javafx/8"
     xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <VBox maxHeight="720" maxWidth="1280">
+        <VBox maxHeight="500" maxWidth="950">
             <children>
                 <AnchorPane styleClass="top-bar" maxHeight="50.0" prefHeight="50.0">
                     <children>
                         <Button mnemonicParsing="false" styleClass="shutdown" onAction="#shutdown" prefHeight="50.0"
                             prefWidth="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <Button fx:id="stopSound" mnemonicParsing="false" styleClass="stop" onAction="#stopSound" prefHeight="50.0"
+                        <Button mnemonicParsing="false" styleClass="stop" onAction="#stopSound" prefHeight="50.0"
                             prefWidth="50.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
 <!--                         <Button mnemonicParsing="false" styleClass="start" onAction="#startRadio" prefHeight="50.0" -->
 <!--                             prefWidth="50.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="0.0" /> -->
                     </children>
                 </AnchorPane>
-                <DefaultableViewSwitcher fx:id="viewSwitcher" maxHeight="620.0" prefHeight="620.0" prefWidth="1280.0" />
+                <DefaultableViewSwitcher fx:id="viewSwitcher" maxHeight="500.0" prefHeight="500.0" prefWidth="1024.0" />
                 <AlarmView fx:id="alarm" />
             </children>
         </VBox>
