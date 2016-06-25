@@ -1,5 +1,7 @@
 package de.briemla.clockradio.controls;
 
+import javafx.animation.RotateTransition;
+import javafx.animation.Transition;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -10,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import de.briemla.clockradio.FxUtil;
 import de.briemla.clockradio.Media;
@@ -30,16 +33,19 @@ public class StationSelector extends VBox {
     private final ObservableList<Station> stationList;
     private final SearchStation searcher;
     private final Player player;
-    private Run run;
+    private final Run run;
+    private final Transition progress;
 
-    public StationSelector(SearchStation searcher, Player player) {
+    public StationSelector(SearchStation searcher, Player player, Run run) {
         super();
         this.searcher = searcher;
         this.player = player;
+        this.run = run;
         FxUtil.load(this, this);
         mediaProperty = new SimpleObjectProperty<>();
         radioMediaProperty = new SimpleObjectProperty<>(defaultStation());
         stationList = FXCollections.observableArrayList();
+        progress = refreshRotation();
         mediaProperty.addListener((change, oldValue, newValue) -> {
             if (newValue != null && newValue instanceof RadioMedia) {
                 radioMediaProperty.set((RadioMedia) newValue);
@@ -49,9 +55,12 @@ public class StationSelector extends VBox {
         initializeContentViewer();
     }
 
-    public StationSelector(SearchStation searcher, Player player, Run run) {
-        this(searcher, player);
-        this.run = run;
+    private Transition refreshRotation() {
+        RotateTransition transition = new RotateTransition(Duration.millis(500), refresh);
+        transition.setByAngle(180.0);
+        transition.setCycleCount(2);
+        transition.setAutoReverse(true);
+        return transition;
     }
 
     private static RadioMedia defaultStation() {
@@ -70,7 +79,7 @@ public class StationSelector extends VBox {
 
     @FXML
     public void refresh(Event event) {
-        run.inBackground(this::updateStations);
+        run.run(this::updateStations);
     }
 
     @FXML
@@ -78,9 +87,18 @@ public class StationSelector extends VBox {
         radioMediaProperty.get().create().play(player);
     }
 
-    // TODO should run in background
     private void updateStations() {
+        startUpdate();
         stationList.clear();
         stationList.addAll(searcher.search());
+        finishUpdate();
+    }
+
+    private void startUpdate() {
+        progress.play();
+    }
+
+    private void finishUpdate() {
+        progress.stop();
     }
 }

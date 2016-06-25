@@ -33,6 +33,6 @@ public class StationSelectorTest extends GuiTest {
     public void triggersBackgroundWorkerToRefreshStationList() throws Exception {
         selector.refresh(unusedEvent);
 
-        verify(run).inBackground(any());
+        verify(run).run(any());
     }
 }

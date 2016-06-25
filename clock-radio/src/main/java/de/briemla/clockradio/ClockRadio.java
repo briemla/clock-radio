@@ -7,7 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -39,7 +38,7 @@ public class ClockRadio extends Application {
         ExceptionHandler exceptionHandler = playMusicOnError(playerFactory, logger());
         AlarmStorage storage = new FileStorage(storagePath, alarmFactory, outputFactory(),
                 exceptionHandler);
-        Run run = Platform::runLater;
+        Run run = new InBackground();
         MainPanel mainPanel = new MainPanel(availablePlayer, trigger, alarmFactory, timeProvider,
                 storage, run);
         mainPanel.getStylesheets()

@@ -32,7 +32,7 @@ public class MediaSelector extends TabPane {
         StationSelector dabSelector = new StationSelector(settings::searchDAB, player, run);
         addTab(DAB, dabSelector);
         mediaProperty.bindBidirectional(dabSelector.mediaProperty());
-        StationSelector fmSelector = new StationSelector(settings::searchFM, player);
+        StationSelector fmSelector = new StationSelector(settings::searchFM, player, run);
         addTab(FM, fmSelector);
         mediaProperty.bindBidirectional(fmSelector.mediaProperty());
     }
