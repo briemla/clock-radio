@@ -30,6 +30,7 @@ public class StationSelector extends VBox {
     private final ObservableList<Station> stationList;
     private final SearchStation searcher;
     private final Player player;
+    private Run run;
 
     public StationSelector(SearchStation searcher, Player player) {
         super();
@@ -48,6 +49,11 @@ public class StationSelector extends VBox {
         initializeContentViewer();
     }
 
+    public StationSelector(SearchStation searcher, Player player, Run run) {
+        this(searcher, player);
+        this.run = run;
+    }
+
     private static RadioMedia defaultStation() {
         return new RadioMedia(new NoStation());
     }
@@ -64,7 +70,7 @@ public class StationSelector extends VBox {
 
     @FXML
     public void refresh(Event event) {
-        updateStations();
+        run.inBackground(this::updateStations);
     }
 
     @FXML

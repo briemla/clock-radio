@@ -108,6 +108,7 @@ public class WakeUpTest extends GuiTest {
     private TimeProvider timeProvider;
     private SimpleObjectProperty<LocalTime> time;
     private AlarmFactory alarmFactory;
+    private Run run;
 
     @Test
     public void whenCancelledAlarmIsTriggeredAgain() throws Exception {
@@ -149,6 +150,7 @@ public class WakeUpTest extends GuiTest {
     @Override
     protected Parent getRootNode() {
         timeProvider = mock(TimeProvider.class);
+        run = mock(Run.class);
         time = new SimpleObjectProperty<>(initialTime);
         when(timeProvider.timeProperty()).thenReturn(time);
         when(timeProvider.nextMinute()).thenReturn(wakeUpTime);
@@ -161,7 +163,7 @@ public class WakeUpTest extends GuiTest {
         SaveTrigger saveTrigger = mock(SaveTrigger.class);
         alarmFactory.initialize(saveTrigger);
         AlarmStorage storage = mock(AlarmStorage.class);
-        return new MainPanel(player, trigger, alarmFactory, timeProvider, storage);
+        return new MainPanel(player, trigger, alarmFactory, timeProvider, storage, run);
     }
 
     private static Matcher<MockedPlayer> hasBeenPlayed() {
@@ -178,8 +180,8 @@ public class WakeUpTest extends GuiTest {
             }
 
             @Override
-            protected void describeMismatchSafely(MockedPlayer item,
-                    Description mismatchDescription) {
+            protected void describeMismatchSafely(
+                    MockedPlayer item, Description mismatchDescription) {
                 mismatchDescription.appendText("Player has not been played");
             }
         };
@@ -199,8 +201,8 @@ public class WakeUpTest extends GuiTest {
             }
 
             @Override
-            protected void describeMismatchSafely(MockedPlayer item,
-                    Description mismatchDescription) {
+            protected void describeMismatchSafely(
+                    MockedPlayer item, Description mismatchDescription) {
                 mismatchDescription.appendText("Player has not been stopped");
             }
         };

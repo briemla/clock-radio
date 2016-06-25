@@ -32,6 +32,7 @@ public class MainPanelTest extends GuiTest {
     private SimpleObjectProperty<LocalTime> time;
     private AlarmStorage storage;
     private AlarmFactory alarmFactory;
+    private Run run;
 
     @Test
     public void initializesAlarmTrigger() throws Exception {
@@ -55,6 +56,7 @@ public class MainPanelTest extends GuiTest {
         player = mock(Player.class);
         trigger = mock(Trigger.class);
         timeProvider = mock(TimeProvider.class);
+        run = mock(Run.class);
 
         LocalTime now = LocalTime.of(0, 0);
         time = new SimpleObjectProperty<>(now);
@@ -66,6 +68,6 @@ public class MainPanelTest extends GuiTest {
         Alarm alarm = new Alarm(playerFactory, timeProvider, () -> {});
         when(alarmFactory.create()).thenReturn(alarm);
 
-        return new MainPanel(player, trigger, alarmFactory, timeProvider, storage);
+        return new MainPanel(player, trigger, alarmFactory, timeProvider, storage, run);
     }
 }

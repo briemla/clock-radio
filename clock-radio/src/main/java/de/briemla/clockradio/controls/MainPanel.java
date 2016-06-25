@@ -50,8 +50,9 @@ public class MainPanel extends StackPane {
     private Timer timer;
     private final Trigger trigger;
 
-    public MainPanel(Player player, Trigger trigger, AlarmFactory alarmFactory,
-            TimeProvider timeProvider, AlarmStorage storage) {
+    public MainPanel(
+            Player player, Trigger trigger, AlarmFactory alarmFactory, TimeProvider timeProvider,
+            AlarmStorage storage, Run run) {
         super();
         this.trigger = trigger;
         FxUtil.load(this, this);
@@ -61,7 +62,7 @@ public class MainPanel extends StackPane {
         trigger.bind(settings.getAlarms());
         Node clock = new DigitalClock(timeProvider);
         viewSwitcher.setDefaultView(clock);
-        AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher, settings, player);
+        AlarmMenu alarmMenu = new AlarmMenu(viewSwitcher, settings, player, run);
         viewSwitcher.addView(Alarm.class, alarmMenu);
         addEventFilter(MouseEvent.MOUSE_PRESSED, showControls());
         active.set(true);

@@ -32,7 +32,8 @@ public class AlarmMenu extends VBox {
     private final Settings settings;
     private Alarm lastAlarm;
 
-    public AlarmMenu(DefaultableViewSwitcher viewSwitcher, Settings settings, Player player) {
+    public AlarmMenu(
+            DefaultableViewSwitcher viewSwitcher, Settings settings, Player player, Run run) {
         super();
         this.viewSwitcher = viewSwitcher;
         this.settings = settings;
@@ -43,14 +44,14 @@ public class AlarmMenu extends VBox {
         time.textProperty().bind(wakeUpTimeProperty.asString());
         mediaDescription.textProperty().bind(mediaProperty.asString());
         weekdays.textProperty().bind(activesDayProperty.asString());
-        registerViews(player);
+        registerViews(player, run);
     }
 
-    private void registerViews(Player player) {
+    private void registerViews(Player player, Run run) {
         TimeEditor editor = new TimeEditor();
         viewSwitcher.addView(WakeUpTime.class, editor);
         editor.timeProperty().bindBidirectional(wakeUpTimeProperty);
-        MediaSelector mediaSelector = new MediaSelector(settings, player);
+        MediaSelector mediaSelector = new MediaSelector(settings, player, run);
         viewSwitcher.addView(Media.class, mediaSelector);
         mediaSelector.mediaProperty().bindBidirectional(mediaProperty);
         ActiveDayEditor activeDayEditor = new ActiveDayEditor();

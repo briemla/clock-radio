@@ -7,10 +7,12 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import de.briemla.clockradio.controls.MainPanel;
+import de.briemla.clockradio.controls.Run;
 import de.briemla.clockradio.controls.Trigger;
 import de.briemla.clockradio.player.AudioFilePlayer;
 import de.briemla.clockradio.player.BasePlayer;
@@ -37,8 +39,9 @@ public class ClockRadio extends Application {
         ExceptionHandler exceptionHandler = playMusicOnError(playerFactory, logger());
         AlarmStorage storage = new FileStorage(storagePath, alarmFactory, outputFactory(),
                 exceptionHandler);
+        Run run = Platform::runLater;
         MainPanel mainPanel = new MainPanel(availablePlayer, trigger, alarmFactory, timeProvider,
-                storage);
+                storage, run);
         mainPanel.getStylesheets()
                  .add(ClockRadio.class.getResource("clock-radio.css").toExternalForm());
         watchCssFile(mainPanel);
