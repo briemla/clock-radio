@@ -71,7 +71,7 @@ public class Settings {
         return player.searchFM();
     }
 
-    public void initialzeAlarms() {
+    public void initializeAlarms() {
         List<Alarm> storedAlarms = storage.load();
         alarms.addAll(storedAlarms);
         ensureAtLeastOneAlarm();

@@ -1,5 +1,7 @@
 package de.briemla.clockradio;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -38,7 +40,7 @@ public class RealTimeProvider implements TimeProvider {
     }
 
     private LocalTime currentMinute() {
-        return LocalTime.now().withSecond(0).withNano(0);
+        return LocalTime.now().truncatedTo(MINUTES);
     }
 
     @Override

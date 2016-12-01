@@ -7,13 +7,6 @@
     <name>Clock Radio</name>
     <description>Simple clock radio using local files and in future some other sources</description>
     <build>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ssh</artifactId>
-                <version>2.8</version>
-            </extension>
-        </extensions>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -54,22 +47,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <!-- <executions> -->
-                <!-- <execution> -->
-                <!-- <id>deplay-to-pi</id> -->
-                <!-- <phase>deploy</phase> -->
-                <!-- <goals> -->
-                <!-- <goal>upload</goal> -->
-                <!-- </goals> -->
-                <!-- <configuration> -->
-                <!-- <fromDir>local.dir</fromDir> -->
-                <!-- <includes>*</includes> -->
-                <!-- <excludes>pom.xml</excludes> -->
-                <!-- <url>scp://pi@192.168.1.20/</url> -->
-                <!-- <toDir>/opt/clock-radio/</toDir> -->
-                <!-- </configuration> -->
-                <!-- </execution> -->
-                <!-- </executions> -->
             </plugin>
         </plugins>
     </build>
@@ -109,18 +86,6 @@
             <artifactId>testFx</artifactId>
             <version>3.1.2</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>de.briemla</groupId>
-            <artifactId>javafx-test-utils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>de.briemla</groupId>
-            <artifactId>fxml-template-loader</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.jfxtras</groupId>

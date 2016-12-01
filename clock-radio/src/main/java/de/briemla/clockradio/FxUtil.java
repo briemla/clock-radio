@@ -1,13 +1,9 @@
 package de.briemla.clockradio;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
-
-import de.briemla.fxmltemplateloader.FxmlTemplateLoader;
-import de.briemla.fxmltemplateloader.template.ITemplate;
 
 public class FxUtil {
 
@@ -22,10 +18,11 @@ public class FxUtil {
      */
     public static <T> T load(Object controller) {
         URL resource = findResource(controller);
-        FxmlTemplateLoader loader = new FxmlTemplateLoader();
+        FXMLLoader loader = new FXMLLoader();
         loader.setController(controller);
+        loader.setLocation(resource);
         try {
-            return loader.doLoad(resource);
+            return loader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
@@ -47,19 +44,7 @@ public class FxUtil {
      */
     public static <T> T load(Object controller, Object root) {
         URL resource = findResource(controller);
-        // return loadWithFXMLLoader(controller, root, resource);
-        return loadWithFXMLTemplateLoader(controller, root, resource);
-    }
-
-    private static <T> T loadWithFXMLTemplateLoader(Object controller, Object root, URL resource) {
-        try {
-            ITemplate loadedTemplate = FxmlTemplateLoader.loadTemplate(resource);
-            loadedTemplate.setRoot(root);
-            return loadedTemplate.create(controller);
-        } catch (IOException | InstantiationException | IllegalAccessException
-                | IllegalArgumentException | InvocationTargetException exception) {
-            throw new RuntimeException(exception);
-        }
+        return loadWithFXMLLoader(controller, root, resource);
     }
 
     /**
@@ -70,7 +55,6 @@ public class FxUtil {
      * @param resource
      * @return
      */
-    @SuppressWarnings("unused")
     private static <T> T loadWithFXMLLoader(Object controller, Object root, URL resource) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();

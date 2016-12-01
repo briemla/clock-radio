@@ -5,11 +5,14 @@ import java.util.concurrent.CountDownLatch;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public abstract class FxUtils {
+import org.junit.BeforeClass;
+
+public abstract class NeedsFxApplicationThread {
 
     private static TestApplication application;
     private static final CountDownLatch startLatch = new CountDownLatch(1);
 
+    @BeforeClass
     public synchronized static void startFxApplicationThread() throws InterruptedException {
         if (application != null) {
             return;
